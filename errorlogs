@@ -1,0 +1,126 @@
+[Thu Jun 19 04:53:24.413141 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] User model initialized with table: h8pd_societe, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:24.415316 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] === CHECKOUT PROCESS START ===, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:24.417334 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] REQUEST_METHOD: POST, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:24.417334 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] POST data: Array\n(\n    [shipping_address] => hy\n    [billing_address] => hy\n    [payment_method] => cash_on_delivery\n    [notes] => f\n)\n, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:24.417334 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Session data: Array\n(\n    [user_id] => 14\n    [user_name] => neji neji\n    [user_email] => neji@gmail.com\n)\n, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:24.417334 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] User ID: 14, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:24.417334 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Processing order for user ID: 14, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:24.521106 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Cart items count: 1, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:24.521106 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Shipping address: hy, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:24.521106 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Payment method: cash_on_delivery, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:24.521106 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Attempting to create order..., referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:24.521106 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Cart items before order creation:, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:24.521106 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Item 1: product_id=1568, label=001_etiquette_codes_barres_4030_ma, price=4, quantity=1, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:24.634658 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Creating order directly in database (bypassing Dolibarr API), referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:24.791781 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Creating order for user: 14, email: neji@gmail.com, name: neji neji, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:24.951037 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Order creation query: INSERT INTO h8pd_commande \n                      (ref, ref_client, entity, fk_soc, fk_user_author, date_commande, date_creation, fk_statut, total_ht, total_ttc, note_private) \n                      VALUES \n                      (:ref, :ref_client, 1, :fk_soc, :fk_user_author, NOW(), NOW(), 1, :total_ht, :total_ttc, :note_private), referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:24.951037 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Order creation params: ref=WEB-20250619055324-791820-92476, ref_client=neji@gmail.com, fk_soc=14, fk_user_author=14, total_ht=4, total_ttc=4, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:25.106494 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Inserted order item: product_id=1568, price=4, qty=1, total=4, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:25.208551 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Cleared cart for user: 14, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:25.265137 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Order created successfully with ID: 263, Reference: WEB-20250619055324-791820-92476, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:25.267397 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Order creation result: 263, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:25.267397 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Order created successfully with ID: 263, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:25.267397 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Redirecting to success page..., referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:26.124755 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] User model initialized with table: h8pd_societe, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:26.717110 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\\xampp\\htdocs\\zai\\app\\views\\checkout\\success.php on line 57, referer: http://localhost/zai/checkout
+[Thu Jun 19 04:53:30.854839 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Product::findAll - Fetching products with limit: 8, offset: 0, search: null, referer: http://localhost/zai/checkout/success/263
+[Thu Jun 19 04:53:30.966684 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Product::findAll - SQL Query: SELECT p.* FROM h8pd_product p WHERE 1=1 ORDER BY p.datec DESC LIMIT :limit OFFSET :offset, referer: http://localhost/zai/checkout/success/263
+[Thu Jun 19 04:53:30.966684 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55166] Product::findAll - Found 8 products, referer: http://localhost/zai/checkout/success/263
+[Thu Jun 19 04:53:47.972345 2025] [php:notice] [pid 24728:tid 1964] [client ::1:55253] Found 1 orders for email: neji@gmail.com, referer: http://localhost/zai/
+[Thu Jun 19 04:53:47.973343 2025] [php:notice] [pid 24728:tid 1964] [client ::1:55253] Retrieving orders for user email: neji@gmail.com, referer: http://localhost/zai/
+[Thu Jun 19 04:53:47.973343 2025] [php:notice] [pid 24728:tid 1964] [client ::1:55253] Found 1 orders for user, referer: http://localhost/zai/
+[Thu Jun 19 04:54:22.316541 2025] [php:notice] [pid 24728:tid 1964] [client ::1:55287] Product::findAll - Fetching products with limit: 8, offset: 0, search: null, referer: http://localhost/zai/orders
+[Thu Jun 19 04:54:22.429558 2025] [php:notice] [pid 24728:tid 1964] [client ::1:55287] Product::findAll - SQL Query: SELECT p.* FROM h8pd_product p WHERE 1=1 ORDER BY p.datec DESC LIMIT :limit OFFSET :offset, referer: http://localhost/zai/orders
+[Thu Jun 19 04:54:22.429558 2025] [php:notice] [pid 24728:tid 1964] [client ::1:55287] Product::findAll - Found 8 products, referer: http://localhost/zai/orders
+[Thu Jun 19 04:54:25.938991 2025] [rewrite:error] [pid 24728:tid 1948] [client ::1:55295] AH10411: Rewritten query string contains control characters or spaces
+[Thu Jun 19 04:58:19.231722 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55582] User model initialized with table: h8pd_societe, referer: http://localhost/zai/orders
+[Thu Jun 19 04:58:21.684685 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55591] User model initialized with table: h8pd_societe, referer: http://localhost/zai/user/profile
+[Thu Jun 19 04:58:22.016150 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55591] User model initialized with table: h8pd_societe, referer: http://localhost/zai/user/profile
+[Thu Jun 19 04:58:23.915130 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55591] User model initialized with table: h8pd_societe, referer: http://localhost/zai/?page=auth&action=login
+[Thu Jun 19 04:58:56.951078 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55610] User model initialized with table: h8pd_societe, referer: http://localhost/zai/auth/register
+[Thu Jun 19 05:00:10.754783 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55727] User model initialized with table: h8pd_societe, referer: http://localhost/zai/auth/register
+[Thu Jun 19 05:00:11.793702 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55727] User model initialized with table: h8pd_societe, referer: http://localhost/zai/auth/register
+[Thu Jun 19 05:00:28.572615 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55741] User model initialized with table: h8pd_societe, referer: http://localhost/zai/?page=auth&action=login
+[Thu Jun 19 05:00:28.739925 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55741] User model initialized with table: h8pd_societe, referer: http://localhost/zai/?page=auth&action=login
+[Thu Jun 19 05:00:28.739925 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55741] Login attempt for user: samia@gmail.com, referer: http://localhost/zai/?page=auth&action=login
+[Thu Jun 19 05:00:29.253285 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55741] Password verified for user: samia@gmail.com, referer: http://localhost/zai/?page=auth&action=login
+[Thu Jun 19 05:00:30.615590 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55741] Product::findAll - Fetching products with limit: 8, offset: 0, search: null, referer: http://localhost/zai/?page=auth&action=login
+[Thu Jun 19 05:00:30.914389 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55741] Product::findAll - SQL Query: SELECT p.* FROM h8pd_product p WHERE 1=1 ORDER BY p.datec DESC LIMIT :limit OFFSET :offset, referer: http://localhost/zai/?page=auth&action=login
+[Thu Jun 19 05:00:30.914389 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55741] Product::findAll - Found 8 products, referer: http://localhost/zai/?page=auth&action=login
+[Thu Jun 19 05:00:40.167716 2025] [core:error] [pid 24728:tid 1980] (20024)The given path is misformatted or contained invalid characters: [client ::1:55754] AH00127: Cannot map GET /zai/http://localhost/zai/public/img/products/default-product.jpg HTTP/1.1 to file, referer: http://localhost/zai/category
+[Thu Jun 19 05:00:40.169730 2025] [core:error] [pid 24728:tid 1980] (20024)The given path is misformatted or contained invalid characters: [client ::1:55754] AH00127: Cannot map GET /zai/http://localhost/zai/public/img/products/001_etiquette_codes_barres_4030_ma.jpg HTTP/1.1 to file, referer: http://localhost/zai/category
+[Thu Jun 19 05:00:58.434124 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55805] === ADD TO CART START ===, referer: http://localhost/zai/product/view/1698
+[Thu Jun 19 05:00:58.434124 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55805] POST data: Array\n(\n    [product_id] => 1698\n    [quantity] => 1\n)\n, referer: http://localhost/zai/product/view/1698
+[Thu Jun 19 05:00:58.434124 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55805] Session data: Array\n(\n    [user_id] => 16\n    [user_name] => samia  gh\n    [user_email] => samia@gmail.com\n)\n, referer: http://localhost/zai/product/view/1698
+[Thu Jun 19 05:00:58.944472 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55805] Attempting to add product: ID=1698, Quantity=1 for User=16, referer: http://localhost/zai/product/view/1698
+[Thu Jun 19 05:00:59.448485 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55805] Product added successfully, referer: http://localhost/zai/product/view/1698
+[Thu Jun 19 05:00:59.564474 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55805] New cart count: 1, referer: http://localhost/zai/product/view/1698
+[Thu Jun 19 05:01:08.590170 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55805] User model initialized with table: h8pd_societe, referer: http://localhost/zai/index.php?page=cart
+[Thu Jun 19 05:01:14.482848 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] User model initialized with table: h8pd_societe, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:14.482848 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] === CHECKOUT PROCESS START ===, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:14.482848 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] REQUEST_METHOD: POST, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:14.482848 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] POST data: Array\n(\n    [shipping_address] => j\n    [billing_address] => j\n    [payment_method] => cash_on_delivery\n    [notes] => y\n)\n, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:14.484904 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] Session data: Array\n(\n    [user_id] => 16\n    [user_name] => samia  gh\n    [user_email] => samia@gmail.com\n)\n, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:14.484904 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] User ID: 16, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:14.484904 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] Processing order for user ID: 16, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:14.600327 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] Cart items count: 1, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:14.600327 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] Shipping address: j, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:14.601364 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] Payment method: cash_on_delivery, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:14.601364 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] Attempting to create order..., referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:14.601364 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] Cart items before order creation:, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:14.602317 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] Item 1: product_id=1698, label=BALANCE DIBAL AVEC EDITION ETIQUETTE CODES A BARRES, price=2090, quantity=1, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:14.955129 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] Creating order directly in database (bypassing Dolibarr API), referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:15.122118 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] Creating order for user: 16, email: samia@gmail.com, name: samia  gh, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:15.297255 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] Order creation query: INSERT INTO h8pd_commande \n                      (ref, ref_client, entity, fk_soc, fk_user_author, date_commande, date_creation, fk_statut, total_ht, total_ttc, note_private) \n                      VALUES \n                      (:ref, :ref_client, 1, :fk_soc, :fk_user_author, NOW(), NOW(), 1, :total_ht, :total_ttc, :note_private), referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:15.299299 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] Order creation params: ref=WEB-20250619060115-123816-87751, ref_client=samia@gmail.com, fk_soc=16, fk_user_author=16, total_ht=2090, total_ttc=2090, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:15.414826 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] PDO Error creating order: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`c137d_app_dolibarr_20`.`h8pd_commande`, CONSTRAINT `fk_commande_fk_user_author` FOREIGN KEY (`fk_user_author`) REFERENCES `h8pd_user` (`rowid`)), referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:15.415822 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] Error Code: 23000, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:15.415822 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] SQL State: 23000, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:15.416992 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] Order creation result: FAILED, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:15.416992 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] ERROR: Order creation returned false, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:16.027998 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] User model initialized with table: h8pd_societe, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:20.139123 2025] [php:notice] [pid 24728:tid 1980] [client ::1:55856] User model initialized with table: h8pd_societe, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:01:22.546638 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55869] User model initialized with table: h8pd_societe, referer: http://localhost/zai/user/profile
+[Thu Jun 19 05:01:22.758825 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55869] User model initialized with table: h8pd_societe, referer: http://localhost/zai/user/profile
+[Thu Jun 19 05:01:25.238946 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55869] User model initialized with table: h8pd_societe, referer: http://localhost/zai/?page=auth&action=login
+[Thu Jun 19 05:01:46.497633 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55886] User model initialized with table: h8pd_societe, referer: http://localhost/zai/auth/register
+[Thu Jun 19 05:01:47.645487 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55886] User model initialized with table: h8pd_societe, referer: http://localhost/zai/auth/register
+[Thu Jun 19 05:01:58.646634 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55894] User model initialized with table: h8pd_societe, referer: http://localhost/zai/?page=auth&action=login
+[Thu Jun 19 05:01:58.819952 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55894] User model initialized with table: h8pd_societe, referer: http://localhost/zai/?page=auth&action=login
+[Thu Jun 19 05:01:58.819952 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55894] Login attempt for user: sadok@gmail.com, referer: http://localhost/zai/?page=auth&action=login
+[Thu Jun 19 05:01:58.912614 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55894] Password verified for user: sadok@gmail.com, referer: http://localhost/zai/?page=auth&action=login
+[Thu Jun 19 05:01:59.230405 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55894] Product::findAll - Fetching products with limit: 8, offset: 0, search: null, referer: http://localhost/zai/?page=auth&action=login
+[Thu Jun 19 05:01:59.351328 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55894] Product::findAll - SQL Query: SELECT p.* FROM h8pd_product p WHERE 1=1 ORDER BY p.datec DESC LIMIT :limit OFFSET :offset, referer: http://localhost/zai/?page=auth&action=login
+[Thu Jun 19 05:01:59.351328 2025] [php:notice] [pid 24728:tid 1944] [client ::1:55894] Product::findAll - Found 8 products, referer: http://localhost/zai/?page=auth&action=login
+[Thu Jun 19 05:02:15.959846 2025] [core:error] [pid 24728:tid 1952] (20024)The given path is misformatted or contained invalid characters: [client ::1:55943] AH00127: Cannot map GET /zai/http://localhost/zai/public/img/products/default-product.jpg HTTP/1.1 to file, referer: http://localhost/zai/category
+[Thu Jun 19 05:02:15.962413 2025] [core:error] [pid 24728:tid 1952] (20024)The given path is misformatted or contained invalid characters: [client ::1:55943] AH00127: Cannot map GET /zai/http://localhost/zai/public/img/products/001_etiquette_codes_barres_4030_ma.jpg HTTP/1.1 to file, referer: http://localhost/zai/category
+[Thu Jun 19 05:02:23.173397 2025] [php:notice] [pid 24728:tid 1940] [client ::1:55961] === ADD TO CART START ===, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 05:02:23.174399 2025] [php:notice] [pid 24728:tid 1940] [client ::1:55961] POST data: Array\n(\n    [product_id] => 1568\n    [quantity] => 1\n)\n, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 05:02:23.174399 2025] [php:notice] [pid 24728:tid 1940] [client ::1:55961] Session data: Array\n(\n    [user_id] => 17\n    [user_name] => sadok sadok\n    [user_email] => sadok@gmail.com\n)\n, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 05:02:23.303881 2025] [php:notice] [pid 24728:tid 1940] [client ::1:55961] Attempting to add product: ID=1568, Quantity=1 for User=17, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 05:02:23.508801 2025] [php:notice] [pid 24728:tid 1940] [client ::1:55961] Product added successfully, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 05:02:23.611648 2025] [php:notice] [pid 24728:tid 1940] [client ::1:55961] New cart count: 1, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 05:02:31.335780 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55981] User model initialized with table: h8pd_societe, referer: http://localhost/zai/index.php?page=cart
+[Thu Jun 19 05:02:35.979888 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] User model initialized with table: h8pd_societe, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:35.979888 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] === CHECKOUT PROCESS START ===, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:35.979888 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] REQUEST_METHOD: POST, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:35.979888 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] POST data: Array\n(\n    [shipping_address] => o\n    [billing_address] => o\n    [payment_method] => cash_on_delivery\n    [notes] => \n)\n, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:35.979888 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] Session data: Array\n(\n    [user_id] => 17\n    [user_name] => sadok sadok\n    [user_email] => sadok@gmail.com\n)\n, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:35.989340 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] User ID: 17, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:35.989340 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] Processing order for user ID: 17, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:36.080148 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] Cart items count: 1, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:36.080148 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] Shipping address: o, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:36.080148 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] Payment method: cash_on_delivery, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:36.080148 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] Attempting to create order..., referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:36.080148 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] Cart items before order creation:, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:36.080148 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] Item 1: product_id=1568, label=001_etiquette_codes_barres_4030_ma, price=4, quantity=1, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:36.201507 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] Creating order directly in database (bypassing Dolibarr API), referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:36.353953 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] Creating order for user: 17, email: sadok@gmail.com, name: sadok sadok, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:36.510703 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] Order creation query: INSERT INTO h8pd_commande \n                      (ref, ref_client, entity, fk_soc, fk_user_author, date_commande, date_creation, fk_statut, total_ht, total_ttc, note_private) \n                      VALUES \n                      (:ref, :ref_client, 1, :fk_soc, :fk_user_author, NOW(), NOW(), 1, :total_ht, :total_ttc, :note_private), referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:36.510703 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] Order creation params: ref=WEB-20250619060236-355245-30018, ref_client=sadok@gmail.com, fk_soc=17, fk_user_author=17, total_ht=4, total_ttc=4, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:36.615072 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] PDO Error creating order: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`c137d_app_dolibarr_20`.`h8pd_commande`, CONSTRAINT `fk_commande_fk_user_author` FOREIGN KEY (`fk_user_author`) REFERENCES `h8pd_user` (`rowid`)), referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:36.615072 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] Error Code: 23000, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:36.615072 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] SQL State: 23000, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:36.617084 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] Order creation result: FAILED, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:36.619092 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] ERROR: Order creation returned false, referer: http://localhost/zai/checkout
+[Thu Jun 19 05:02:37.423915 2025] [php:notice] [pid 24728:tid 1952] [client ::1:55994] User model initialized with table: h8pd_societe, referer: http://localhost/zai/checkout

@@ -1,0 +1,265 @@
+[12-Jun-2025 04:26:12 Europe/Berlin] Using societe ID: 1 for user ID: 1
+[12-Jun-2025 04:26:12 Europe/Berlin] Error creating order: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'CO2506-0005-1' for key 'uk_commande_ref'
+[12-Jun-2025 17:32:19 Europe/Berlin] Using societe ID: 1 for user ID: 1
+[12-Jun-2025 17:32:19 Europe/Berlin] Error creating order: SQLSTATE[HY093]: Invalid parameter number
+[Thu Jun 19 02:43:20.642911 2025] [php:notice] [pid 16080:tid 1936] [client ::1:62484] SQL State: 42S22
+[Thu Jun 19 02:47:06.631807 2025] [php:notice] [pid 16080:tid 1936] [client ::1:62992] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:47:07.270697 2025] [php:notice] [pid 16080:tid 1936] [client ::1:62992] User model initialized with table: h8pd_societe, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:47:07.886453 2025] [php:notice] [pid 16080:tid 1936] [client ::1:62992] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:50:56.162798 2025] [ssl:warn] [pid 15984:tid 472] AH01909: www.example.com:443:0 server certificate does NOT include an ID which matches the server name
+[Thu Jun 19 02:50:56.189381 2025] [core:warn] [pid 15984:tid 472] AH00098: pid file C:/xampp/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Jun 19 02:50:56.191380 2025] [ssl:warn] [pid 15984:tid 472] AH01909: www.example.com:443:0 server certificate does NOT include an ID which matches the server name
+[Thu Jun 19 02:50:56.219282 2025] [mpm_winnt:notice] [pid 15984:tid 472] AH00455: Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12 configured -- resuming normal operations
+[Thu Jun 19 02:50:56.219282 2025] [mpm_winnt:notice] [pid 15984:tid 472] AH00456: Apache Lounge VS17 Server built: Oct 18 2023 13:03:18
+[Thu Jun 19 02:50:56.219282 2025] [core:notice] [pid 15984:tid 472] AH00094: Command line: 'c:\\xampp\\apache\\bin\\httpd.exe -d C:/xampp/apache'
+[Thu Jun 19 02:50:56.222249 2025] [mpm_winnt:notice] [pid 15984:tid 472] AH00418: Parent: Created child process 24728
+AH00548: NameVirtualHost has no effect and will be removed in the next release C:/xampp/apache/conf/extra/httpd-vhosts.conf:20
+[Thu Jun 19 02:50:56.523309 2025] [ssl:warn] [pid 24728:tid 444] AH01909: www.example.com:443:0 server certificate does NOT include an ID which matches the server name
+[Thu Jun 19 02:50:56.560779 2025] [ssl:warn] [pid 24728:tid 444] AH01909: www.example.com:443:0 server certificate does NOT include an ID which matches the server name
+[Thu Jun 19 02:50:56.604783 2025] [mpm_winnt:notice] [pid 24728:tid 444] AH00354: Child: Starting 150 worker threads.
+[Thu Jun 19 02:50:57.739397 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:50:58.234767 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] User model initialized with table: h8pd_societe, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:50:58.349535 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:50:59.170922 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/cart
+[Thu Jun 19 02:51:04.378265 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/cart
+[Thu Jun 19 02:51:04.807572 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] Found 0 orders for email: test@example.com, referer: http://localhost/zai/cart
+[Thu Jun 19 02:51:04.808548 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] Retrieving orders for user email: test@example.com, referer: http://localhost/zai/cart
+[Thu Jun 19 02:51:04.808548 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] Found 0 orders for user, referer: http://localhost/zai/cart
+[Thu Jun 19 02:51:05.219024 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/orders
+[Thu Jun 19 02:51:08.364702 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/orders
+[Thu Jun 19 02:51:09.208404 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/index.php?page=cart
+[Thu Jun 19 02:51:12.203085 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/index.php?page=cart
+[Thu Jun 19 02:51:13.419216 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category
+[Thu Jun 19 02:51:13.458535 2025] [core:error] [pid 24728:tid 1972] (20024)The given path is misformatted or contained invalid characters: [client ::1:63396] AH00127: Cannot map GET /zai/http://localhost/zai/public/img/products/default-product.jpg HTTP/1.1 to file, referer: http://localhost/zai/category
+[Thu Jun 19 02:51:13.458535 2025] [core:error] [pid 24728:tid 1968] (20024)The given path is misformatted or contained invalid characters: [client ::1:63397] AH00127: Cannot map GET /zai/http://localhost/zai/public/img/products/001_etiquette_codes_barres_4030_ma.jpg HTTP/1.1 to file, referer: http://localhost/zai/category
+[Thu Jun 19 02:51:13.485596 2025] [core:error] [pid 24728:tid 1968] (20024)The given path is misformatted or contained invalid characters: [client ::1:63397] AH00127: Cannot map GET /zai/http://localhost/zai/public/img/products/default-product.jpg HTTP/1.1 to file, referer: http://localhost/zai/category
+[Thu Jun 19 02:51:13.810343 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category
+[Thu Jun 19 02:51:16.398796 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category
+[Thu Jun 19 02:51:17.795355 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category/view/396
+[Thu Jun 19 02:51:18.189070 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category/view/396
+[Thu Jun 19 02:51:18.636321 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category/view/396
+[Thu Jun 19 02:51:19.029695 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category/view/396
+[Thu Jun 19 02:51:19.414884 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category/view/396
+[Thu Jun 19 02:51:20.313210 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category/view/396
+[Thu Jun 19 02:51:20.690723 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:21.072512 2025] [php:notice] [pid 24728:tid 1968] [client ::1:63412] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:21.444174 2025] [php:notice] [pid 24728:tid 1968] [client ::1:63412] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:21.819159 2025] [php:notice] [pid 24728:tid 1968] [client ::1:63412] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:22.288558 2025] [php:notice] [pid 24728:tid 1968] [client ::1:63412] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:22.682553 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:23.046720 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] === ADD TO CART START ===, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:23.046720 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] POST data: Array\n(\n    [product_id] => 1568\n    [quantity] => 1\n)\n, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:23.046720 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] Session data: Array\n(\n    [user_id] => 1\n    [user_name] => death gh\n    [user_email] => test@example.com\n    [error_message] => Your cart is empty. Please add items before checkout.\n)\n, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:23.163785 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] Attempting to add product: ID=1568, Quantity=1 for User=1, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:23.378420 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] Product added successfully, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:23.483393 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] New cart count: 1, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:23.485395 2025] [php:notice] [pid 24728:tid 1968] [client ::1:63412] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:23.861032 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:24.766278 2025] [php:notice] [pid 24728:tid 1968] [client ::1:63412] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:25.137603 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:25.518649 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:25.895409 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:26.295021 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:26.708008 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:27.108541 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:27.520896 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:27.947415 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:28.384125 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:28.781166 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:29.159464 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:29.486426 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] === ADD TO CART START ===, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:29.486426 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] POST data: Array\n(\n    [product_id] => 1568\n    [quantity] => 1\n)\n, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:29.486426 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] Session data: Array\n(\n    [user_id] => 1\n    [user_name] => death gh\n    [user_email] => test@example.com\n    [error_message] => Your cart is empty. Please add items before checkout.\n)\n, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:29.592839 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] Attempting to add product: ID=1568, Quantity=1 for User=1, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:29.802035 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] Product added successfully, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:29.908367 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] New cart count: 1, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:29.909339 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:30.286974 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:31.182686 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63365] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:31.564723 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63394] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:31.971297 2025] [php:notice] [pid 24728:tid 1968] [client ::1:63444] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:32.365517 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:33.248985 2025] [php:notice] [pid 24728:tid 1968] [client ::1:63444] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:51:33.636519 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/index.php?page=cart
+[Thu Jun 19 02:51:34.733763 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/index.php?page=cart
+[Thu Jun 19 02:51:35.227566 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] User model initialized with table: h8pd_societe, referer: http://localhost/zai/index.php?page=cart
+[Thu Jun 19 02:51:35.728195 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:40.233831 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:41.166184 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/index.php?page=cart
+[Thu Jun 19 02:51:42.485040 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/index.php?page=cart
+[Thu Jun 19 02:51:42.956845 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] User model initialized with table: h8pd_societe, referer: http://localhost/zai/index.php?page=cart
+[Thu Jun 19 02:51:43.490170 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:48.169568 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:48.651715 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] User model initialized with table: h8pd_societe, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:48.652715 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] === CHECKOUT PROCESS START ===, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:48.652715 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] REQUEST_METHOD: POST, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:48.652715 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] POST data: Array\n(\n    [shipping_address] => d\n    [billing_address] => d\n    [payment_method] => cash_on_delivery\n    [notes] => d\n)\n, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:48.652715 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Session data: Array\n(\n    [user_id] => 1\n    [user_name] => death gh\n    [user_email] => test@example.com\n)\n, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:48.652715 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] User ID: 1, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:48.652715 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Processing order for user ID: 1, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:48.755296 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Cart items count: 1, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:48.756299 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Shipping address: d, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:48.756299 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Payment method: cash_on_delivery, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:48.756299 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Attempting to create order..., referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:48.756299 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Cart items before order creation:, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:48.756299 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Item 1: product_id=1568, label=001_etiquette_codes_barres_4030_ma, price=4, quantity=1, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:50.180419 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Customer not found in Dolibarr, will use default customer ID or create one, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:51.369888 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Failed to create Dolibarr draft order: {"error":"HTTP Error 401","message":"{\\"error\\":{\\"code\\":401,\\"message\\":\\"Unauthorized: Error user not valid (not found with api key or bad status or bad validity dates) (conf->entity=1)\\"}}"}, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:51.537587 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Creating order for user: 1, email: exemple@gmail.com, name: Exemple, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:51.713564 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Order creation query: INSERT INTO h8pd_commande \n                      (ref, ref_client, entity, fk_soc, fk_user_author, date_commande, fk_statut, total_ht, total_ttc, note_private) \n                      VALUES \n                      (:ref, :ref_client, 1, :fk_soc, :fk_user_author, NOW(), 1, :total_ht, :total_ttc, :note_private), referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:51.713564 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Order creation params: ref=WEB-20250619035151-538153-14588, ref_client=exemple@gmail.com, fk_soc=1, fk_user_author=1, total_ht=4, total_ttc=4, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:51.870964 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Inserted order item: product_id=1568, price=4, qty=1, total=4, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:51.980357 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Cleared cart for user: 1, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:52.034966 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Order created successfully with ID: 247, Reference: WEB-20250619035151-538153-14588, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:52.034966 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Order creation result: 247, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:52.034966 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Order created successfully with ID: 247, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:52.034966 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] Redirecting to success page..., referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:52.054844 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:52.621145 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] User model initialized with table: h8pd_societe, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:53.231269 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] PHP Deprecated:  strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in C:\\xampp\\htdocs\\zai\\app\\views\\checkout\\success.php on line 32, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:53.232285 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\\xampp\\htdocs\\zai\\app\\views\\checkout\\success.php on line 57, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:51:53.298015 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63446] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/checkout/success/247
+[Thu Jun 19 02:52:04.156560 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63490] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/checkout/success/247
+[Thu Jun 19 02:52:04.484042 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63490] Product::findAll - Fetching products with limit: 8, offset: 0, search: null, referer: http://localhost/zai/checkout/success/247
+[Thu Jun 19 02:52:04.594537 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63490] Product::findAll - SQL Query: SELECT p.* FROM h8pd_product p WHERE 1=1 ORDER BY p.datec DESC LIMIT :limit OFFSET :offset, referer: http://localhost/zai/checkout/success/247
+[Thu Jun 19 02:52:04.594537 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63490] Product::findAll - Found 8 products, referer: http://localhost/zai/checkout/success/247
+[Thu Jun 19 02:52:05.335717 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63490] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:05.704834 2025] [php:notice] [pid 24728:tid 1968] [client ::1:63495] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:06.103134 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63496] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:06.550324 2025] [php:notice] [pid 24728:tid 1972] [client ::1:63497] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:06.934605 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63498] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:07.354818 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63499] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:07.744762 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63490] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:08.145004 2025] [php:notice] [pid 24728:tid 1968] [client ::1:63495] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:08.529565 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63496] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:08.968897 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63496] Found 0 orders for email: test@example.com, referer: http://localhost/zai/
+[Thu Jun 19 02:52:08.969974 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63496] Retrieving orders for user email: test@example.com, referer: http://localhost/zai/
+[Thu Jun 19 02:52:08.969974 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63496] Found 0 orders for user, referer: http://localhost/zai/
+[Thu Jun 19 02:52:09.353750 2025] [php:notice] [pid 24728:tid 1972] [client ::1:63497] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:09.725654 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63498] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:10.107539 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63499] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:10.471808 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63490] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:10.855256 2025] [php:notice] [pid 24728:tid 1968] [client ::1:63495] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:11.267297 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63496] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:11.654767 2025] [php:notice] [pid 24728:tid 1972] [client ::1:63497] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/orders
+[Thu Jun 19 02:52:12.047012 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63498] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:12.426309 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63499] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:12.803174 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63490] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:13.166901 2025] [php:notice] [pid 24728:tid 1968] [client ::1:63495] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:13.529439 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63496] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:13.901695 2025] [php:notice] [pid 24728:tid 1972] [client ::1:63497] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:14.283190 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63498] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:14.648124 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63499] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:52:15.073429 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63490] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/public/css/home.css
+[Thu Jun 19 02:52:45.904653 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/orders
+[Thu Jun 19 02:52:46.784825 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/index.php?page=cart
+[Thu Jun 19 02:52:48.186625 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/index.php?page=cart
+[Thu Jun 19 02:52:49.463501 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category
+[Thu Jun 19 02:52:49.564852 2025] [core:error] [pid 24728:tid 1972] (20024)The given path is misformatted or contained invalid characters: [client ::1:63581] AH00127: Cannot map GET /zai/http://localhost/zai/public/img/products/default-product.jpg HTTP/1.1 to file, referer: http://localhost/zai/category
+[Thu Jun 19 02:52:49.564852 2025] [core:error] [pid 24728:tid 1964] (20024)The given path is misformatted or contained invalid characters: [client ::1:63580] AH00127: Cannot map GET /zai/http://localhost/zai/public/img/products/001_etiquette_codes_barres_4030_ma.jpg HTTP/1.1 to file, referer: http://localhost/zai/category
+[Thu Jun 19 02:52:49.884147 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63578] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category
+[Thu Jun 19 02:52:50.919186 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63578] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category
+[Thu Jun 19 02:52:52.887433 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63578] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category/view/396
+[Thu Jun 19 02:52:53.253112 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category/view/396
+[Thu Jun 19 02:52:53.633434 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category/view/396
+[Thu Jun 19 02:52:54.158008 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category/view/396
+[Thu Jun 19 02:52:54.657229 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category/view/396
+[Thu Jun 19 02:52:55.067905 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category/view/396
+[Thu Jun 19 02:52:55.487486 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category/view/396
+[Thu Jun 19 02:52:55.917190 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63578] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category/view/396
+[Thu Jun 19 02:52:56.929394 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/category/view/396
+[Thu Jun 19 02:52:57.334858 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63578] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:52:57.720995 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:52:58.101200 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:52:58.466493 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:52:58.842669 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:52:59.219374 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:52:59.590450 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:52:59.977978 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:00.350415 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:00.748706 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:01.172245 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:01.667993 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:02.377711 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:02.782922 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63578] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:03.108527 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63578] === ADD TO CART START ===, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:03.108527 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63578] POST data: Array\n(\n    [product_id] => 1568\n    [quantity] => 8\n)\n, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:03.108527 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63578] Session data: Array\n(\n    [user_id] => 1\n    [user_name] => death gh\n    [user_email] => test@example.com\n    [success_message] => Order placed successfully! Order ID: 247\n)\n, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:03.214104 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63578] Attempting to add product: ID=1568, Quantity=8 for User=1, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:03.423888 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63578] Product added successfully, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:03.528684 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63578] New cart count: 8, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:03.529690 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:03.908850 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63578] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:04.794920 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63568] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:05.173405 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63578] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:05.591199 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63629] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:05.999402 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63629] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:06.399955 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63578] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:07.268268 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63629] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/product/view/1568
+[Thu Jun 19 02:53:07.673230 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63578] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/index.php?page=cart
+[Thu Jun 19 02:53:09.464914 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63629] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/index.php?page=cart
+[Thu Jun 19 02:53:10.004196 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63629] User model initialized with table: h8pd_societe, referer: http://localhost/zai/index.php?page=cart
+[Thu Jun 19 02:53:10.550314 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63629] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:16.935511 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:17.458276 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] User model initialized with table: h8pd_societe, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:17.458276 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] === CHECKOUT PROCESS START ===, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:17.459286 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] REQUEST_METHOD: POST, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:17.459286 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] POST data: Array\n(\n    [shipping_address] => g\n    [billing_address] => g\n    [payment_method] => cash_on_delivery\n    [notes] => g\n)\n, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:17.459286 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Session data: Array\n(\n    [user_id] => 1\n    [user_name] => death gh\n    [user_email] => test@example.com\n)\n, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:17.460280 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] User ID: 1, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:17.460280 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Processing order for user ID: 1, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:17.570250 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Cart items count: 1, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:17.570250 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Shipping address: g, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:17.570250 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Payment method: cash_on_delivery, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:17.570250 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Attempting to create order..., referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:17.570250 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Cart items before order creation:, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:17.570250 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Item 1: product_id=1568, label=001_etiquette_codes_barres_4030_ma, price=4, quantity=8, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:18.904278 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Customer not found in Dolibarr, will use default customer ID or create one, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:21.198763 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Failed to create Dolibarr draft order: {"error":"HTTP Error 401","message":"{\\"error\\":{\\"code\\":401,\\"message\\":\\"Unauthorized: Error user not valid (not found with api key or bad status or bad validity dates) (conf->entity=1)\\"}}"}, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:21.366432 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Creating order for user: 1, email: exemple@gmail.com, name: Exemple, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:21.522504 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Order creation query: INSERT INTO h8pd_commande \n                      (ref, ref_client, entity, fk_soc, fk_user_author, date_commande, fk_statut, total_ht, total_ttc, note_private) \n                      VALUES \n                      (:ref, :ref_client, 1, :fk_soc, :fk_user_author, NOW(), 1, :total_ht, :total_ttc, :note_private), referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:21.522504 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Order creation params: ref=WEB-20250619035321-367573-70047, ref_client=exemple@gmail.com, fk_soc=1, fk_user_author=1, total_ht=32, total_ttc=32, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:21.690587 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Inserted order item: product_id=1568, price=4, qty=8, total=32, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:21.805642 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Cleared cart for user: 1, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:21.862846 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Order created successfully with ID: 248, Reference: WEB-20250619035321-367573-70047, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:21.862846 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Order creation result: 248, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:21.862846 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Order created successfully with ID: 248, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:21.862846 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] Redirecting to success page..., referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:21.887718 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:22.411406 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] User model initialized with table: h8pd_societe, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:23.014661 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] PHP Deprecated:  strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in C:\\xampp\\htdocs\\zai\\app\\views\\checkout\\success.php on line 32, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:23.015644 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\\xampp\\htdocs\\zai\\app\\views\\checkout\\success.php on line 57, referer: http://localhost/zai/checkout
+[Thu Jun 19 02:53:23.073786 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63647] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/checkout/success/248
+[Thu Jun 19 02:53:51.181445 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63681] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/checkout/success/248
+[Thu Jun 19 02:53:51.498404 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63681] Product::findAll - Fetching products with limit: 8, offset: 0, search: null, referer: http://localhost/zai/checkout/success/248
+[Thu Jun 19 02:53:51.607600 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63681] Product::findAll - SQL Query: SELECT p.* FROM h8pd_product p WHERE 1=1 ORDER BY p.datec DESC LIMIT :limit OFFSET :offset, referer: http://localhost/zai/checkout/success/248
+[Thu Jun 19 02:53:51.607600 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63681] Product::findAll - Found 8 products, referer: http://localhost/zai/checkout/success/248
+[Thu Jun 19 02:53:52.353805 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63681] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:52.821680 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63685] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:53.239938 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63686] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:53.627648 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63688] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:54.071928 2025] [php:notice] [pid 24728:tid 1972] [client ::1:63687] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:54.463667 2025] [php:notice] [pid 24728:tid 1968] [client ::1:63689] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:54.846328 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63681] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:55.211701 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63685] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:55.586312 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63686] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:55.976449 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63688] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:56.337831 2025] [php:notice] [pid 24728:tid 1972] [client ::1:63687] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:56.712275 2025] [php:notice] [pid 24728:tid 1968] [client ::1:63689] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:57.096634 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63681] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:57.480718 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63685] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:57.873570 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63686] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:58.271081 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63688] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:58.666539 2025] [php:notice] [pid 24728:tid 1972] [client ::1:63687] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:59.070592 2025] [php:notice] [pid 24728:tid 1968] [client ::1:63689] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:59.475382 2025] [php:notice] [pid 24728:tid 1964] [client ::1:63681] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:53:59.867324 2025] [php:notice] [pid 24728:tid 1960] [client ::1:63685] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:54:00.226285 2025] [php:notice] [pid 24728:tid 1980] [client ::1:63686] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:54:00.587389 2025] [php:notice] [pid 24728:tid 1976] [client ::1:63688] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:54:00.962331 2025] [php:notice] [pid 24728:tid 1972] [client ::1:63687] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/public/css/home.css
+[Thu Jun 19 02:55:19.615628 2025] [php:notice] [pid 24728:tid 1972] [client ::1:63795] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/
+[Thu Jun 19 02:55:20.130080 2025] [php:notice] [pid 24728:tid 1972] [client ::1:63795] Found 0 orders for email: test@example.com, referer: http://localhost/zai/
+[Thu Jun 19 02:55:20.130080 2025] [php:notice] [pid 24728:tid 1972] [client ::1:63795] Retrieving orders for user email: test@example.com, referer: http://localhost/zai/
+[Thu Jun 19 02:55:20.130080 2025] [php:notice] [pid 24728:tid 1972] [client ::1:63795] Found 0 orders for user, referer: http://localhost/zai/
+[Thu Jun 19 02:55:20.571546 2025] [php:notice] [pid 24728:tid 1972] [client ::1:63795] ENV file not found at: C:\\xampp\\htdocs\\zai/.env, referer: http://localhost/zai/orders
+

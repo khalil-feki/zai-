@@ -1,0 +1,60 @@
+/* Category Menu Styles */
+.category-menu {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.category-menu-header {
+    background-color: #0056b3;
+    color: white;
+    padding: 15px 20px;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+}
+
+.category-menu-body {
+    background-color: #f8f9fa;
+}
+
+.category-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    transition: background-color 0.2s;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.category-item:last-child {
+    border-bottom: none;
+}
+
+.category-item:hover {
+    background-color: #e9ecef;
+}
+
+.category-item.active {
+    background-color: #e9ecef;
+    font-weight: 500;
+}
+
+.category-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: #e9ecef;
+    border-radius: 50%;
+    margin-right: 15px;
+    color: #495057;
+}
+
+.category-name {
+    font-size: 15px;
+}

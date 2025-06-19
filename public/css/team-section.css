@@ -1,0 +1,225 @@
+/* Section Équipe - Notre équipe à votre service */ 
+.asm-team-section { 
+    padding: 120px 0; 
+    background: #f8f9fa; 
+    position: relative; 
+    overflow: hidden; 
+} 
+
+.asm-team-section::before { 
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234a6cf7' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); 
+    z-index: 0; 
+} 
+
+.asm-section-title { 
+    text-align: center; 
+    margin-bottom: 70px; 
+    position: relative; 
+    z-index: 1; 
+} 
+
+.asm-section-title h2 { 
+    font-size: 3rem; 
+    font-weight: 800; 
+    color: #333; 
+    margin-bottom: 15px; 
+    position: relative; 
+    display: inline-block; 
+} 
+
+.asm-section-title h2::after { 
+    content: ''; 
+    position: absolute; 
+    bottom: -15px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 80px; 
+    height: 4px; 
+    background: linear-gradient(90deg, #4a6cf7, #6a30a3); 
+    border-radius: 2px; 
+} 
+
+.asm-section-title p { 
+    font-size: 1.2rem; 
+    color: #666; 
+    max-width: 700px; 
+    margin: 25px auto 0; 
+} 
+
+.asm-team-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 30px; 
+    position: relative; 
+    z-index: 1; 
+} 
+
+.asm-team-member { 
+    background: #fff; 
+    border-radius: 15px; 
+    overflow: hidden; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); 
+    transition: all 0.3s ease; 
+    transform: translateY(30px); 
+    opacity: 0; 
+    animation: fadeInUp 0.8s forwards; 
+} 
+
+.asm-team-member:nth-child(1) { animation-delay: 0.1s; } 
+.asm-team-member:nth-child(2) { animation-delay: 0.3s; } 
+.asm-team-member:nth-child(3) { animation-delay: 0.5s; } 
+.asm-team-member:nth-child(4) { animation-delay: 0.7s; } 
+
+.asm-team-member:hover { 
+    transform: translateY(-10px); 
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); 
+} 
+
+.asm-team-photo { 
+    position: relative; 
+    height: 280px; 
+    overflow: hidden; 
+} 
+
+.asm-team-photo::before { 
+    content: ''; 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 50%; 
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent); 
+    z-index: 1; 
+    opacity: 0; 
+    transition: all 0.3s ease; 
+} 
+
+.asm-team-member:hover .asm-team-photo::before { 
+    opacity: 1; 
+} 
+
+.asm-team-photo img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    transition: all 0.5s ease; 
+} 
+
+.asm-team-member:hover .asm-team-photo img { 
+    transform: scale(1.1); 
+} 
+
+.asm-team-info { 
+    padding: 25px; 
+    text-align: center; 
+    position: relative; 
+} 
+
+.asm-team-info::before { 
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 50px; 
+    height: 3px; 
+    background: linear-gradient(90deg, #4a6cf7, #6a30a3); 
+    border-radius: 3px; 
+} 
+
+.asm-team-info h3 { 
+    font-size: 1.4rem; 
+    font-weight: 700; 
+    margin-bottom: 5px; 
+    color: #333; 
+} 
+
+.asm-team-info p { 
+    color: #666; 
+    font-size: 1rem; 
+    margin: 0; 
+} 
+
+.asm-team-social { 
+    display: flex; 
+    justify-content: center; 
+    margin-top: 15px; 
+    gap: 10px; 
+    opacity: 0; 
+    transform: translateY(10px); 
+    transition: all 0.3s ease; 
+} 
+
+.asm-team-member:hover .asm-team-social { 
+    opacity: 1; 
+    transform: translateY(0); 
+} 
+
+.asm-team-social a { 
+    width: 35px; 
+    height: 35px; 
+    border-radius: 50%; 
+    background: #f0f0f0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: #4a6cf7; 
+    transition: all 0.3s ease; 
+} 
+
+.asm-team-social a:hover { 
+    background: linear-gradient(90deg, #4a6cf7, #6a30a3); 
+    color: #fff; 
+    transform: translateY(-3px); 
+}
+
+/* Animation pour le fadeInUp */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation pour le flottement des formes */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Media queries pour la responsivité */
+@media (max-width: 992px) {
+    .asm-team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .asm-team-section {
+        padding: 80px 0;
+    }
+    
+    .asm-section-title h2 {
+        font-size: 2.5rem;
+    }
+    
+    .asm-team-grid {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+}

@@ -1,0 +1,178 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.6
+-- https://www.phpmyadmin.net/
+--
+-- Host: c137d.myd.infomaniak.com
+-- Generation Time: Jun 12, 2025 at 03:50 AM
+-- Server version: 10.6.16-MariaDB-1:10.6.16+maria~deb11-log
+-- PHP Version: 7.4.33
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `c137d_app_dolibarr_20`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `h8pd_product`
+--
+
+CREATE TABLE `h8pd_product` (
+  `rowid` int(11) NOT NULL,
+  `ref` varchar(128) NOT NULL,
+  `entity` int(11) NOT NULL DEFAULT 1,
+  `ref_ext` varchar(128) DEFAULT NULL,
+  `datec` datetime DEFAULT NULL,
+  `tms` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `virtual` tinyint(4) NOT NULL DEFAULT 0,
+  `fk_parent` int(11) DEFAULT 0,
+  `label` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `note` text DEFAULT NULL,
+  `customcode` varchar(32) DEFAULT NULL,
+  `fk_country` int(11) DEFAULT NULL,
+  `fk_state` int(11) DEFAULT NULL,
+  `price` double(24,8) DEFAULT 0.00000000,
+  `price_ttc` double(24,8) DEFAULT 0.00000000,
+  `price_min` double(24,8) DEFAULT 0.00000000,
+  `price_min_ttc` double(24,8) DEFAULT 0.00000000,
+  `price_base_type` varchar(3) DEFAULT 'HT',
+  `price_label` varchar(255) DEFAULT NULL,
+  `tva_tx` double(6,3) DEFAULT NULL,
+  `recuperableonly` int(11) NOT NULL DEFAULT 0,
+  `localtax1_tx` double(6,3) DEFAULT 0.000,
+  `localtax1_type` varchar(10) NOT NULL DEFAULT '0',
+  `localtax2_tx` double(6,3) DEFAULT 0.000,
+  `localtax2_type` varchar(10) NOT NULL DEFAULT '0',
+  `fk_user_author` int(11) DEFAULT NULL,
+  `fk_user_modif` int(11) DEFAULT NULL,
+  `tosell` tinyint(4) DEFAULT 1,
+  `tobuy` tinyint(4) DEFAULT 1,
+  `tobatch` tinyint(4) NOT NULL DEFAULT 0,
+  `sell_or_eat_by_mandatory` tinyint(4) NOT NULL DEFAULT 0,
+  `fk_product_type` int(11) DEFAULT 0,
+  `duration` varchar(6) DEFAULT NULL,
+  `seuil_stock_alerte` float DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `barcode` varchar(255) DEFAULT NULL,
+  `fk_barcode_type` int(11) DEFAULT NULL,
+  `accountancy_code_sell` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `accountancy_code_sell_intra` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `accountancy_code_sell_export` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `accountancy_code_buy` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `accountancy_code_buy_intra` varchar(32) DEFAULT NULL,
+  `accountancy_code_buy_export` varchar(32) DEFAULT NULL,
+  `partnumber` varchar(32) DEFAULT NULL,
+  `weight` float DEFAULT NULL,
+  `weight_units` tinyint(4) DEFAULT NULL,
+  `length` float DEFAULT NULL,
+  `length_units` tinyint(4) DEFAULT NULL,
+  `surface` float DEFAULT NULL,
+  `surface_units` tinyint(4) DEFAULT NULL,
+  `volume` float DEFAULT NULL,
+  `volume_units` tinyint(4) DEFAULT NULL,
+  `stock` double DEFAULT NULL,
+  `pmp` double(24,8) NOT NULL DEFAULT 0.00000000,
+  `fifo` double(24,8) DEFAULT NULL,
+  `lifo` double(24,8) DEFAULT NULL,
+  `canvas` varchar(32) DEFAULT NULL,
+  `finished` tinyint(4) DEFAULT NULL,
+  `hidden` tinyint(4) DEFAULT 0,
+  `import_key` varchar(14) DEFAULT NULL,
+  `desiredstock` float DEFAULT NULL,
+  `fk_price_expression` int(11) DEFAULT NULL,
+  `fk_unit` int(11) DEFAULT NULL,
+  `cost_price` double(24,8) DEFAULT NULL,
+  `default_vat_code` varchar(10) DEFAULT NULL,
+  `price_autogen` smallint(6) DEFAULT 0,
+  `batch_mask` varchar(32) DEFAULT NULL,
+  `lifetime` int(11) DEFAULT NULL,
+  `qc_frequency` int(11) DEFAULT NULL,
+  `note_public` text DEFAULT NULL,
+  `model_pdf` varchar(255) DEFAULT '',
+  `width` float DEFAULT NULL,
+  `width_units` tinyint(4) DEFAULT NULL,
+  `height` float DEFAULT NULL,
+  `height_units` tinyint(4) DEFAULT NULL,
+  `fk_default_warehouse` int(11) DEFAULT NULL,
+  `fk_project` int(11) DEFAULT NULL,
+  `net_measure` float DEFAULT NULL,
+  `net_measure_units` tinyint(4) DEFAULT NULL,
+  `mandatory_period` tinyint(4) DEFAULT 0,
+  `fk_default_bom` int(11) DEFAULT NULL,
+  `fk_default_workstation` int(11) DEFAULT NULL,
+  `stockable_product` int(11) NOT NULL DEFAULT 1,
+  `last_main_doc` varchar(255) DEFAULT NULL,
+  `image_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+
+--
+-- Dumping data for table `h8pd_product`
+--
+
+INSERT INTO `h8pd_product` (`rowid`, `ref`, `entity`, `ref_ext`, `datec`, `tms`, `virtual`, `fk_parent`, `label`, `description`, `note`, `customcode`, `fk_country`, `fk_state`, `price`, `price_ttc`, `price_min`, `price_min_ttc`, `price_base_type`, `price_label`, `tva_tx`, `recuperableonly`, `localtax1_tx`, `localtax1_type`, `localtax2_tx`, `localtax2_type`, `fk_user_author`, `fk_user_modif`, `tosell`, `tobuy`, `tobatch`, `sell_or_eat_by_mandatory`, `fk_product_type`, `duration`, `seuil_stock_alerte`, `url`, `barcode`, `fk_barcode_type`, `accountancy_code_sell`, `accountancy_code_sell_intra`, `accountancy_code_sell_export`, `accountancy_code_buy`, `accountancy_code_buy_intra`, `accountancy_code_buy_export`, `partnumber`, `weight`, `weight_units`, `length`, `length_units`, `surface`, `surface_units`, `volume`, `volume_units`, `stock`, `pmp`, `fifo`, `lifo`, `canvas`, `finished`, `hidden`, `import_key`, `desiredstock`, `fk_price_expression`, `fk_unit`, `cost_price`, `default_vat_code`, `price_autogen`, `batch_mask`, `lifetime`, `qc_frequency`, `note_public`, `model_pdf`, `width`, `width_units`, `height`, `height_units`, `fk_default_warehouse`, `fk_project`, `net_measure`, `net_measure_units`, `mandatory_period`, `fk_default_bom`, `fk_default_workstation`, `stockable_product`, `last_main_doc`, `image_name`) VALUES
+(1568, '40_30_TT', 1, NULL, NULL, '2025-06-09 23:51:08', 0, 0, '001_etiquette_codes_barres_4030_ma', '', NULL, '', NULL, NULL, 4.00000000, 0.00000000, 0.00000000, NULL, 'HT', NULL, 19.000, 0, 0.000, '0', 0.000, '0', 1, 2, 1, 1, 0, 0, 0, '0', NULL, NULL, NULL, NULL, '707', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.00000000, NULL, NULL, NULL, NULL, 0, '20250415112119', NULL, NULL, NULL, NULL, NULL, 0, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 1, NULL, '001_etiquette_codes_barres_4030_ma.jpg');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `h8pd_product`
+--
+ALTER TABLE `h8pd_product`
+  ADD PRIMARY KEY (`rowid`),
+  ADD UNIQUE KEY `uk_product_ref` (`ref`,`entity`),
+  ADD UNIQUE KEY `uk_product_barcode` (`barcode`,`fk_barcode_type`,`entity`),
+  ADD KEY `idx_product_label` (`label`),
+  ADD KEY `idx_product_barcode` (`barcode`),
+  ADD KEY `idx_product_import_key` (`import_key`),
+  ADD KEY `idx_product_seuil_stock_alerte` (`seuil_stock_alerte`),
+  ADD KEY `idx_product_fk_country` (`fk_country`),
+  ADD KEY `idx_product_fk_user_author` (`fk_user_author`),
+  ADD KEY `idx_product_fk_barcode_type` (`fk_barcode_type`),
+  ADD KEY `fk_product_fk_unit` (`fk_unit`),
+  ADD KEY `fk_product_default_warehouse` (`fk_default_warehouse`),
+  ADD KEY `idx_product_fk_project` (`fk_project`),
+  ADD KEY `fk_product_finished` (`finished`),
+  ADD KEY `idx_product_entity_fk_product_type` (`entity`,`fk_product_type`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `h8pd_product`
+--
+ALTER TABLE `h8pd_product`
+  MODIFY `rowid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2373;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `h8pd_product`
+--
+ALTER TABLE `h8pd_product`
+  ADD CONSTRAINT `fk_product_barcode_type` FOREIGN KEY (`fk_barcode_type`) REFERENCES `h8pd_c_barcode_type` (`rowid`),
+  ADD CONSTRAINT `fk_product_default_warehouse` FOREIGN KEY (`fk_default_warehouse`) REFERENCES `h8pd_entrepot` (`rowid`),
+  ADD CONSTRAINT `fk_product_finished` FOREIGN KEY (`finished`) REFERENCES `h8pd_c_product_nature` (`code`),
+  ADD CONSTRAINT `fk_product_fk_country` FOREIGN KEY (`fk_country`) REFERENCES `h8pd_c_country` (`rowid`),
+  ADD CONSTRAINT `fk_product_fk_unit` FOREIGN KEY (`fk_unit`) REFERENCES `h8pd_c_units` (`rowid`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
