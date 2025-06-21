@@ -1,0 +1,430 @@
+{
+  "_type": "Project",
+  "_id": "AAAAAAGR1234570000",
+  "name": "Authentication Diagrams",
+  "ownedElements": [
+    {
+      "_type": "UMLModel",
+      "_id": "AAAAAAGR1234570001",
+      "_parent": {
+        "$ref": "AAAAAAGR1234570000"
+      },
+      "name": "Authentication Model",
+      "ownedElements": [
+        {
+          "_type": "UMLClassDiagram",
+          "_id": "AAAAAAGR1234570002",
+          "_parent": {
+            "$ref": "AAAAAAGR1234570001"
+          },
+          "name": "Authentication Class Diagram",
+          "ownedViews": [
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234570003",
+              "_parent": {
+                "$ref": "AAAAAAGR1234570002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234570004"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234570005",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234570003"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234570004"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 100,
+                  "top": 100,
+                  "width": 200,
+                  "height": 25,
+                  "text": "AuthController"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234570006",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234570003"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234570004"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 100,
+                  "top": 125,
+                  "width": 200,
+                  "height": 80,
+                  "text": "-userModel: UserModel\n-sessionManager: SessionManager\n-validator: Validator\n-emailService: EmailService\n-dolibarrAPI: DolibarrAPI"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234570007",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234570003"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234570004"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 100,
+                  "top": 205,
+                  "width": 200,
+                  "height": 120,
+                  "text": "+register(userData)\n+login(credentials)\n+logout()\n+resetPassword(email)\n+updateProfile(userId, data)\n+verifyEmail(token)\n+changePassword(userId, passwords)\n+checkSession()"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 100,
+              "top": 100,
+              "width": 200,
+              "height": 225
+            },
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234570008",
+              "_parent": {
+                "$ref": "AAAAAAGR1234570002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234570009"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234570010",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234570008"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234570009"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 350,
+                  "top": 100,
+                  "width": 180,
+                  "height": 25,
+                  "text": "UserModel"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234570011",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234570008"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234570009"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 350,
+                  "top": 125,
+                  "width": 180,
+                  "height": 100,
+                  "text": "-id: int\n-email: string\n-password: string\n-firstName: string\n-lastName: string\n-phone: string\n-isActive: boolean\n-createdAt: DateTime"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234570012",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234570008"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234570009"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 350,
+                  "top": 225,
+                  "width": 180,
+                  "height": 100,
+                  "text": "+create(userData)\n+findByEmail(email)\n+findById(id)\n+update(id, data)\n+delete(id)\n+verifyPassword(password)\n+hashPassword(password)"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 350,
+              "top": 100,
+              "width": 180,
+              "height": 225
+            },
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234570013",
+              "_parent": {
+                "$ref": "AAAAAAGR1234570002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234570014"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234570015",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234570013"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234570014"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 100,
+                  "top": 380,
+                  "width": 200,
+                  "height": 25,
+                  "text": "SessionManager"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234570016",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234570013"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234570014"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 100,
+                  "top": 405,
+                  "width": 200,
+                  "height": 60,
+                  "text": "-sessionId: string\n-userId: int\n-expiresAt: DateTime\n-isActive: boolean"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234570017",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234570013"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234570014"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 100,
+                  "top": 465,
+                  "width": 200,
+                  "height": 80,
+                  "text": "+createSession(userId)\n+validateSession(sessionId)\n+destroySession(sessionId)\n+refreshSession(sessionId)\n+getUserFromSession(sessionId)"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 100,
+              "top": 380,
+              "width": 200,
+              "height": 165
+            }
+          ]
+        },
+        {
+          "_type": "UMLUseCaseDiagram",
+          "_id": "AAAAAAGR1234570018",
+          "_parent": {
+            "$ref": "AAAAAAGR1234570001"
+          },
+          "name": "Authentication Use Cases",
+          "ownedViews": [
+            {
+              "_type": "UMLActorView",
+              "_id": "AAAAAAGR1234570019",
+              "_parent": {
+                "$ref": "AAAAAAGR1234570018"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234570020"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234570021",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234570019"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234570020"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 250,
+                  "width": 80,
+                  "height": 15,
+                  "text": "User"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 50,
+              "top": 200,
+              "width": 80,
+              "height": 65
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234570022",
+              "_parent": {
+                "$ref": "AAAAAAGR1234570018"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234570023"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234570024",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234570022"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234570023"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 100,
+                  "width": 120,
+                  "height": 15,
+                  "text": "Register"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 80,
+              "width": 120,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234570025",
+              "_parent": {
+                "$ref": "AAAAAAGR1234570018"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234570026"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234570027",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234570025"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234570026"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 160,
+                  "width": 120,
+                  "height": 15,
+                  "text": "Login"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 140,
+              "width": 120,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234570028",
+              "_parent": {
+                "$ref": "AAAAAAGR1234570018"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234570029"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234570030",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234570028"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234570029"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 220,
+                  "width": 120,
+                  "height": 15,
+                  "text": "Reset Password"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 200,
+              "width": 120,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234570031",
+              "_parent": {
+                "$ref": "AAAAAAGR1234570018"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234570032"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234570033",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234570031"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234570032"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 280,
+                  "width": 120,
+                  "height": 15,
+                  "text": "Update Profile"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 260,
+              "width": 120,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234570034",
+              "_parent": {
+                "$ref": "AAAAAAGR1234570018"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234570035"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234570036",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234570034"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234570035"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 340,
+                  "width": 120,
+                  "height": 15,
+                  "text": "Logout"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 320,
+              "width": 120,
+              "height": 55
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

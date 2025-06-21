@@ -78,8 +78,6 @@
                     <p>Analysez vos performances avec des rapports détaillés et personnalisables.</p>
                 </div>
                 
-                
-                
                 <div class="solution-item">
                     <div class="solution-item-icon">
                         <i class="fas fa-cloud"></i>
@@ -192,28 +190,28 @@
         
         <div class="asm-clients-grid">
             <div class="asm-client">
-                <img src="<?= BASE_URL ?>public/images/client-1.jpg" alt="Client">
+                <img src="<?= BASE_URL ?>public/img/client-1.jpg" alt="Client">
             </div>
             <div class="asm-client">
-                <img src="<?= BASE_URL ?>public/images/client-2.jpg" alt="Client">
+                <img src="<?= BASE_URL ?>public/img/client-2.jpg" alt="Client">
             </div>
             <div class="asm-client">
-                <img src="<?= BASE_URL ?>public/images/client-3.jpg" alt="Client">
+                <img src="<?= BASE_URL ?>public/img/client-3.jpg" alt="Client">
             </div>
             <div class="asm-client">
-                <img src="<?= BASE_URL ?>public/images/client-4.jpg" alt="Client">
+                <img src="<?= BASE_URL ?>public/img/client-4.jpg" alt="Client">
             </div>
             <div class="asm-client">
-                <img src="<?= BASE_URL ?>public/images/client-5.jpg" alt="Client">
+                <img src="<?= BASE_URL ?>public/img/client-5.jpg" alt="Client">
             </div>
             <div class="asm-client">
-                <img src="<?= BASE_URL ?>public/images/client-6.jpg" alt="Client">
+                <img src="<?= BASE_URL ?>public/img/client-6.jpg" alt="Client">
             </div>
             <div class="asm-client">
-                <img src="<?= BASE_URL ?>public/images/client-7.jpg" alt="Client">
+                <img src="<?= BASE_URL ?>public/img/client-7.jpg" alt="Client">
             </div>
             <div class="asm-client">
-                <img src="<?= BASE_URL ?>public/images/client-8.jpg" alt="Client">
+                <img src="<?= BASE_URL ?>public/img/client-8.jpg" alt="Client">
             </div>
         </div>
     </div>

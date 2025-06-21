@@ -1,0 +1,866 @@
+{
+  "_type": "Project",
+  "_id": "AAAAAAGR1234574000",
+  "name": "Global System Diagrams",
+  "ownedElements": [
+    {
+      "_type": "UMLModel",
+      "_id": "AAAAAAGR1234574001",
+      "_parent": {
+        "$ref": "AAAAAAGR1234574000"
+      },
+      "name": "Global System Model",
+      "ownedElements": [
+        {
+          "_type": "UMLClassDiagram",
+          "_id": "AAAAAAGR1234574002",
+          "_parent": {
+            "$ref": "AAAAAAGR1234574001"
+          },
+          "name": "Global Class Diagram",
+          "ownedViews": [
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234574003",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574004"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574005",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574003"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574004"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 50,
+                  "top": 50,
+                  "width": 150,
+                  "height": 25,
+                  "text": "BaseController"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234574006",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574003"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574004"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 75,
+                  "width": 150,
+                  "height": 60,
+                  "text": "#request: Request\n#response: Response\n#session: Session\n#validator: Validator"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234574007",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574003"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574004"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 135,
+                  "width": 150,
+                  "height": 80,
+                  "text": "+validate(data)\n+authorize(permission)\n+jsonResponse(data)\n+errorResponse(message)\n+redirect(url)"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 50,
+              "top": 50,
+              "width": 150,
+              "height": 165
+            },
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234574008",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574009"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574010",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574008"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574009"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 250,
+                  "top": 50,
+                  "width": 150,
+                  "height": 25,
+                  "text": "BaseModel"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234574011",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574008"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574009"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 250,
+                  "top": 75,
+                  "width": 150,
+                  "height": 80,
+                  "text": "#db: Database\n#table: string\n#primaryKey: string\n#fillable: array\n#timestamps: boolean"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234574012",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574008"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574009"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 250,
+                  "top": 155,
+                  "width": 150,
+                  "height": 100,
+                  "text": "+find(id)\n+create(data)\n+update(id, data)\n+delete(id)\n+all()\n+where(conditions)"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 250,
+              "top": 50,
+              "width": 150,
+              "height": 205
+            },
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234574013",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574014"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574015",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574013"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574014"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 450,
+                  "top": 50,
+                  "width": 150,
+                  "height": 25,
+                  "text": "DolibarrAPI"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234574016",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574013"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574014"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 450,
+                  "top": 75,
+                  "width": 150,
+                  "height": 80,
+                  "text": "-baseUrl: string\n-apiKey: string\n-httpClient: HttpClient\n-timeout: int\n-retryCount: int"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234574017",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574013"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574014"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 450,
+                  "top": 155,
+                  "width": 150,
+                  "height": 120,
+                  "text": "+get(endpoint)\n+post(endpoint, data)\n+put(endpoint, data)\n+delete(endpoint)\n+authenticate()\n+handleResponse(response)"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 450,
+              "top": 50,
+              "width": 150,
+              "height": 225
+            },
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234574018",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574019"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574020",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574018"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574019"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 50,
+                  "top": 300,
+                  "width": 150,
+                  "height": 25,
+                  "text": "DatabaseManager"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234574021",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574018"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574019"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 325,
+                  "width": 150,
+                  "height": 80,
+                  "text": "-connection: PDO\n-host: string\n-database: string\n-username: string\n-password: string"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234574022",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574018"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574019"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 405,
+                  "width": 150,
+                  "height": 100,
+                  "text": "+connect()\n+query(sql, params)\n+execute(sql, params)\n+beginTransaction()\n+commit()\n+rollback()"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 50,
+              "top": 300,
+              "width": 150,
+              "height": 205
+            },
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234574023",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574024"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574025",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574023"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574024"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 250,
+                  "top": 300,
+                  "width": 150,
+                  "height": 25,
+                  "text": "SecurityManager"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234574026",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574023"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574024"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 250,
+                  "top": 325,
+                  "width": 150,
+                  "height": 80,
+                  "text": "-encryptionKey: string\n-hashAlgorithm: string\n-saltLength: int\n-sessionTimeout: int\n-csrfToken: string"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234574027",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574023"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574024"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 250,
+                  "top": 405,
+                  "width": 150,
+                  "height": 120,
+                  "text": "+hashPassword(password)\n+verifyPassword(password, hash)\n+generateToken()\n+validateToken(token)\n+encrypt(data)\n+decrypt(data)"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 250,
+              "top": 300,
+              "width": 150,
+              "height": 225
+            },
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234574028",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574029"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574030",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574028"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574029"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 450,
+                  "top": 300,
+                  "width": 150,
+                  "height": 25,
+                  "text": "ConfigManager"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234574031",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574028"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574029"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 450,
+                  "top": 325,
+                  "width": 150,
+                  "height": 80,
+                  "text": "-configFile: string\n-environment: string\n-debugMode: boolean\n-logLevel: string\n-cacheEnabled: boolean"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234574032",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574028"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574029"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 450,
+                  "top": 405,
+                  "width": 150,
+                  "height": 100,
+                  "text": "+get(key)\n+set(key, value)\n+load(file)\n+save()\n+getEnvironment()\n+isDebug()"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 450,
+              "top": 300,
+              "width": 150,
+              "height": 205
+            }
+          ]
+        },
+        {
+          "_type": "UMLUseCaseDiagram",
+          "_id": "AAAAAAGR1234574033",
+          "_parent": {
+            "$ref": "AAAAAAGR1234574001"
+          },
+          "name": "Global Use Case Diagram",
+          "ownedViews": [
+            {
+              "_type": "UMLActorView",
+              "_id": "AAAAAAGR1234574034",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574033"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574035"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574036",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574034"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574035"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 150,
+                  "width": 80,
+                  "height": 15,
+                  "text": "Visitor"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 50,
+              "top": 100,
+              "width": 80,
+              "height": 65
+            },
+            {
+              "_type": "UMLActorView",
+              "_id": "AAAAAAGR1234574037",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574033"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574038"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574039",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574037"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574038"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 250,
+                  "width": 80,
+                  "height": 15,
+                  "text": "Customer"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 50,
+              "top": 200,
+              "width": 80,
+              "height": 65
+            },
+            {
+              "_type": "UMLActorView",
+              "_id": "AAAAAAGR1234574040",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574033"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574041"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574042",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574040"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574041"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 350,
+                  "width": 80,
+                  "height": 15,
+                  "text": "Administrator"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 50,
+              "top": 300,
+              "width": 80,
+              "height": 65
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234574043",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574033"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574044"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574045",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574043"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574044"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 80,
+                  "width": 140,
+                  "height": 15,
+                  "text": "Browse Products"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 60,
+              "width": 140,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234574046",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574033"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574047"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574048",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574046"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574047"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 140,
+                  "width": 140,
+                  "height": 15,
+                  "text": "User Authentication"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 120,
+              "width": 140,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234574049",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574033"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574050"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574051",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574049"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574050"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 200,
+                  "width": 140,
+                  "height": 15,
+                  "text": "Shopping Cart"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 180,
+              "width": 140,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234574052",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574033"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574053"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574054",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574052"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574053"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 260,
+                  "width": 140,
+                  "height": 15,
+                  "text": "Order Management"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 240,
+              "width": 140,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234574055",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574033"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574056"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574057",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574055"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574056"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 320,
+                  "width": 140,
+                  "height": 15,
+                  "text": "Support System"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 300,
+              "width": 140,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234574058",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574033"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574059"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574060",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574058"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574059"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 380,
+                  "width": 140,
+                  "height": 15,
+                  "text": "System Administration"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 360,
+              "width": 140,
+              "height": 55
+            }
+          ]
+        },
+        {
+          "_type": "UMLDeploymentDiagram",
+          "_id": "AAAAAAGR1234574061",
+          "_parent": {
+            "$ref": "AAAAAAGR1234574001"
+          },
+          "name": "Deployment Diagram",
+          "ownedViews": [
+            {
+              "_type": "UMLNodeView",
+              "_id": "AAAAAAGR1234574062",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574061"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574063"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574064",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574062"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574063"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 50,
+                  "top": 50,
+                  "width": 150,
+                  "height": 25,
+                  "text": "Web Server"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 50,
+              "top": 50,
+              "width": 150,
+              "height": 100
+            },
+            {
+              "_type": "UMLNodeView",
+              "_id": "AAAAAAGR1234574065",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574061"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574066"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574067",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574065"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574066"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 250,
+                  "top": 50,
+                  "width": 150,
+                  "height": 25,
+                  "text": "Database Server"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 250,
+              "top": 50,
+              "width": 150,
+              "height": 100
+            },
+            {
+              "_type": "UMLNodeView",
+              "_id": "AAAAAAGR1234574068",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574061"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574069"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574070",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574068"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574069"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 450,
+                  "top": 50,
+                  "width": 150,
+                  "height": 25,
+                  "text": "Dolibarr Server"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 450,
+              "top": 50,
+              "width": 150,
+              "height": 100
+            },
+            {
+              "_type": "UMLNodeView",
+              "_id": "AAAAAAGR1234574071",
+              "_parent": {
+                "$ref": "AAAAAAGR1234574061"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234574072"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234574073",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234574071"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234574072"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 150,
+                  "top": 200,
+                  "width": 150,
+                  "height": 25,
+                  "text": "Client Browser"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 150,
+              "top": 200,
+              "width": 150,
+              "height": 100
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

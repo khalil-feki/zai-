@@ -1,0 +1,1727 @@
+École Supérieure Privée de Management de Tunis
+Esprit School of Business
+
+RAPPORT DE STAGE
+En vue de l’obtention du diplôme de licence Professionnel en
+Parcours Business information system
+Soutenu le :
+Réalisé par : Youssef Ayed
+« Développement d’une application web de recherche d’emploi
+JobPortal »
+20/03/2024 – 20/07/2024
+Maître de stage : Ahmed Naffati
+Encadrant académique : Marouen Boukari
+Année universitaire 2023/2024
+Maître de stage
+Nom & Prénom Date et Signature
+M. Ahmed Naffati
+Encadrant académique Mr. Marouen Boukari
+Dédicace
+Je tiens à exprimer ma profonde gratitude envers ma mère pour son soutien inconditionnel,
+son amour sans faille et ses encouragements constants. Elle est mon modèle de
+persévérance, et je lui serai toujours reconnaissant pour cela.
+À mon père, malgré les défis qu'il a dû affronter cette année, je tiens à le remercier
+chaleureusement pour sa présence et son soutien, qui m'ont donné la force de poursuivre
+mes efforts.
+À mes frères, je vous remercie pour votre soutien et votre présence constante à mes côtés.
+Enfin, à toute ma famille, je suis profondément touché par chaque membre, et je vous
+exprime ma gratitude sincère pour tout ce que vous apportez dans ma vie.
+À mes amis, merci du fond du cœur pour votre soutien constant et votre bienveillance.
+Remerciements
+Je souhaite exprimer ma sincère gratitude envers toutes les personnes qui ont joué un rôle
+essentiel dans la réalisation de mon projet et qui m'ont soutenu tout au long de cette
+expérience.
+Un remerciement particulier à mon maître de stage, M. Ahmed Naffati, pour son
+accompagnement bienveillant et son engagement constant dans mon développement
+professionnel. Ses conseils ont été d'une grande aide pour moi.
+Je souhaite également exprimer ma gratitude envers mon encadrant, M. Marouen Boukeri,
+pour son soutien, son écoute, et son aide précieuse tout au long de cette période.
+Enfin, je remercie sincèrement ma famille et mes amis pour leur encouragement constant,
+qui m'ont permis de surmonter les défis rencontrés pendant ce parcours.
+Table des matières
+Chapitre 1 : Chapitre introductif.........................................................................................................2
+Introduction ...................................................................................................................................3
+1. Présentation de l’organisme d’accueil .........................................................................................3
+1.1 Présentation de Beecoders .....................................................................................................3
+1.2 Les services offerts par Beecoders.........................................................................................3
+1.3 Présentation du département « Technologie Transformation »................................................4
+2. Cadre Général du projet...............................................................................................................4
+2.1 Présentation du projet ............................................................................................................4
+2.1.1 Caractéristiques Principales ................................................................................................4
+2.2 Problématique .......................................................................................................................5
+2.3 Étude de l’existant.................................................................................................................6
+2.3.1 Plateformes Populaires .......................................................................................................6
+2.3.1.1 LinkedIn..........................................................................................................................6
+2.3.1.2 Indeed .............................................................................................................................7
+2.3.1.3 Monster ...........................................................................................................................7
+2.4 Critique de l’existant .............................................................................................................8
+3. Méthodologie adoptée................................................................................................................8
+3.1 Choix de la méthodologie......................................................................................................8
+3.2 Présentation de SCRUM........................................................................................................9
+3.3 Les rôles SCRUM .................................................................................................................9
+3.3.1 Product owner ....................................................................................................................9
+3.3.2 Équipe de Développement ................................................................................................10
+3.3.3 SCRUM Master................................................................................................................10
+Conclusion....................................................................................................................................10
+Chapitre 2 : Sprint 0..........................................................................................................................11
+Introduction .................................................................................................................................12
+1. Capture des besoins..................................................................................................................12
+1.1 Identifications des acteurs...................................................................................................12
+1.1.1 Administrateurs................................................................................................................13
+1.1.2 Utilisateur.........................................................................................................................13
+1.1.3 Entreprise .........................................................................................................................13
+1.2 Identifications des besoins...................................................................................................13
+1.2.1 Administrateur..................................................................................................................13
+1.2.3 Entreprise .........................................................................................................................14
+2. Pilotage du projet avec SCRUM................................................................................................15
+2.1 Les fonctionnalités du Backlog............................................................................................15
+2.2 Diagramme des cas d’utilisation globale ..............................................................................17
+2.3 Diagramme de classes globale .............................................................................................17
+2.4 Planifications des release .....................................................................................................18
+2.5 Prototypage des interfaces..................................................................................................19
+2.5.1 Prototypage de l’interface d’authentification .....................................................................20
+2.5.2 Prototypage de l’interface de la gestion des comptes.........................................................20
+2.5.3 Prototypage de l’interface de la gestion des offres.............................................................21
+2.5.4 Prototypage de l’interface page d’accueil pour les entreprises ...........................................22
+3. Environnement de travail..........................................................................................................22
+3.1 Environnement de matériel ..................................................................................................23
+3.2 Environnement de développement .......................................................................................24
+3.3 Environnement logiciels......................................................................................................27
+4. Architecture générale de l’application.......................................................................................29
+4.1 Architecture logique ............................................................................................................29
+4.2 Architecture physique (architecture client/ serveur)..............................................................30
+4.3 Fonctionnement de l’architecture.........................................................................................31
+4.4 Les niveaux de l’architecture ...............................................................................................31
+4.5 Diagramme de déploiement .................................................................................................32
+5. Conclusion ................................................................................................................................32
+CHAPITRE 3 Release 1.......................................................................................................................33
+Introduction .................................................................................................................................34
+1. Sprint 1 : Authentification et gestion du compte .......................................................................34
+2. Conception................................................................................................................................34
+2.1 Définition ............................................................................................................................34
+2.1.1 Diagramme de séquence ...................................................................................................34
+2.1.1.1 Définition ......................................................................................................................34
+2.1.1.2 Acteur principal.............................................................................................................35
+2.1.1.3 Vue ...............................................................................................................................35
+2.1.1.4 Contrôleur .....................................................................................................................35
+2.1.1.5 Modèle ..........................................................................................................................35
+2.1.1.6 Objets............................................................................................................................35
+2.1.1.7 Messages ......................................................................................................................35
+2.1.2 Diagramme de classes.......................................................................................................36
+2.1.2.1 Définition ......................................................................................................................36
+2.1.2.2 Classe ............................................................................................................................36
+2.1.2.3 Attribut..........................................................................................................................36
+2.1.2.4 Méthodes......................................................................................................................36
+2.1.2.5 Association ....................................................................................................................37
+2.1.2.6 Classe d'association .......................................................................................................37
+2.1.2.7 Généralisation / spécialisation.......................................................................................37
+2.1.2.8 Agrégation.....................................................................................................................37
+2.1.2.9 Composition ..................................................................................................................37
+2.1.2.10 Éléments d’une classe ..................................................................................................38
+3. Backlog sprint1..........................................................................................................................38
+3.1 Diagramme de cas d’utilisation raffiné du sprint 1 ...............................................................39
+3.1.1 S’authentifier....................................................................................................................39
+3.1.1.1 Diagramme de cas d’utilisation « s’authentifier »...........................................................39
+3.1.1.2 Diagramme de classe de conception du CU « S’authentifier » ........................................40
+3.1.1.3 Diagramme de séquence du CU précis « S’authentifier » ...............................................41
+3.1.1.4 interface graphique de création de compte......................................................................42
+3.1.1.5 interface graphique de connexion...................................................................................42
+3.1.1.6 Interface Graphique de déconnexion du profil................................................................43
+3.1.1.7 Interface Graphique de connexion de l’administrateur....................................................43
+3.1.2 Gérer son compte..............................................................................................................43
+3.1.2.1 Diagramme de cas d’utilisation « Gérer son compte » ....................................................44
+3.1.2.2 Diagramme de classe de conception du CU « Gérer Son Compte ».................................46
+3.1.2.3 Diagramme de séquence du CU précis « Modifier son compte ».....................................47
+3.1.2.4 Interface Graphique pour Modifier profil utilisateur .......................................................48
+3.1.2.5 Interface Graphique pour Modifier profil entreprise .......................................................48
+3.1.2.6 Diagramme de séquence du CU précis « Consulter son compte » ...................................50
+3.1.2.7 Interface Graphique Profil d’entreprise ..........................................................................50
+3.1.2.8 Interface Graphique Profil d’utilisateur ..........................................................................51
+3.1.2.9 Diagramme de séquence du CU précis « Désactiver son compte »..................................53
+4. Sprint 2 : Gérer les catégories des offres et gérer les utilisateurs...............................................54
+4.1 Backlog Sprint 2..................................................................................................................54
+4.2 Diagramme de cas d’utilisation raffiné du sprint 2 ...............................................................55
+4.2.1 Gérer les catégories des offres ..........................................................................................55
+4.2.1.1 Diagramme de cas d’utilisations « Gérer les catégories des offres »................................55
+4.2.1.2 Diagramme de classe de conception du CU « Gérer catégories des offres » ....................56
+4.2.1.3 Diagramme de séquence du CU précis « Consulter catégories d’offres » ........................57
+4.2.1.4 Diagramme de séquence du CU précis « Ajouter catégories d’offres » ...........................59
+4.2.1.5 Diagramme de séquence du CU précis « Supprimer catégories d’offres ».......................61
+4.2.2 Gérer les utilisateurs.........................................................................................................62
+4.2.2.1 Diagramme de cas d’utilisation « Gérer les utilisateurs »................................................62
+4.2.2.2 Diagramme de séquence du CU précis Consulter utilisateur » ........................................63
+4.2.2.3 Diagramme de séquence du CU précis « Supprimer utilisateur » ....................................66
+4.2.2.4 Interface Graphique de gestion de l’utilisateur................................................................67
+4.2.2.5 Interface Graphique Gestion des entreprises...................................................................67
+Conclusion........................................................................................................................................68
+Chapitre 4 Release 2.........................................................................................................................69
+Introduction .................................................................................................................................70
+1. Sprint 3 : Gérer les offres d’emplois...........................................................................................70
+1.1 Backlog du sprint 3..............................................................................................................70
+1.2 Diagramme de cas d’utilisation raffiné sprint 3 ....................................................................71
+1.2.1 Gérer les offres d’emplois.................................................................................................71
+1.2.1.1 Diagramme de séquence du CU précis « Consulter offres d’emploi » .............................72
+1.2.1.2 Interface graphique pour Consulter et supprimer offre d’emploi de l’entreprise ..............73
+1.2.1.3 Interface Graphique pour Consulter et postuler offre d’emploi pour l’utilisateur.............74
+1.2.1.4 Diagramme de séquence du CU précis « Modifier offres d’emploi » ..............................76
+1.2.1.5 Diagramme de séquence du CU précis « Supprimer offres d’emploi »............................78
+1.2.1.6 Diagramme de séquence du CU précis « Postuler à une offre d’emploi »........................80
+1.2.1.7 Diagramme de classe de conception du CU « Gérer les offres d’emploi ».......................81
+1.2.1.8 Interface Graphique d’administrateur pour Gérer la liste des offres...............................82
+2. Sprint 4 : Gérer les offres de stages...........................................................................................82
+2.1 Backlog Sprint 4..................................................................................................................82
+2.1.1 Gérer les offres de stages..................................................................................................84
+2.1.1.1 Diagramme de séquence du CU précis « Consulter Stage » ............................................85
+2.1.1.2 Diagramme de séquence du CU précis « Ajouter Stage » ...............................................87
+2.1.1.3 Interface Graphique pour Ajouter une offre de stages.....................................................88
+2.1.1.4 Diagramme de séquence du CU précis « Supprimer Stage » ...........................................90
+2.1.1.5 Diagramme de séquence du CU précis « Demander Stage » ...........................................91
+2.1.1.6 Diagramme de classes de conception du CU « Gérer Stages » ........................................92
+Conclusion........................................................................................................................................92
+Figures
+Figure 1 Les principes agile..................................................................................................................9
+Figure 2 La méthode SCRUM.............................................................................................................10
+Figure 3 Diagramme de cas d’utilisation globale................................................................................17
+Figure 4 Diagramme de classes globale .............................................................................................18
+Figure 5 logo d’outils Balsamiq..........................................................................................................19
+Figure 6 Interface de l’authentification .............................................................................................20
+Figure 7 Interface gestion des comptes.............................................................................................20
+Figure 8 Interface gestion des offres.................................................................................................21
+Figure 9 Interface page d’accueil pour utilisateur..............................................................................21
+Figure 10 Interface page d’accueil pour entreprise............................................................................22
+Figure 11 Machine ............................................................................................................................23
+Figure 12 Logo de React....................................................................................................................24
+Figure 13 Logo de HTML....................................................................................................................24
+Figure 14 Logo de JavaScript .............................................................................................................25
+Figure 15 Logo de Vite ......................................................................................................................25
+Figure 16 Logo de CSS .......................................................................................................................26
+Figure 17 Logo de Visual Studio Code................................................................................................27
+Figure 18 Logo de Node.js.................................................................................................................27
+Figure 19 Logo de Postman ...............................................................................................................28
+Figure 20 Logo de MongoDB .............................................................................................................28
+Figure 21 Logo de GitHub..................................................................................................................29
+Figure 22 Logo de StartUML..............................................................................................................29
+Figure 23 Architecture MVC ..............................................................................................................30
+Figure 24 Architecture physique.......................................................................................................31
+Figure 25 Diagramme de déploiement ..............................................................................................32
+Figure 26 Eléments d’une classe........................................................................................................38
+Figure 27 Diagramme de cas d’utilisation du sprint 1 ........................................................................39
+Figure 28 Raffinement de cas d’utilisation "S’authentifier"................................................................39
+Figure 29 Diagramme de classe du "s’authentifier.............................................................................40
+Figure 30 Diagramme de séquence « S’authentifier »........................................................................41
+Figure 31 Interface de création compte d’utilisateur.........................................................................42
+Figure 32 Interface de connexion pour compte d’utilisateur .............................................................42
+Figure 33 Interface de déconnexion du compte ................................................................................43
+Figure 34 Interface d’authentification de l’Administrateur................................................................43
+Figure 35 Raffinement de cas d’utilisation "gérer son compte" .........................................................44
+Figure 36 Diagramme de classe de conception du CU « gérer son compte »......................................46
+Figure 37 Diagramme de séquence « Modifier son compte » ............................................................47
+Figure 38 Interface de modification du profil de l’utilisateur .............................................................48
+Figure 39 Interface de modification du profil de l’entreprise.............................................................48
+Figure 40 Diagramme de séquence « Consulter son compte »...........................................................50
+Figure 41 Interface de visualisation du profil de l’entreprise .............................................................50
+Figure 42 Interface de visualisation du profil de l’utilisateur..............................................................51
+Figure 43 Diagramme de séquence « Désactiver son compte » .........................................................53
+Figure 44 Diagramme de cas d’utilisation du sprint2 .........................................................................55
+Figure 45 Raffinement de cas d’utilisation "gérer les catégories des offres" ......................................55
+Figure 46 Diagramme de classe de conception du CU « gérer catégories des offres »........................56
+Figure 47 Diagramme de séquence "Consulter les catégories des offres" ..........................................57
+Figure 48 Diagramme de séquence « Ajouter les catégories des offres »...........................................59
+Figure 49 Diagramme de séquence "Supprimer les catégories des offres".........................................61
+Figure 50 Raffinement de cas d’utilisation "gérer les utilisateurs" .....................................................62
+Figure 51 Diagramme de séquence "Consulter utilisateur"................................................................63
+Figure 52 Interface Graphique pour consulter Profil entreprise.........................................................64
+Figure 53 Diagramme de séquence "Supprimer utilisateur................................................................66
+Figure 54 Interface de gestion des utilisateurs ..................................................................................67
+Figure 55 Interface de consultation liste des entreprises...................................................................67
+Figure 56 Diagramme de cas d’utilisation raffiné sprint 3 ..................................................................71
+Figure 57 Diagramme de séquence du CU précis «Consulter Offres d’emploi» ..................................72
+Figure 58 Interface de consultation et suppression offre d’emploi chez l’entreprise..........................73
+Figure 59 Interface de consultation offre d’emploi chez l’utilisateur .................................................74
+Figure 60 Diagramme de séquence du CU précis « Modifier Offres D’emploi »..................................76
+Figure 61 Diagramme de séquence du CU précis « Supprimer Offres D’emploi »...............................78
+Figure 62 Diagramme de séquence du CU précis « Postuler à un Offres D’emploi »...........................80
+Figure 63 Diagramme de classe de conception du CU « Gérer les offres d’emploi »...........................81
+Figure 64 Interface d’administrateur pour Gérer les offres................................................................82
+Figure 65 Raffinement de cas d’utilisation « gérer les stages » ..........................................................84
+Figure 66 Diagramme de séquence du CU précis « Consulter Stages »...............................................85
+Figure 67 Diagramme de séquence « Ajouter stages » ......................................................................87
+Figure 68 Interface d’ajout une offre de stage pour entreprise..........................................................88
+Figure 69 Diagramme de séquence du CU précis « Supprimer Stage »...............................................90
+Figure 70 Diagramme de séquence du CU précis « Demander Stage »...............................................91
+Figure 71 Diagramme de classe de conception du CU « Gérer Stages » .............................................92
+Liste des tableaux
+Tableau 1 inconvénients et avantages de LinkedIn .................................................................6
+Tableau 2 inconvénients et avantages de Indeed....................................................................7
+Tableau 3 inconvénients et avantages de Monster.................................................................8
+Tableau 4 les Besoins fonctionnels et non fonctionnels........................................................12
+Tableau 5 Backlog du produit ...............................................................................................16
+Tableau 6 planification des sprints........................................................................................19
+Tableau 7 Backlog du sprint 1 ...............................................................................................38
+Tableau 8 Scénario du cas d’utilisation "S’authentifier" ........................................................40
+Tableau 9 Scénario du cas d’utilisation "Modifier son compte".............................................45
+Tableau 10 Scénario du cas d’utilisation "consulter son compte" .........................................49
+Tableau 11 Scénario du cas d’utilisation "Désactiver son compte"........................................52
+Tableau 12 Backlog du sprint 2 .............................................................................................54
+Tableau 13 Scénario du cas d’utilisation "Consulter les catégories des offres" ......................56
+Tableau 14 Scénario du cas d’utilisation Ajouter catégories d’offre ......................................58
+Tableau 15 Scénario du cas d’utilisation "Supprimer les catégories des offres" ....................60
+Tableau 16 Scénario du cas d’utilisation "Consulter utilisateurs" ..........................................63
+Tableau 17 Scénario du cas d’utilisation "supprimer utilisateurs" .........................................65
+Tableau 18 Backlog du sprint 3 .............................................................................................70
+Tableau 19 Scénario du cas d’utilisation ...............................................................................72
+Tableau 20 Scénario du cas d’utilisation « Modifier les offres d’emploi » .............................75
+Tableau 21 Scénario du cas d’utilisation « supprimer les offres d’emploi »...........................77
+Tableau 22 Scénario du cas d’utilisation « Postuler des offres d’emploi ».............................79
+Tableau 23 Backlog du Sprint 4.............................................................................................83
+Tableau 24 Scénario du cas d’utilisation "Consulter les stages" ............................................84
+Tableau 25 Scénario du cas d’utilisation « ajouter les stages » .............................................86
+Tableau 26 Scénario du cas d’utilisation « Supprimer les stages » ........................................89
+Tableau 27 Scénario du cas d’utilisation « demander un stage » ..........................................91
+1
+Introduction générale
+Le développement des technologies de l’information a radicalement transformé de
+nombreux secteurs, dont celui du recrutement et de la recherche d'emploi. Aujourd'hui, les
+entreprises et les demandeurs d'emploi ont de plus en plus recours aux plateformes en ligne
+pour publier des offres d'emploi, rechercher des postes et gérer les candidatures. Cette
+transformation digitale a permis d'améliorer la visibilité des opportunités professionnelles,
+tout en facilitant le processus de recrutement pour les entreprises.
+Dans un monde en constante évolution, l'accès rapide à l'information et la gestion efficace
+des flux de données sont devenus des enjeux majeurs. Pour les chercheurs d'emploi, il s'agit
+de trouver des offres pertinentes et adaptées à leurs compétences dans un marché de plus
+en plus compétitif. Du côté des entreprises, il est essentiel de pouvoir diffuser des offres
+d’emploi de manière ciblée et d’optimiser la gestion des candidatures.
+Les plateformes de recrutement en ligne jouent donc un rôle crucial dans l’intermédiation
+entre l’offre et la demande d’emploi. Elles offrent un accès simplifié à un grand nombre
+d’offres tout en permettant aux entreprises de gérer de manière plus fluide le processus de
+recrutement. Ces outils numériques sont devenus incontournables pour répondre aux
+exigences du marché moderne, où la réactivité et la précision dans la recherche de talents
+sont des facteurs clés de succès.
+Cependant, malgré leur utilité, ces plateformes rencontrent encore des défis importants.
+Parmi ces défis, on retrouve la complexité de la gestion des candidatures, la pertinence des
+résultats de recherche pour les utilisateurs, et la difficulté pour les recruteurs de trouver les
+bons profils rapidement.
+2
+Chapitre 1 : Chapitre
+introductif
+3
+Introduction
+Dans un monde de plus en plus digitalisé, l'accès aux opportunités professionnelles et la
+gestion des candidatures sont des enjeux cruciaux pour les demandeurs d'emploi et les
+recruteurs. Les plateformes comme JobPortal facilitent cette rencontre en permettant aux
+entreprises de publier des offres et aux utilisateurs de rechercher des postes adaptés à leurs
+compétences.
+Dans le cadre de mon Projet de Fin d'Études (PFE) à l'Esprit School of Business, et grâce à mon
+expérience chez Beecoders, j'ai développé cette application web. Beecoders, en tant que
+startup innovante, m'a permis d'intégrer des pratiques modernes pour simplifier le processus
+de recherche d'emploi. Ce rapport présente les étapes du développement de JobPortal, ainsi
+que les technologies utilisées, telles que Node.js pour le back-end et React pour le front-end.
+1. Présentation de l’organisme d’accueil
+1.1 Présentation de Beecoders
+Beecoders est une startup tunisienne spécialisée dans le développement de solutions
+digitales et la formation en technologies de l'information. Depuis sa création, elle s'est
+engagée à soutenir la transformation numérique des entreprises tunisiennes en
+proposant des services de développement web et mobile, ainsi que des programmes de
+formation en ligne.
+Avec une équipe dynamique de 15 employés, Beecoders bénéficie d'un
+positionnement unique pour répondre aux besoins variés des entreprises en
+matière de digitalisation. L'entreprise collabore étroitement avec différents acteurs
+du secteur privé et public pour maximiser son impact sur l'écosystème numérique.
+1.2 Les services offerts par Beecoders
+• Développement de solutions digitales : création d'applications web et mobiles
+sur mesure pour améliorer l'efficacité des entreprises.
+• Formations en ligne : programmes destinés à renforcer les compétences
+techniques des professionnels et des entreprises, afin de les préparer aux défis
+du marché numérique.
+• Conseil en transformation digitale : accompagnement stratégique pour aider
+les entreprises à optimiser leurs opérations grâce à l'intégration de nouvelles
+technologies.
+4
+1.3 Présentation du département « Technologie Transformation »
+Au sein de Beecoders, le département de Technologie Transformation joue un rôle
+essentiel dans l'accompagnement des entreprises tunisiennes vers la numérisation
+et l'optimisation de leurs opérations. Ce département est conçu pour répondre aux
+besoins croissants des organisations en matière de transformation digitale, en
+offrant des solutions sur mesure adaptées à chaque secteur.
+2. Cadre Général du projet
+Le projet JobPortal s'inscrit dans un contexte où la digitalisation transforme le marché de
+l'emploi, rendant l'accès aux offres et la gestion des candidatures plus efficaces. Face à la
+nécessité d'outils performants pour répondre aux attentes croissantes des utilisateurs,
+JobPortal a été conçu comme une solution intuitive pour les demandeurs d'emploi et les
+entreprises.
+2.1 Présentation du projet
+JobPortal est une application web conçue pour répondre aux besoins des
+demandeurs d'emploi et des recruteurs dans un environnement de travail de plus en
+plus numérisé. Son objectif principal est de faciliter la recherche d'offres d'emploi et de
+simplifier le processus de candidature, tout en offrant une interface conviviale et
+intuitive.
+2.1.1 Caractéristiques Principales
+• Recherche Avancée d'Offres : Les utilisateurs peuvent filtrer les offres selon différents
+critères tels que la localisation, le type de contrat (CDI, CDD, stage), et le secteur d'activité,
+leur permettant de trouver rapidement les opportunités qui correspondent à leurs
+compétences et attentes.
+• Publication d'Offres Simplifiée : Les entreprises ont la possibilité de créer et de publier
+des annonces de manière rapide et efficace, tout en suivant l'évolution des candidatures
+reçues via un tableau de bord intuitif.
+5
+2.2 Problématique
+Dans un contexte économique en constante évolution, marqué par la digitalisation
+ croissante des activités professionnelles, la recherche d'emploi et la gestion des
+ candidatures sont devenues des défis majeurs tant pour les candidats que pour les
+ entreprises. Malgré la disponibilité de multiples plateformes de recrutement, de
+ nombreux demandeurs d'emploi rencontrent des difficultés à accéder aux offres
+ pertinentes et à postuler efficacement, tandis que les recruteurs peinent à identifier
+ des candidats qualifiés en raison de la surcharge d'informations et de la concurrence
+ accrue.
+Les principales problématiques :
+1. Accessibilité et Visibilité des Offres : De nombreux candidats n'ont pas accès à des
+offres d'emploi adaptées à leurs compétences, en raison de la dispersion des
+informations sur différentes plateformes. Cette situation limite les opportunités
+pour les chercheurs d'emploi, en particulier pour ceux issus de zones
+géographiques moins desservies par les services en ligne.
+2. Complexité du Processus de Candidature : Le processus de candidature peut
+souvent être long et décourageant. Les candidats doivent naviguer à travers des
+interfaces complexes et soumettre des documents sur plusieurs sites, ce qui
+entraîne une perte de temps et une baisse de motivation.
+3. Qualité des Candidatures : Les recruteurs reçoivent souvent un volume élevé de
+candidatures, dont beaucoup ne correspondent pas aux exigences du poste. Cela
+entraîne une surcharge de travail pour les équipes de recrutement et peut aboutir
+à des décisions hâtives, compromettant ainsi la qualité du personnel recruté.
+4. Suivi et Communication : Le manque de communication transparente entre
+candidats et recruteurs sur l'état des candidatures génère frustration et incertitude
+pour les deux parties. Les candidats souhaitent être informés de l'évolution de
+leurs demandes, tandis que les recruteurs cherchent à rationaliser la gestion des
+candidatures.
+6
+2.3 Étude de l’existant
+L'étude de l'existant dans le domaine des plateformes de recherche d'emploi révèle
+une multitude d'applications et de services qui tentent de répondre aux besoins des
+demandeurs d'emploi et des recruteurs. Cependant, chacune de ces solutions présente
+des avantages et des inconvénients qui influencent leur efficacité.
+2.3.1 Plateformes Populaires
+2.3.1.1 LinkedIn
+Ce réseau social professionnel permet non seulement de rechercher des offres, mais aussi
+de construire un réseau professionnel. Cependant, son interface peut sembler complexe
+pour les nouveaux utilisateurs, et la concurrence est souvent élevée, rendant difficile la
+visibilité des profils moins établis.
+Avantages Inconvénients
+1. Réseau professionnel : LinkedIn permet
+aux utilisateurs de créer un réseau
+professionnel, en plus de rechercher des
+offres d'emploi.
+2. Visibilité : Il offre une visibilité des
+compétences et expériences professionnelles
+grâce aux profils publics.
+3. Recommandations : Les utilisateurs
+peuvent obtenir des recommandations de
+leurs contacts, renforçant la crédibilité de
+leur profil.
+4. Algorithmes de correspondance : LinkedIn
+propose des offres basées sur le profil et les
+compétences des utilisateurs.
+1. Concurrence : La popularité de LinkedIn
+entraîne une forte concurrence, rendant
+difficile la différenciation des candidats.
+2. Complexité : L'interface peut sembler
+complexe pour les nouveaux utilisateurs,
+nécessitant un certain temps d'adaptation.
+3. Fonctionnalités premium : Certaines
+fonctionnalités utiles sont limitées à la
+version payante (LinkedIn Premium).
+4. Spam et sollicitations excessives : Les
+utilisateurs peuvent recevoir de nombreux
+messages non sollicités, y compris des offres
+inappropriées ou du démarchage commercial
+excessif.
+Tableau 1 inconvénients et avantages de LinkedIn
+7
+2.3.1.2 Indeed
+Très utilisé, Indeed regroupe des offres d'emploi provenant de divers sites, mais cela
+entraîne une surcharge d'informations. Les candidats peuvent se sentir perdus parmi la
+multitude d'annonces, et les fonctionnalités de filtrage ne répondent pas toujours à des
+critères très spécifiques.
+Avantages Inconvénients
+1. Portée étendue : Indeed regroupe des
+offres provenant de divers sites et
+entreprises, offrant un vaste choix aux
+chercheurs d'emploi.
+2. Facilité d’utilisation : Le processus de
+candidature est relativement simple et
+rapide.
+3. Filtres de recherche : Les candidats
+peuvent affiner leurs recherches par
+secteur, localisation, etc.
+1. Surcharge d’offres : Avec le grand nombre
+d’offres disponibles, les utilisateurs peuvent
+avoir du mal à trouver celles qui correspondent
+vraiment à leurs compétences.
+2. Qualité des correspondances : Les filtres et
+recommandations ne sont parfois pas assez
+précis, ce qui peut générer des résultats non
+pertinents.
+3. Trop de candidats : Les recruteurs reçoivent
+un grand nombre de candidatures, ce qui peut
+entraîner une concurrence accrue entre les
+candidats.
+Tableau 2 inconvénients et avantages de Indeed
+2.3.1.3 Monster
+Malgré sa bonne réputation, Monster a perdu en popularité face à des concurrents plus
+modernes et intuitifs. De plus, le processus de candidature peut être perçu comme moins
+convivial
+Avantages Inconvénients
+1. Réputation solide : Monster est l’une des
+premières plateformes de recherche
+d’emploi, ce qui lui confère une crédibilité sur
+le marché.
+1. Perte de popularité : Face à des
+concurrents plus modernes, Monster a perdu
+une partie de sa popularité et de son attrait.
+8
+2. Large éventail d’offres : Les offres
+d’emploi couvrent divers secteurs et niveaux
+d’expérience
+3. Outils de recherche avancés : La
+plateforme propose des filtres de recherche
+sophistiqués, permettant aux utilisateurs de
+trouver des offres adaptées à leurs
+compétences, localisation et autres critères
+spécifiques.
+2. Interface obsolète : Certains utilisateurs
+trouvent que l’interface et l’expérience
+utilisateur sont vieillissantes par rapport à des
+plateformes plus récentes.
+3. Complexité des processus : Le processus de
+candidature peut être plus lourd que sur
+d'autres sites.
+Tableau 3 inconvénients et avantages de Monster
+2.4 Critique de l’existant
+Les plateformes de recherche d'emploi existantes présentent toutes des avantages
+notables, comme l'accès à un large éventail d'offres et la possibilité de se connecter avec
+d'autres professionnels, mais elles souffrent également de limitations importantes,
+notamment une concurrence accrue, des interfaces parfois complexes et une qualité
+variable des annonces, rendant la recherche d'opportunités parfois difficile et
+frustrante.
+Ces points soulignent la nécessité d'améliorer l'expérience utilisateur pour répondre aux
+besoins diversifiés des chercheurs d'emploi.
+3. Méthodologie adoptée
+3.1 Choix de la méthodologie
+La méthode choisie dépend de la nature de projet et de sa taille. Parmi les méthodes
+itératives, on peut distinguer la méthode agile qui est actuellement populaire dans le
+monde entier. Les techniques agiles sont réalisées dans un esprit collaboratif et
+s’adaptent à une approche pas à pas. Cette méthode offre des produits de haute qualité
+qui tiennent compte de l’évolution des besoins des clients. Les techniques agiles
+assurent une meilleure communication avec les clients et une meilleure visibilité des
+performances. Elle doit aussi être évolutive, permettant de piloter en continu la qualité
+des projets dont les besoins ne sont pas encore totalement identifiés, de détecter les
+9
+problèmes au plus tôt, et pour cela on a choisi la méthode de type agile, notamment
+Scrum.
+3.2 Présentation de SCRUM
+La méthode agile Scrum est particulièrement destinée à la gestion de projets
+informatiques Cette méthode de gestion, ou plutôt ce Framework de management de
+projet, a pour objectif d’améliorer la productivité de son équipe. Scrum s’appuie sur le
+découpage d’un projet en « boîtes de temps », nommés sprints. Les sprints peuvent
+durer entre quelques heures et un mois. Chaque sprint commence par une estimation
+suivie d’une planification opérationnelle. Le sprint se termine par une démonstration de
+ce qui a été achevé. Avant de démarrer un nouveau sprint, l’équipe réalise une
+rétrospective. Cette technique analyse le déroulement du sprint achevé, afin
+d’améliorer ses pratiques. Le flux de travail de l’équipe de développement est facilité
+par son auto-organisation, il n’y aura donc pas de gestionnaire de projet.
+Figure 1 Les principes agile
+3.3 Les rôles SCRUM
+3.3.1 Product owner
+• Responsable de maximiser la valeur du produit et du travail de l’Équipe de Développement.
+La façon de jouer ce rôle peut varier grandement selon les entreprises, les Équipes Scrum et
+les individus
+10
+3.3.2 Équipe de Développement
+• L’Équipe de Développement est constituée de professionnels qui livrent à chaque Sprint un
+incrément « terminé » et potentiellement livrable du produit
+3.3.3 SCRUM Master
+Le Scrum master est une sorte de leader, mais au lieu de dire à l'équipe ce qu'elle doit faire,
+son travail consiste à l'aider à devenir autonome grâce à des techniques comme l'autoorganisation et la résolution des conflits
+Conclusion
+Dans ce chapitre introductif, nous avons essayé dans un premier temps de présenter
+l’organisme d’accueil ainsi que ses domaines d’activités. Ensuite, nous avons présenté le
+travail demandé et la démarche à suivre pour la réalisation de ce travail. En fait, nous avons
+maintenant une idée générale sur le cadre et le contexte du sujet et nous passerons ainsi à
+mettre en œuvre le projet.
+Figure 2 La méthode SCRUM
+11
+ Chapitre 2 : Sprint 0
+Analyse et
+Spécification du
+projet
+12
+Introduction
+La spécification des besoins est la base de notre travail qui permettra de dresser la
+problématique et les objectifs de notre projet afin de produire le backlog initial comme une
+première planification des sprints et nous allons traiter la phase la plus importante dans le
+cycle de développement Scrum « planification » et puis la conception.
+1. Capture des besoins
+Cette phase est cruciale et incontournable, car elle permet aux utilisateurs finaux d'exprimer
+clairement leurs besoins et de comprendre les fonctionnalités que le système proposera. De
+plus, elle doit veiller à respecter les exigences non fonctionnelles qui seront essentielles lors
+de la phase de développement.
+Besoins Fonctionnels Besoins non-fonctionnels
+Inscription et Authentification : Gestion des Entreprises
+Gestion des Profils : Performance
+Publication d'Offres d'Emploi Scalabilité
+Recherche d'Emplois Accessibilité
+Candidature aux Offres Compatibilité
+Gestion des Entreprises Maintenance
+Tableau 4 les Besoins fonctionnels et non fonctionnels
+1.1 Identifications des acteurs
+La première des missions est de bien identifier les acteurs qui vont interagir avec le
+système.
+Dans notre cas nous avons typiquement des acteurs humains qui sont :
+13
+1.1.1 Administrateurs
+Cet acteur désigne la personne responsable, ayant le plus haut niveau de privilèges, capable
+de gérer l'ensemble des modules de l'application JobPortal. Il a la capacité de superviser tout
+ce qui concerne le système, notamment la gestion des utilisateurs, la gestion des offres
+d'emploi et de stages
+1.1.2 Utilisateur
+L'utilisateur a le droit de consulter les offres mises à disposition par l'application. Plus
+précisément, il peut :
+ S'inscrire sur JobPortal afin de bénéficier des services proposés.
+ Demander à participer à un stage ou à une offre d'emploi.
+ Gérer son compte.
+1.1.3 Entreprise
+Une fois connecté à la plateforme, le responsable de l'entreprise a le droit de gérer ses offres
+de stages et d'emploi. Il peut également consulter ses offres d'emploi et les participants
+inscrits pour chaque stage et offre.
+1.2 Identifications des besoins
+Il s’agit d’analyser les acteurs acteur par acteur et de vérifier pour chacun qu’il dispose de toutes
+les fonctionnalités qui lui seront utiles au regard de sa mission et du périmètre du projet.
+1.2.1 Administrateur
+• S’authentifier : Il doit saisir ses identifiants pour accéder à la plateforme.
+• Gérer les utilisateurs : L’administrateur a le droit de consulter et de bloquer les utilisateurs.
+• Gérer les offres : L’administrateur peut supprimer des entreprises et des offres,
+garantissant ainsi la pertinence et la qualité du contenu disponible sur la plateforme.
+ 1.2.2 Utilisateur
+• S’authentifier : Il doit saisir ses identifiants pour accéder à son compte sur la plateforme.
+• Modifier ses caractéristiques : L'utilisateur peut mettre à jour ses informations
+personnelles et professionnelles selon ses besoins.
+• Postuler aux offres : Il a la possibilité de postuler directement à des offres d'emploi et de
+stages qui l'intéressent.
+14
+• Consulter les offres : L'utilisateur peut parcourir et consulter les différentes offres de
+stages et d'emploi disponibles sur la plateforme.
+1.2.3 Entreprise
+• S’authentifier : Elles doivent saisir leurs identifiants pour accéder à leur compte sur la
+plateforme.
+• Consulter les offres : Elles peuvent parcourir et consulter les offres d'emploi et de stages
+publiées par d'autres entreprises.
+• Postuler à des offres : Les entreprises peuvent également soumettre une demande pour
+un emploi ou un stage.
+• Modifier leurs caractéristiques : Elles ont la possibilité de mettre à jour leurs informations
+et détails de profil.
+• Supprimer une offre : Les entreprises peuvent supprimer des offres d'emploi ou de stage
+qui ne sont plus d'actualité.
+15
+2. Pilotage du projet avec SCRUM
+2.1 Les fonctionnalités du Backlog
+Au cœur de la gestion agile, le product backlog est une liste priorisée d'éléments tels
+que des fonctionnalités, des améliorations, ou des corrections, chacun contribuant à la
+valeur ajoutée du produit final.
+Ce Tableau résume le backlog produit de notre module :
+Fonctionnalité ID User story Acteur Priorité
+S’authentifier 1.1 En tant qu’acteur je peux m’identifier
+pour m’accéder à ma session
+Administrateur,
+Utilisateur
+Entreprise
+1
+Gérer son compte 2.1 -En tant qu’acteur je peux consulter
+mon compte
+Administrateur
+Utilisateur
+Entreprise
+2
+2.2 -En tant qu’acteur je peux modifier
+mon compte
+2.3 -En tant qu’acteur je peux désactiver
+mon compte
+Gérer les utilisateurs 3.1 -En tant qu’administrateur je peux
+supprimer un utilisateur
+Administrateur 5
+3.2 --En tant qu’administrateur je peux
+consulter un utilisateur
+Gérer des offres de
+stages
+4.1 En tant qu’entreprise je peux
+supprimer les offres de stages
+Entreprise 3
+4.2 En tant qu’entreprise je peux consulter
+les demandes de stages
+4.4 -En tant qu’acteur je peux consulter les
+offres de stages
+Administrateur
+Entreprise
+Utilisateur
+4.5 - En tant qu’utilisateur je peux
+demander une offre de stage
+Utilisateur
+16
+Gérer des catégories 5.1 - En tant qu’acteur je peux consulter les
+catégories de stages et offres d’emploi
+Administrateur
+Entreprise
+Utilisateur
+6
+Gérer des offres
+d’emploi
+6.1 En tant qu’entreprise je peux consulter
+les demandes d’emploi
+Administrateur
+Entreprise
+Utilisateur
+4
+6.2 En tant qu’entreprise je peux accepter
+ou refuser les demandes d’emploi
+6.3 En tant qu’entreprise je peux ajouter
+des offres d’emploi
+6.4 En tant qu’acteur je peux consulter les
+offres d’emploi
+6.5 En tant qu’utilisateur je peux
+demander une offre d’emploi
+Utilisateur
+Tableau 5 Backlog du produit
+17
+2.2 Diagramme des cas d’utilisation globale
+Afin de formaliser les fonctionnalités de notre système, nous avons recours au
+diagramme de cas d’utilisation en utilisant le langage de modélisation UML.
+La figure ci-dessous présente une vue d’ensemble des cas d’utilisation de notre
+application. Ce diagramme met en évidence les différents acteurs impliqués ainsi que
+les cas d’utilisation associés à chacun d’eux.
+Figure 3 Diagramme de cas d’utilisation globale
+2.3 Diagramme de classes globale
+Un diagramme de classes fournit une vue globale d'un système en présentant ses
+classes, interfaces et collaborations, et les relations entre elles. Les diagrammes de
+classes sont statiques : ils affichent ce qui interagit mais pas ce qui se passe pendant
+l'interaction.
+18
+Figure 4 Diagramme de classes globale
+2.4 Planifications des release
+La planification des release constitue une réunion clé dans la gestion d’un projet Scrum.
+Elle est cruciale pour le bon déroulement de chaque itération, car elle influence
+largement le succès ou l’échec du sprint (qui comprend l’ensemble des user stories
+prévues dans celui-ci). Une release correspond à une période au terme de laquelle une
+version livrable du produit est proposée. Elle se compose de plusieurs sprints, dont le
+nombre dépend de leur durée et de celle attribuée à la release. Pour notre projet, nous
+avons opté pour une release structurée en deux release : le premier dédié à la gestion
+des paramétrages (administration) et le second axé sur la gestion des demandes de
+présence manuelle.
+19
+ Le tableau ci-dessous présente notre planification de travail :
+Release 1 Release 2
+Sprint 1 Sprint 2 Sprint 3 Sprint 4
+- S’authentifier
+- Gérer son
+compte
+- Gérer les
+utilisateurs
+- Gérer les
+catégories des
+offres
+- Gérer les offres
+d’emplois
+- Gérer les offres
+de stages
+Tableau 6 planification des sprints
+2.5 Prototypage des interfaces
+Dans cette section, nous avons créé des maquettes pour les interfaces de l'application
+web afin d'obtenir une vision graphique et ergonomique. Nous avons utilisé l'outil de
+prototypage « Balsamiq » pour concevoir ces interfaces
+Figure 5 logo d’outils Balsamiq
+20
+2.5.1 Prototypage de l’interface d’authentification
+Figure 6 Interface de l’authentification
+2.5.2 Prototypage de l’interface de la gestion des comptes
+Figure 7 Interface gestion des comptes
+21
+2.5.3 Prototypage de l’interface de la gestion des offres
+Figure 8 Interface gestion des offres
+2.5.4 Prototypage de l’interface page d’accueil pour les utilisateurs
+Figure 9 Interface page d’accueil pour utilisateur
+22
+2.5.4 Prototypage de l’interface page d’accueil pour les entreprises
+Figure 10 Interface page d’accueil pour entreprise
+3. Environnement de travail
+L'environnement de travail se réfère à l'ensemble des conditions de travail humaines ou
+matérielles qui sont susceptibles d'influencer les collaborateurs dans leurs tâches
+quotidiennes, ainsi que leur épanouissement au sein de l'entreprise.
+23
+3.1 Environnement de matériel
+J'ai utilisé un ordinateur HP Pavillon pour le développement de l'application, offrant les
+performances nécessaires pour exécuter les outils et logiciels requis.
+Figure 11 Machine
+24
+3.2 Environnement de développement
+ React :
+React est une bibliothèque JavaScript open-source conçue pour créer des
+interfaces utilisateur, en particulier dans les applications web à page unique. Elle
+permet de gérer efficacement la partie visuelle des applications web et mobiles,
+facilitant ainsi le développement d'interfaces dynamiques et interactives.
+Figure 12 Logo de React
+ HTML
+HTML (HyperText Markup Language) est un langage de balisage utilisé pour créer et
+structurer des pages Web. Il permet de rédiger du texte hyperlié, d’organiser le contenu
+de manière sémantique et logique, et de formater les pages. HTML intègre également
+des éléments multimédias tels que des images, des formulaires, ainsi que des scripts et
+programmes interactifs.
+Figure 13 Logo de HTML
+25
+ JavaScript
+JavaScript est un langage de programmation utilisé par les développeurs pour concevoir
+des sites web interactifs. Les fonctions JavaScript peuvent permettre d'améliorer
+l'expérience utilisateur d'un site web, de la mise à jour des flux de médias sociaux à
+l'affichage d'animations et de cartes interactives.
+Figure 14 Logo de JavaScript
+ Vite
+Vite est un outil de développement rapide qui permet de créer et de compiler des
+applications JavaScript modernes, optimisant les performances en chargeant les modules
+de manière efficace.
+Figure 15 Logo de Vite
+26
+ CSS
+Le CSS (Cascading Style Sheets) est un langage utilisé pour styliser les fichiers et pages
+HTML sur le web. Il permet de gérer efficacement l'apparence des pages, offrant un gain
+de temps significatif par rapport à l'utilisation des balises HTML seules pour la mise en
+forme.
+Figure 16 Logo de CSS
+27
+3.3 Environnement logiciels
+ Visual Studio Code
+Visual Studio Code est un éditeur de code polyvalent créé par Microsoft, compatible
+avec Windows, Linux et macOS. Parmi ses fonctionnalités, on trouve le débogage, la
+coloration syntaxique, l'autocomplétion, des extraits de code, des outils de
+refactorisation, ainsi qu'une intégration avec Git.
+Figure 17 Logo de Visual Studio Code
+ Node.js
+Node.js est une plateforme basée sur le moteur JavaScript V8 de Google Chrome,
+permettant le développement d'applications en JavaScript. Sa particularité réside dans
+son architecture non bloquante, qui facilite la gestion des entrées/sorties (I/O) de
+manière asynchrone.
+Figure 18 Logo de Node.js
+28
+ Postman
+Pour tester les API de notre application, nous avons utilisé Postman, un logiciel de test
+moderne disponible en deux versions : une application web et une application de
+bureau, toutes deux compatibles avec Chrome. Bien que leurs fonctionnalités soient
+similaires, elles ne sont pas identiques. Après installation, Postman offre une interface
+graphique complète pour gérer toutes nos interactions avec les API web.
+Figure 19 Logo de Postman
+ MongoDB
+MongoDB est une base de données NoSQL axée sur la gestion de documents. Comme
+nous le verrons, l'ensemble du système est conçu autour de cette approche
+documentaire, y compris son langage de requête, ce qui constitue son principal atout.
+Nous allons maintenant nous concentrer sur la configuration d'un serveur MongoDB et
+l'intégration de données dans cet environnement.
+*
+Figure 20 Logo de MongoDB
+29
+ GitHub
+A un haut niveau, GitHub est un site web et un service de cloud qui aide les développeurs
+à stocker et à gérer leur code, ainsi qu’à suivre et contrôler les modifications qui lui sont
+apportées.
+Figure 21 Logo de GitHub
+StarUML
+StarUML est un logiciel de modélisation UML qui permet de créer des diagrammes et
+des modèles pour concevoir des systèmes logiciels de manière visuelle et structurée.
+Figure 22 Logo de StartUML
+4. Architecture générale de l’application
+4.1 Architecture logique
+Dans cette section, nous justifions notre choix d’architecture logicielle, qui repose sur
+le modèle MVC. L’architecture MVC est largement adoptée pour les applications web
+et se divise en trois composants principaux :
+30
+Figure 23 Architecture MVC
+ Le modèle (modèle de données)
+Cette partie gère les données de l’application, qui eux-mêmes peuvent être exploitées
+sous forme de classes. Son rôle est d’aller récupérer les informations « brutes » dans la
+base de données, de les organiser et de les assembler pour qu’elles puissent ensuite être
+traitées par le contrôleur. On y trouve donc les requêtes SQL.
+ La Vue (Présentation, Interface utilisateur) :
+Cette section se concentre sur la présentation des données. Elle effectue peu de
+traitement et se limite principalement à récupérer des variables pour déterminer ce qui
+doit être affiché, utilisant essentiellement du code HTML.
+ Le Contrôleur (logique de contrôle, gestion des événements, synchronisation) :
+Cette section est responsable de la logique du code, prenant des décisions et servant
+d'intermédiaire entre le Modèle et la Vue. Le Contrôleur sollicite les données du Modèle,
+les analyse, prend des décisions, puis renvoie le contenu à afficher à la Vue.
+L'architecture MVC a été choisie en raison de sa clarté. En effet, modifier les traitements
+n'affecte pas la Vue. Par exemple, il est possible de passer d'une base de données SQL à
+XML simplement en ajustant les traitements d'interaction avec la base, sans impact sur
+les vues.
+4.2 Architecture physique (architecture client/ serveur)
+ L’application est réalisée par l’architecture trois tiers :
+31
+Figure 24 Architecture physique
+4.3 Fonctionnement de l’architecture
+• Le client est écrit en React et est téléchargé sur votre téléphone ou votre ordinateur
+lorsque vous visitez le site. Il s'agit du code qui provoque l'affichage de l'interface
+utilisateur de l'application dans votre navigateur et gère les entrées de l'utilisateur.
+• Le code côté serveur est écrit en Node.js et s'exécute quelque part dans un centre
+de données. Ce code répondra aux demandes de l'utilisateur initiées par le code côté
+client et gérera l'enregistrement et la récupération des données de la base de données.
+• La base de données MongoDB est également un serveur exécuté dans un centre de
+données. Il peut se trouver sur le même serveur (ordinateur distant) que le code
+Node.js, ou sur un autre. C'est là que les données de l'application seront stockées.
+4.4 Les niveaux de l’architecture
+Client (React) : Le front-end de l'application est développé avec React. Lorsque
+l'utilisateur accède au site via son ordinateur ou téléphone, l'interface utilisateur est
+chargée dans le navigateur. Le client gère les interactions avec l'utilisateur.
+Serveur (Node.js) : Le back-end est géré par Node.js, exécuté sur un serveur distant. Il
+traite les requêtes du client, comme l'enregistrement et la récupération des données.
+Base de données (MongoDB) : MongoDB est utilisée pour stocker les données de
+l'application. Elle peut être hébergée sur le même serveur que le code Node.js ou sur
+un serveur séparé.
+32
+4.5 Diagramme de déploiement
+Les diagrammes de déploiement affichent les relations entre les composants logiciels et
+matériels du système, d'une part, et la distribution physique du traitement, d'autre part.
+Figure 25 Diagramme de déploiement
+5. Conclusion
+Dans ce chapitre, nous avons détaillé la mise en œuvre technique du système, en couvrant les
+différentes étapes de la réalisation de notre application web JobPortal. Nous avons expliqué
+les technologies utilisées, telles que React pour le front-end, Node.js pour le back-end, et
+MongoDB pour la gestion des données. L'architecture déployée reflète une organisation claire
+entre le client, le serveur d'application et le serveur de base de données, garantissant une
+communication efficace et une gestion sécurisée des données. Cette phase de réalisation
+constitue une étape clé dans la concrétisation de notre projet.
+33
+CHAPITRE 3
+Release 1
+34
+Introduction
+Dans cette première release, nous mettrons en place les fonctionnalités essentielles de la
+plateforme JobFinder, permettant aux utilisateurs et aux entreprises de se connecter, de
+gérer leurs profils, et de publier des offres d’emploi, établissant ainsi les bases fonctionnelles
+du portail. Cette release est divisée en deux sprints distincts : le premier se concentre sur
+l'authentification et la gestion des comptes, tandis que le deuxième sprint se focalise sur la
+gestion des utilisateurs et l'administration des catégories des offres.
+1. Sprint 1 : Authentification et gestion du compte
+Ce sprint présente en détail les tâches réalisées lors du premier sprint de JobFinder. L'objectif
+est de mettre en avant toutes les fonctionnalités à développer en décrivant les étapes
+nécessaires pour compléter les user stories sélectionnées. Nous débutons par la présentation
+du Sprint Backlog, suivie des phases de spécification et de conception illustrées à l'aide de
+diagrammes et de descriptions textuelles.
+2. Conception
+2.1 Définition
+L'étape d'expression des besoins nous a permis de définir les exigences spécifiques à
+notre application. Afin de mieux comprendre le fonctionnement du système et de
+modéliser le problème de manière orientée objet, nous passons maintenant à la phase
+de conception. Cette étape donne au système sa structure et son architecture, illustrée
+notamment par des diagrammes de classes et de séquences. Dans un premier temps,
+nous présenterons la traçabilité MCU/MC, le diagramme de classes de conception, ainsi
+que les diagrammes de séquence associés aux cas d’utilisation. Ensuite, nous
+détaillerons le diagramme de classes des entités de l’application et terminerons par la
+représentation de la base de données et le diagramme de déploiement.
+2.1.1 Diagramme de séquence
+2.1.1.1 Définition
+Le diagramme de séquence offre une représentation dynamique du système d'information.
+Il décrit les scénarios de chaque cas d'utilisation en soulignant la séquence chronologique
+des opérations et les interactions entre les différents objets.
+35
+2.1.1.2 Acteur principal
+L'entité responsable du cas d'utilisation, décrite dans le diagramme de séquence,
+représente les flux d'événements et les interactions entre les objets participant à sa
+réalisation.
+2.1.1.3 Vue
+La vue représente l'interface par laquelle l'utilisateur interagit avec le système.
+2.1.1.4 Contrôleur
+Le contrôleur fait le lien entre le modèle et la vue. Il intercepte les actions de l'utilisateur,
+détermine les traitements appropriés, utilise les données du modèle pour exécuter ces
+actions, puis renvoie les résultats via la vue. Il gère donc la logique métier de l'application.
+2.1.1.5 Modèle
+Le modèle désigne les données manipulées par le système. Dans un diagramme de
+séquence, il est représenté par des instances de classes, qui sont essentielles pour la
+réalisation du cas d'utilisation concerné.
+2.1.1.6 Objets
+Les objets sont des entités du système, qu'il s'agisse d'instances de classes ou d'acteurs
+situés aux frontières du système. Ils peuvent représenter des concepts abstraits ou des
+acteurs, ou encore des objets techniques (utilisés dans les diagrammes de séquence pour
+les interactions informatiques). Ils sont identifiés à partir des cas d'utilisation ou des
+diagrammes de classes.
+ Ligne de vie : Représente la période d'activité d'un objet. Elle est illustrée par une bande
+verticale symbolisant le déroulement des actions dans le temps.
+2.1.1.7 Messages
+Comme vous pouvez le voir dans l’exemple ci-dessus, UML propose un certain nombre de
+stéréotypes graphiques pour décrire la nature du message (ces stéréotypes graphiques
+s’appliquent également aux messages des diagrammes de collaborations) :
+• Message simple : Message dont on ne spécifie aucune caractéristique d’envoi ou de
+réception particulière.
+36
+• Message minuté (timeout) : Bloque l’expéditeur pendant un temps donné (qui peut être
+spécifié dans une contrainte), en attendant la prise en compte du message par le
+récepteur. L’expéditeur est libéré si la prise en compte n’a pas eu lieu pendant le délai
+spécifié.
+• Message synchrone : Bloque l’expéditeur jusqu’à prise en compte du message par le
+destinataire. Le flot de contrôle passe de l’émetteur au récepteur (l’émetteur devient
+passif et le récepteur actif) à la prise en compte du message.
+• Message asynchrone : N’interrompt pas l’exécution de l’expéditeur. Le message envoyé
+peut être pris en compte par le récepteur à tout moment ou ignoré (jamais traité).
+• Message dérobant : N’interrompt pas l’exécution de l’expéditeur et ne déclenche une
+opération chez le récepteur que s’il s’est préalablement mis en attente de ce message.
+2.1.2 Diagramme de classes
+2.1.2.1 Définition
+Le diagramme de classes est l'un des types les plus populaires en langage UML. Très utilisé
+par les ingénieurs logiciels pour documenter l'architecture de leurs logiciels, les
+diagrammes de classes sont un type de diagramme de structure, car ils décrivent ce qui
+doit être présent dans le système modélisé 5.2 Eléments d’un Diagramme de classes
+2.1.2.2 Classe
+Une classe définit les responsabilités, le comportement et le type d’un groupe d’objets,
+avec les objets individuels représentant des instances de cette classe. Elle regroupe des
+fonctions et des données (attributs) liées par un même domaine sémantique. Dans la
+programmation orientée objet, les classes permettent de modéliser un programme en
+fragmentant une tâche complexe en sous-tâches plus simples.
+2.1.2.3 Attribut
+La structure d’une classe est déterminée par ses attributs. Ceux-ci sont identifiés en
+analysant la définition des classes, les besoins liés au problème et les connaissances
+spécifiques au domaine.
+2.1.2.4 Méthodes
+Les méthodes définissent le comportement d’une classe, c’est-à-dire les opérations
+pouvant être appliquées aux objets de cette classe.
+37
+2.1.2.5 Association
+Une association est une relation entre deux ou plusieurs classes (association binaire ou naire), décrivant les connexions structurelles entre leurs instances. Elle indique qu'il peut
+exister des liens entre les instances des classes impliquées.
+2.1.2.6 Classe d'association
+Une classe d'association combine les caractéristiques d’une association et d’une classe. Elle
+fait partie d’une relation d’association entre plusieurs classes, tout en possédant ses
+propres attributs et opérations. Elle est utile dans les modèles d'analyse, notamment
+lorsque l'on souhaite associer des attributs à une relation entre classes.
+2.1.2.7 Généralisation / spécialisation
+Également appelée héritage, cette relation décrit comment les classes enfants héritent des
+propriétés de leurs classes parents. La généralisation exprime une relation de type "estun", tandis que la spécialisation permet aux classes enfants d’ajouter ou de redéfinir
+certaines caractéristiques des classes parents, en leur apportant des spécificités
+supplémentaires
+2.1.2.8 Agrégation
+Une agrégation est un type d'association qui représente une relation de tout à partie, où
+une classe regroupe plusieurs éléments plus petits. Dans cette relation, l'élément "tout"
+contient les éléments "parties", tout en maintenant une certaine indépendance. Par
+exemple, dans un diagramme de classe, l'agrégation exprime la relation "est une partie de"
+ou "a un".
+2.1.2.9 Composition
+La composition est une relation plus forte que l'agrégation. Dans ce cas, les parties
+appartiennent exclusivement à l'ensemble et ne peuvent exister indépendamment de
+celui-ci. Le cycle de vie des parties est lié à celui de l'ensemble, ce qui signifie que la
+destruction de l'ensemble entraîne également celle de ses composants.
+38
+2.1.2.10 Éléments d’une classe
+Figure 26 Eléments d’une classe
+3. Backlog sprint1
+Fonctionnalité ID User story Acteur Priorité
+S’authentifier 1.1 En tant qu’acteur je peux m’identifier
+pour m’accéder à ma session
+Administrateur,
+Utilisateur
+Entreprise
+1
+Gérer son compte 2.1 -En tant qu’acteur je peux consulter
+mon compte
+Administrateur
+Utilisateur
+Entreprise
+2
+2.2 -En tant qu’acteur je peux modifier
+mon compte
+2.3 -En tant qu’acteur je peux désactiver
+mon compte
+Tableau 7 Backlog du sprint 1
+39
+3.1 Diagramme de cas d’utilisation raffiné du sprint 1
+Figure 27 Diagramme de cas d’utilisation du sprint 1
+3.1.1 S’authentifier
+Pour accéder aux fonctionnalités de JobFinder, les utilisateurs doivent d'abord s'authentifier
+en fournissant leurs identifiants, garantissant un accès sécurisé et personnalisé.
+3.1.1.1 Diagramme de cas d’utilisation « s’authentifier »
+Figure 28 Raffinement de cas d’utilisation "S’authentifier"
+40
+• Description textuelle de cas d’utilisations S’authentifier :
+Cas d’utilisation S’authentifier
+Acteur Administrateur, Utilisateur, Entreprise.
+Résumé L’acteur introduit son login et mot de passe pour accéder au
+Système.
+Précondition L’acteur doit avoir un login et un mot de passe.
+Postcondition Acteur authentifié.
+Scénario de base 1. L’acteur saisit son login et mot de passe
+2. L’acteur clique sur le bouton « Se connecter »
+3. Le système vérifie la combinaison login et mot de passe
+4. Le système affiche l’interface d’accueil propre à l’acteur
+Tableau 8 Scénario du cas d’utilisation "S’authentifier"
+3.1.1.2 Diagramme de classe de conception du CU « S’authentifier »
+Ce diagramme décrit les attributs et les méthodes de chaque classe du cas d’utilisation «
+S’authentifier » ainsi que les relations entre ces classes.
+Figure 29 Diagramme de classe du "s’authentifier
+41
+3.1.1.3 Diagramme de séquence du CU précis « S’authentifier »
+ Ce diagramme de séquence permet de décrire le scénario du CU « S’authentifier » en
+mettant l’accent sur la chronologie des opérations montrant l’interaction entre les
+objets
+Figure 30 Diagramme de séquence « S’authentifier »
+42
+3.1.1.4 interface graphique de création de compte
+Pour devenir membre de la plateforme, l'utilisateur doit s'inscrire en remplissant un
+formulaire avec les informations nécessaires. Une fois la demande soumise, il pourra
+accéder à son compte et utiliser les services offerts.
+Figure 31 Interface de création compte d’utilisateur
+3.1.1.5 interface graphique de connexion
+Pour se connecter à la plateforme, l'utilisateur doit saisir son adresse e-mail et son mot de
+passe dans le formulaire de connexion. Après avoir cliqué sur "Se connecter", il sera
+redirigé vers son tableau de bord et pourra accéder à toutes les fonctionnalités
+disponibles.
+Figure 32 Interface de connexion pour compte d’utilisateur
+43
+3.1.1.6 Interface Graphique de déconnexion du profil
+Pour se déconnecter de la plateforme, l'utilisateur doit cliquer sur le bouton Log Out. Une
+fois cliqué, il sera redirigé vers la page d'accueil et ne pourra plus accéder aux
+fonctionnalités tant qu'il ne se reconnecte pas.
+Figure 33 Interface de déconnexion du compte
+3.1.1.7 Interface Graphique de connexion de l’administrateur
+Pour se connecter à l'interface d'administration, l'administrateur doit saisir son adresse email et son mot de passe* dans des champs distincts du formulaire de connexion
+Figure 34 Interface d’authentification de l’Administrateur
+3.1.2 Gérer son compte
+Les utilisateurs peuvent gérer leur compte sur JobFinder en modifiant leurs informations
+personnelles, mettant à jour leurs préférences, ou en ajustant leurs paramètres de
+confidentialité selon leurs besoins
+44
+3.1.2.1 Diagramme de cas d’utilisation « Gérer son compte »
+Figure 35 Raffinement de cas d’utilisation "gérer son compte"
+
+45
+ • Description textuelle de cas d’utilisations Modifier son compte :
+Cas d’utilisation Modifier son compte
+Acteur Administrateur, Utilisateur, Entreprise
+Résumé L’acteur est permis de modifier les coordonnées relatives à son
+compte.
+Précondition -Acteur authentifié.
+-Opération de modification choisie
+Postcondition Compte modifié.
+Scénario de base 1. « Include » S’authentifier.
+2. « Include » Consulter Son Compte.
+3. L’acteur saisit les modifications souhaitées.
+4. L’acteur valide les modifications.
+5. Le système vérifie les modifications.
+6. Le système enregistre les modifications.
+7. Le système affiche un message de succès de modification.
+Scénario
+d’exception
+5. Modification non valide
+-Le système affiche un message d’erreur.
+-Retour à l’étape 3 de scénario principal.
+Tableau 9 Scénario du cas d’utilisation "Modifier son compte"
+46
+3.1.2.2 Diagramme de classe de conception du CU « Gérer Son Compte »
+Ce diagramme décrit les attributs et les méthodes de chaque classe du cas d’utilisation «
+Gérer Son Compte » ainsi que les relations entre ces classes.
+Figure 36 Diagramme de classe de conception du CU « gérer son compte »
+47
+3.1.2.3 Diagramme de séquence du CU précis « Modifier son compte »
+ Ce diagramme de séquence permet de décrire le scénario du CU « Modifier Compte »
+en mettant l’accent sur la chronologie des opérations montrant l’interaction entre les
+objets.
+Figure 37 Diagramme de séquence « Modifier son compte »
+48
+3.1.2.4 Interface Graphique pour Modifier profil utilisateur
+Cette interface permet à l’utilisateur de modifier son profil
+Figure 38 Interface de modification du profil de l’utilisateur
+3.1.2.5 Interface Graphique pour Modifier profil entreprise
+Cette interface permet à l’entreprise de modifier son profil
+Figure 39 Interface de modification du profil de l’entreprise
+
+49
+• Description textuelle de cas d’utilisations consulter son compte :
+Cas d’utilisation Consulter son compte
+Acteur Administrateur, Utilisateur, Entreprise
+Résumé L’acteur a la possibilité de consulter son compte.
+Précondition -Acteur authentifié.
+-Opération de consultation choisie
+Postcondition Compte consulté.
+Scénario de base 1. « Include » s’authentifier.
+2. L’acteur choisit la consultation de son compte.
+3. Le système fournit l’interface de consultation du compte
+Tableau 10 Scénario du cas d’utilisation "consulter son compte"
+50
+3.1.2.6 Diagramme de séquence du CU précis « Consulter son compte »
+ Ce diagramme de séquence permet de décrire le scénario du CU « Consulter Son
+Compte » en mettant l’accent sur la chronologie des opérations montrant l’interaction
+entre les objets.
+Figure 40 Diagramme de séquence « Consulter son compte »
+3.1.2.7 Interface Graphique Profil d’entreprise
+Cette interface permet à l’entreprise de visualiser son profil
+Figure 41 Interface de visualisation du profil de l’entreprise
+51
+3.1.2.8 Interface Graphique Profil d’utilisateur
+Cette interface permet à l’utilisateur de visualiser son profil
+Figure 42 Interface de visualisation du profil de l’utilisateur
+• Description textuelle de cas d’utilisations Désactiver son compte :
+Cas d’utilisation Désactiver son compte
+Acteur Administrateur, Utilisateur, Entreprise,
+Résumé L’acteur peut désactiver son compte.
+Précondition -Acteur authentifié.
+-Opération de modification choisie.
+Postcondition Compte désactivé.
+Scénario de base 1. « Include » S’authentifier.
+2. « Include » Consulter Son Compte.
+3. L’acteur choisit la désactivation de son compte.
+4. Le système demande la confirmation de l’opération.
+5. L’acteur valide l’opération.
+52
+6. Le système désactive le compte de l’acteur.
+7. Le système dirige l’acteur vers la page d’accueil du site.
+Scénario
+d’exception
+5. L’acteur annule la désactivation :
+-Retour à l’étape 3 de scénario principal.
+Tableau 11 Scénario du cas d’utilisation "Désactiver son compte"
+53
+3.1.2.9 Diagramme de séquence du CU précis « Désactiver son compte »
+ Ce diagramme de séquence permet de décrire le scénario du CU « Désactiver
+Compte» en mettant l’accent sur la chronologie des opérations montrant l’interaction
+entre les objets
+Figure 43 Diagramme de séquence « Désactiver son compte »
+54
+4. Sprint 2 : Gérer les catégories des offres et gérer les utilisateurs
+Ce sprint détaille les tâches réalisées pour la gestion des catégories des offres et des
+utilisateurs dans JobFinder. L'objectif est de décrire les fonctionnalités à développer en
+précisant les étapes nécessaires pour compléter les user stories correspondantes. Nous
+débutons par la présentation du Sprint Backlog, suivie des phases de spécification et de
+conception à l'aide de diagrammes et de descriptions textuelles.
+4.1 Backlog Sprint 2
+Fonctionnalité ID User story Acteur Priorité
+Gérer les utilisateurs 3.1 -En tant qu’administrateur je peux
+supprimer un utilisateur
+Administrateur 3
+3.2 -En tant qu’administrateur je peux
+consulter un utilisateur
+Gérer les catégories des
+offres
+4.1 - En tant qu’administrateur je peux
+consulter les catégories de stages, offres
+d’emploi et formations
+Administrateur 4
+4.2 En tant qu’administrateur je peux
+ajouter les catégories de stages, offres
+d’emploi et formations
+4.3 - En tant qu’administrateur je peux
+supprimer les catégories de stages,
+offres d’emploi et formations
+Tableau 12 Backlog du sprint 2
+55
+4.2 Diagramme de cas d’utilisation raffiné du sprint 2
+Figure 44 Diagramme de cas d’utilisation du sprint2
+4.2.1 Gérer les catégories des offres
+Les administrateurs peuvent gérer les catégories des offres en créant, modifiant ou supprimant des
+catégories afin d’organiser efficacement les annonces et de faciliter la recherche pour les utilisateurs.
+4.2.1.1 Diagramme de cas d’utilisations « Gérer les catégories des offres »
+Figure 45 Raffinement de cas d’utilisation "gérer les catégories des offres"
+56
+• Description textuelle de cas d’utilisations Consulter les catégories des offres
+Cas d’utilisation Consulter les catégories des offres
+Acteur Administrateur
+Résumé L’administrateur peut voir la liste des catégories des offres.
+Précondition -Acteur authentifié.
+-Opération de consultation choisie.
+Postcondition Liste des catégories d’offre consultée.
+Scénario de base 1. « Include » s’authentifier.
+2. L’acteur choisit les catégories des offres.
+Tableau 13 Scénario du cas d’utilisation "Consulter les catégories des offres"
+4.2.1.2 Diagramme de classe de conception du CU « Gérer catégories des offres »
+Ce diagramme décrit les attributs et les méthodes de chaque classe du cas d’utilisation «
+Gérer Catégories des offres » ainsi que les relations entre ces classes.
+Figure 46 Diagramme de classe de conception du CU « gérer catégories des offres »
+57
+4.2.1.3 Diagramme de séquence du CU précis « Consulter catégories d’offres »
+ Ce diagramme de séquence permet de décrire le scénario du CU « Consulter
+catégories d’offre » en mettant l’accent sur la chronologie des opérations montrant
+l’interaction entre les objets
+Figure 47 Diagramme de séquence "Consulter les catégories des offres"
+• Description textuelle de cas d’utilisations Ajouter les catégories des offres
+Cas d’utilisation Ajouter les catégories des offres
+Acteur Administrateur
+Objectif L’Administrateur introduit les informations relatives aux catégories
+des offres
+Précondition -Administrateur authentifié.
+-Opération d’ajout choisie
+Postcondition Catégories d’offre Ajoutée.
+Scénario de base 1. « include » S’authentifier.
+2. « include » Consulter catégories de formations.
+L’acteur choisit l’opération d’ajout de l’interface de consultation.
+3. L’acteur introduit les informations relatives à la formation.
+4. L’acteur valide l’opération.
+5. Le système vérifie la saisie.
+6. Le système enregistre les données saisies.
+58
+7. Le système affiche un message de succès d’ajout.
+Scénario
+d’exception
+6. Données non valides :
+-Le système affiche un message d’erreur.
+-Retour à l’étape 4 du scénario principal.
+Tableau 14 Scénario du cas d’utilisation Ajouter catégories d’offre
+59
+4.2.1.4 Diagramme de séquence du CU précis « Ajouter catégories d’offres »
+ Ce diagramme de séquence permet de décrire le scénario du CU « Ajouter catégories
+d’offre » en mettant l’accent sur la chronologie des opérations montrant l’interaction
+entre les objets.
+Figure 48 Diagramme de séquence « Ajouter les catégories des offres »
+60
+• Description textuelle de cas d’utilisation "supprimer catégories de formations" :
+Cas d’utilisation Supprimer catégories des offres
+Acteur Administrateur
+Résumé L’Administrateur a la possibilité de supprimer une
+catégorie d’offre.
+Précondition -Acteur authentifié.
+-Opération de suppression choisie.
+Postcondition Catégories de formations.
+Scénario de base 1. « Include » s’authentifier.
+2. « Include » consulter catégories de formations.
+3. L’acteur choisit la suppression de la catégorie d’offre
+sélectionné.
+4. Le système affiche un message d’avertissement indiquant
+l’accord de suppression.
+5. L’acteur valide la suppression.
+6. Le système archive les catégories d’offre.
+7. Le système affiche un message indiquant le succès de la
+suppression.
+Tableau 15 Scénario du cas d’utilisation "Supprimer les catégories des offres"
+61
+4.2.1.5 Diagramme de séquence du CU précis « Supprimer catégories d’offres »
+ Ce diagramme de séquence permet de décrire le scénario du CU « Supprimer
+Catégorie des offres » en mettant l’accent sur la chronologie des opérations montrant
+l’interaction entre les objets.
+Figure 49 Diagramme de séquence "Supprimer les catégories des offres"
+62
+4.2.2 Gérer les utilisateurs
+Les administrateurs ont la possibilité de gérer les utilisateurs en surveillant leur activité, en
+modifiant leurs droits d'accès, ou en désactivant des comptes si nécessaire pour maintenir la
+sécurité et le bon fonctionnement de la plateforme
+4.2.2.1 Diagramme de cas d’utilisation « Gérer les utilisateurs »
+Figure 50 Raffinement de cas d’utilisation "gérer les utilisateurs"
+• Description textuelle de cas d’utilisations Consulter utilisateurs :
+Cas d’utilisation Consulter utilisateurs
+Acteur Administrateur
+Résumé L’acteur pour voir les utilisateurs, il peut accéder à une interface
+de consultation.
+Précondition Acteur authentifié.
+-Opération de consultation choisie
+Postcondition Liste des utilisateurs consultée.
+63
+Scénario de base 1. « Include » s’authentifier.
+2. L’acteur choisit la consultation des utilisateurs.
+3. Le système affiche la liste des utilisateurs ainsi que leurs
+détails.
+Tableau 16 Scénario du cas d’utilisation "Consulter utilisateurs"
+4.2.2.2 Diagramme de séquence du CU précis Consulter utilisateur »
+Ce diagramme de séquence permet de décrire le scénario du CU « Supprimer Catégorie
+des offres » en mettant l’accent sur la chronologie des opérations montrant l’interaction
+entre les objets
+Figure 51 Diagramme de séquence "Consulter utilisateur"
+64
+4.2.2.3 Interface Graphique pour consulter une entreprise
+Interface d’une entreprise s'affiche avec des informations détaillées, y compris la
+description de l'entreprise, ses offres d'emploi, ses coordonnées, et d'autres informations
+pertinentes.
+Figure 52 Interface Graphique pour consulter Profil entreprise
+• Description textuelle de cas d’utilisations supprimer utilisateurs :
+Cas d’utilisation Supprimer utilisateurs
+Acteur Administrateur
+Résumé L’administrateur a le droit de supprimer un participant.
+Précondition Acteur authentifié.
+Opération de blocage choisie.
+Postcondition Utilisateur bloqué.
+Scénario de base 1. « Include » s’authentifier.
+2. « Include » consulter participants.
+3. L’administrateur sélectionne le participant à supprimer.
+4. Le système affiche un message de confirmation.
+5. L’administrateur valide la suppression.
+6. Le système supprime le participant.
+65
+Scénario
+d’exception
+6. suppression annulée :
+-Retour à l’étape 3 du scénario principal.
+Tableau 17 Scénario du cas d’utilisation "supprimer utilisateurs"
+66
+4.2.2.3 Diagramme de séquence du CU précis « Supprimer utilisateur »
+Ce diagramme de séquence permet de décrire le scénario du CU « Supprimer Catégorie
+des offres » en mettant l’accent sur la chronologie des opérations montrant l’interaction
+entre les objets
+Figure 53 Diagramme de séquence "Supprimer utilisateur
+67
+4.2.2.4 Interface Graphique de gestion de l’utilisateur
+Cette interface permet à l’administrateur de consulter et gérer la liste des utilisateurs
+Figure 54 Interface de gestion des utilisateurs
+4.2.2.5 Interface Graphique Gestion des entreprises
+Cette interface permet à l’administrateur de consulter et gérer la liste des entreprises
+Figure 55 Interface de consultation liste des entreprises
+68
+Conclusion
+Dans ce chapitre, nous avons détaillé les différentes étapes de la conception et du
+développement de la première version de l’application JobFinder. Chaque sprint a été
+soigneusement planifié pour intégrer des fonctionnalités essentielles, telles que
+l’authentification, la gestion des comptes, et la visualisation des interfaces utilisateurs. À
+travers des diagrammes de séquence et de classes, nous avons mis en lumière l’architecture
+technique qui assure la fluidité des interactions entre les composants de l'application. Ce
+travail de conception précise pose les bases solides pour le développement de futures
+fonctionnalités tout en garantissant une expérience utilisateur optimisée.
+69
+Chapitre 4
+Release 2
+70
+Introduction
+Ce chapitre fait partie de la release 2 et se concentre sur deux sprints majeurs : l'un dédié à la
+gestion des offres d'emploi et l'autre à la gestion des offres de stages. Il détaille les processus
+mis en œuvre pour assurer une gestion efficace de ces offres, tout en présentant des éléments
+visuels clés tels que les diagrammes de séquence, les diagrammes de classes, ainsi que les cas
+d'utilisation.
+1. Sprint 3 : Gérer les offres d’emplois
+Ce sprint présente les tâches effectuées pour la gestion des offres d'emplois dans JobFinder.
+L'objectif est de décrire en détail les fonctionnalités à développer en spécifiant les étapes
+nécessaires pour compléter les user stories sélectionnées. Nous commençons par la
+présentation du Sprint Backlog, puis nous abordons les phases de spécification et de
+conception, illustrées par des diagrammes et des descriptions textuelles.
+1.1 Backlog du sprint 3
+Fonctionnalité ID User story Acteur Priorité
+Gérer les offres
+d’emploi
+1.1 -En tant qu’Administrateur je
+peux voir les offres d’emploi.
+-En tant qu’Administrateur je
+peux supprimer les offres
+d’emploi.
+Administrateur 1
+1.2 -En tant qu’Entreprise je peux
+ajouter des offres d’emploi.
+-En tant qu’Entreprise je peux
+supprimer mes offres d’emploi.
+Entreprise
+1.3
+-En tant qu’Utilisateur je
+peux consulter les offres
+d’emploi.
+-En tant qu’Utilisateur je peux
+postuler à des offres d’emploi. Utilisateur
+Tableau 18 Backlog du sprint 3
+71
+1.2 Diagramme de cas d’utilisation raffiné sprint 3
+Figure 56 Diagramme de cas d’utilisation raffiné sprint 3
+1.2.1 Gérer les offres d’emplois
+Les entreprises peuvent gérer leurs offres d'emploi en les publiant, les modifiant ou les
+supprimant, tout en ayant la possibilité de suivre les candidatures reçues pour faciliter leur
+processus de recrutement.
+ Description textuelle de cas d’utilisations Consulter les offres d’emploi :
+Cas d’utilisation Consulter les offres d’emploi
+Acteur Entreprise, Utilisateur
+Résumé L’acteur peut voir la liste de des offres d’emploi.
+Précondition -Acteur authentifié.
+-Opération de consultation choisie.
+Postcondition Liste des offres d’emploi consultée.
+72
+Scénario de
+base
+1. « Include » s’authentifier.
+2. L’acteur choisit la consultation des offres d’emploi.
+3. Le système affiche la liste des offres d’emploi ainsi que
+leurs détails.
+Tableau 19 Scénario du cas d’utilisation
+1.2.1.1 Diagramme de séquence du CU précis « Consulter offres d’emploi »
+ Ce diagramme de séquence permet de décrire le scénario du CU « Consulter les offres
+d’emploi » en mettant l’accent sur la chronologie des opérations montrant
+l’interaction entre les objets.
+Figure 57 Diagramme de séquence du CU précis «Consulter Offres d’emploi»
+73
+1.2.1.2 Interface graphique pour Consulter et supprimer offre d’emploi de
+l’entreprise
+Cette interface permet à l’entreprise de consulter son offre
+Figure 58 Interface de consultation et suppression offre d’emploi chez l’entreprise
+74
+1.2.1.3 Interface Graphique pour Consulter et postuler offre d’emploi pour
+l’utilisateur
+Cette interface permet à l’utilisateur de consulter et postuler à une offre
+Figure 59 Interface de consultation offre d’emploi chez l’utilisateur
+ Description textuelle de cas d’utilisations Modifier offres d’emploi :
+Cas d’utilisation Modifier offres d’emploi
+Acteur Entreprise
+Résumé L’entreprise a le droit d’effectuer des modifications sur
+les données relatives aux offres d’emploi.
+Précondition -Entreprise authentifiée.
+-Opération de modification choisie.
+Postcondition Offres d’emploi modifié.
+75
+Scénario de
+base
+1. « Include » s’authentifier.
+2. « Include » consulter offres d’emploi.
+3. L’acteur choisit la modification du stage
+sélectionné.
+4. L’acteur introduit les modifications souhaitées.
+5. L’acteur valide la modification.
+6. Le système vérifie les modifications.
+7. Le système enregistre les modifications.
+8. Le système affiche un message indiquant le
+succès de la modification du stage.
+Tableau 20 Scénario du cas d’utilisation « Modifier les offres d’emploi »
+76
+1.2.1.4 Diagramme de séquence du CU précis « Modifier offres d’emploi »
+ Ce diagramme de séquence permet de décrire le scénario du CU « Modifier Offre
+D’emploi » en mettant l’accent sur la chronologie des opérations montrant
+l’interaction entre les objets.
+Figure 60 Diagramme de séquence du CU précis « Modifier Offres D’emploi »
+77
+ Description textuelle de cas d’utilisations Supprimer offres d’emploi :
+Cas d’utilisation Supprimer offres d’emploi
+Acteur Entreprise
+Résumé L’entreprise a la possibilité de supprimer une offre
+d’emploi.
+Précondition -Acteur authentifié.
+-Opération de suppression choisie.
+Postcondition Offre d’emploi supprimé.
+Scénario de base 1. « Include » s’authentifier.
+2. « Include » consulter offres d’emploi.
+3. L’acteur choisit la suppression de l’offre d’emploi
+sélectionné.
+4. Le système affiche un message d’avertissement
+indiquant l’accord de suppression.
+5. L’acteur valide la suppression.
+6. Le système archive l’offres d’emploi.
+7. Le système affiche un message indiquant le succès
+de la suppression.
+Tableau 21 Scénario du cas d’utilisation « supprimer les offres d’emploi »
+78
+1.2.1.5 Diagramme de séquence du CU précis « Supprimer offres d’emploi »
+ Ce diagramme de séquence permet de décrire le scénario du CU « Supprimer
+Formation » en mettant l’accent sur la chronologie des opérations montrant
+l’interaction entre les objets.
+Figure 61 Diagramme de séquence du CU précis « Supprimer Offres D’emploi »
+Description textuelle de cas d’utilisations Demander offre d’emploi :
+Cas d’utilisation Postuler Offre d’emploi
+Acteur Utilisateur
+Résumé L’utilisateur a la possibilité de postuler a un Offre d’emploi.
+79
+Précondition -Acteur authentifié.
+-Opération de demande choisie.
+Postcondition Offre d’emploi Postulé.
+Scénario de base 1. « Include » s’authentifier.
+2. « Include » consulter Offres d’emploi.
+3. L’acteur choisit l’Offre d’emploi sélectionné.
+4. Le système affiche un message d’avertissement
+indiquant l’accord de demande.
+5. L’acteur valide la demande.
+6. Le système archive la demande d’Offre d’emploi.
+7. Le système affiche un message indiquant le succès
+de la postulation d’Offre d’emploi.
+Tableau 22 Scénario du cas d’utilisation « Postuler des offres d’emploi »
+80
+1.2.1.6 Diagramme de séquence du CU précis « Postuler à une offre d’emploi »
+ Ce diagramme de séquence permet de décrire le scénario du CU « postuler a un Offre
+D’emploi » en mettant l’accent sur la chronologie des opérations montrant l’interaction
+entre les objets.
+Figure 62 Diagramme de séquence du CU précis « Postuler à un Offres D’emploi »
+81
+1.2.1.7 Diagramme de classe de conception du CU « Gérer les offres d’emploi »
+ Ce diagramme décrit les attributs et les méthodes de chaque classe du cas d’utilisation
+« Gérer les offres d’emploi » ainsi que les relations entre ces classes.
+Figure 63 Diagramme de classe de conception du CU « Gérer les offres d’emploi »
+82
+1.2.1.8 Interface Graphique d’administrateur pour Gérer la liste des offres
+Cette interface permet à l’administrateur de consulter la liste des offres d’emploi et des stages
+ajouter par les entreprises
+Figure 64 Interface d’administrateur pour Gérer les offres
+2. Sprint 4 : Gérer les offres de stages
+Ce sprint détaille les tâches réalisées pour la gestion des offres de stages dans JobFinder.
+L'objectif est de décrire en détail les fonctionnalités à développer, en précisant les étapes
+nécessaires pour compléter les user stories associées. Nous commençons par la présentation
+du Sprint Backlog, suivie des phases de spécification et de conception illustrées à l'aide de
+diagrammes et de descriptions textuelles.
+2.1 Backlog Sprint 4
+Fonctionnalité ID User story Acteur Priorité
+Gérer les offres
+de stages
+1.1 -en tant qu’entreprise je peux
+consulter offre de stage
+Administrateur
+Entreprise
+Administrateur
+1.2 -en tant qu’entreprise je peux
+ajouter offre de stage
+Entreprise 1
+1.3 -en tant qu’utilisateur je peux
+postuler a un stage
+Utilisateur 2
+83
+1.4 -en tant qu’administrateur je peux
+supprimer offre de stage
+Administrateur 3
+Tableau 23 Backlog du Sprint 4
+84
+2.1.1 Gérer les offres de stages
+Figure 65 Raffinement de cas d’utilisation « gérer les stages »
+ Description textuelle de cas d’utilisations Consulter les stages :
+Cas d’utilisation Consulter les stages
+Acteur Entreprise, Utilisateur
+Résumé L’acteur peut voir la liste de des stages.
+Précondition -Acteur authentifié.
+-Opération de consultation choisie.
+Postcondition Liste de stages consultée.
+Scénario de base 1. « Include » s’authentifier.
+2. L’acteur choisit la consultation des stages.
+3. Le système affiche la liste des stages ainsi que leurs
+détails.
+Tableau 24 Scénario du cas d’utilisation "Consulter les stages"
+85
+2.1.1.1 Diagramme de séquence du CU précis « Consulter Stage »
+ Ce diagramme de séquence permet de décrire le scénario du CU «Consulter Stages»
+en mettant l’accent sur la chronologie des opérations montrant l’interaction entre
+les objets.
+Figure 66 Diagramme de séquence du CU précis « Consulter Stages »
+Description textuelle de cas d’utilisations Ajouter les stages :
+Cas d’utilisation Ajouter les stages
+Acteur Entreprise
+Objectif L’entreprise introduit les informations relatives au
+stage telles que le nom, le domaine du stage, sa
+description, la durée. . .
+Précondition -Entreprise authentifié.
+-Opération d’ajout choisie
+Postcondition Stage Ajoutée.
+86
+Scénario de
+base
+1. « Include » S’authentifier.
+2. « Include » Consulter Stages.
+3. L’acteur choisit l’opération d’ajout de l’interface de
+consultation.
+4. L’acteur introduit les informations relatives à la
+formation.
+5. L’acteur valide l’opération.
+6. Le système vérifie la saisie.
+7. Le système enregistre les données saisies.
+8. Le système affiche un message de succès d’ajout.
+Scénario
+d’exception
+6. Données non valides :
+-Le système affiche un message d’erreur.
+-Retour à l’étape 4 du scénario principal.
+Tableau 25 Scénario du cas d’utilisation « ajouter les stages »
+87
+2.1.1.2 Diagramme de séquence du CU précis « Ajouter Stage »
+ Ce diagramme de séquence permet de décrire le scénario du CU « Ajouter Stages» en
+mettant l’accent sur la chronologie des opérations montrant l’interaction entre les
+objets.
+Figure 67 Diagramme de séquence « Ajouter stages »
+88
+2.1.1.3 Interface Graphique pour Ajouter une offre de stages
+Cette interface permet au responsable d’entreprises d’ajouter une offre
+Figure 68 Interface d’ajout une offre de stage pour entreprise
+89
+ Description textuelle de cas d’utilisations Supprimer Stage
+Cas d’utilisation Supprimer Stage
+Acteur Entreprise
+Résumé L’entreprise a la possibilité de supprimer un stage.
+Précondition -Acteur authentifié.
+-Opération de suppression choisie.
+Postcondition Stage supprimé.
+Scénario de base 1.« Include » s’authentifier.
+2.« Include » consulter stages.
+3.L’acteur choisit la suppression du stage
+sélectionné.
+4.Le système affiche un message d’avertissement
+indiquant l’accord de suppression.
+5.L’acteur valide la suppression.
+6.Le système archive le stage.
+7. Le système affiche un message indiquant le succès de la
+suppression.
+Tableau 26 Scénario du cas d’utilisation « Supprimer les stages »
+90
+2.1.1.4 Diagramme de séquence du CU précis « Supprimer Stage »
+ Ce diagramme de séquence permet de décrire le scénario du CU « Supprimer Stage » en
+mettant l’accent sur la chronologie des opérations montrant l’interaction entre les objets.
+Figure 69 Diagramme de séquence du CU précis « Supprimer Stage »
+ Description textuelle de cas d’utilisations Demander Stage :
+Cas d’utilisation Demander Stage
+Acteur Utilisateur
+Résumé L’utilisateur a la possibilité de demander un stage.
+Précondition -Acteur authentifié.
+-Opération de demande choisie.
+Postcondition Stage demandé.
+91
+Scénario de base 1. « Include » s’authentifier.
+2. « Include » consulter stages.
+3. L’acteur choisit le stage sélectionné.
+4. Le système affiche un message d’avertissement
+indiquant l’accord de demande.
+5. L’acteur valide la demande.
+6. Le système archive la demande de stage.
+7. Le système affiche un message indiquant le succès
+de la demande de stage.
+Tableau 27 Scénario du cas d’utilisation « demander un stage »
+2.1.1.5 Diagramme de séquence du CU précis « Demander Stage »
+ Ce diagramme de séquence permet de décrire le scénario du CU « Demander Stage »
+en mettant l’accent sur la chronologie des opérations montrant l’interaction entre les
+objets.
+Figure 70 Diagramme de séquence du CU précis « Demander Stage »
+92
+2.1.1.6 Diagramme de classes de conception du CU « Gérer Stages »
+ Ce diagramme décrit les attributs et les méthodes de chaque classe du cas
+d’utilisation « Gérer Stages » ainsi que les relations entre ces classes.
+Figure 71 Diagramme de classe de conception du CU « Gérer Stages »
+Conclusion
+Ce chapitre a présenté les étapes de développement de la deuxième version de l’application
+JobFinder, avec un accent particulier sur la gestion des offres d'emploi et des stages. À travers les
+sprints 3 et 4, nous avons conçu des interfaces et des diagrammes détaillés pour illustrer les
+processus de consultation, de modification, de suppression et de postulation aux offres. Les
+fonctionnalités élaborées permettent une gestion optimisée des annonces pour les entreprises et
+offrent une expérience utilisateur fluide et intuitive. Cette phase marque une progression
+significative dans l’application, en enrichissant les services offerts tout en maintenant une
+architecture robuste.
+93
+Conclusion et perspectives
+Ce projet JobPortal, réalisé dans le cadre de notre stage, nous a permis de créer une
+plateforme web dédiée à la recherche d'emploi et à la gestion d'offres. Il s'est avéré être
+une excellente opportunité d'approfondir nos compétences techniques et personnelles.
+Sur le plan technique, nous avons acquis une solide maîtrise de technologies comme
+JavaScript, Node.js, et React.js, ainsi que des bases de données avec MongoDB. Nous avons
+également appliqué nos connaissances en conception à travers l'utilisation d'UML pour
+modéliser les différentes fonctionnalités de l'application.
+Sur le plan personnel, cette expérience pratique a renforcé notre capacité à mener des
+projets concrets en développement web. Elle nous a également permis d'améliorer nos
+compétences en gestion de projet en appliquant la méthodologie de développement en
+cascade. De plus, travailler en équipe a été une occasion enrichissante de développer notre
+esprit de collaboration, tout en affinant nos compétences en communication et en gestion
+des tâches.
+En résumé, ce projet a été un défi stimulant, tant sur le plan technique que personnel, et
+constitue une étape importante dans notre préparation à la vie professionnelle
+94
+Résumé
+Ce document contient un rapport de fin d’étude présenté en vue de l’obtention du diplôme de
+Licence en Technologies de l’Information. Ce sujet a été proposé par M. Ahmed Naffati mon encadrant
+professionnel durant la période de stage au sein de la Start-up BeeCoders
+Ce travail se devise en 4 parties :
+Dans le premier chapitre, on étudie le contexte général du projet. Par la suite, on s’intéresse à la mise
+en œuvre du projet. Alors que dans les deux derniers chapitres on arrive à faire l’étude et la réalisation
+des sprints et réaliser notre application web.
+Abstract
+This document contains an end-of-study report presented with a view to obtaining the Bachelor’s
+degree in Business Information Systems. This subject was proposed by M. Ahmed Naffati our
+professional supervisor during the internship period within the Start-up BeeCoders This work is divided
+into 4 parts:
+In the first chapter, we study the general context of the project. Next, we focus on the implementation
+of the project. While in the last two chapters we manage to study and carry out sprints and create our
+web application.
+95
+Bibliographie
+[1] :https://docwiki.embarcadero.com/RADStudio/Athens/fr/D%C3%A9finition_des_diagram
+mes_de_classes_UML_1.5#:~:text=Un%20diagramme%20de%20classes%20fournit,se%20p
+asse%20pendant%20l'interaction.
+[2] : https://www.lucidchart.com/pages/fr/diagramme-de-classesuml#:~:text=Le%20diagramme%20de%20classes%20est,pr%C3%A9sent%20dans%20le%20
+syst%C3%A8me%20mod%C3%A9lis%C3%A9.
+[3] : https://asana.com/fr/resources/scrum-master
+[4] : https://aws.amazon.com/fr/whatis/javascript/#:~:text=JavaScript%20est%20un%20langage%20de,animations%20et%20de%2
+0cartes%20interactives.
+[5] : https://www.edflex.com/blog/environnement-detravail#:~:text=L'environnement%20de%20travail%20se,au%20sein%20de%20l'entreprise.
+[6] : https://www.ibm.com/docs/fr/rsas/7.5.0?topic=topologies-deployment-diagrams
+[7] : https://asana.com/fr/resources/product-backlog
+[8] : https://kinsta.com/fr/base-de-connaissances/base-de-connaissances-github/

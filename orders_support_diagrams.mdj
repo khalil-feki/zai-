@@ -1,0 +1,659 @@
+{
+  "_type": "Project",
+  "_id": "AAAAAAGR1234572000",
+  "name": "Orders and Support Diagrams",
+  "ownedElements": [
+    {
+      "_type": "UMLModel",
+      "_id": "AAAAAAGR1234572001",
+      "_parent": {
+        "$ref": "AAAAAAGR1234572000"
+      },
+      "name": "Orders and Support Model",
+      "ownedElements": [
+        {
+          "_type": "UMLClassDiagram",
+          "_id": "AAAAAAGR1234572002",
+          "_parent": {
+            "$ref": "AAAAAAGR1234572001"
+          },
+          "name": "Orders and Support Class Diagram",
+          "ownedViews": [
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234572003",
+              "_parent": {
+                "$ref": "AAAAAAGR1234572002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234572004"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234572005",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572003"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572004"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 50,
+                  "top": 50,
+                  "width": 200,
+                  "height": 25,
+                  "text": "OrderController"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234572006",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572003"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572004"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 75,
+                  "width": 200,
+                  "height": 100,
+                  "text": "-orderModel: OrderModel\n-paymentService: PaymentService\n-emailService: EmailService\n-cartModel: CartModel\n-dolibarrAPI: DolibarrAPI\n-stockManager: StockManager"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234572007",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572003"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572004"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 175,
+                  "width": 200,
+                  "height": 140,
+                  "text": "+create(cartData)\n+show(orderId)\n+updateStatus(id, status)\n+processPayment(id, data)\n+getHistory(userId)\n+cancel(orderId)\n+track(orderId)\n+generateInvoice(orderId)\n+sendConfirmation(orderId)"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 50,
+              "top": 50,
+              "width": 200,
+              "height": 265
+            },
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234572008",
+              "_parent": {
+                "$ref": "AAAAAAGR1234572002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234572009"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234572010",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572008"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572009"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 300,
+                  "top": 50,
+                  "width": 180,
+                  "height": 25,
+                  "text": "OrderModel"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234572011",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572008"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572009"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 300,
+                  "top": 75,
+                  "width": 180,
+                  "height": 140,
+                  "text": "-id: int\n-ref: string\n-userId: int\n-totalAmount: decimal\n-status: string\n-paymentMethod: string\n-paymentStatus: string\n-shippingAddress: text\n-billingAddress: text\n-createdAt: DateTime"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234572012",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572008"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572009"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 300,
+                  "top": 215,
+                  "width": 180,
+                  "height": 100,
+                  "text": "+create(orderData)\n+findById(id)\n+findByUser(userId)\n+updateStatus(id, status)\n+addOrderLine(orderId, productId, qty)\n+calculateTotal(orderId)\n+generateRef()"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 300,
+              "top": 50,
+              "width": 180,
+              "height": 265
+            },
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234572013",
+              "_parent": {
+                "$ref": "AAAAAAGR1234572002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234572014"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234572015",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572013"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572014"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 520,
+                  "top": 50,
+                  "width": 180,
+                  "height": 25,
+                  "text": "PaymentService"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234572016",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572013"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572014"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 520,
+                  "top": 75,
+                  "width": 180,
+                  "height": 80,
+                  "text": "-stripeAPI: StripeAPI\n-paypalAPI: PaypalAPI\n-bankAPI: BankAPI\n-config: PaymentConfig\n-logger: Logger"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234572017",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572013"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572014"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 520,
+                  "top": 155,
+                  "width": 180,
+                  "height": 100,
+                  "text": "+processPayment(amount, method)\n+validateCard(cardData)\n+refundPayment(transactionId)\n+getPaymentStatus(transactionId)\n+createPaymentIntent(amount)\n+confirmPayment(intentId)"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 520,
+              "top": 50,
+              "width": 180,
+              "height": 205
+            },
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234572018",
+              "_parent": {
+                "$ref": "AAAAAAGR1234572002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234572019"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234572020",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572018"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572019"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 50,
+                  "top": 350,
+                  "width": 200,
+                  "height": 25,
+                  "text": "TicketController"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234572021",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572018"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572019"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 375,
+                  "width": 200,
+                  "height": 100,
+                  "text": "-ticketModel: TicketModel\n-userModel: UserModel\n-emailService: EmailService\n-fileUpload: FileUploadService\n-dolibarrAPI: DolibarrAPI\n-notificationService: NotificationService"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234572022",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572018"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572019"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 475,
+                  "width": 200,
+                  "height": 120,
+                  "text": "+create(ticketData)\n+show(ticketId)\n+addResponse(id, message)\n+updateStatus(id, status)\n+getTickets(userId)\n+close(ticketId)\n+assignAgent(id, agentId)\n+uploadAttachment(ticketId, file)"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 50,
+              "top": 350,
+              "width": 200,
+              "height": 245
+            },
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234572023",
+              "_parent": {
+                "$ref": "AAAAAAGR1234572002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234572024"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234572025",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572023"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572024"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 300,
+                  "top": 350,
+                  "width": 180,
+                  "height": 25,
+                  "text": "TicketModel"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234572026",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572023"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572024"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 300,
+                  "top": 375,
+                  "width": 180,
+                  "height": 120,
+                  "text": "-id: int\n-ref: string\n-userId: int\n-subject: string\n-message: text\n-status: string\n-priority: string\n-assignedTo: int\n-createdAt: DateTime"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234572027",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572023"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572024"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 300,
+                  "top": 495,
+                  "width": 180,
+                  "height": 100,
+                  "text": "+create(ticketData)\n+findById(id)\n+findByUser(userId)\n+updateStatus(id, status)\n+addResponse(ticketId, message)\n+assignAgent(id, agentId)\n+generateRef()"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 300,
+              "top": 350,
+              "width": 180,
+              "height": 245
+            }
+          ]
+        },
+        {
+          "_type": "UMLUseCaseDiagram",
+          "_id": "AAAAAAGR1234572028",
+          "_parent": {
+            "$ref": "AAAAAAGR1234572001"
+          },
+          "name": "Orders and Support Use Cases",
+          "ownedViews": [
+            {
+              "_type": "UMLActorView",
+              "_id": "AAAAAAGR1234572029",
+              "_parent": {
+                "$ref": "AAAAAAGR1234572028"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234572030"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234572031",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572029"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572030"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 250,
+                  "width": 80,
+                  "height": 15,
+                  "text": "Customer"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 50,
+              "top": 200,
+              "width": 80,
+              "height": 65
+            },
+            {
+              "_type": "UMLActorView",
+              "_id": "AAAAAAGR1234572032",
+              "_parent": {
+                "$ref": "AAAAAAGR1234572028"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234572033"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234572034",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572032"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572033"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 450,
+                  "width": 80,
+                  "height": 15,
+                  "text": "Support Agent"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 50,
+              "top": 400,
+              "width": 80,
+              "height": 65
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234572035",
+              "_parent": {
+                "$ref": "AAAAAAGR1234572028"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234572036"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234572037",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572035"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572036"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 80,
+                  "width": 140,
+                  "height": 15,
+                  "text": "Create Order"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 60,
+              "width": 140,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234572038",
+              "_parent": {
+                "$ref": "AAAAAAGR1234572028"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234572039"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234572040",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572038"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572039"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 140,
+                  "width": 140,
+                  "height": 15,
+                  "text": "Process Payment"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 120,
+              "width": 140,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234572041",
+              "_parent": {
+                "$ref": "AAAAAAGR1234572028"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234572042"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234572043",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572041"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572042"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 200,
+                  "width": 140,
+                  "height": 15,
+                  "text": "Track Order"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 180,
+              "width": 140,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234572044",
+              "_parent": {
+                "$ref": "AAAAAAGR1234572028"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234572045"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234572046",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572044"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572045"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 260,
+                  "width": 140,
+                  "height": 15,
+                  "text": "View Order History"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 240,
+              "width": 140,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234572047",
+              "_parent": {
+                "$ref": "AAAAAAGR1234572028"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234572048"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234572049",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572047"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572048"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 320,
+                  "width": 140,
+                  "height": 15,
+                  "text": "Create Support Ticket"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 300,
+              "width": 140,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234572050",
+              "_parent": {
+                "$ref": "AAAAAAGR1234572028"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234572051"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234572052",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572050"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572051"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 380,
+                  "width": 140,
+                  "height": 15,
+                  "text": "Manage Tickets"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 360,
+              "width": 140,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234572053",
+              "_parent": {
+                "$ref": "AAAAAAGR1234572028"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234572054"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234572055",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234572053"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234572054"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 440,
+                  "width": 140,
+                  "height": 15,
+                  "text": "Respond to Tickets"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 420,
+              "width": 140,
+              "height": 55
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

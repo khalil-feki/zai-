@@ -1,0 +1,593 @@
+{
+  "_type": "Project",
+  "_id": "AAAAAAGR1234571000",
+  "name": "Product Catalog Diagrams",
+  "ownedElements": [
+    {
+      "_type": "UMLModel",
+      "_id": "AAAAAAGR1234571001",
+      "_parent": {
+        "$ref": "AAAAAAGR1234571000"
+      },
+      "name": "Product Catalog Model",
+      "ownedElements": [
+        {
+          "_type": "UMLClassDiagram",
+          "_id": "AAAAAAGR1234571002",
+          "_parent": {
+            "$ref": "AAAAAAGR1234571001"
+          },
+          "name": "Product Catalog Class Diagram",
+          "ownedViews": [
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234571003",
+              "_parent": {
+                "$ref": "AAAAAAGR1234571002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234571004"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234571005",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571003"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571004"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 50,
+                  "top": 50,
+                  "width": 200,
+                  "height": 25,
+                  "text": "ProductController"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234571006",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571003"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571004"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 75,
+                  "width": 200,
+                  "height": 80,
+                  "text": "-productModel: ProductModel\n-categoryModel: CategoryModel\n-searchEngine: SearchEngine\n-cache: CacheManager\n-dolibarrAPI: DolibarrAPI"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234571007",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571003"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571004"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 155,
+                  "width": 200,
+                  "height": 120,
+                  "text": "+index()\n+show(id)\n+search(query)\n+filterByCategory(id)\n+getRecommendations()\n+updateStock(id, qty)\n+getByBarcode(barcode)\n+getRelatedProducts(id)"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 50,
+              "top": 50,
+              "width": 200,
+              "height": 225
+            },
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234571008",
+              "_parent": {
+                "$ref": "AAAAAAGR1234571002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234571009"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234571010",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571008"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571009"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 300,
+                  "top": 50,
+                  "width": 180,
+                  "height": 25,
+                  "text": "ProductModel"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234571011",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571008"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571009"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 300,
+                  "top": 75,
+                  "width": 180,
+                  "height": 140,
+                  "text": "-id: int\n-ref: string\n-label: string\n-description: text\n-price: decimal\n-stock: int\n-categoryId: int\n-barcode: string\n-weight: decimal\n-isActive: boolean"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234571012",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571008"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571009"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 300,
+                  "top": 215,
+                  "width": 180,
+                  "height": 100,
+                  "text": "+findAll()\n+findById(id)\n+findByCategory(categoryId)\n+search(query)\n+updateStock(id, quantity)\n+create(data)\n+update(id, data)"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 300,
+              "top": 50,
+              "width": 180,
+              "height": 265
+            },
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234571013",
+              "_parent": {
+                "$ref": "AAAAAAGR1234571002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234571014"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234571015",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571013"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571014"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 520,
+                  "top": 50,
+                  "width": 180,
+                  "height": 25,
+                  "text": "CategoryModel"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234571016",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571013"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571014"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 520,
+                  "top": 75,
+                  "width": 180,
+                  "height": 80,
+                  "text": "-id: int\n-label: string\n-description: text\n-parentId: int\n-isActive: boolean"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234571017",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571013"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571014"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 520,
+                  "top": 155,
+                  "width": 180,
+                  "height": 80,
+                  "text": "+findAll()\n+findById(id)\n+getTree()\n+getChildren(parentId)\n+create(data)\n+update(id, data)"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 520,
+              "top": 50,
+              "width": 180,
+              "height": 185
+            },
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234571018",
+              "_parent": {
+                "$ref": "AAAAAAGR1234571002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234571019"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234571020",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571018"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571019"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 50,
+                  "top": 350,
+                  "width": 200,
+                  "height": 25,
+                  "text": "CartController"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234571021",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571018"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571019"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 375,
+                  "width": 200,
+                  "height": 80,
+                  "text": "-cartModel: CartModel\n-productModel: ProductModel\n-sessionManager: SessionManager\n-validator: Validator\n-stockManager: StockManager"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234571022",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571018"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571019"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 455,
+                  "width": 200,
+                  "height": 120,
+                  "text": "+addItem(productId, qty)\n+removeItem(itemId)\n+updateQuantity(itemId, qty)\n+getCart()\n+clearCart()\n+getTotal()\n+checkout()\n+validateStock()"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 50,
+              "top": 350,
+              "width": 200,
+              "height": 225
+            },
+            {
+              "_type": "UMLClassView",
+              "_id": "AAAAAAGR1234571023",
+              "_parent": {
+                "$ref": "AAAAAAGR1234571002"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234571024"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234571025",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571023"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571024"
+                  },
+                  "font": "Arial;13;1",
+                  "left": 300,
+                  "top": 350,
+                  "width": 180,
+                  "height": 25,
+                  "text": "CartModel"
+                },
+                {
+                  "_type": "UMLAttributeCompartmentView",
+                  "_id": "AAAAAAGR1234571026",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571023"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571024"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 300,
+                  "top": 375,
+                  "width": 180,
+                  "height": 100,
+                  "text": "-id: int\n-sessionId: string\n-productId: int\n-quantity: int\n-price: decimal\n-createdAt: DateTime\n-updatedAt: DateTime"
+                },
+                {
+                  "_type": "UMLOperationCompartmentView",
+                  "_id": "AAAAAAGR1234571027",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571023"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571024"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 300,
+                  "top": 475,
+                  "width": 180,
+                  "height": 100,
+                  "text": "+addItem(sessionId, productId, qty)\n+removeItem(id)\n+updateQuantity(id, qty)\n+getCartItems(sessionId)\n+clearCart(sessionId)\n+calculateTotal(sessionId)"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 300,
+              "top": 350,
+              "width": 180,
+              "height": 225
+            }
+          ]
+        },
+        {
+          "_type": "UMLUseCaseDiagram",
+          "_id": "AAAAAAGR1234571028",
+          "_parent": {
+            "$ref": "AAAAAAGR1234571001"
+          },
+          "name": "Product Catalog Use Cases",
+          "ownedViews": [
+            {
+              "_type": "UMLActorView",
+              "_id": "AAAAAAGR1234571029",
+              "_parent": {
+                "$ref": "AAAAAAGR1234571028"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234571030"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234571031",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571029"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571030"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 50,
+                  "top": 250,
+                  "width": 80,
+                  "height": 15,
+                  "text": "Customer"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 50,
+              "top": 200,
+              "width": 80,
+              "height": 65
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234571032",
+              "_parent": {
+                "$ref": "AAAAAAGR1234571028"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234571033"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234571034",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571032"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571033"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 80,
+                  "width": 140,
+                  "height": 15,
+                  "text": "Browse Products"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 60,
+              "width": 140,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234571035",
+              "_parent": {
+                "$ref": "AAAAAAGR1234571028"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234571036"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234571037",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571035"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571036"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 140,
+                  "width": 140,
+                  "height": 15,
+                  "text": "Search Products"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 120,
+              "width": 140,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234571038",
+              "_parent": {
+                "$ref": "AAAAAAGR1234571028"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234571039"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234571040",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571038"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571039"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 200,
+                  "width": 140,
+                  "height": 15,
+                  "text": "Filter by Category"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 180,
+              "width": 140,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234571041",
+              "_parent": {
+                "$ref": "AAAAAAGR1234571028"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234571042"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234571043",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571041"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571042"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 260,
+                  "width": 140,
+                  "height": 15,
+                  "text": "Add to Cart"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 240,
+              "width": 140,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234571044",
+              "_parent": {
+                "$ref": "AAAAAAGR1234571028"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234571045"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234571046",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571044"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571045"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 320,
+                  "width": 140,
+                  "height": 15,
+                  "text": "Manage Cart"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 300,
+              "width": 140,
+              "height": 55
+            },
+            {
+              "_type": "UMLUseCaseView",
+              "_id": "AAAAAAGR1234571047",
+              "_parent": {
+                "$ref": "AAAAAAGR1234571028"
+              },
+              "model": {
+                "$ref": "AAAAAAGR1234571048"
+              },
+              "subViews": [
+                {
+                  "_type": "UMLNameCompartmentView",
+                  "_id": "AAAAAAGR1234571049",
+                  "_parent": {
+                    "$ref": "AAAAAAGR1234571047"
+                  },
+                  "model": {
+                    "$ref": "AAAAAAGR1234571048"
+                  },
+                  "font": "Arial;13;0",
+                  "left": 200,
+                  "top": 380,
+                  "width": 140,
+                  "height": 15,
+                  "text": "View Product Details"
+                }
+              ],
+              "font": "Arial;13;0",
+              "left": 200,
+              "top": 360,
+              "width": 140,
+              "height": 55
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
