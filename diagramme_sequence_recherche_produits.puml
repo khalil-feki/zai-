@@ -1,0 +1,133 @@
+@startuml Product Search Sequence
+!theme plain
+title ZAI E-commerce Platform - Diagramme de séquence : Recherche de Produits
+
+actor Utilisateur as "Utilisateur"
+participant "PageRecherche" as SearchPage
+participant "ProductController" as ProductCtrl
+participant "ProductModel" as ProductM
+participant "Database" as DB
+participant "DolibarrAPI" as DoliAPI
+
+Utilisateur -> SearchPage: accède à la page de recherche
+activate SearchPage
+SearchPage --> Utilisateur: affiche interface de recherche
+deactivate SearchPage
+
+Utilisateur -> SearchPage: saisit terme de recherche
+activate SearchPage
+note right : L'utilisateur peut rechercher par :
+- Nom du produit
+- Catégorie
+- Description
+- Prix (fourchette)
+
+SearchPage -> SearchPage: validateSearchInput(searchTerm)
+
+alt terme de recherche valide
+    SearchPage -> ProductCtrl: searchProducts(searchTerm, filters)
+    activate ProductCtrl
+    
+    ProductCtrl -> ProductM: findProducts(searchTerm, filters)
+    activate ProductM
+    
+    ProductM -> DB: SELECT p.*, c.label as category_name
+    FROM llx_product p
+    LEFT JOIN llx_categorie c ON p.fk_product_type = c.rowid
+    WHERE p.label LIKE ? OR p.description LIKE ?
+    AND p.tosell = 1
+    activate DB
+    
+    alt produits trouvés
+        DB --> ProductM: resultats de recherche
+        deactivate DB
+        
+        ProductM -> DoliAPI: getProductDetails(productIds)
+        activate DoliAPI
+        DoliAPI --> ProductM: détails complémentaires
+        deactivate DoliAPI
+        
+        ProductM -> ProductM: formatSearchResults(products)
+        ProductM --> ProductCtrl: liste des produits
+        deactivate ProductM
+        
+        ProductCtrl -> ProductCtrl: applyFilters(products, filters)
+        ProductCtrl -> ProductCtrl: sortResults(products, sortBy)
+        ProductCtrl --> SearchPage: { "success": true, "products": [...], "total": count }
+        deactivate ProductCtrl
+        
+        SearchPage -> SearchPage: displaySearchResults(products)
+        SearchPage --> Utilisateur: affiche résultats de recherche
+        
+    else aucun produit trouvé
+        DB --> ProductM: résultat vide
+        deactivate DB
+        ProductM --> ProductCtrl: liste vide
+        deactivate ProductM
+        ProductCtrl --> SearchPage: { "success": true, "products": [], "total": 0 }
+        deactivate ProductCtrl
+        SearchPage --> Utilisateur: affiche "Aucun produit trouvé"
+    end
+    
+else terme de recherche invalide
+    SearchPage -> SearchPage: displayValidationError("Terme de recherche requis")
+    SearchPage --> Utilisateur: affiche message d'erreur
+end
+
+opt filtrage avancé
+    Utilisateur -> SearchPage: applique filtres (catégorie, prix, etc.)
+    activate SearchPage
+    SearchPage -> ProductCtrl: searchProducts(searchTerm, newFilters)
+    activate ProductCtrl
+    note right : Filtres disponibles :
+    - Catégorie
+    - Fourchette de prix
+    - Disponibilité
+    - Marque
+    ProductCtrl -> ProductM: findProductsWithFilters(searchTerm, filters)
+    activate ProductM
+    ProductM -> DB: SELECT avec clauses WHERE supplémentaires
+    activate DB
+    DB --> ProductM: résultats filtrés
+    deactivate DB
+    ProductM --> ProductCtrl: produits filtrés
+    deactivate ProductM
+    ProductCtrl --> SearchPage: résultats mis à jour
+    deactivate ProductCtrl
+    SearchPage --> Utilisateur: affiche résultats filtrés
+    deactivate SearchPage
+end
+
+opt tri des résultats
+    Utilisateur -> SearchPage: sélectionne option de tri
+    activate SearchPage
+    SearchPage -> SearchPage: sortResults(products, sortOption)
+    note right : Options de tri :
+    - Pertinence
+    - Prix croissant/décroissant
+    - Nom alphabétique
+    - Nouveautés
+    SearchPage --> Utilisateur: affiche résultats triés
+    deactivate SearchPage
+end
+
+opt pagination
+    Utilisateur -> SearchPage: clique sur page suivante
+    activate SearchPage
+    SearchPage -> ProductCtrl: searchProducts(searchTerm, filters, page)
+    activate ProductCtrl
+    ProductCtrl -> ProductM: findProductsPaginated(searchTerm, filters, offset, limit)
+    activate ProductM
+    ProductM -> DB: SELECT avec LIMIT et OFFSET
+    activate DB
+    DB --> ProductM: résultats paginés
+    deactivate DB
+    ProductM --> ProductCtrl: produits de la page
+    deactivate ProductM
+    ProductCtrl --> SearchPage: résultats paginés
+    deactivate ProductCtrl
+    SearchPage --> Utilisateur: affiche nouvelle page
+    deactivate SearchPage
+end
+
+@enduml

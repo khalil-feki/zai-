@@ -2,10 +2,7 @@
 !theme plain
 title Diagramme de Sequence - Connexion Utilisateur
 
-!define PRIMARY_COLOR #2E86AB
-!define SECONDARY_COLOR #A23B72
-!define SUCCESS_COLOR #F18F01
-!define ERROR_COLOR #C73E1D
+
 
 participant "Utilisateur" as User #lightblue
 participant "Plateforme ZAI" as ZAI #lightgreen

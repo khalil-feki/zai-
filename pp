@@ -13,7 +13,7 @@
 \usepackage{titlesec}
 \usepackage{xcolor}
 \usepackage{geometry}
-
+\usepackage[french]{babel}
 % Set page geometry
 \geometry{a4paper, margin=2.5cm}
 
@@ -34,103 +34,61 @@
 {\thesection}{1em}{}
 \titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
 
-% Header and footer
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\slshape\nouppercase{\leftmark}}
-\fancyhead[R]{\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0pt}
+
+
+
+
 
 \begin{document}
 
 % Front cover
-\begin{titlepage}
-    \centering
-    
-    {\scshape\LARGE École Supérieure Privée d'Ingénierie et de Technologies\par}
-    \vspace{1.5cm}
-    {\huge\bfseries Projet de Fin d'Études\par}
-    \vspace{2cm}
-    {\Huge\bfseries ZAI E-commerce Project\par}
-    \vspace{1cm}
-    {\Large\itshape Intégration d'une Plateforme E-commerce avec Dolibarr ERP\par}
-    \vspace{2cm}
-    {\Large\bfseries Présenté par:\par}
-    {\Large fekih mohamed khalil\par}
-    \vspace{1cm}
-    {\Large\bfseries Encadré par:\par}
-    {\Large Ben mansour ahmed\par}
-    \vfill
-    {\large Année Universitaire 2024-2025\par}
-\end{titlepage}
+\includegraphics[width=1 \textwidth]{11.png}
 
 % Dedication page
-\cleardoublepage
+\includegraphics[width=1.15 \textwidth]{22.png}
+
 \thispagestyle{empty}
 \vspace*{5cm}
-\begin{flushright}
-\textit{À ma famille,\\
-pour leur soutien inconditionnel\\
-et leurs encouragements constants.}
-\end{flushright}
-\cleardoublepage
+\
+\chapter*{Dédicaces}
+
+
+Avant toute chose, je rends grâce à Dieu, le Tout-Puissant, pour m’avoir accordé la force, la patience et le courage nécessaires pour mener ce projet à bien. Sa bienveillance m’a accompagné tout au long de ce parcours, même dans les moments les plus difficiles.
+
+Je dédie ce travail à ma famille, pilier fondamental de mon équilibre et de ma motivation. À mes parents, dont l’amour inconditionnel, le soutien sans relâche et les encouragements constants m’ont porté chaque jour. Merci pour votre confiance, votre patience et pour avoir toujours cru en moi, même lorsque moi-même j’en doutais. Vous êtes ma source première de force et d’inspiration.
+
+À mes frères et sœurs, merci pour votre affection, votre complicité et votre présence rassurante. Votre soutien, parfois discret mais toujours sincère, m’a été précieux tout au long de cette aventure. Vous avez su m’apporter du réconfort et de la légèreté dans les moments les plus intenses.
+
+Je souhaite également dédier ce travail à toutes les personnes qui ont été présentes à mes côtés, que ce soit par un mot d’encouragement, un geste d’aide ou simplement par leur écoute. Leur bienveillance, leur patience et leur confiance ont été des sources de motivation inestimables. À mes amis, mes collègues et toutes celles et ceux qui, de près ou de loin, ont contribué à rendre cette expérience plus humaine, plus riche et plus belle : ce projet vous est aussi dédié.
 
 % Acknowledgments
 \chapter*{Remerciements}
-\addcontentsline{toc}{chapter}{Remerciements}
 
-Je voudrais d'abord remercier chaleureusement mon encadrant, \textbf{Ben mansour ahmed}, pour sa disponibilité de tous les instants, ses conseils vraiment précieux et son soutien constant tout au long de ce projet. Sans lui, rien n'aurait été possible.
 
-Un grand merci aussi à toute l'équipe pédagogique d'ESPRIT pour la qualité exceptionnelle de l'enseignement qu'ils nous ont dispensé pendant ces années. On a vraiment eu de la chance d'avoir des profs aussi passionnés.
+Au terme de mon projet de fin d'études, je souhaite exprimer ma profonde reconnaissance à toutes les personnes qui ont, d’une manière ou d’une autre, contribué à la réalisation de ce travail. Ce projet n’aurait pu aboutir sans l’encadrement, le soutien et les encouragements que j’ai reçus tout au long de cette période. Je remercie tout particulièrement mon encadrante académique pour la qualité de son accompagnement, sa disponibilité constante, ainsi que la pertinence de ses remarques et conseils, qui m’ont permis de progresser et de mieux structurer ma réflexion.
 
-Je remercie également l'entreprise qui m'a accueilli pour ce projet - ils m'ont donné une opportunité en or de bosser sur quelque chose de vraiment concret et enrichissant, et ils ont mis tous les moyens à ma disposition. C'était top !
+Je tiens également à exprimer ma gratitude envers l’équipe encadrante au sein de l’entreprise, pour leur accueil, leur patience et leur soutien tout au long de mon stage. Leur encadrement professionnel, leur écoute attentive et les échanges constructifs que nous avons partagés m’ont beaucoup apporté, tant sur le plan technique que sur le plan humain.
 
-Enfin, impossible d'oublier ma famille et mes amis qui m'ont soutenu moralement et encouragé dans les moments difficiles. Leur présence a été essentielle pour mener ce projet à bien.
+Enfin, je remercie sincèrement les membres du jury pour l’intérêt qu’ils portent à mon travail. Leur implication et le temps qu’ils consacrent à son évaluation sont pour moi une réelle marque de considération, que j’apprécie vivement. À toutes les personnes qui m’ont accompagné de près ou de loin dans cette aventure, je tiens à adresser mes remerciements les plus sincères.
 \cleardoublepage
 
-% Abstract in French
-\chapter*{Résumé}
-\addcontentsline{toc}{chapter}{Résumé}
 
-Ce projet de fin d'études, c'est vraiment quelque chose qui me tenait à cœur ! Il porte sur la conception et le développement d'une plateforme e-commerce qui s'intègre parfaitement avec Dolibarr. L'idée principale ? Créer une interface utilisateur moderne et responsive qui se connecte directement à la base de données Dolibarr existante, pour avoir une gestion vraiment unifiée des produits, clients et commandes.
 
-On a choisi d'utiliser la méthodologie Scrum pour ce projet - et franchement, c'était le bon choix ! Ça nous a permis une approche itérative et incrémentale du développement. Côté technique, on a développé le système avec PHP pour le backend (architecture MVC bien sûr), et HTML/CSS/JavaScript pour le frontend.
-
-Les principales fonctionnalités qu'on a développées incluent l'authentification des utilisateurs, la gestion complète du catalogue de produits, le panier d'achat, tout le processus de commande et même un système de tickets de support.
-
-\textbf{Mots-clés:} E-commerce, Dolibarr, ERP, PHP, MVC, Scrum, Intégration de systèmes
-
-\cleardoublepage
-
-% Abstract in English
-\chapter*{Abstract}
-\addcontentsline{toc}{chapter}{Abstract}
-
-This final year project has been quite an adventure! It focuses on designing and developing an e-commerce platform that integrates seamlessly with the Dolibarr ERP system. The main goal was to create a modern and responsive user interface that connects directly to the existing Dolibarr database, enabling truly unified management of products, customers, and orders.
-
-We chose to use the Scrum methodology for this project - and honestly, it was the right call! It allowed us to take an iterative and incremental approach to development. On the technical side, we developed the system using PHP for the backend (with proper MVC architecture, of course), and HTML/CSS/JavaScript for the frontend.
-
-The main features we developed include user authentication, comprehensive product catalog management, shopping cart functionality, complete order processing, and even a support ticket system.
-
-\textbf{Keywords:} E-commerce, Dolibarr, ERP, PHP, MVC, Scrum, Systems Integration
-
-\cleardoublepage
-
-% Table of contents
+% Table des matières
 \tableofcontents
 \cleardoublepage
 
-% List of figures
+% Liste des figures
 \listoffigures
 \cleardoublepage
 
-% List of tables
+% Liste des tableaux 
 \listoftables
 \cleardoublepage
 
-% Introduction
-\chapter{Introduction Générale}
+% Chapitre 1 : Présentation du cadre de projet
+\chapter{Présentation du cadre de projet}
+\section{Introduction Générale}
 \section{Contexte du Projet}
 Aujourd'hui, on vit vraiment dans un monde où tout devient numérique, et franchement, le commerce électronique explose littéralement ! Le marché mondial dépasse maintenant les 5 000 milliards de dollars en 2024 - c'est énorme quand on y pense. Toutes les entreprises, petites ou grandes, se battent pour améliorer leur présence en ligne et optimiser leurs processus de vente. C'est devenu vital pour survivre dans cet environnement ultra-compétitif qui évolue à une vitesse folle.
 
@@ -196,14 +154,13 @@ Bon, concrètement, qu'est-ce qu'on veut faire avec ce projet ? On vise à déve
 \section{Structure du Rapport}
 Ce rapport est structuré en cinq chapitres:
 \begin{itemize}
-    \item \textbf{Chapitre 1: Introduction Générale} - Présente le contexte, la problématique et les objectifs du projet.
-    \item \textbf{Chapitre 2: Cadre du Projet} - Décrit l'organisme d'accueil, la problématique détaillée, l'étude de l'existant et la méthodologie de travail adoptée.
-    \item \textbf{Chapitre 3: Sprint 0 - Conception et Architecture} - Présente l'analyse des besoins, les diagrammes UML et la planification des sprints.
-    \item \textbf{Chapitre 4: Sprint 1 - Gestion des Utilisateurs et Authentification} - Détaille le développement du module d'authentification et de gestion des utilisateurs.
-    \item \textbf{Chapitre 5: Sprint 2 - Catalogue de Produits et Panier} - Décrit le développement du catalogue de produits et du panier d'achat.
-    \item \textbf{Chapitre 6: Sprint 3 - Gestion des Commandes} - Présente le développement du module de gestion des commandes.
-    \item \textbf{Chapitre 7: Sprint 4 - Système de Support Client} - Détaille le développement du système de tickets de support.
-    \item \textbf{Chapitre 8: Conclusion Générale et Perspectives} - Résume les réalisations et propose des perspectives d'évolution.
+    \item \textbf{Chapitre 1: Présentation du cadre de projet} - Présente le contexte, la problématique, les objectifs du projet, l'organisme d'accueil et la méthodologie de travail adoptée.
+    \item \textbf{Chapitre 2: Sprint 0 - Conception et Architecture} - Présente l'analyse des besoins, les diagrammes UML et la planification des sprints.
+    \item \textbf{Chapitre 3: Sprint 1 - Gestion des Utilisateurs et Authentification} - Détaille le développement du module d'authentification et de gestion des utilisateurs.
+    \item \textbf{Chapitre 4: Sprint 2 - Catalogue de Produits et Panier} - Décrit le développement du catalogue de produits et du panier d'achat.
+    \item \textbf{Chapitre 5: Sprint 3 - Gestion des Commandes} - Présente le développement du module de gestion des commandes.
+    \item \textbf{Chapitre 6: Sprint 4 - Système de Support Client} - Détaille le développement du système de tickets de support.
+    \item \textbf{Conclusion Générale et Perspectives} - Résume les réalisations et propose des perspectives d'évolution.
 \end{itemize}
 
 \begin{figure}[H]
@@ -213,8 +170,7 @@ Ce rapport est structuré en cinq chapitres:
     \label{fig:project_overview}
 \end{figure}
 
-% Chapter 2
-\chapter{Cadre du Projet}
+\section{Cadre du Projet}
 \section{Présentation de l'Organisme d'Accueil}
 ESPRIT (École Supérieure Privée d'Ingénierie et de Technologies), c'est vraiment une école qui sort du lot ! Reconnue pour son excellence académique et son approche super pratique de l'enseignement, elle forme des ingénieurs depuis 2003 dans plein de domaines : informatique, télécoms, électromécanique, génie civil... bref, tout ce qui bouge dans la tech !
 
@@ -254,13 +210,6 @@ Personnalisation & Limitée & Moyenne & Complète \\
 \caption{Comparaison des solutions existantes}
 \label{tab:solutions}
 \end{table}
-
-\begin{figure}[H]
-    \centering
-    \fbox{\parbox{0.8\textwidth}{\centering\Large [PLACEHOLDER: Insérer ici un diagramme comparatif des solutions existantes]}}
-    \caption{Comparaison graphique des solutions e-commerce}
-    \label{fig:solutions_comparison}
-\end{figure}
 
 \subsection{Solution Proposée}
 Après avoir bien analysé les besoins et étudié toutes les solutions existantes, on a décidé de partir sur le développement d'une solution sur mesure. Pourquoi ? Parce qu'elle :
@@ -328,7 +277,7 @@ Notre équipe Scrum, c'est du solide ! Elle est composée de :
 \section{Conclusion}
 Voilà, ce chapitre nous a permis de poser le cadre général du projet ! On a présenté ESPRIT, détaillé la problématique de notre client, étudié toutes les solutions existantes et expliqué pourquoi on a choisi Scrum. Notre solution sur mesure va vraiment répondre aux besoins spécifiques du client tout en s'intégrant parfaitement avec son système Dolibarr. On est prêts à attaquer !
 
-% Chapter 3
+% Chapter 2
 \chapter{Sprint 0: Conception et Architecture}
 \section{Introduction}
 Alors, on attaque le Sprint 0 ! C'est la phase où on pose vraiment les bases de tout le projet. Dans ce chapitre, on va vous présenter toute la conception et l'architecture : analyse des besoins, diagrammes UML, planification des sprints... bref, tout ce qu'il faut pour avoir des fondations solides avant de se lancer dans le développement. C'est peut-être pas la partie la plus fun, mais c'est absolument essentiel !
@@ -757,7 +706,7 @@ Cette approche méthodologique apporte plusieurs avantages concurrentiels :
 
 Cette phase solide de conception et d'architecture constitue le socle indispensable pour le développement des fonctionnalités dans les sprints suivants, garantissant la qualité, la sécurité et la performance de la solution finale.
 
-% Chapter 4
+% Chapter 3
 \chapter{Sprint 1: Gestion des Utilisateurs et Authentification}
 \section{Introduction}
 Ce chapitre présente le premier sprint de développement, focalisé sur la gestion des utilisateurs et l'authentification. Ce module est fondamental car il permet aux utilisateurs de s'inscrire, de se connecter et de gérer leur profil sur la plateforme e-commerce.
@@ -1055,6 +1004,7 @@ Ce sprint a permis de mettre en place le système d'authentification et de gesti
 
 L'architecture MVC adoptée a permis une séparation claire des responsabilités, facilitant la maintenance et l'évolution future du système. L'intégration avec Dolibarr a été réalisée en utilisant les tables existantes (h8pd\_societe et h8pd\_societe\_extrafields), assurant ainsi une cohérence des données entre l'ERP et la plateforme e-commerce.
 
+% Chapter 4
 \chapter{Sprint 2: Catalogue de Produits et Panier}
 \section{Introduction}
 Ce chapitre présente le deuxième sprint de développement, focalisé sur le catalogue de produits et la gestion du panier d'achat. Ces fonctionnalités sont essentielles pour permettre aux utilisateurs de parcourir les produits disponibles et de les ajouter à leur panier avant de passer commande.
@@ -1393,6 +1343,7 @@ Ce sprint a permis de mettre en place le catalogue de produits et la gestion du 
 
 L'intégration avec Dolibarr a été réalisée en utilisant les tables existantes (h8pd\_product et h8pd\_categorie), assurant ainsi une cohérence des données entre l'ERP et la plateforme e-commerce. La gestion du panier utilise les sessions PHP pour stocker temporairement les informations du panier, offrant ainsi une expérience utilisateur fluide sans nécessiter de connexion à la base de données pour chaque opération.
 
+% Chapter 5
 \chapter{Sprint 3: Gestion des Commandes}
 \section{Introduction}
 Ce chapitre présente le troisième sprint de développement, focalisé exclusivement sur la gestion des commandes. Cette fonctionnalité constitue le cœur du processus e-commerce, permettant aux utilisateurs de finaliser leurs achats et de suivre leurs commandes de manière efficace et sécurisée.
@@ -1626,7 +1577,7 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \subsection{Séquence de Création de Commande}
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\textwidth]{plantuml_sequence_order_creation.png}
+
 \caption{Diagramme de séquence - Création d'une commande}
 \label{fig:sequence_create_order}
 \end{figure}
@@ -1649,18 +1600,17 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \subsection{Flux Client}
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\textwidth]{plantuml_sequence_client_flow.png}
+\includegraphics[width=1 \textwidth]{FLUX.png}
 \caption{Diagramme de séquence - Flux Client}
 \label{fig:sequence_client_flow}
 \end{figure}
 
 \textbf{Étapes du flux client :}
 \begin{enumerate}
-\item Authentification et création de session
-\item Navigation dans le catalogue produits
-\item Ajout de produits au panier avec vérification de stock
-\item Validation du panier et processus de checkout
-\item Création de la commande dans Dolibarr
+\item Création de commande
+\item Paiement sécurisé
+\item Suivi en temps réel
+\item Annulation de commande
 \item Consultation de l'historique des commandes
 \item Suivi détaillé des commandes
 \end{enumerate}
@@ -1668,25 +1618,24 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \subsection{Fonctions Administrateur}
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\textwidth]{plantuml_sequence_admin_functions.png}
+\includegraphics[width=1 \textwidth]{ADMINZAI.png}
 \caption{Diagramme de séquence - Fonctions Administrateur}
 \label{fig:sequence_admin_functions}
 \end{figure}
+
 
 \textbf{Fonctionnalités administrateur :}
 \begin{enumerate}
 \item Gestion complète des commandes et modification des statuts
 \item Administration du catalogue produits et gestion des stocks
-\item Gestion des utilisateurs et attribution des droits
-\item Génération de rapports et statistiques de vente
+\item Génération des factures
 \item Traitement des demandes de retour et avoir
-\item Notifications automatiques aux clients
 \end{enumerate}
 
 \subsection{Intégration Dolibarr}
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\textwidth]{plantuml_sequence_dolibarr_integration.png}
+\includegraphics[width=1 \textwidth]{dolidoli.png}
 \caption{Diagramme de séquence - Intégration Dolibarr}
 \label{fig:sequence_dolibarr_integration}
 \end{figure}
@@ -1696,34 +1645,12 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \item Synchronisation bidirectionnelle des données clients
 \item Mise à jour en temps réel du catalogue produits
 \item Création automatique des commandes dans les tables Dolibarr
-\item Gestion des stocks avec réservation temporaire
 \item Traitement des paiements et génération des factures
 \item Suivi des commandes via les statuts Dolibarr
-\item Synchronisation programmée toutes les 5 minutes
+
 \end{enumerate}
 
-\subsection{Séquence de Traitement de Paiement}
-\begin{figure}[H]
-\centering
-\fbox{\parbox{0.8\textwidth}{\centering\Large [PLACEHOLDER: Insérer ici le diagramme de séquence de traitement de paiement]}}
-\caption{Diagramme de séquence - Traitement d'un paiement}
-\label{fig:sequence_payment}
-\end{figure}
 
-\textbf{Étapes du paiement :}
-\begin{enumerate}
-\item Sélection de la méthode de paiement
-\item Validation des informations de paiement
-\item Chiffrement des données sensibles
-\item Appel au service de paiement externe (Stripe, PayPal, etc.)
-\item Vérification de la transaction
-\item Enregistrement du paiement dans Dolibarr
-\item Mise à jour du statut de la commande
-\item Confirmation définitive du stock
-\item Génération de la facture
-\item Envoi de la confirmation par email
-\item Déclenchement du processus d'expédition
-\end{enumerate}
 
 \subsection{Séquence de Suivi de Commande}
 \begin{figure}[H]
@@ -1744,27 +1671,7 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \item Alertes proactives en cas de retard
 \end{itemize}
 
-\subsection{Séquence de Gestion des Expéditions}
-\begin{figure}[H]
-\centering
-\fbox{\parbox{0.8\textwidth}{\centering\Large [PLACEHOLDER: Insérer ici le diagramme de séquence de gestion des expéditions]}}
-\caption{Diagramme de séquence - Gestion des expéditions}
-\label{fig:sequence_shipment}
-\end{figure}
 
-\textbf{Processus d'expédition :}
-\begin{enumerate}
-\item Réception de la commande confirmée
-\item Préparation des articles en entrepôt
-\item Génération de l'étiquette d'expédition
-\item Attribution du numéro de tracking
-\item Mise à jour du statut dans Dolibarr
-\item Remise au transporteur
-\item Notification client avec numéro de suivi
-\item Suivi automatique via API transporteur
-\item Confirmation de livraison
-\item Mise à jour finale du statut
-\end{enumerate}
 
 \section{Réalisation}
 Cette section présente les captures d'écran des interfaces utilisateur développées pour la gestion complète des commandes, du processus de commande jusqu'au suivi des livraisons.
@@ -1793,21 +1700,12 @@ L'interface d'historique offre une vue d'ensemble complète de toutes les comman
 \begin{figure}[H]
 \centering
 \fbox{\parbox{0.8\textwidth}{\centering\Large [PLACEHOLDER: Interface de détail de commande avec tracking]}}
-\caption{Interface de détail de commande avec suivi de livraison}
+\caption{Interface de détail de commande }
 \label{fig:order_detail_screen}
 \end{figure}
 
-Cette interface permet aux utilisateurs de consulter tous les détails d'une commande spécifique, incluant les produits commandés, les informations de livraison, le statut de paiement et le suivi en temps réel de l'expédition.
+Cette interface permet aux utilisateurs de consulter tous les détails d'une commande spécifique, incluant les produits commandés, les informations de livraison.
 
-\subsection{Interface de Suivi des Expéditions}
-\begin{figure}[H]
-\centering
-\fbox{\parbox{0.8\textwidth}{\centering\Large [PLACEHOLDER: Interface de suivi des expéditions avec carte]}}
-\caption{Interface de suivi des expéditions avec géolocalisation}
-\label{fig:tracking_screen}
-\end{figure}
-
-L'interface de suivi des expéditions offre une expérience utilisateur moderne avec géolocalisation en temps réel, estimation des délais de livraison et notifications proactives.
 
 \section{Tests}
 Pour assurer la qualité et la fiabilité du module de gestion des commandes, nous avons effectué une batterie de tests complète couvrant tous les aspects du processus de commande :
@@ -1819,20 +1717,17 @@ Pour assurer la qualité et la fiabilité du module de gestion des commandes, no
 \textbf{Test} & \textbf{Description} & \textbf{Résultat attendu} & \textbf{Statut} \\
 \hline
 Création de commande & Finalisation d'une commande à partir du panier & Commande créée avec succès dans Dolibarr & Réussi \\
-\hline
-Validation des stocks & Vérification de la disponibilité des produits & Stock vérifié et réservé temporairement & Réussi \\
+
 \hline
 Calcul des totaux & Calcul automatique des taxes et frais de port & Montants calculés correctement & Réussi \\
-\hline
-Traitement de paiement & Paiement via différentes passerelles & Transaction sécurisée et confirmée & Réussi \\
+
 \hline
 Génération de facture & Création automatique de la facture & Facture générée au format PDF & Réussi \\
 \hline
-Historique des commandes & Consultation de l'historique des commandes & Liste des commandes avec filtres & Réussi \\
+Historique des commandes & Consultation de l'historique des commandes & Liste des commandes  & Réussi \\
 \hline
 Détails de commande & Consultation des détails d'une commande & Informations complètes affichées & Réussi \\
-\hline
-Suivi des expéditions & Suivi en temps réel des livraisons & Statut mis à jour automatiquement & Réussi \\
+
 \hline
 Notifications & Envoi d'emails de confirmation et de suivi & Notifications envoyées correctement & Réussi \\
 \hline
@@ -1873,6 +1768,7 @@ Ce sprint a permis de mettre en place un système complet de gestion des command
 \subsection{Valeur Ajoutée}
 L'intégration avec Dolibarr garantit une cohérence parfaite des données entre l'ERP et la plateforme e-commerce, éliminant les risques de désynchronisation et permettant une gestion unifiée des opérations commerciales. Le système développé respecte les meilleures pratiques de sécurité et de performance, assurant une expérience utilisateur de qualité professionnelle.
 
+% Chapter 6
 \chapter{Sprint 4 - Système de Support Client}
 \section{Introduction}
 Le Sprint 4 se concentre sur le développement d'un système de support client complet et intégré, permettant aux utilisateurs de la plateforme e-commerce de bénéficier d'un service d'assistance professionnel et réactif. Ce système s'appuie sur le module de tickets de Dolibarr pour assurer une gestion centralisée et efficace des demandes de support.
@@ -1890,14 +1786,10 @@ US-13 & En tant qu'utilisateur, je veux pouvoir créer un ticket de support pour
 US-14 & En tant qu'utilisateur, je veux consulter l'historique de mes tickets de support & Haute & 5 \\
 \hline
 US-15 & En tant qu'utilisateur, je veux recevoir des notifications sur l'évolution de mes tickets & Moyenne & 5 \\
-\hline
-US-16 & En tant qu'utilisateur, je veux pouvoir répondre aux messages des agents de support & Haute & 8 \\
-\hline
-US-17 & En tant qu'agent, je veux pouvoir consulter et traiter les tickets assignés & Haute & 13 \\
+
+
 \hline
 US-18 & En tant qu'agent, je veux pouvoir catégoriser et prioriser les tickets & Moyenne & 5 \\
-\hline
-US-19 & En tant qu'administrateur, je veux avoir un tableau de bord des performances du support & Basse & 8 \\
 \hline
 \end{tabularx}
 \caption{Backlog du Sprint 4 - Support Client}
@@ -2143,15 +2035,7 @@ Création de ticket & Création d'un nouveau ticket de support & Ticket créé a
 \hline
 Catégorisation automatique & Classification automatique des tickets & Catégorie assignée correctement & Réussi \\
 \hline
-Notifications & Envoi d'alertes aux utilisateurs et agents & Notifications envoyées en temps réel & Réussi \\
-\hline
 Assignation d'agent & Attribution automatique selon les règles & Agent assigné selon la disponibilité & Réussi \\
-\hline
-Échange de messages & Communication bidirectionnelle & Messages échangés correctement & Réussi \\
-\hline
-Évaluation satisfaction & Système de notation du support & Évaluation enregistrée et analysée & Réussi \\
-\hline
-Escalade automatique & Escalade selon les SLA & Ticket escaladé automatiquement & Réussi \\
 \hline
 Rapports et statistiques & Génération de tableaux de bord & Données agrégées correctement & Réussi \\
 \hline
@@ -2174,127 +2058,45 @@ Ce sprint a permis de développer un système de support client professionnel et
 \item \textbf{Intégration CRM} : Vision client unifiée avec historique complet
 \item \textbf{Système de satisfaction} : Mesure et amélioration continue de la qualité
 \end{itemize}
+\vspace{1cm}
+\vspace{1cm}
+\vspace{1cm}
 
-\subsection{Valeur Ajoutée}
-Le système de support développé transforme l'expérience client en offrant un service professionnel, réactif et personnalisé. L'intégration avec Dolibarr permet une gestion unifiée des relations client, de la vente au support, créant un écosystème commercial cohérent et efficace.
+\section*{Conclusion Générale et Perspectives}
 
-\chapter{Conclusion Générale et Perspectives}
-\section{Bilan du Projet}
-Ce projet a abouti au développement d'une plateforme e-commerce moderne, sécurisée et performante, parfaitement intégrée avec le système ERP Dolibarr existant. L'adoption de la méthodologie Scrum a permis une approche itérative et adaptative, garantissant la livraison de fonctionnalités de haute qualité répondant aux exigences du marché e-commerce contemporain.
+Dans ce rapport, nous avons détaillé l'ensemble des étapes de réalisation de notre projet ZAI E-commerce, construit de façon incrémentale et itérative en utilisant la méthode agile Scrum. Cette approche, largement adoptée aujourd'hui, notamment par les entreprises technologiques innovantes, permet d'accroître la rapidité et la qualité du développement tout en maximisant la satisfaction des utilisateurs finaux.
 
-\subsection{Réalisations Techniques Majeures}
+Ce projet de fin d'études marque l'aboutissement de notre parcours universitaire. Il nous a permis de mettre en pratique les connaissances théoriques et pratiques acquises tout au long de notre cursus. Le projet consistait à développer une plateforme e-commerce moderne et sécurisée, parfaitement intégrée avec le système ERP Dolibarr.
+
+Durant ce projet, nous avons pu réaliser plusieurs modules clés de l'application, couvrant :
 \begin{itemize}
-    \item \textbf{Architecture sécurisée} : Implémentation complète des standards de sécurité e-commerce (SSL/TLS, chiffrement AES-256, conformité RGPD)
-    \item \textbf{Intégration native Dolibarr} : Synchronisation temps réel avec l'ERP sans duplication de données
-    \item \textbf{Performance optimisée} : Temps de chargement < 3 secondes, cache multi-niveaux, optimisation des requêtes
-    \item \textbf{Interface responsive} : Design adaptatif pour tous les appareils avec score Lighthouse > 90
-    \item \textbf{Système d'authentification robuste} : Gestion sécurisée des sessions, protection contre les attaques courantes
-    \item \textbf{Catalogue intelligent} : Recherche avancée, filtrage dynamique, recommandations personnalisées
-    \item \textbf{Processus de commande optimisé} : Tunnel de conversion simplifié, gestion des stocks en temps réel
-    \item \textbf{Système de support client} : Gestion professionnelle des tickets avec CRM intégré et notifications automatiques
+\item La gestion des utilisateurs et l'authentification (Sprint 1)
+\item Le catalogue de produits et la gestion du panier (Sprint 2)
+\item La gestion des commandes, incluant le processus de création, le suivi et l'intégration avec Dolibarr pour la synchronisation des données (Sprint 3)
+\item Le système de support client avec gestion des tickets et communication en temps réel (Sprint 4)
+\item Les tableaux de bord et les analyses de ventes
+\item La synchronisation bidirectionnelle avec Dolibarr pour une cohérence parfaite des données
+\item L'interface d'administration pour la gestion complète de la plateforme
 \end{itemize}
 
-\subsection{Valeur Business Apportée}
+L'objectif principal était de créer une plateforme robuste et intuitive permettant une gestion efficace des différents aspects du commerce électronique, tout en assurant une cohérence parfaite des données avec Dolibarr. Nous avons mis l'accent sur une architecture MVC propre, des performances optimisées. 
+
+\vspace{1cm}
+\textbf{Perspectives d'Évolution}
+
+En dépit des réussites obtenues, il reste encore des occasions d'amélioration et d'évolution pour le projet ZAI. Plusieurs perspectives d'amélioration peuvent être envisagées :
+
 \begin{itemize}
-    \item \textbf{Réduction des coûts opérationnels} : Automatisation des processus et élimination des saisies manuelles
-    \item \textbf{Amélioration de l'expérience client} : Interface moderne et processus d'achat fluide
-    \item \textbf{Augmentation du chiffre d'affaires} : Disponibilité 24/7 et élargissement de la clientèle
-    \item \textbf{Optimisation de la gestion} : Tableaux de bord en temps réel et reporting automatisé
-    \item \textbf{Conformité réglementaire} : Respect des normes RGPD et standards e-commerce
+\item \textbf{Application Mobile} : Développement d'une application mobile native pour iOS et Android
+\item \textbf{Intelligence Artificielle} : Intégration d'un système de recommandations basé sur l'IA
+\item \textbf{Optimisation des Performances} : Mise en place d'un système de cache avancé et optimisation des requêtes
+\item \textbf{Sécurité Renforcée} : Implémentation de l'authentification à deux facteurs et audit de sécurité
 \end{itemize}
 
-\section{Défis Techniques et Solutions Apportées}
-Le développement de cette plateforme e-commerce a nécessité de surmonter plusieurs défis techniques complexes :
-
-\subsection{Défis d'Intégration}
-\begin{itemize}
-    \item \textbf{Architecture Dolibarr} : Maîtrise de la structure modulaire complexe de l'ERP
-    \begin{itemize}
-        \item \textit{Solution} : Analyse approfondie du code source et création d'une couche d'abstraction
-    \end{itemize}
-    \item \textbf{Compatibilité versions} : Gestion des différences entre les versions de Dolibarr
-    \begin{itemize}
-        \item \textit{Solution} : Développement d'adaptateurs et tests de compatibilité automatisés
-    \end{itemize}
-    \item \textbf{Synchronisation temps réel} : Maintien de la cohérence des données entre e-commerce et ERP
-    \begin{itemize}
-        \item \textit{Solution} : Implémentation d'un système d'événements et de webhooks
-    \end{itemize}
-\end{itemize}
-
-\subsection{Défis de Performance}
-\begin{itemize}
-    \item \textbf{Optimisation des requêtes} : Gestion efficace des grandes bases de données
-    \begin{itemize}
-        \item \textit{Solution} : Indexation avancée, requêtes optimisées et mise en cache intelligente
-    \end{itemize}
-    \item \textbf{Scalabilité} : Préparation pour la montée en charge
-    \begin{itemize}
-        \item \textit{Solution} : Architecture microservices et containerisation Docker
-    \end{itemize}
-\end{itemize}
-
-\subsection{Défis de Sécurité}
-\begin{itemize}
-    \item \textbf{Protection des données} : Conformité RGPD et sécurisation des transactions
-    \begin{itemize}
-        \item \textit{Solution} : Chiffrement bout-en-bout, audit de sécurité et tests de pénétration
-    \end{itemize}
-    \item \textbf{Authentification robuste} : Prévention des attaques et gestion des sessions
-    \begin{itemize}
-        \item \textit{Solution} : Implémentation OAuth 2.0, 2FA et monitoring des tentatives d'intrusion
-    \end{itemize}
-\end{itemize}
-
-\section{Perspectives d'Évolution et Innovation}
-La plateforme développée constitue une base solide pour de nombreuses évolutions futures, alignées sur les tendances du e-commerce moderne :
-
-\subsection{Évolutions Technologiques à Court Terme (6-12 mois)}
-\begin{itemize}
-    \item \textbf{Intelligence Artificielle} : Système de recommandations basé sur l'IA et chatbot intelligent
-    \item \textbf{Application Mobile Native} : Développement iOS/Android avec notifications push
-    \item \textbf{Paiements Avancés} : Intégration Apple Pay, Google Pay, cryptomonnaies
-    \item \textbf{Réalité Augmentée} : Visualisation 3D des produits et essayage virtuel
-    \item \textbf{Voice Commerce} : Intégration avec assistants vocaux (Alexa, Google Assistant)
-\end{itemize}
-
-\subsection{Évolutions Business à Moyen Terme (1-2 ans)}
-\begin{itemize}
-    \item \textbf{Marketplace Multi-vendeurs} : Plateforme ouverte aux vendeurs tiers
-    \item \textbf{Internationalisation} : Support multi-devises, multi-langues, conformité fiscale internationale
-    \item \textbf{Omnichannel} : Intégration magasins physiques, click \& collect, unified commerce
-    \item \textbf{Sustainability} : Tracking empreinte carbone, options de livraison écologique
-    \item \textbf{Social Commerce} : Intégration native avec réseaux sociaux, live shopping
-\end{itemize}
-
-\subsection{Innovations à Long Terme (2-5 ans)}
-\begin{itemize}
-    \item \textbf{Blockchain \& Web3} : NFTs, tokens de fidélité, supply chain transparente
-    \item \textbf{IoT Integration} : Commandes automatiques via objets connectés
-    \item \textbf{Métaverse Commerce} : Boutiques virtuelles en réalité virtuelle
-    \item \textbf{Predictive Analytics} : Prédiction des tendances et gestion proactive des stocks
-    \item \textbf{Autonomous Commerce} : Automatisation complète du cycle de vente
-\end{itemize}
-
-\subsection{Roadmap Technologique}
-\begin{itemize}
-    \item \textbf{Phase 1} : Migration vers architecture cloud-native (Kubernetes, microservices)
-    \item \textbf{Phase 2} : Implémentation d'un data lake pour l'analytics avancée
-    \item \textbf{Phase 3} : Adoption de l'edge computing pour la performance globale
-    \item \textbf{Phase 4} : Intégration complète avec l'écosystème IoT et Industry 4.0
-\end{itemize}
+\vspace{0.5cm}
+En conclusion, ce projet nous a non seulement permis de consolider nos compétences techniques et organisationnelles, mais aussi de fournir une solution logicielle moderne et adaptée aux besoins spécifiques du client pour son activité e-commerce. La plateforme ZAI constitue une base solide pour l'avenir, prête à évoluer avec les tendances du marché et les besoins croissants des utilisateurs.
 
 
-
-\section{Remerciements}
-Nous tenons à remercier toutes les personnes qui ont contribué à la réussite de ce projet :
-\begin{itemize}
-    \item Notre encadrant académique pour ses conseils et son soutien tout au long du projet
-    \item L'équipe de l'entreprise cliente pour sa disponibilité et sa collaboration
-    \item Les membres de l'équipe de développement pour leur engagement et leur travail acharné
-    \item L'administration de l'ESPRIT pour nous avoir fourni les ressources nécessaires
-    \item La communauté Dolibarr pour la documentation et les ressources mises à disposition
-\end{itemize}
 
 \bibliographystyle{plain}
 \begin{thebibliography}{20}

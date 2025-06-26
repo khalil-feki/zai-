@@ -1,0 +1,216 @@
+@startuml Profile Update Sequence
+!theme plain
+title ZAI E-commerce Platform - Séquence de Modification de Profil
+
+actor Utilisateur as "Utilisateur"
+participant "PageProfil" as ProfilePage
+participant "UserController" as UserCtrl
+participant "UserModel" as UserM
+participant "DolibarrService" as Doli
+participant "EmailService" as Email
+participant "Database" as DB
+participant "ValidationService" as Valid
+
+Utilisateur -> ProfilePage: accède à la page de profil
+activate ProfilePage
+ProfilePage -> UserCtrl: getCurrentUserProfile(userId)
+activate UserCtrl
+
+UserCtrl -> UserM: getUserById(userId)
+activate UserM
+UserM -> DB: SELECT * FROM llx_user WHERE rowid = ?
+activate DB
+DB --> UserM: user data
+deactivate DB
+UserM --> UserCtrl: user profile data
+deactivate UserM
+
+UserCtrl --> ProfilePage: user profile information
+deactivate UserCtrl
+
+ProfilePage --> Utilisateur: affiche formulaire de profil pré-rempli
+deactivate ProfilePage
+
+note right : Informations affichées :
+- Nom, Prénom
+- Email
+- Téléphone
+- Adresse
+- Informations société
+
+Utilisateur -> ProfilePage: modifie informations personnelles
+activate ProfilePage
+
+note right : L'utilisateur peut modifier :
+- Nom, Prénom
+- Téléphone
+- Adresse
+- Mot de passe (optionnel)
+
+Utilisateur -> ProfilePage: clique sur "Sauvegarder"
+
+ProfilePage -> ProfilePage: validateClientSide(formData)
+
+alt validation côté client réussie
+    ProfilePage -> UserCtrl: updateUserProfile(userId, updatedData)
+    activate UserCtrl
+    
+    UserCtrl -> Valid: validateProfileData(updatedData)
+    activate Valid
+    
+    Valid -> Valid: validateName(firstname, lastname)
+    Valid -> Valid: validatePhone(phone)
+    Valid -> Valid: validateAddress(address)
+    
+    alt mot de passe fourni
+        Valid -> Valid: validatePasswordStrength(newPassword)
+    end
+    
+    Valid --> UserCtrl: validation result
+    deactivate Valid
+    
+    alt données valides
+        UserCtrl -> UserM: checkEmailUniqueness(email, userId)
+        activate UserM
+        UserM -> DB: SELECT COUNT(*) FROM llx_user 
+        WHERE email = ? AND rowid != ?
+        activate DB
+        DB --> UserM: count result
+        deactivate DB
+        UserM --> UserCtrl: email available
+        deactivate UserM
+        
+        alt email disponible
+            UserCtrl -> UserM: updateUserProfile(userId, updatedData)
+            activate UserM
+            
+            UserM -> DB: BEGIN TRANSACTION
+            activate DB
+            
+            alt mot de passe modifié
+                UserM -> UserM: hashPassword(newPassword)
+                UserM -> DB: UPDATE llx_user 
+                SET firstname = ?, lastname = ?, 
+                    phone = ?, address = ?,
+                    pass_crypted = ?, 
+                    datec = NOW()
+                WHERE rowid = ?
+            else pas de changement de mot de passe
+                UserM -> DB: UPDATE llx_user 
+                SET firstname = ?, lastname = ?, 
+                    phone = ?, address = ?,
+                    datec = NOW()
+                WHERE rowid = ?
+            end
+            
+            UserM -> DB: UPDATE llx_user_extrafields
+            SET profile_updated_date = NOW()
+            WHERE fk_object = ?
+            
+            UserM -> DB: COMMIT TRANSACTION
+            deactivate DB
+            
+            UserM --> UserCtrl: profile updated successfully
+            deactivate UserM
+            
+            UserCtrl -> Doli: syncProfileToDolibarr(userId, updatedData)
+            activate Doli
+            
+            note over Doli : Synchronisation avec
+Dolibarr ERP
+            
+            Doli -> DB: UPDATE llx_societe 
+            SET nom = ?, 
+                phone = ?, 
+                address = ?,
+                datec = NOW()
+            WHERE rowid = (SELECT fk_societe FROM llx_user WHERE rowid = ?)
+            activate DB
+            DB --> Doli: company updated
+            deactivate DB
+            
+            Doli --> UserCtrl: dolibarr sync completed
+            deactivate Doli
+            
+            alt email modifié
+                UserCtrl -> Email: sendEmailChangeNotification(oldEmail, newEmail)
+                activate Email
+                
+                note over Email : Notification de changement
+d'email pour sécurité
+                
+                Email -> Email: createEmailChangeTemplate()
+                Email -> Email: sendEmail(oldEmail, emailContent)
+                Email -> Email: sendEmail(newEmail, confirmationContent)
+                
+                Email --> UserCtrl: notification emails sent
+                deactivate Email
+            end
+            
+            alt mot de passe modifié
+                UserCtrl -> Email: sendPasswordChangeNotification(userEmail)
+                activate Email
+                Email --> UserCtrl: password change notification sent
+                deactivate Email
+            end
+            
+            UserCtrl -> UserCtrl: logProfileUpdate(userId, 'success', updatedFields)
+            
+            UserCtrl --> ProfilePage: {
+                "success": true,
+                "message": "Profil mis à jour avec succès",
+                "updatedData": updatedUserData
+            }
+            
+        else email déjà utilisé
+            UserCtrl -> UserCtrl: logProfileUpdate(userId, 'email_exists')
+            
+            UserCtrl --> ProfilePage: {
+                "success": false,
+                "message": "Cette adresse email est déjà utilisée",
+                "field": "email",
+                "error_code": "EMAIL_EXISTS"
+            }
+        end
+        
+    else données invalides
+        UserCtrl -> UserCtrl: logProfileUpdate(userId, 'validation_failed')
+        
+        UserCtrl --> ProfilePage: {
+            "success": false,
+            "message": "Données invalides",
+            "errors": validationErrors,
+            "error_code": "VALIDATION_ERROR"
+        }
+    end
+    
+    deactivate UserCtrl
+    
+else validation côté client échouée
+    ProfilePage -> ProfilePage: displayValidationErrors(errors)
+    
+    note over ProfilePage : Affichage des erreurs
+en temps réel sans
+envoi au serveur
+end
+
+alt mise à jour réussie
+    ProfilePage -> ProfilePage: updateFormWithNewData(updatedData)
+    ProfilePage -> ProfilePage: showSuccessMessage("Profil mis à jour")
+    
+    ProfilePage --> Utilisateur: affiche confirmation de mise à jour
+    
+else erreur de mise à jour
+    ProfilePage -> ProfilePage: showErrorMessage(errorMessage)
+    ProfilePage -> ProfilePage: highlightErrorFields(errorFields)
+    
+    ProfilePage --> Utilisateur: affiche erreurs de validation
+end
+
+deactivate ProfilePage
+
+note over Utilisateur : Le profil utilisateur est
+maintenant à jour dans
+le système et Dolibarr
+
+@enduml

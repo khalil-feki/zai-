@@ -1,0 +1,194 @@
+@startuml Password Reset Sequence
+!theme plain
+title ZAI E-commerce Platform - Diagramme de séquence : Réinitialisation de mot de passe
+
+actor Utilisateur as "Utilisateur"
+participant "PageConnexion" as LoginPage
+participant "AuthController" as AuthCtrl
+participant "UserModel" as UserM
+participant "EmailService" as Email
+participant "Database" as DB
+participant "PageReset" as ResetPage
+
+Utilisateur -> LoginPage: accède à la page de connexion
+activate LoginPage
+LoginPage --> Utilisateur: affiche formulaire de connexion
+deactivate LoginPage
+
+Utilisateur -> LoginPage: clique sur "Mot de passe oublié ?"
+activate LoginPage
+LoginPage --> Utilisateur: affiche formulaire de réinitialisation
+deactivate LoginPage
+
+Utilisateur -> LoginPage: saisit adresse email
+activate LoginPage
+note right : L'utilisateur saisit
+son adresse email
+
+LoginPage -> LoginPage: validateEmail(email)
+
+alt email valide
+    LoginPage -> AuthCtrl: requestPasswordReset(email)
+    activate AuthCtrl
+    
+    AuthCtrl -> UserM: findUserByEmail(email)
+    activate UserM
+    UserM -> DB: SELECT * FROM llx_user WHERE email = ?
+    activate DB
+    DB --> UserM: user data or null
+    deactivate DB
+    UserM --> AuthCtrl: user found/not found
+    deactivate UserM
+    
+    alt utilisateur trouvé
+        AuthCtrl -> AuthCtrl: generateResetToken()
+        note over AuthCtrl : Génération d'un token
+sécurisé avec expiration
+        
+        AuthCtrl -> DB: INSERT INTO password_reset_tokens
+        (user_id, token, expires_at, created_at)
+        VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 1 HOUR), NOW())
+        activate DB
+        DB --> AuthCtrl: token saved
+        deactivate DB
+        
+        AuthCtrl -> Email: sendPasswordResetEmail(userEmail, resetToken)
+        activate Email
+        
+        note over Email : Envoi email avec lien
+de réinitialisation
+        
+        Email -> Email: createResetEmailTemplate(resetLink)
+        Email -> Email: sendEmail(userEmail, emailContent)
+        
+        Email --> AuthCtrl: email sent successfully
+        deactivate Email
+        
+        AuthCtrl -> AuthCtrl: logPasswordResetRequest(userId, 'success')
+        
+        AuthCtrl --> LoginPage: {
+            "success": true,
+            "message": "Un email de réinitialisation a été envoyé"
+        }
+        
+    else utilisateur non trouvé
+        AuthCtrl -> AuthCtrl: logPasswordResetRequest(email, 'user_not_found')
+        
+        note over AuthCtrl : Pour des raisons de sécurité,
+le même message est affiché
+        
+        AuthCtrl --> LoginPage: {
+            "success": true,
+            "message": "Un email de réinitialisation a été envoyé"
+        }
+    end
+    
+    deactivate AuthCtrl
+    
+else email invalide
+    LoginPage -> LoginPage: displayValidationError("Email invalide")
+end
+
+LoginPage --> Utilisateur: affiche message de confirmation
+deactivate LoginPage
+
+alt email de réinitialisation reçu
+    Utilisateur -> Utilisateur: consulte email de réinitialisation
+    
+    Utilisateur -> ResetPage: clique sur lien de réinitialisation
+    activate ResetPage
+    
+    ResetPage -> AuthCtrl: validateResetToken(token)
+    activate AuthCtrl
+    
+    AuthCtrl -> DB: SELECT user_id, expires_at FROM password_reset_tokens
+    WHERE token = ? AND expires_at > NOW()
+    activate DB
+    DB --> AuthCtrl: token data or null
+    deactivate DB
+    
+    alt token valide et non expiré
+        AuthCtrl --> ResetPage: {
+            "valid": true,
+            "userId": userId
+        }
+        
+        ResetPage --> Utilisateur: affiche formulaire nouveau mot de passe
+        deactivate AuthCtrl
+        
+        Utilisateur -> ResetPage: saisit nouveau mot de passe
+        activate ResetPage
+        
+        note right : L'utilisateur saisit :
+- Nouveau mot de passe
+- Confirmation mot de passe
+        
+        ResetPage -> ResetPage: validatePasswordStrength(password)
+        ResetPage -> ResetPage: confirmPasswordMatch(password, confirmPassword)
+        
+        alt mots de passe valides
+            ResetPage -> AuthCtrl: resetPassword(token, newPassword)
+            activate AuthCtrl
+            
+            AuthCtrl -> AuthCtrl: hashPassword(newPassword)
+            
+            AuthCtrl -> DB: BEGIN TRANSACTION
+            activate DB
+            
+            AuthCtrl -> DB: UPDATE llx_user 
+            SET pass_crypted = ?, 
+                pass_temp = NULL,
+                datec = NOW()
+            WHERE rowid = ?
+            
+            AuthCtrl -> DB: DELETE FROM password_reset_tokens 
+            WHERE token = ?
+            
+            AuthCtrl -> DB: INSERT INTO llx_user_extrafields
+            (fk_object, password_reset_date)
+            VALUES (?, NOW())
+            ON DUPLICATE KEY UPDATE password_reset_date = NOW()
+            
+            AuthCtrl -> DB: COMMIT TRANSACTION
+            deactivate DB
+            
+            AuthCtrl -> Email: sendPasswordChangeConfirmation(userEmail)
+            activate Email
+            Email --> AuthCtrl: confirmation email sent
+            deactivate Email
+            
+            AuthCtrl -> AuthCtrl: logPasswordReset(userId, 'success')
+            
+            AuthCtrl --> ResetPage: {
+                "success": true,
+                "message": "Mot de passe réinitialisé avec succès",
+                "redirectUrl": "/login?reset=success"
+            }
+            
+        else mots de passe invalides
+            ResetPage -> ResetPage: displayValidationErrors(errors)
+        end
+        
+        ResetPage --> Utilisateur: affiche résultat réinitialisation
+        deactivate ResetPage
+        deactivate AuthCtrl
+        
+    else token invalide ou expiré
+        AuthCtrl -> AuthCtrl: logPasswordResetAttempt(token, 'invalid_token')
+        
+        AuthCtrl --> ResetPage: {
+            "valid": false,
+            "message": "Lien de réinitialisation invalide ou expiré"
+        }
+        deactivate AuthCtrl
+        
+        ResetPage --> Utilisateur: "Lien invalide. Demandez une nouvelle réinitialisation."
+        deactivate ResetPage
+    end
+end
+
+note over Utilisateur : L'utilisateur peut maintenant
+se connecter avec son nouveau
+mot de passe
+
+@enduml

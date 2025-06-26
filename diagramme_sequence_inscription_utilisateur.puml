@@ -1,0 +1,211 @@
+@startuml User Registration Sequence
+!theme plain
+title ZAI E-commerce Platform - Séquence d'Inscription d'un Utilisateur
+
+actor User as "Utilisateur"
+participant "RegistrationForm" as Form
+participant "AuthController" as AuthCtrl
+participant "UserModel" as UserM
+participant "DolibarrService" as Doli
+participant "EmailService" as Email
+participant "Database" as DB
+
+User -> Form: accède à la page d'inscription
+activate Form
+Form --> User: affiche formulaire d'inscription
+deactivate Form
+
+User -> Form: saisit informations personnelles
+activate Form
+note right : Informations saisies :
+- Nom, Prénom
+- Email
+- Mot de passe
+- Confirmation mot de passe
+- Téléphone (optionnel)
+- Adresse
+
+Form -> Form: validateClientSide(formData)
+
+alt validation côté client réussie
+    Form -> AuthCtrl: register(userData)
+    activate AuthCtrl
+    
+    note over AuthCtrl : Validation serveur
+    
+    AuthCtrl -> AuthCtrl: validateRegistrationData(userData)
+    
+    alt données valides
+        AuthCtrl -> UserM: checkEmailExists(email)
+        activate UserM
+        UserM -> DB: SELECT COUNT(*) FROM llx_user WHERE email = ?
+        activate DB
+        DB --> UserM: count result
+        deactivate DB
+        UserM --> AuthCtrl: emailExists boolean
+        deactivate UserM
+        
+        alt email n'existe pas déjà
+            AuthCtrl -> AuthCtrl: hashPassword(password)
+            
+            AuthCtrl -> UserM: createUser(userData)
+            activate UserM
+            
+            note over UserM : Création utilisateur
+            
+            UserM -> DB: BEGIN TRANSACTION
+            activate DB
+            
+            UserM -> DB: INSERT INTO llx_user
+            (login, email, firstname, lastname, 
+            pass_crypted, phone, address, 
+            datec, entity, statut)
+            VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), 1, 1)
+            
+            DB --> UserM: userId (last_insert_id)
+            
+            UserM -> DB: INSERT INTO llx_user_extrafields
+            (fk_object, registration_date, 
+            email_verified, account_status)
+            VALUES (?, NOW(), 0, 'pending')
+            
+            UserM -> DB: COMMIT TRANSACTION
+            deactivate DB
+            
+            UserM --> AuthCtrl: user created successfully
+            deactivate UserM
+            
+            AuthCtrl -> Doli: syncUserToDolibarr(userData, userId)
+            activate Doli
+            
+            note over Doli : Synchronisation avec
+Dolibarr ERP
+            
+            Doli -> DB: INSERT INTO llx_societe
+            (nom, email, client, fournisseur,
+            datec, entity, status)
+            VALUES (?, ?, 1, 0, NOW(), 1, 1)
+            
+            activate DB
+            DB --> Doli: companyId (societe_id)
+            deactivate DB
+            
+            Doli -> DB: UPDATE llx_user 
+            SET fk_societe = ? 
+            WHERE rowid = ?
+            activate DB
+            DB --> Doli: update success
+            deactivate DB
+            
+            Doli --> AuthCtrl: dolibarr sync completed
+            deactivate Doli
+            
+            AuthCtrl -> Email: sendVerificationEmail(userEmail, userId)
+            activate Email
+            
+            note over Email : Envoi email de vérification
+            
+            Email -> Email: generateVerificationToken(userId)
+            Email -> Email: createEmailTemplate(verificationLink)
+            Email -> Email: sendEmail(userEmail, emailContent)
+            
+            Email --> AuthCtrl: email sent successfully
+            deactivate Email
+            
+            AuthCtrl -> AuthCtrl: logRegistrationEvent(userId, 'success')
+            
+            AuthCtrl --> Form: {
+                "success": true,
+                "message": "Inscription réussie ! Vérifiez votre email.",
+                "userId": userId,
+                "redirectUrl": "/login?registered=true"
+            }
+            
+        else email existe déjà
+            AuthCtrl -> AuthCtrl: logRegistrationEvent(email, 'email_exists')
+            
+            AuthCtrl --> Form: {
+                "success": false,
+                "message": "Cette adresse email est déjà utilisée",
+                "field": "email",
+                "error_code": "EMAIL_EXISTS"
+            }
+        end
+        
+    else données invalides
+        AuthCtrl -> AuthCtrl: logRegistrationEvent(userData, 'validation_failed')
+        
+        AuthCtrl --> Form: {
+            "success": false,
+            "message": "Données invalides",
+            "errors": validationErrors,
+            "error_code": "VALIDATION_ERROR"
+        }
+    end
+    
+    deactivate AuthCtrl
+    
+else validation côté client échouée
+    Form -> Form: displayValidationErrors(errors)
+    
+    note over Form : Affichage des erreurs
+en temps réel sans
+envoi au serveur
+end
+
+Form --> User: affiche résultat inscription
+deactivate Form
+
+alt inscription réussie
+    User -> User: consulte email de vérification
+    
+    User -> AuthCtrl: clickVerificationLink(token)
+    activate AuthCtrl
+    
+    AuthCtrl -> UserM: verifyEmailToken(token)
+    activate UserM
+    UserM -> DB: SELECT user_id FROM email_verification_tokens
+    WHERE token = ? AND expires_at > NOW()
+    activate DB
+    DB --> UserM: userId or null
+    deactivate DB
+    
+    alt token valide
+        UserM -> DB: UPDATE llx_user_extrafields
+        SET email_verified = 1, account_status = 'active'
+        WHERE fk_object = ?
+        activate DB
+        DB --> UserM: update success
+        deactivate DB
+        
+        UserM -> DB: DELETE FROM email_verification_tokens
+        WHERE token = ?
+        activate DB
+        DB --> UserM: token deleted
+        deactivate DB
+        
+        UserM --> AuthCtrl: email verified successfully
+        deactivate UserM
+        
+        AuthCtrl -> Email: sendWelcomeEmail(userEmail)
+        activate Email
+        Email --> AuthCtrl: welcome email sent
+        deactivate Email
+        
+        AuthCtrl --> User: "Email vérifié ! Votre compte est maintenant actif."
+        
+    else token invalide ou expiré
+        UserM --> AuthCtrl: invalid token
+        deactivate UserM
+        
+        AuthCtrl --> User: "Lien de vérification invalide ou expiré"
+    end
+    
+    deactivate AuthCtrl
+end
+
+note over User : L'utilisateur peut maintenant
+se connecter avec ses identifiants
+et accéder à la plateforme
+
+@enduml
