@@ -109,8 +109,8 @@ class UserController {
             }
         }
         
-        // Redirect back to profile page with query parameter format
-        redirect('?page=user&action=profile');
+        // Reload the profile page
+        redirect('index.php?page=user&action=profile');
     }
     /**
      * Handle user orders
@@ -202,8 +202,8 @@ class UserController {
             }
         }
         
-        // Redirect back to addresses page
-        redirect('user/addresses');
+        // Reload the addresses page
+        redirect('index.php?page=user&action=addresses');
     }
 }
 ?>

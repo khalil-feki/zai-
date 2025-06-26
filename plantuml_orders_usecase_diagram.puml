@@ -1,0 +1,94 @@
+@startuml ZAI Orders Management
+!theme plain
+title ZAI E-commerce Platform - Order Management Use Cases (Sprint 3)
+
+left to right direction
+
+actor Client
+actor "ZAI Admin" as Admin
+actor "Dolibarr System" as Dolibarr
+
+rectangle "ZAI Order Management" {
+  usecase "Create Order" as UC1
+  usecase "Process Payment" as UC2
+  usecase "View Order History" as UC3
+  usecase "Track Order Status" as UC4
+  usecase "Manage Shipping Address" as UC5
+  usecase "Apply Discount Code" as UC6
+  usecase "Cancel Order" as UC7
+}
+
+rectangle "ZAI Admin Functions" {
+  usecase "Validate Order" as ADMIN1
+  usecase "Update Order Status" as ADMIN2
+  usecase "Generate Invoice" as ADMIN3
+  usecase "Process Refund" as ADMIN4
+  usecase "Manage Returns" as ADMIN5
+}
+
+rectangle "Dolibarr Integration" {
+  usecase "Sync Customer Data" as DOL1
+  usecase "Update Product Stock" as DOL2
+  usecase "Generate Dolibarr Invoice" as DOL3
+  usecase "Track Shipment" as DOL4
+}
+
+' Client interactions
+Client --> UC1 : creates
+Client --> UC2 : pays
+Client --> UC3 : views
+Client --> UC4 : tracks
+Client --> UC5 : manages
+Client --> UC6 : applies
+Client --> UC7 : requests
+
+' Admin interactions
+Admin --> ADMIN1 : validates
+Admin --> ADMIN2 : updates
+Admin --> ADMIN3 : generates
+Admin --> ADMIN4 : processes
+Admin --> ADMIN5 : handles
+Admin --> UC4 : monitors
+
+' Dolibarr system interactions
+Dolibarr --> DOL1 : synchronizes
+Dolibarr --> DOL2 : updates
+Dolibarr --> DOL3 : creates
+Dolibarr --> DOL4 : provides
+
+' Use case relationships
+UC1 ..> UC2 : includes
+UC1 ..> UC5 : may include
+UC1 ..> UC6 : may include
+UC2 ..> ADMIN1 : triggers
+ADMIN1 ..> DOL1 : activates
+ADMIN1 ..> DOL3 : generates
+ADMIN2 ..> DOL4 : updates
+UC7 ..> ADMIN4 : may trigger
+
+' ZAI-specific notes
+note right of UC1
+  Converts ZAI cart to order
+  using Dolibarr product data
+  and customer information
+end note
+
+note right of DOL1
+  Synchronizes with Dolibarr
+  llx_societe and llx_user
+  tables for customer data
+end note
+
+note right of DOL2
+  Updates Dolibarr llx_product
+  and llx_stock tables
+  for inventory management
+end note
+
+note right of DOL3
+  Creates entries in Dolibarr
+  llx_commande and
+  llx_commandedet tables
+end note
+
+@enduml

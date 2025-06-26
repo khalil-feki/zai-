@@ -1,0 +1,181 @@
+@startuml
+!theme plain
+title Diagramme de Séquence - Fonctions Administrateur ZAI E-commerce
+
+actor "ZAI Admin" as A
+participant "Admin Interface" as AI
+participant "AdminController" as AC
+participant "OrderManagement" as OM
+participant "ProductManagement" as PM
+participant "UserManagement" as UM
+participant "ReportService" as RS
+participant "DolibarrAPI" as DAPI
+database "Base Dolibarr" as DB
+participant "NotificationService" as NS
+
+== Gestion des Commandes ==
+A -> AI: Accéder gestion commandes
+activate AI
+AI -> AC: authenticate(adminCredentials)
+activate AC
+AC -> DB: SELECT * FROM llx_user WHERE admin = 1
+activate DB
+DB --> AC: adminValidated
+deactivate DB
+AC --> AI: adminSessionCreated
+deactivate AC
+
+AI -> OM: getAllOrders(filters)
+activate OM
+OM -> DB: SELECT * FROM llx_commande ORDER BY date_creation DESC
+activate DB
+DB --> OM: ordersList[]
+deactivate DB
+OM --> AI: ordersData
+deactivate OM
+AI --> A: Liste des commandes
+deactivate AI
+
+A -> AI: Modifier statut commande
+activate AI
+AI -> OM: updateOrderStatus(orderId, newStatus)
+activate OM
+OM -> DAPI: updateOrder(orderId, statusData)
+activate DAPI
+DAPI -> DB: UPDATE llx_commande SET fk_statut = ? WHERE rowid = ?
+activate DB
+DB --> DAPI: statusUpdated
+deactivate DB
+DAPI --> OM: orderUpdated
+deactivate DAPI
+
+OM -> NS: notifyCustomer(orderId, statusChange)
+activate NS
+NS --> OM: notificationSent
+deactivate NS
+OM --> AI: statusChanged
+deactivate OM
+AI --> A: Confirmation mise à jour
+deactivate AI
+
+== Gestion des Produits ==
+A -> AI: Gérer catalogue produits
+activate AI
+AI -> PM: getProductCatalog()
+activate PM
+PM -> DB: SELECT * FROM llx_product
+activate DB
+DB --> PM: productsList[]
+deactivate DB
+PM --> AI: catalogData
+deactivate PM
+AI --> A: Catalogue produits
+deactivate AI
+
+A -> AI: Modifier stock produit
+activate AI
+AI -> PM: updateStock(productId, newStock)
+activate PM
+PM -> DAPI: updateProductStock(productId, stockData)
+activate DAPI
+DAPI -> DB: UPDATE llx_stock SET stock = ? WHERE fk_product = ?
+activate DB
+DB --> DAPI: stockUpdated
+deactivate DB
+DAPI --> PM: productUpdated
+deactivate DAPI
+PM --> AI: stockChanged
+deactivate PM
+AI --> A: Confirmation stock
+deactivate AI
+
+== Gestion des Utilisateurs ==
+A -> AI: Gérer utilisateurs
+activate AI
+AI -> UM: getAllUsers()
+activate UM
+UM -> DB: SELECT * FROM llx_user WHERE entity = 1
+activate DB
+DB --> UM: usersList[]
+deactivate DB
+UM --> AI: usersData
+deactivate UM
+AI --> A: Liste utilisateurs
+deactivate AI
+
+A -> AI: Modifier droits utilisateur
+activate AI
+AI -> UM: updateUserRights(userId, permissions)
+activate UM
+UM -> DAPI: updateUser(userId, rightsData)
+activate DAPI
+DAPI -> DB: UPDATE llx_user SET rights = ? WHERE rowid = ?
+activate DB
+DB --> DAPI: rightsUpdated
+deactivate DB
+DAPI --> UM: userUpdated
+deactivate DAPI
+UM --> AI: rightsChanged
+deactivate UM
+AI --> A: Confirmation droits
+deactivate AI
+
+== Rapports et Statistiques ==
+A -> AI: Générer rapports
+activate AI
+AI -> RS: generateSalesReport(period)
+activate RS
+RS -> DB: SELECT SUM(total_ttc) FROM llx_commande WHERE date_creation BETWEEN ? AND ?
+activate DB
+DB --> RS: salesData
+deactivate DB
+
+RS -> DB: SELECT COUNT(*) FROM llx_commande GROUP BY fk_statut
+activate DB
+DB --> RS: orderStats
+deactivate DB
+
+RS -> DB: SELECT p.label, SUM(cd.qty) FROM llx_product p JOIN llx_commandedet cd ON p.rowid = cd.fk_product
+activate DB
+DB --> RS: productStats
+deactivate DB
+
+RS -> RS: compileReport(salesData, orderStats, productStats)
+RS --> AI: reportGenerated
+deactivate RS
+AI --> A: Rapport de ventes
+deactivate AI
+
+== Gestion des Retours ==
+A -> AI: Traiter demande retour
+activate AI
+AI -> OM: processReturn(returnId)
+activate OM
+OM -> DAPI: createCreditNote(returnData)
+activate DAPI
+DAPI -> DB: INSERT INTO llx_facture (type = 2)
+activate DB
+DB --> DAPI: creditNoteId
+deactivate DB
+DAPI --> OM: creditNoteCreated
+deactivate DAPI
+
+OM -> DAPI: updateStock(productId, returnedQty)
+activate DAPI
+DAPI -> DB: UPDATE llx_stock SET stock = stock + ? WHERE fk_product = ?
+activate DB
+DB --> DAPI: stockRestored
+deactivate DB
+DAPI --> OM: stockUpdated
+deactivate DAPI
+
+OM -> NS: notifyCustomer(returnId, "processed")
+activate NS
+NS --> OM: customerNotified
+deactivate NS
+OM --> AI: returnProcessed
+deactivate OM
+AI --> A: Retour traité
+deactivate AI
+
+@enduml

@@ -1,0 +1,94 @@
+@startuml Product Search Sequence
+!theme plain
+title ZAI E-commerce Platform - Sequence de Recherche de Produits
+
+actor Customer as "Client"
+participant "ProductController" as ProdCtrl
+participant "ProductModel" as ProdM
+participant "CategoryModel" as CatM
+participant "DolibarrAPI" as Doli
+participant "SearchEngine" as Search
+participant "Database" as DB
+
+Customer -> ProdCtrl: searchProducts(query, filters)
+activate ProdCtrl
+
+note over ProdCtrl : Validation et nettoyage\nde la requête de recherche
+
+ProdCtrl -> ProdCtrl: validateSearchQuery(query)
+ProdCtrl -> ProdCtrl: sanitizeInput(query)
+
+ProdCtrl -> Search: processSearchQuery(query)
+activate Search
+
+note over Search : Analyse de la requête\net extraction des mots-clés
+
+Search -> Search: extractKeywords(query)
+Search -> Search: buildSearchCriteria(keywords)
+Search --> ProdCtrl: searchCriteria
+deactivate Search
+
+ProdCtrl -> ProdM: searchProducts(searchCriteria, filters)
+activate ProdM
+
+ProdM -> Doli: searchInProducts(searchCriteria)
+activate Doli
+
+note over Doli : Recherche dans les tables:\n- llx_product (label, description)\n- llx_product_extrafields\n- llx_categorie
+
+Doli -> DB: SELECT p.*, pe.*, c.label as category_name\nFROM llx_product p\nJOIN llx_product_extrafields pe ON p.rowid = pe.fk_object\nLEFT JOIN llx_categorie c ON p.fk_categorie = c.rowid\nWHERE (p.label LIKE ? OR p.description LIKE ?)\nAND p.tosell = 1\nAND p.fk_product_type = 0
+activate DB
+DB --> Doli: resultats bruts
+deactivate DB
+
+Doli -> Doli: applyFilters(results, filters)
+note right : Application des filtres:\n- Prix min/max\n- Catégorie\n- Disponibilité\n- Marque
+
+Doli -> Doli: calculateRelevanceScore(results, keywords)
+note right : Calcul de la pertinence\nbasé sur la correspondance\ndes mots-clés
+
+Doli --> ProdM: searchResults with relevance
+deactivate Doli
+
+ProdM -> ProdM: sortByRelevance(results)
+ProdM -> ProdM: highlightSearchTerms(results, keywords)
+
+ProdM --> ProdCtrl: sortedResults
+deactivate ProdM
+
+ProdCtrl -> CatM: getSuggestedCategories(keywords)
+activate CatM
+CatM -> DB: SELECT DISTINCT c.* FROM llx_categorie c\nJOIN llx_product p ON c.rowid = p.fk_categorie\nWHERE c.label LIKE ?
+activate DB
+DB --> CatM: categories suggérées
+deactivate DB
+CatM --> ProdCtrl: suggestedCategories
+deactivate CatM
+
+ProdCtrl -> ProdM: getSimilarProducts(topResults)
+activate ProdM
+ProdM -> Doli: findSimilarProducts(productIds)
+activate Doli
+Doli --> ProdM: similarProducts
+deactivate Doli
+ProdM --> ProdCtrl: recommendations
+deactivate ProdM
+
+ProdCtrl -> Search: logSearchQuery(query, resultCount, userId)
+activate Search
+note right : Enregistrement des\nstatistiques de recherche
+Search -> DB: INSERT INTO search_logs\n(query, result_count, user_id, timestamp)
+activate DB
+DB --> Search: logged
+deactivate DB
+Search --> ProdCtrl: statistics saved
+deactivate Search
+
+note over ProdCtrl : Préparation de la réponse\navec résultats, suggestions\net recommandations
+
+ProdCtrl --> Customer: search results page
+deactivate ProdCtrl
+
+note over Customer : Affichage des résultats\navec termes surlignés,\nfiltres et suggestions
+
+@enduml

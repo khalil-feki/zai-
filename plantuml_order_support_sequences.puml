@@ -1,0 +1,201 @@
+@startuml Order Creation Sequence
+!theme plain
+title ZAI E-commerce Platform - Order Creation Sequence
+
+actor Customer
+participant "OrderController" as OrderCtrl
+participant "CartModel" as CartM
+participant "OrderModel" as OrderM
+participant "PaymentService" as PayServ
+participant "ProductModel" as ProdM
+participant "EmailService" as Email
+participant "DolibarrAPI" as Doli
+
+Customer -> OrderCtrl: createOrder(orderData)
+activate OrderCtrl
+
+OrderCtrl -> CartM: getCartItems(userId)
+activate CartM
+CartM --> OrderCtrl: cart items
+deactivate CartM
+
+alt cart not empty
+    OrderCtrl -> ProdM: validateStock(cartItems)
+    activate ProdM
+    ProdM --> OrderCtrl: stock validation
+    deactivate ProdM
+    
+    alt stock available
+        OrderCtrl -> OrderM: calculateTotal(cartItems, shipping, tax)
+        activate OrderM
+        OrderM --> OrderCtrl: total amount
+        deactivate OrderM
+        
+        OrderCtrl -> OrderM: create(orderData)
+        activate OrderM
+        OrderM -> OrderM: generate order number
+        OrderM -> OrderM: save order
+        OrderM --> OrderCtrl: order created
+        deactivate OrderM
+        
+        OrderCtrl -> PayServ: processPayment(orderId, paymentData)
+        activate PayServ
+        PayServ -> PayServ: validate payment
+        PayServ -> PayServ: process with gateway
+        PayServ --> OrderCtrl: payment result
+        deactivate PayServ
+        
+        alt payment successful
+            OrderCtrl -> OrderM: updateStatus(orderId, 'confirmed')
+            activate OrderM
+            OrderM --> OrderCtrl: status updated
+            deactivate OrderM
+            
+            OrderCtrl -> ProdM: updateStock(cartItems)
+            activate ProdM
+            ProdM --> OrderCtrl: stock updated
+            deactivate ProdM
+            
+            OrderCtrl -> CartM: clearCart(userId)
+            activate CartM
+            CartM --> OrderCtrl: cart cleared
+            deactivate CartM
+            
+            OrderCtrl -> Doli: createOrder(orderData)
+            activate Doli
+            Doli --> OrderCtrl: dolibarr order created
+            deactivate Doli
+            
+            OrderCtrl -> Email: sendOrderConfirmation(orderData)
+            activate Email
+            Email --> OrderCtrl: confirmation sent
+            deactivate Email
+            
+            OrderCtrl --> Customer: order created successfully
+        else payment failed
+            OrderCtrl -> OrderM: updateStatus(orderId, 'payment_failed')
+            activate OrderM
+            OrderM --> OrderCtrl: status updated
+            deactivate OrderM
+            
+            OrderCtrl --> Customer: payment failed
+        end
+    else insufficient stock
+        OrderCtrl --> Customer: insufficient stock error
+    end
+else cart empty
+    OrderCtrl --> Customer: cart is empty
+end
+
+deactivate OrderCtrl
+
+@enduml
+
+@startuml Support Ticket Creation Sequence
+!theme plain
+title ZAI E-commerce Platform - Support Ticket Creation Sequence
+
+actor Customer
+participant "TicketController" as TicketCtrl
+participant "TicketModel" as TicketM
+participant "UserModel" as UserM
+participant "EmailService" as Email
+participant "FileUpload" as Upload
+participant "DolibarrAPI" as Doli
+
+Customer -> TicketCtrl: createTicket(ticketData, files)
+activate TicketCtrl
+
+TicketCtrl -> UserM: findById(userId)
+activate UserM
+UserM --> TicketCtrl: user data
+deactivate UserM
+
+TicketCtrl -> TicketM: validateTicketData(ticketData)
+activate TicketM
+TicketM --> TicketCtrl: validation result
+deactivate TicketM
+
+alt validation successful
+    alt files attached
+        TicketCtrl -> Upload: processFiles(files)
+        activate Upload
+        Upload -> Upload: validate file types
+        Upload -> Upload: save files
+        Upload --> TicketCtrl: file paths
+        deactivate Upload
+    end
+    
+    TicketCtrl -> TicketM: create(ticketData)
+    activate TicketM
+    TicketM -> TicketM: generate ticket number
+    TicketM -> TicketM: set initial status
+    TicketM -> TicketM: save ticket
+    TicketM --> TicketCtrl: ticket created
+    deactivate TicketM
+    
+    TicketCtrl -> Doli: createTicket(ticketData)
+    activate Doli
+    Doli --> TicketCtrl: dolibarr ticket created
+    deactivate Doli
+    
+    TicketCtrl -> Email: sendTicketConfirmation(ticketData, userData)
+    activate Email
+    Email -> Email: send to customer
+    Email -> Email: notify support team
+    Email --> TicketCtrl: notifications sent
+    deactivate Email
+    
+    TicketCtrl --> Customer: ticket created successfully
+else validation failed
+    TicketCtrl --> Customer: validation errors
+end
+
+deactivate TicketCtrl
+
+@enduml
+
+@startuml Order Tracking Sequence
+!theme plain
+title ZAI E-commerce Platform - Order Tracking Sequence
+
+actor Customer
+participant "OrderController" as OrderCtrl
+participant "OrderModel" as OrderM
+participant "DolibarrAPI" as Doli
+participant "ShippingAPI" as Shipping
+
+Customer -> OrderCtrl: trackOrder(orderId)
+activate OrderCtrl
+
+OrderCtrl -> OrderM: findById(orderId)
+activate OrderM
+OrderM --> OrderCtrl: order data
+deactivate OrderM
+
+alt order exists and belongs to user
+    OrderCtrl -> Doli: getOrderStatus(dolibarrOrderId)
+    activate Doli
+    Doli --> OrderCtrl: dolibarr status
+    deactivate Doli
+    
+    alt order has tracking number
+        OrderCtrl -> Shipping: getTrackingInfo(trackingNumber)
+        activate Shipping
+        Shipping --> OrderCtrl: shipping status
+        deactivate Shipping
+    end
+    
+    OrderCtrl -> OrderM: getOrderHistory(orderId)
+    activate OrderM
+    OrderM --> OrderCtrl: status history
+    deactivate OrderM
+    
+    OrderCtrl --> Customer: order tracking information
+else order not found or unauthorized
+    OrderCtrl --> Customer: order not found
+end
+
+deactivate OrderCtrl
+
+@enduml

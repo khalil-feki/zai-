@@ -142,6 +142,8 @@
 /* Add animation classes that can be applied to any element */
 .animate-fadeIn {
   animation: fadeInUp 0.8s var(--ease-out) forwards;
+  z-index: 30;
+  position: relative;
 }
 
 .animate-delay-1 {

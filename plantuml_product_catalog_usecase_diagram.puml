@@ -1,0 +1,86 @@
+@startuml Cas d'Usage Catalogue Produits
+!theme plain
+title Plateforme E-commerce ZAI - Cas d'Usage Catalogue Produits (Sprint 2)
+
+left to right direction
+
+actor Visiteur
+actor Client
+actor Administrateur
+
+rectangle "Système Catalogue Produits" {
+  usecase "Parcourir Produits" as UC1
+  usecase "Rechercher Produits" as UC2
+  usecase "Filtrer par Catégorie" as UC3
+  usecase "Filtrer par Prix" as UC4
+  usecase "Voir Détails Produit" as UC5
+  usecase "Ajouter au Panier" as UC6
+  usecase "Retirer du Panier" as UC7
+  usecase "Modifier Quantité Panier" as UC8
+  usecase "Voir Panier" as UC9
+  usecase "Vider Panier" as UC10
+  usecase "Parcourir Catégories" as UC11
+  usecase "Voir Produits Catégorie" as UC12
+}
+
+rectangle "Fonctions Admin" {
+  usecase "Gérer Produits" as ADMIN1
+  usecase "Gérer Catégories" as ADMIN2
+  usecase "Mettre à jour Stock" as ADMIN3
+  usecase "Définir Prix" as ADMIN4
+}
+
+' Interactions Visiteur
+Visiteur --> UC1 : parcourt
+Visiteur --> UC2 : recherche
+Visiteur --> UC3 : filtre
+Visiteur --> UC4 : filtre
+Visiteur --> UC5 : consulte détails
+Visiteur --> UC11 : explore
+Visiteur --> UC12 : consulte
+
+' Interactions Client (inclut toutes les actions visiteur plus panier)
+Client --> UC1
+Client --> UC2
+Client --> UC3
+Client --> UC4
+Client --> UC5
+Client --> UC6 : ajoute articles
+Client --> UC7 : retire articles
+Client --> UC8 : modifie
+Client --> UC9 : consulte
+Client --> UC10 : vide
+Client --> UC11
+Client --> UC12
+
+' Interactions Administrateur
+Administrateur --> ADMIN1 : maintient
+Administrateur --> ADMIN2 : organise
+Administrateur --> ADMIN3 : met à jour
+Administrateur --> ADMIN4 : définit
+
+' Relations cas d'usage
+UC1 ..> UC5 : étend
+UC2 ..> UC5 : étend
+UC3 ..> UC1 : étend
+UC4 ..> UC1 : étend
+UC5 ..> UC6 : permet
+UC6 ..> UC9 : met à jour
+UC7 ..> UC9 : met à jour
+UC8 ..> UC9 : met à jour
+UC12 ..> UC1 : spécialise
+
+' Héritage
+Client --|> Visiteur
+
+note right of UC6
+  Nécessite authentification utilisateur
+  ou gestion de session
+end note
+
+note right of UC3
+  Supporte la navigation
+  hiérarchique des catégories
+end note
+
+@enduml

@@ -1,0 +1,104 @@
+@startuml Diagramme de Classes Catalogue Produits
+!theme plain
+title Plateforme E-commerce ZAI - Classes Catalogue Produits (Sprint 2)
+
+class ControlleurProduit {
+  -modeleProduit: ModeleProduit
+  -modeleCategorie: ModeleCategorie
+  -controlleurPanier: ControlleurPanier
+  --
+  +index()
+  +afficher(id)
+  +rechercher(requete)
+  +filtrerParCategorie(idCategorie)
+  +filtrerParPrix(min, max)
+  +obtenirDetailsProduit(id)
+  +verifierStock(id)
+}
+
+class ModeleProduit {
+  +id: int
+  +nom: string
+  +description: text
+  +prix: decimal
+  +stock: int
+  +id_categorie: int
+  +url_image: string
+  +sku: string
+  +actif: boolean
+  +cree_le: datetime
+  +modifie_le: datetime
+  --
+  +trouverTous()
+  +trouverParId(id)
+  +trouverParCategorie(idCategorie)
+  +rechercher(requete)
+  +filtrerParPrix(min, max)
+  +mettreAJourStock(id, quantite)
+  +estEnStock(id)
+  +obtenirProduitsLies(id)
+}
+
+class ModeleCategorie {
+  +id: int
+  +nom: string
+  +description: text
+  +id_parent: int
+  +url_image: string
+  +actif: boolean
+  +ordre_tri: int
+  +cree_le: datetime
+  +modifie_le: datetime
+  --
+  +trouverTous()
+  +trouverParId(id)
+  +trouverParParent(idParent)
+  +obtenirHierarchie()
+  +obtenirProduits(id)
+  +obtenirSousCategories(id)
+  +obtenirFilAriane(id)
+}
+
+class ControlleurPanier {
+  -modelePanier: ModelePanier
+  -modeleProduit: ModeleProduit
+  -gestionnaireSession: GestionnaireSession
+  --
+  +ajouterAuPanier(idProduit, quantite)
+  +retirerDuPanier(idProduit)
+  +mettreAJourQuantite(idProduit, quantite)
+  +obtenirContenuPanier()
+  +obtenirTotalPanier()
+  +viderPanier()
+  +obtenirNombreArticles()
+}
+
+class ModelePanier {
+  +id: int
+  +id_utilisateur: int
+  +id_session: string
+  +id_produit: int
+  +quantite: int
+  +prix: decimal
+  +cree_le: datetime
+  +modifie_le: datetime
+  --
+  +ajouterArticle(donnees)
+  +retirerArticle(idProduit)
+  +mettreAJourArticle(idProduit, quantite)
+  +obtenirArticles(idUtilisateur, idSession)
+  +calculerTotal(idUtilisateur, idSession)
+  +viderPanier(idUtilisateur, idSession)
+  +obtenirNombreArticles(idUtilisateur, idSession)
+}
+
+' Relations
+ControlleurProduit --> ModeleProduit : utilise
+ControlleurProduit --> ModeleCategorie : utilise
+ControlleurProduit --> ControlleurPanier : collabore
+ControlleurPanier --> ModelePanier : utilise
+ControlleurPanier --> ModeleProduit : valide
+ModeleProduit }o--|| ModeleCategorie : appartient à
+ModelePanier }o--|| ModeleProduit : contient
+
+@enduml

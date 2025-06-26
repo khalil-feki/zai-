@@ -489,7 +489,7 @@
         <nav>
             <div class="logo">
                 <a href="<?= BASE_URL ?>">
-                    <img src="<?= BASE_URL ?>public/images/logo.png" alt="Logo">
+                    <img src="<?= BASE_URL ?>public/img/logo.jpeg" alt="Logo">
                 </a>
             </div>
             

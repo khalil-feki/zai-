@@ -1,0 +1,77 @@
+@startuml
+!theme plain
+title Scrum Process - ZAI E-commerce Development
+
+!define PHASE rectangle
+!define ARTIFACT note
+!define ROLE actor
+
+ROLE ProductOwner as "Product Owner"
+ROLE ScrumMaster as "Scrum Master" 
+ROLE DevTeam as "Development Team"
+
+package "Sprint Cycle (2-4 weeks)" {
+    PHASE SprintPlanning as "Sprint Planning"
+    PHASE DailyScrum as "Daily Scrum"
+    PHASE SprintReview as "Sprint Review"
+    PHASE SprintRetro as "Sprint Retrospective"
+    
+    package "Development Activities" {
+        PHASE Development as "Development Work"
+        PHASE Testing as "Testing & QA"
+        PHASE Integration as "Dolibarr Integration"
+        PHASE Documentation as "Documentation"
+    }
+}
+
+package "Artifacts" {
+    ARTIFACT ProductBacklog as "Product Backlog\n• User Stories\n• Acceptance Criteria\n• Priority Ranking"
+    ARTIFACT SprintBacklog as "Sprint Backlog\n• Selected User Stories\n• Tasks Breakdown\n• Effort Estimation"
+    ARTIFACT Increment as "Product Increment\n• Working Software\n• Tested Features\n• Deployable Code"
+}
+
+package "ZAI Project Sprints" {
+    PHASE Sprint1 as "Sprint 1\nAuthentication\n& User Management"
+    PHASE Sprint2 as "Sprint 2\nProduct Catalog\n& Shopping Cart"
+    PHASE Sprint3 as "Sprint 3\nOrders & Customer\nSupport System"
+}
+
+' Relationships
+ProductOwner --> ProductBacklog : maintains
+ProductOwner --> SprintPlanning : participates
+ProductOwner --> SprintReview : accepts/rejects
+
+ScrumMaster --> SprintPlanning : facilitates
+ScrumMaster --> DailyScrum : facilitates
+ScrumMaster --> SprintReview : facilitates
+ScrumMaster --> SprintRetro : facilitates
+
+DevTeam --> SprintPlanning : estimates & commits
+DevTeam --> DailyScrum : reports progress
+DevTeam --> Development : implements
+DevTeam --> Testing : validates
+DevTeam --> Integration : integrates with Dolibarr
+DevTeam --> Documentation : documents
+
+ProductBacklog --> SprintPlanning : input
+SprintPlanning --> SprintBacklog : creates
+Development --> Increment : produces
+Testing --> Increment : validates
+Integration --> Increment : enhances
+
+SprintBacklog --> Development : guides
+Increment --> SprintReview : demonstrates
+SprintReview --> ProductBacklog : feedback
+SprintRetro --> SprintPlanning : improvements
+
+' Sprint Flow
+Sprint1 --> Sprint2 : iteration
+Sprint2 --> Sprint3 : iteration
+
+note bottom of Sprint1 : **Deliverables:**\n• User Registration/Login\n• Session Management\n• Dolibarr User Sync\n• Security Implementation
+
+note bottom of Sprint2 : **Deliverables:**\n• Product Display\n• Category Management\n• Shopping Cart\n• Search Functionality
+
+note bottom of Sprint3 : **Deliverables:**\n• Order Processing\n• Payment Integration\n• Support Tickets\n• Email Notifications
+
+@enduml

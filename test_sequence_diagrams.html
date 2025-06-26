@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test des Diagrammes de Séquence ZAI E-commerce</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+        }
+        .diagram-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        .plantuml-code {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        .instructions {
+            background-color: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .features {
+            background-color: #f0f9ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Diagrammes de Séquence - ZAI E-commerce</h1>
+        
+        <div class="instructions">
+            <h3>Instructions pour générer les images PNG :</h3>
+            <ol>
+                <li>Copiez le code PlantUML de chaque diagramme</li>
+                <li>Allez sur <a href="http://www.plantuml.com/plantuml/uml" target="_blank">PlantUML Online Server</a></li>
+                <li>Collez le code dans l'éditeur</li>
+                <li>Téléchargez l'image PNG générée</li>
+                <li>Renommez le fichier selon le nom indiqué</li>
+                <li>Placez le fichier dans le répertoire du projet ZAI</li>
+            </ol>
+        </div>
+
+        <div class="diagram-section">
+            <h2>1. Diagramme de Création de Commande</h2>
+            <p><strong>Fichier :</strong> plantuml_sequence_order_creation.png</p>
+            
+            <div class="features">
+                <h4>Fonctionnalités couvertes :</h4>
+                <ul>
+                    <li>Validation du panier client</li>
+                    <li>Vérification des produits et du stock</li>
+                    <li>Calcul des totaux et taxes</li>
+                    <li>Création de la commande dans Dolibarr</li>
+                    <li>Insertion dans les tables llx_commande et llx_commandedet</li>
+                    <li>Réservation temporaire du stock</li>
+                    <li>Redirection vers le paiement</li>
+                    <li>Gestion des erreurs de stock</li>
+                </ul>
+            </div>
+            
+            <div class="plantuml-code">@startuml
+!theme plain
+title Diagramme de Séquence - Création d'une Commande ZAI E-commerce
+
+actor Client as C
+participant "Interface Web" as UI
+participant "OrderController" as OC
+participant "CartService" as CS
+participant "ProductService" as PS
+participant "StockService" as SS
+participant "DolibarrAPI" as DAPI
+database "Base Dolibarr" as DB
+participant "PaymentGateway" as PG
+participant "NotificationService" as NS
+
+C -> UI: Valider le panier
+activate UI
+
+UI -> OC: POST /order/create
+activate OC
+
+OC -> CS: getCartItems(userId)
+activate CS
+CS --> OC: cartItems[]
+deactivate CS
+
+OC -> PS: validateProducts(cartItems)
+activate PS
+PS -> DB: SELECT * FROM llx_product WHERE rowid IN (...)
+activate DB
+DB --> PS: productData[]
+deactivate DB
+PS --> OC: validationResult
+deactivate PS
+
+OC -> SS: checkStock(cartItems)
+activate SS
+SS -> DB: SELECT stock FROM llx_stock WHERE fk_product IN (...)
+activate DB
+DB --> SS: stockLevels[]
+deactivate DB
+SS --> OC: stockAvailable
+deactivate SS
+
+alt Stock disponible
+    OC -> OC: calculateTotals(cartItems)
+    
+    OC -> DAPI: createOrder(orderData)
+    activate DAPI
+    
+    DAPI -> DB: INSERT INTO llx_commande (...)
+    activate DB
+    DB --> DAPI: orderId
+    deactivate DB
+    
+    loop Pour chaque produit
+        DAPI -> DB: INSERT INTO llx_commandedet (...)
+        activate DB
+        DB --> DAPI: detailId
+        deactivate DB
+    end
+    
+    DAPI -> DB: UPDATE llx_stock SET stock = stock - qty
+    activate DB
+    DB --> DAPI: stockUpdated
+    deactivate DB
+    
+    DAPI --> OC: orderCreated(orderId, orderNumber)
+    deactivate DAPI
+    
+    OC -> CS: clearCart(userId)
+    activate CS
+    CS --> OC: cartCleared
+    deactivate CS
+    
+    OC -> NS: sendOrderConfirmation(orderId, userEmail)
+    activate NS
+    NS --> OC: emailSent
+    deactivate NS
+    
+    OC --> UI: redirect(/payment?order=orderId)
+    UI --> C: Page de paiement
+    
+else Stock insuffisant
+    OC --> UI: error("Stock insuffisant")
+    UI --> C: Message d'erreur
+end
+
+deactivate OC
+deactivate UI
+
+@enduml</div>
+        </div>
+
+        <div class="diagram-section">
+            <h2>2. Diagramme de Flux Client</h2>
+            <p><strong>Fichier :</strong> plantuml_sequence_client_flow.png</p>
+            
+            <div class="features">
+                <h4>Fonctionnalités couvertes :</h4>
+                <ul>
+                    <li>Authentification et gestion de session</li>
+                    <li>Navigation dans le catalogue produits</li>
+                    <li>Gestion du panier avec vérification de stock</li>
+                    <li>Processus de checkout complet</li>
+                    <li>Création de commande dans Dolibarr</li>
+                    <li>Consultation de l'historique des commandes</li>
+                    <li>Suivi détaillé des commandes</li>
+                </ul>
+            </div>
+            
+            <div class="plantuml-code">@startuml
+!theme plain
+title Diagramme de Séquence - Flux Client ZAI E-commerce
+
+actor Client as C
+participant "Interface Web" as UI
+participant "AuthController" as AC
+participant "ProductController" as PC
+participant "CartController" as CC
+participant "OrderController" as OC
+participant "AccountController" as ACC
+participant "DolibarrAPI" as DAPI
+database "Base Dolibarr" as DB
+
+== Authentification ==
+C -> UI: Connexion/Inscription
+activate UI
+UI -> AC: authenticate(credentials)
+activate AC
+AC -> DAPI: validateUser(email, password)
+activate DAPI
+DAPI -> DB: SELECT * FROM llx_user WHERE email = ?
+activate DB
+DB --> DAPI: userData
+deactivate DB
+DAPI --> AC: userValidated
+deactivate DAPI
+AC --> UI: sessionCreated
+deactivate AC
+UI --> C: Dashboard client
+deactivate UI
+
+== Navigation Produits ==
+C -> UI: Parcourir catalogue
+activate UI
+UI -> PC: getProducts(filters)
+activate PC
+PC -> DB: SELECT * FROM llx_product WHERE active = 1
+activate DB
+DB --> PC: productList[]
+deactivate DB
+PC --> UI: productsData
+deactivate PC
+UI --> C: Liste des produits
+deactivate UI
+
+== Gestion Panier ==
+C -> UI: Ajouter au panier
+activate UI
+UI -> CC: addToCart(productId, quantity)
+activate CC
+CC -> DB: SELECT stock FROM llx_stock WHERE fk_product = ?
+activate DB
+DB --> CC: stockLevel
+deactivate DB
+
+alt Stock disponible
+    CC -> CC: addItemToSession(productId, quantity)
+    CC --> UI: itemAdded
+    UI --> C: Produit ajouté
+else Stock insuffisant
+    CC --> UI: error("Stock insuffisant")
+    UI --> C: Message d'erreur
+end
+deactivate CC
+deactivate UI
+
+== Finalisation Commande ==
+C -> UI: Valider panier
+activate UI
+UI -> OC: processCheckout()
+activate OC
+OC -> OC: validateCartItems()
+OC -> OC: calculateTotals()
+OC --> UI: checkoutData
+deactivate OC
+UI --> C: Page de checkout
+deactivate UI
+
+C -> UI: Confirmer commande
+activate UI
+UI -> OC: createOrder(orderData)
+activate OC
+OC -> DAPI: createDolibarrOrder(orderData)
+activate DAPI
+DAPI -> DB: INSERT INTO llx_commande
+activate DB
+DB --> DAPI: orderId
+deactivate DB
+DAPI --> OC: orderCreated
+deactivate DAPI
+OC --> UI: orderConfirmed
+deactivate OC
+UI --> C: Confirmation commande
+deactivate UI
+
+== Suivi Commande ==
+C -> UI: Consulter mes commandes
+activate UI
+UI -> ACC: getOrderHistory(userId)
+activate ACC
+ACC -> DB: SELECT * FROM llx_commande WHERE fk_soc = ?
+activate DB
+DB --> ACC: orderHistory[]
+deactivate DB
+ACC --> UI: ordersData
+deactivate ACC
+UI --> C: Historique des commandes
+deactivate UI
+
+C -> UI: Détails commande
+activate UI
+UI -> OC: getOrderDetails(orderId)
+activate OC
+OC -> DB: SELECT * FROM llx_commande c JOIN llx_commandedet cd ON c.rowid = cd.fk_commande WHERE c.rowid = ?
+activate DB
+DB --> OC: orderDetails
+deactivate DB
+OC --> UI: detailedOrder
+deactivate OC
+UI --> C: Détails de la commande
+deactivate UI
+
+@enduml</div>
+        </div>
+
+        <div class="diagram-section">
+            <h2>3. Diagramme des Fonctions Administrateur</h2>
+            <p><strong>Fichier :</strong> plantuml_sequence_admin_functions.png</p>
+            
+            <div class="features">
+                <h4>Fonctionnalités couvertes :</h4>
+                <ul>
+                    <li>Gestion complète des commandes</li>
+                    <li>Administration du catalogue produits</li>
+                    <li>Gestion des utilisateurs et droits</li>
+                    <li>Génération de rapports et statistiques</li>
+                    <li>Traitement des retours et avoirs</li>
+                    <li>Notifications automatiques</li>
+                </ul>
+            </div>
+            
+            <div class="plantuml-code">@startuml
+!theme plain
+title Diagramme de Séquence - Fonctions Administrateur ZAI E-commerce
+
+actor "ZAI Admin" as A
+participant "Admin Interface" as AI
+participant "AdminController" as AC
+participant "OrderManagement" as OM
+participant "ProductManagement" as PM
+participant "UserManagement" as UM
+participant "ReportService" as RS
+participant "DolibarrAPI" as DAPI
+database "Base Dolibarr" as DB
+participant "NotificationService" as NS
+
+== Gestion des Commandes ==
+A -> AI: Accéder gestion commandes
+activate AI
+AI -> AC: authenticate(adminCredentials)
+activate AC
+AC -> DB: SELECT * FROM llx_user WHERE admin = 1
+activate DB
+DB --> AC: adminValidated
+deactivate DB
+AC --> AI: adminSessionCreated
+deactivate AC
+
+AI -> OM: getAllOrders(filters)
+activate OM
+OM -> DB: SELECT * FROM llx_commande ORDER BY date_creation DESC
+activate DB
+DB --> OM: ordersList[]
+deactivate DB
+OM --> AI: ordersData
+deactivate OM
+AI --> A: Liste des commandes
+deactivate AI
+
+A -> AI: Modifier statut commande
+activate AI
+AI -> OM: updateOrderStatus(orderId, newStatus)
+activate OM
+OM -> DAPI: updateOrder(orderId, statusData)
+activate DAPI
+DAPI -> DB: UPDATE llx_commande SET fk_statut = ? WHERE rowid = ?
+activate DB
+DB --> DAPI: statusUpdated
+deactivate DB
+DAPI --> OM: orderUpdated
+deactivate DAPI
+
+OM -> NS: notifyCustomer(orderId, statusChange)
+activate NS
+NS --> OM: notificationSent
+deactivate NS
+OM --> AI: statusChanged
+deactivate OM
+AI --> A: Confirmation mise à jour
+deactivate AI
+
+== Gestion des Produits ==
+A -> AI: Gérer catalogue produits
+activate AI
+AI -> PM: getProductCatalog()
+activate PM
+PM -> DB: SELECT * FROM llx_product
+activate DB
+DB --> PM: productsList[]
+deactivate DB
+PM --> AI: catalogData
+deactivate PM
+AI --> A: Catalogue produits
+deactivate AI
+
+A -> AI: Modifier stock produit
+activate AI
+AI -> PM: updateStock(productId, newStock)
+activate PM
+PM -> DAPI: updateProductStock(productId, stockData)
+activate DAPI
+DAPI -> DB: UPDATE llx_stock SET stock = ? WHERE fk_product = ?
+activate DB
+DB --> DAPI: stockUpdated
+deactivate DB
+DAPI --> PM: productUpdated
+deactivate DAPI
+PM --> AI: stockChanged
+deactivate PM
+AI --> A: Confirmation stock
+deactivate AI
+
+== Gestion des Utilisateurs ==
+A -> AI: Gérer utilisateurs
+activate AI
+AI -> UM: getAllUsers()
+activate UM
+UM -> DB: SELECT * FROM llx_user WHERE entity = 1
+activate DB
+DB --> UM: usersList[]
+deactivate DB
+UM --> AI: usersData
+deactivate UM
+AI --> A: Liste utilisateurs
+deactivate AI
+
+A -> AI: Modifier droits utilisateur
+activate AI
+AI -> UM: updateUserRights(userId, permissions)
+activate UM
+UM -> DAPI: updateUser(userId, rightsData)
+activate DAPI
+DAPI -> DB: UPDATE llx_user SET rights = ? WHERE rowid = ?
+activate DB
+DB --> DAPI: rightsUpdated
+deactivate DB
+DAPI --> UM: userUpdated
+deactivate DAPI
+UM --> AI: rightsChanged
+deactivate UM
+AI --> A: Confirmation droits
+deactivate AI
+
+== Rapports et Statistiques ==
+A -> AI: Générer rapports
+activate AI
+AI -> RS: generateSalesReport(period)
+activate RS
+RS -> DB: SELECT SUM(total_ttc) FROM llx_commande WHERE date_creation BETWEEN ? AND ?
+activate DB
+DB --> RS: salesData
+deactivate DB
+
+RS -> DB: SELECT COUNT(*) FROM llx_commande GROUP BY fk_statut
+activate DB
+DB --> RS: orderStats
+deactivate DB
+
+RS -> DB: SELECT p.label, SUM(cd.qty) FROM llx_product p JOIN llx_commandedet cd ON p.rowid = cd.fk_product
+activate DB
+DB --> RS: productStats
+deactivate DB
+
+RS -> RS: compileReport(salesData, orderStats, productStats)
+RS --> AI: reportGenerated
+deactivate RS
+AI --> A: Rapport de ventes
+deactivate AI
+
+== Gestion des Retours ==
+A -> AI: Traiter demande retour
+activate AI
+AI -> OM: processReturn(returnId)
+activate OM
+OM -> DAPI: createCreditNote(returnData)
+activate DAPI
+DAPI -> DB: INSERT INTO llx_facture (type = 2)
+activate DB
+DB --> DAPI: creditNoteId
+deactivate DB
+DAPI --> OM: creditNoteCreated
+deactivate DAPI
+
+OM -> DAPI: updateStock(productId, returnedQty)
+activate DAPI
+DAPI -> DB: UPDATE llx_stock SET stock = stock + ? WHERE fk_product = ?
+activate DB
+DB --> DAPI: stockRestored
+deactivate DB
+DAPI --> OM: stockUpdated
+deactivate DAPI
+
+OM -> NS: notifyCustomer(returnId, "processed")
+activate NS
+NS --> OM: customerNotified
+deactivate NS
+OM --> AI: returnProcessed
+deactivate OM
+AI --> A: Retour traité
+deactivate AI
+
+@enduml</div>
+        </div>
+
+        <div class="diagram-section">
+            <h2>4. Diagramme d'Intégration Dolibarr</h2>
+            <p><strong>Fichier :</strong> plantuml_sequence_dolibarr_integration.png</p>
+            
+            <div class="features">
+                <h4>Fonctionnalités couvertes :</h4>
+                <ul>
+                    <li>Synchronisation bidirectionnelle des données</li>
+                    <li>Gestion des clients et sociétés</li>
+                    <li>Synchronisation du catalogue produits</li>
+                    <li>Création automatique des commandes</li>
+                    <li>Traitement des paiements et factures</li>
+                    <li>Suivi des commandes en temps réel</li>
+                    <li>Gestion des stocks avec réservation</li>
+                    <li>Synchronisation programmée</li>
+                </ul>
+            </div>
+            
+            <div class="plantuml-code">@startuml
+!theme plain
+title Diagramme de Séquence - Intégration Dolibarr ZAI E-commerce
+
+participant "ZAI E-commerce" as ZAI
+participant "DolibarrIntegration" as DI
+participant "Dolibarr API" as DAPI
+database "llx_societe" as TSOC
+database "llx_user" as TUSER
+database "llx_product" as TPROD
+database "llx_commande" as TCMD
+database "llx_commandedet" as TCMDDET
+database "llx_stock" as TSTOCK
+database "llx_facture" as TFACT
+database "llx_paiement" as TPAY
+
+== Synchronisation Client ==
+ZAI -> DI: syncCustomer(customerData)
+activate DI
+DI -> DAPI: checkCustomerExists(email)
+activate DAPI
+DAPI -> TUSER: SELECT rowid FROM llx_user WHERE email = ?
+activate TUSER
+TUSER --> DAPI: customerId or null
+deactivate TUSER
+
+alt Client n'existe pas
+    DAPI -> TSOC: INSERT INTO llx_societe (nom, email, ...)
+    activate TSOC
+    TSOC --> DAPI: societeId
+    deactivate TSOC
+    
+    DAPI -> TUSER: INSERT INTO llx_user (login, email, fk_societe, ...)
+    activate TUSER
+    TUSER --> DAPI: userId
+    deactivate TUSER
+else Client existe
+    DAPI -> TUSER: UPDATE llx_user SET ... WHERE rowid = ?
+    activate TUSER
+    TUSER --> DAPI: userUpdated
+    deactivate TUSER
+end
+
+DAPI --> DI: customerSynced(userId)
+deactivate DAPI
+DI --> ZAI: syncComplete
+deactivate DI
+
+== Synchronisation Produits ==
+ZAI -> DI: syncProducts()
+activate DI
+DI -> DAPI: getProductCatalog()
+activate DAPI
+DAPI -> TPROD: SELECT * FROM llx_product WHERE tosell = 1
+activate TPROD
+TTPROD --> DAPI: productsList[]
+deactivate TPROD
+
+DAPI -> TSTOCK: SELECT stock FROM llx_stock WHERE fk_product IN (...)
+activate TSTOCK
+TSTOCK --> DAPI: stockLevels[]
+deactivate TSTOCK
+
+DAPI --> DI: productsData(products, stocks)
+deactivate DAPI
+DI --> ZAI: productsCatalogUpdated
+deactivate DI
+
+== Création Commande ==
+ZAI -> DI: createOrder(orderData)
+activate DI
+DI -> DAPI: validateOrderData(orderData)
+activate DAPI
+
+# Vérification stock
+DAPI -> TSTOCK: SELECT stock FROM llx_stock WHERE fk_product = ?
+activate TSTOCK
+TSTOCK --> DAPI: currentStock
+deactivate TSTOCK
+
+alt Stock suffisant
+    # Création commande
+    DAPI -> TCMD: INSERT INTO llx_commande (ref, fk_soc, date_creation, total_ttc, ...)
+    activate TCMD
+    TCMD --> DAPI: commandeId
+    deactivate TCMD
+    
+    # Détails commande
+    loop Pour chaque produit
+        DAPI -> TCMDDET: INSERT INTO llx_commandedet (fk_commande, fk_product, qty, prix, ...)
+        activate TCMDDET
+        TCMDDET --> DAPI: detailId
+        deactivate TCMDDET
+        
+        # Réservation stock
+        DAPI -> TSTOCK: UPDATE llx_stock SET stock = stock - ? WHERE fk_product = ?
+        activate TSTOCK
+        TSTOCK --> DAPI: stockUpdated
+        deactivate TSTOCK
+    end
+    
+    DAPI --> DI: orderCreated(commandeId, orderRef)
+else Stock insuffisant
+    DAPI --> DI: error("Stock insuffisant")
+end
+deactivate DAPI
+DI --> ZAI: orderResult
+deactivate DI
+
+== Traitement Paiement ==
+ZAI -> DI: processPayment(paymentData)
+activate DI
+DI -> DAPI: createPayment(paymentData)
+activate DAPI
+
+# Enregistrement paiement
+DAPI -> TPAY: INSERT INTO llx_paiement (datep, amount, fk_paiement, num_paiement, ...)
+activate TPAY
+TTPAY --> DAPI: paiementId
+deactivate TPAY
+
+# Mise à jour statut commande
+DAPI -> TCMD: UPDATE llx_commande SET fk_statut = 2 WHERE rowid = ?
+activate TCMD
+TCMD --> DAPI: statusUpdated
+deactivate TCMD
+
+# Génération facture
+DAPI -> TFACT: INSERT INTO llx_facture (facnumber, fk_soc, total_ttc, paye, ...)
+activate TFACT
+TFACT --> DAPI: factureId
+deactivate TFACT
+
+DAPI --> DI: paymentProcessed(paiementId, factureId)
+deactivate DAPI
+DI --> ZAI: paymentComplete
+deactivate DI
+
+== Suivi Commande ==
+ZAI -> DI: getOrderStatus(orderId)
+activate DI
+DI -> DAPI: fetchOrderDetails(orderId)
+activate DAPI
+
+DAPI -> TCMD: SELECT c.*, s.nom FROM llx_commande c JOIN llx_societe s ON c.fk_soc = s.rowid WHERE c.rowid = ?
+activate TCMD
+TCMD --> DAPI: orderInfo
+deactivate TCMD
+
+DAPI -> TCMDDET: SELECT cd.*, p.label FROM llx_commandedet cd JOIN llx_product p ON cd.fk_product = p.rowid WHERE cd.fk_commande = ?
+activate TCMDDET
+TCMDDET --> DAPI: orderDetails[]
+deactivate TCMDDET
+
+DAPI --> DI: orderData(orderInfo, orderDetails)
+deactivate DAPI
+DI --> ZAI: orderStatus
+deactivate DI
+
+== Gestion Stock Temps Réel ==
+ZAI -> DI: checkStockAvailability(productId, quantity)
+activate DI
+DI -> DAPI: getProductStock(productId)
+activate DAPI
+DAPI -> TSTOCK: SELECT stock FROM llx_stock WHERE fk_product = ?
+activate TSTOCK
+TSTOCK --> DAPI: currentStock
+deactivate TSTOCK
+DAPI --> DI: stockLevel
+deactivate DAPI
+
+alt Stock >= quantity
+    DI --> ZAI: stockAvailable(true)
+else Stock < quantity
+    DI --> ZAI: stockAvailable(false, availableStock)
+end
+deactivate DI
+
+== Synchronisation Bidirectionnelle ==
+note over ZAI, TPAY
+    Synchronisation automatique toutes les 5 minutes
+    - Mise à jour des stocks
+    - Synchronisation des statuts de commande
+    - Mise à jour des informations clients
+    - Synchronisation des nouveaux produits
+end note
+
+ZAI -> DI: scheduledSync()
+activate DI
+DI -> DAPI: syncAllData()
+activate DAPI
+
+# Sync stocks
+DAPI -> TSTOCK: SELECT fk_product, stock FROM llx_stock
+activate TSTOCK
+TSTOCK --> DAPI: allStocks[]
+deactivate TSTOCK
+
+# Sync commandes
+DAPI -> TCMD: SELECT rowid, fk_statut FROM llx_commande WHERE date_modification > ?
+activate TCMD
+TCMD --> DAPI: updatedOrders[]
+deactivate TCMD
+
+DAPI --> DI: syncData(stocks, orders)
+deactivate DAPI
+DI --> ZAI: syncCompleted
+deactivate DI
+
+@enduml</div>
+        </div>
+
+        <div class="instructions">
+            <h3>Intégration dans le document LaTeX :</h3>
+            <p>Les quatre diagrammes ont été intégrés dans le document LaTeX <code>pp</code> :</p>
+            <ul>
+                <li><strong>Séquence de Création de Commande</strong> : Remplace le placeholder existant</li>
+                <li><strong>Flux Client</strong> : Nouvelle section ajoutée</li>
+                <li><strong>Fonctions Administrateur</strong> : Nouvelle section ajoutée</li>
+                <li><strong>Intégration Dolibarr</strong> : Nouvelle section ajoutée</li>
+            </ul>
+            <p>Chaque diagramme est accompagné d'une description détaillée des étapes et fonctionnalités couvertes.</p>
+        </div>
+    </div>
+</body>
+</html>

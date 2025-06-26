@@ -141,6 +141,36 @@ try {
         exit; // Exit after handling checkout to prevent further processing
     }
 
+    // User routes
+    if ($page === 'user') {
+        require_once 'app/controllers/UserController.php';
+        $userController = new UserController();
+        
+        $action = isset($_GET['action']) ? $_GET['action'] : 'profile';
+        
+        switch ($action) {
+            case 'profile':
+                $userController->profile();
+                break;
+            case 'update':
+                $userController->update();
+                break;
+            case 'orders':
+                $userController->orders();
+                break;
+            case 'addresses':
+                $userController->addresses();
+                break;
+            case 'saveAddress':
+                $userController->saveAddress();
+                break;
+            default:
+                $userController->profile();
+                break;
+        }
+        exit; // Exit after handling user to prevent further processing
+    }
+    
     // Auth routes
     else if ($page === 'auth') {
         require_once 'app/controllers/AuthController.php';

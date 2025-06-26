@@ -1,0 +1,308 @@
+@startuml
+!theme plain
+title ZAI E-commerce Platform - Authentication Sequences
+
+!define PRIMARY_COLOR #2E86AB
+!define SECONDARY_COLOR #A23B72
+!define SUCCESS_COLOR #F18F01
+!define ERROR_COLOR #C73E1D
+
+participant "Utilisateur" as User #lightblue
+participant "Plateforme ZAI" as ZAI #lightgreen
+participant "AuthController" as AuthCtrl #lightyellow
+participant "User Model" as UserModel #lightcyan
+participant "EmailService" as EmailSvc #lightpink
+participant "Base de Donnees" as DB #lightgray
+
+== Reinitialisation de Mot de Passe ==
+
+User -> ZAI : Demande de reinitialisation
+activate ZAI
+
+ZAI -> AuthCtrl : forgotPassword(email)
+activate AuthCtrl
+
+note over AuthCtrl : Validation de l'email
+
+AuthCtrl -> UserModel : findByEmail(email)
+activate UserModel
+
+UserModel -> DB : SELECT * FROM h8pd_societe\nWHERE email = ?
+activate DB
+DB --> UserModel : Données utilisateur
+deactivate DB
+
+UserModel --> AuthCtrl : Utilisateur trouvé/null
+deactivate UserModel
+
+alt Utilisateur existe
+    AuthCtrl -> AuthCtrl : generateResetToken()
+    note right : Token unique 64 caracteres
+    
+    AuthCtrl -> UserModel : saveResetToken(userId, token, expires)
+    activate UserModel
+    
+    UserModel -> DB : INSERT INTO reset_tokens\n(user_id, token, expires)
+    activate DB
+    DB --> UserModel : Token sauvegarde
+    deactivate DB
+    
+    UserModel --> AuthCtrl : Token enregistre
+    deactivate UserModel
+    
+    AuthCtrl -> EmailSvc : sendResetEmail(email, resetLink)
+    activate EmailSvc
+    note right : Lien expire en 1h
+    EmailSvc --> AuthCtrl : Email envoye
+    deactivate EmailSvc
+    
+    AuthCtrl --> ZAI : Email de reinitialisation envoye
+else Utilisateur introuvable
+    AuthCtrl --> ZAI : Message generique (securite)
+end
+
+deactivate AuthCtrl
+ZAI --> User : Instructions envoyees si email valide
+deactivate ZAI
+
+== Confirmation de Reinitialisation ==
+
+User -> ZAI : Clic sur lien de reinitialisation
+activate ZAI
+
+ZAI -> AuthCtrl : resetPassword(token, email, newPassword)
+activate AuthCtrl
+
+note over AuthCtrl : Validation des parametres
+
+AuthCtrl -> UserModel : getUserByEmailAndToken(email, token)
+activate UserModel
+
+UserModel -> DB : SELECT u.* FROM h8pd_societe u\nJOIN reset_tokens t ON u.rowid = t.user_id\nWHERE u.email = ? AND t.token = ?\nAND t.expires > NOW()
+activate DB
+DB --> UserModel : Utilisateur + Token valide
+deactivate DB
+
+UserModel --> AuthCtrl : Validation du token
+deactivate UserModel
+
+alt Token valide et non expire
+    AuthCtrl -> AuthCtrl : password_hash(newPassword)
+    note right : Hachage securise
+    
+    AuthCtrl -> UserModel : updatePassword(userId, hashedPassword)
+    activate UserModel
+    
+    UserModel -> DB : UPDATE h8pd_societe_extrafields\nSET password = ?\nWHERE fk_object = ?
+    activate DB
+    DB --> UserModel : Mot de passe mis a jour
+    deactivate DB
+    
+    UserModel --> AuthCtrl : Mot de passe modifié
+    deactivate UserModel
+    
+    AuthCtrl -> UserModel : clearResetToken(userId)
+    activate UserModel
+    UserModel -> DB : DELETE FROM reset_tokens\nWHERE user_id = ?
+    activate DB
+    DB --> UserModel : Token supprime
+    deactivate DB
+    UserModel --> AuthCtrl : Token nettoye
+    deactivate UserModel
+    
+    AuthCtrl --> ZAI : Reinitialisation reussie
+else Token invalide/expire
+    AuthCtrl --> ZAI : Erreur - Token invalide
+end
+
+deactivate AuthCtrl
+ZAI --> User : Mot de passe mis a jour avec succes
+deactivate ZAI
+
+== Mise a Jour du Profil ==
+
+User -> ZAI : Soumission mise a jour profil
+activate ZAI
+
+ZAI -> AuthCtrl : updateProfile(userId, profileData)
+activate AuthCtrl
+
+note over AuthCtrl : Validation des donnees
+AuthCtrl -> AuthCtrl : validateProfileData(profileData)
+
+alt Validation reussie
+    AuthCtrl -> UserModel : updateUser(userId, profileData)
+    activate UserModel
+    
+    UserModel -> DB : UPDATE h8pd_societe SET\nfirstname=?, lastname=?, email=?,\nphone=?, address=?, zip=?, town=?\nWHERE rowid=?
+    activate DB
+    
+    note right of DB
+        Champs mis a jour :
+        - Prenom/Nom
+        - Email
+        - Telephone  
+        - Adresse complete
+        - Code postal
+        - Ville
+    end note
+    
+    DB --> UserModel : Profil mis a jour
+    deactivate DB
+    
+    UserModel --> AuthCtrl : Mise a jour reussie
+    deactivate UserModel
+    
+    AuthCtrl -> AuthCtrl : updateSession(updatedUserData)
+    note right : Mise a jour session utilisateur
+    
+    AuthCtrl --> ZAI : Profil mis a jour avec succes
+else Validation echouee
+    AuthCtrl --> ZAI : Erreurs de validation
+end
+
+deactivate AuthCtrl
+ZAI --> User : Confirmation mise a jour profil
+deactivate ZAI
+
+== Inscription avec Verification Email ==
+
+User -> ZAI : Formulaire d'inscription
+activate ZAI
+
+ZAI -> AuthCtrl : register(userData)
+activate AuthCtrl
+
+note over AuthCtrl : Validation des donnees\n(email, mot de passe, etc.)
+
+AuthCtrl -> UserModel : register(userData)
+activate UserModel
+
+note over UserModel : Transaction de creation utilisateur
+
+UserModel -> DB : BEGIN TRANSACTION
+activate DB
+
+UserModel -> DB : INSERT INTO h8pd_societe\n(nom, email, firstname, etc.)
+DB --> UserModel : userId cree
+
+UserModel -> DB : INSERT INTO h8pd_societe_extrafields\n(fk_object, password, email_verified=0)
+DB --> UserModel : Donnees extrafields sauvegardees
+
+UserModel -> DB : INSERT INTO h8pd_user\n(fk_soc, login, etc.)
+DB --> UserModel : Utilisateur cree dans h8pd_user
+
+UserModel -> DB : COMMIT
+deactivate DB
+
+UserModel --> AuthCtrl : Utilisateur cree (userId)
+deactivate UserModel
+
+AuthCtrl -> UserModel : generateVerificationToken()
+activate UserModel
+note right : Token unique 32 bytes
+UserModel --> AuthCtrl : Token genere
+deactivate UserModel
+
+AuthCtrl -> UserModel : saveVerificationToken(userId, token)
+activate UserModel
+UserModel -> DB : UPDATE h8pd_societe_extrafields\nSET verification_token = ?,\nverification_token_created = NOW()\nWHERE fk_object = ?
+activate DB
+DB --> UserModel : Token sauvegarde
+deactivate DB
+UserModel --> AuthCtrl : Token enregistré
+deactivate UserModel
+
+AuthCtrl -> EmailSvc : sendVerificationEmail(email, verificationLink)
+activate EmailSvc
+note right : Lien de verification\navec token integre
+EmailSvc --> AuthCtrl : Email de verification envoye
+deactivate EmailSvc
+
+AuthCtrl --> ZAI : Inscription reussie
+deactivate AuthCtrl
+
+ZAI --> User : Verifiez votre email pour activer votre compte
+deactivate ZAI
+
+== Confirmation de Verification Email ==
+
+User -> ZAI : Clic sur lien de verification
+activate ZAI
+
+ZAI -> AuthCtrl : verifyEmail(token)
+activate AuthCtrl
+
+note over AuthCtrl : Validation du token de verification
+
+AuthCtrl -> UserModel : validateVerificationToken(token)
+activate UserModel
+
+UserModel -> DB : SELECT fk_object, verification_token_created\nFROM h8pd_societe_extrafields\nWHERE verification_token = ?\nAND verification_token_created > DATE_SUB(NOW(), INTERVAL 24 HOUR)
+activate DB
+DB --> UserModel : Token valide trouve
+deactivate DB
+
+UserModel --> AuthCtrl : Token valide et non expire
+deactivate UserModel
+
+alt Token valide
+    AuthCtrl -> UserModel : markEmailAsVerified(token)
+    activate UserModel
+    
+    UserModel -> DB : UPDATE h8pd_societe_extrafields\nSET email_verified = 1,\nverification_token = NULL,\nverification_token_created = NULL\nWHERE verification_token = ?
+    activate DB
+    DB --> UserModel : Email verifie et token nettoye
+    deactivate DB
+    
+    UserModel --> AuthCtrl : Verification reussie
+    deactivate UserModel
+    
+    AuthCtrl --> ZAI : Email verifie avec succes
+    
+    ZAI --> User : Email verifie! Vous pouvez maintenant vous connecter
+else Token invalide/expire
+    AuthCtrl --> ZAI : Erreur - Token invalide ou expire
+    ZAI --> User : Lien de verification invalide ou expire
+end
+
+deactivate AuthCtrl
+deactivate ZAI
+
+== Connexion avec Verification Email ==
+
+User -> ZAI : Tentative de connexion
+activate ZAI
+
+ZAI -> AuthCtrl : login(email, password)
+activate AuthCtrl
+
+AuthCtrl -> UserModel : authenticate(email, password)
+activate UserModel
+
+UserModel -> DB : SELECT s.*, e.password, e.email_verified\nFROM h8pd_societe s\nJOIN h8pd_societe_extrafields e ON s.rowid = e.fk_object\nWHERE s.email = ?
+activate DB
+DB --> UserModel : Donnees utilisateur + statut verification
+deactivate DB
+
+UserModel --> AuthCtrl : Utilisateur trouvé
+deactivate UserModel
+
+alt Mot de passe correct
+    alt Email verifie
+        AuthCtrl -> AuthCtrl : createSession(userData)
+        AuthCtrl --> ZAI : Connexion reussie
+        ZAI --> User : Bienvenue! Connexion reussie
+    else Email non verifie
+        AuthCtrl --> ZAI : Erreur - Email non verifie
+        ZAI --> User : Veuillez verifier votre email avant de vous connecter
+    end
+else Mot de passe incorrect
+    AuthCtrl --> ZAI : Erreur - Identifiants invalides
+    ZAI --> User : Email ou mot de passe incorrect
+end
+
+deactivate AuthCtrl
+deactivate ZAI
+
+@enduml

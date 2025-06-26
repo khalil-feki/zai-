@@ -1,0 +1,92 @@
+@startuml
+!theme plain
+title Diagramme de Séquence - Création d'une Commande ZAI E-commerce
+
+actor Client as C
+participant "Interface Web" as UI
+participant "OrderController" as OC
+participant "CartService" as CS
+participant "ProductService" as PS
+participant "StockService" as SS
+participant "DolibarrAPI" as DAPI
+database "Base Dolibarr" as DB
+participant "PaymentGateway" as PG
+participant "NotificationService" as NS
+
+C -> UI: Valider le panier
+activate UI
+
+UI -> OC: POST /order/create
+activate OC
+
+OC -> CS: getCartItems(userId)
+activate CS
+CS --> OC: cartItems[]
+deactivate CS
+
+OC -> PS: validateProducts(cartItems)
+activate PS
+PS -> DB: SELECT * FROM llx_product WHERE rowid IN (...)
+activate DB
+DB --> PS: productData[]
+deactivate DB
+PS --> OC: validationResult
+deactivate PS
+
+OC -> SS: checkStock(cartItems)
+activate SS
+SS -> DB: SELECT stock FROM llx_stock WHERE fk_product IN (...)
+activate DB
+DB --> SS: stockLevels[]
+deactivate DB
+SS --> OC: stockAvailable
+deactivate SS
+
+alt Stock disponible
+    OC -> OC: calculateTotals(cartItems)
+    
+    OC -> DAPI: createOrder(orderData)
+    activate DAPI
+    
+    DAPI -> DB: INSERT INTO llx_commande (...)
+    activate DB
+    DB --> DAPI: orderId
+    deactivate DB
+    
+    loop Pour chaque produit
+        DAPI -> DB: INSERT INTO llx_commandedet (...)
+        activate DB
+        DB --> DAPI: detailId
+        deactivate DB
+    end
+    
+    DAPI -> DB: UPDATE llx_stock SET stock = stock - qty
+    activate DB
+    DB --> DAPI: stockUpdated
+    deactivate DB
+    
+    DAPI --> OC: orderCreated(orderId, orderNumber)
+    deactivate DAPI
+    
+    OC -> CS: clearCart(userId)
+    activate CS
+    CS --> OC: cartCleared
+    deactivate CS
+    
+    OC -> NS: sendOrderConfirmation(orderId, userEmail)
+    activate NS
+    NS --> OC: emailSent
+    deactivate NS
+    
+    OC --> UI: redirect(/payment?order=orderId)
+    UI --> C: Page de paiement
+    
+else Stock insuffisant
+    OC --> UI: error("Stock insuffisant")
+    UI --> C: Message d'erreur
+end
+
+deactivate OC
+deactivate UI
+
+@enduml

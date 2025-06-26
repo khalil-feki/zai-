@@ -1,0 +1,216 @@
+@startuml
+!theme plain
+title Dolibarr ERP Integration Architecture - ZAI E-commerce Platform
+
+!define SYSTEM rectangle
+!define API interface
+!define DATABASE cylinder
+!define SERVICE component
+
+SYSTEM "ZAI E-commerce Platform" as ZAI {
+    SERVICE "AuthController" as AuthCtrl
+    SERVICE "ProductController" as ProdCtrl
+    SERVICE "OrderController" as OrderCtrl
+    SERVICE "TicketsController" as TicketCtrl
+    
+    SERVICE "DolibarrService" as DoliService {
+        + syncUser()
+        + getProducts()
+        + createOrder()
+        + createTicket()
+        + updateInventory()
+        --
+        - makeApiCall()
+        - handleAuthentication()
+        - formatResponse()
+        - handleErrors()
+    }
+    
+    SERVICE "Models" as Models {
+        + User Model
+        + Product Model
+        + Order Model
+        + Ticket Model
+        + Cart Model
+    }
+}
+
+API "Dolibarr REST API" as DoliAPI {
+    **Authentication Endpoints:**
+    + POST /api/index.php/login
+    + GET /api/index.php/users
+    + POST /api/index.php/users
+    + PUT /api/index.php/users/{id}
+    
+    **Product Endpoints:**
+    + GET /api/index.php/products
+    + GET /api/index.php/products/{id}
+    + GET /api/index.php/categories
+    + PUT /api/index.php/products/{id}/stock
+    
+    **Order Endpoints:**
+    + POST /api/index.php/orders
+    + GET /api/index.php/orders/{id}
+    + PUT /api/index.php/orders/{id}
+    + POST /api/index.php/orders/{id}/validate
+    
+    **Ticket Endpoints:**
+    + POST /api/index.php/tickets
+    + GET /api/index.php/tickets/{id}
+    + PUT /api/index.php/tickets/{id}
+}
+
+SYSTEM "Dolibarr ERP System" as Dolibarr {
+    SERVICE "User Management" as UserMgmt {
+        + User Authentication
+        + Role Management
+        + Company Assignment
+        + Profile Management
+    }
+    
+    SERVICE "Product Catalog" as ProdCatalog {
+        + Product Information
+        + Category Management
+        + Inventory Tracking
+        + Price Management
+    }
+    
+    SERVICE "Order Management" as OrderMgmt {
+        + Order Processing
+        + Invoice Generation
+        + Payment Tracking
+        + Delivery Management
+    }
+    
+    SERVICE "Support System" as SupportSys {
+        + Ticket Management
+        + Customer Communication
+        + Issue Tracking
+        + Resolution Workflow
+    }
+}
+
+DATABASE "Dolibarr Database" as DoliDB {
+    **Core Tables:**
+    + llx_user
+    + llx_societe
+    + llx_product
+    + llx_categorie
+    + llx_commande
+    + llx_commandedet
+    + llx_ticket
+    + llx_facture
+    + llx_paiement
+    
+    **Custom Extensions:**
+    + zai_cart
+    + zai_orders
+    + zai_order_items
+}
+
+' Integration Flow
+AuthCtrl --> DoliService : User Operations
+ProdCtrl --> DoliService : Product Data
+OrderCtrl --> DoliService : Order Processing
+TicketCtrl --> DoliService : Support Tickets
+
+DoliService --> DoliAPI : HTTP Requests
+DoliAPI --> UserMgmt : User Sync
+DoliAPI --> ProdCatalog : Product Data
+DoliAPI --> OrderMgmt : Order Creation
+DoliAPI --> SupportSys : Ticket Management
+
+UserMgmt --> DoliDB : User Data
+ProdCatalog --> DoliDB : Product Data
+OrderMgmt --> DoliDB : Order Data
+SupportSys --> DoliDB : Ticket Data
+
+DoliService --> Models : Data Mapping
+Models --> DoliDB : Direct Access
+
+package "Integration Patterns" {
+    note as SyncPattern
+        **Synchronization Pattern:**
+        1. ZAI creates/updates data
+        2. DolibarrService formats request
+        3. API call to Dolibarr
+        4. Response validation
+        5. Local data update
+        6. Error handling & retry
+    end note
+    
+    note as AuthPattern
+        **Authentication Flow:**
+        1. User registers/logs in ZAI
+        2. Check local user table
+        3. Sync with Dolibarr users
+        4. Create/update company link
+        5. Establish session
+        6. Maintain sync status
+    end note
+    
+    note as OrderPattern
+        **Order Processing:**
+        1. Cart checkout in ZAI
+        2. Create order in Dolibarr
+        3. Generate invoice
+        4. Process payment
+        5. Update inventory
+        6. Send notifications
+    end note
+}
+
+package "Data Flow Examples" {
+    note as UserSync
+        **User Registration:**
+        ZAI User → DolibarrService
+        → POST /api/users
+        → llx_user table
+        → Company assignment
+        → Session creation
+    end note
+    
+    note as ProductSync
+        **Product Display:**
+        ZAI Request → DolibarrService
+        → GET /api/products
+        → llx_product table
+        → Category mapping
+        → Price calculation
+        → Stock verification
+    end note
+    
+    note as OrderSync
+        **Order Creation:**
+        ZAI Cart → DolibarrService
+        → POST /api/orders
+        → llx_commande table
+        → llx_commandedet table
+        → Invoice generation
+        → Payment processing
+    end note
+}
+
+package "Security & Configuration" {
+    note as Security
+        **Security Measures:**
+        • API Key Authentication
+        • HTTPS Communication
+        • Input Validation
+        • SQL Injection Prevention
+        • Session Management
+        • Error Logging
+    end note
+    
+    note as Config
+        **Configuration:**
+        • DOLIBARR_URL
+        • DOLIBARR_API_KEY
+        • Database Credentials
+        • Timeout Settings
+        • Retry Policies
+        • Debug Modes
+    end note
+}
+
+@enduml

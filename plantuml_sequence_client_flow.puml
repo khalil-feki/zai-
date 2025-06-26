@@ -1,0 +1,124 @@
+@startuml
+!theme plain
+title Diagramme de Séquence - Flux Client ZAI E-commerce
+
+actor Client as C
+participant "Interface Web" as UI
+participant "AuthController" as AC
+participant "ProductController" as PC
+participant "CartController" as CC
+participant "OrderController" as OC
+participant "AccountController" as ACC
+participant "DolibarrAPI" as DAPI
+database "Base Dolibarr" as DB
+
+== Authentification ==
+C -> UI: Connexion/Inscription
+activate UI
+UI -> AC: authenticate(credentials)
+activate AC
+AC -> DAPI: validateUser(email, password)
+activate DAPI
+DAPI -> DB: SELECT * FROM llx_user WHERE email = ?
+activate DB
+DB --> DAPI: userData
+deactivate DB
+DAPI --> AC: userValidated
+deactivate DAPI
+AC --> UI: sessionCreated
+deactivate AC
+UI --> C: Dashboard client
+deactivate UI
+
+== Navigation Produits ==
+C -> UI: Parcourir catalogue
+activate UI
+UI -> PC: getProducts(filters)
+activate PC
+PC -> DB: SELECT * FROM llx_product WHERE active = 1
+activate DB
+DB --> PC: productList[]
+deactivate DB
+PC --> UI: productsData
+deactivate PC
+UI --> C: Liste des produits
+deactivate UI
+
+== Gestion Panier ==
+C -> UI: Ajouter au panier
+activate UI
+UI -> CC: addToCart(productId, quantity)
+activate CC
+CC -> DB: SELECT stock FROM llx_stock WHERE fk_product = ?
+activate DB
+DB --> CC: stockLevel
+deactivate DB
+
+alt Stock disponible
+    CC -> CC: addItemToSession(productId, quantity)
+    CC --> UI: itemAdded
+    UI --> C: Produit ajouté
+else Stock insuffisant
+    CC --> UI: error("Stock insuffisant")
+    UI --> C: Message d'erreur
+end
+deactivate CC
+deactivate UI
+
+== Finalisation Commande ==
+C -> UI: Valider panier
+activate UI
+UI -> OC: processCheckout()
+activate OC
+OC -> OC: validateCartItems()
+OC -> OC: calculateTotals()
+OC --> UI: checkoutData
+deactivate OC
+UI --> C: Page de checkout
+deactivate UI
+
+C -> UI: Confirmer commande
+activate UI
+UI -> OC: createOrder(orderData)
+activate OC
+OC -> DAPI: createDolibarrOrder(orderData)
+activate DAPI
+DAPI -> DB: INSERT INTO llx_commande
+activate DB
+DB --> DAPI: orderId
+deactivate DB
+DAPI --> OC: orderCreated
+deactivate DAPI
+OC --> UI: orderConfirmed
+deactivate OC
+UI --> C: Confirmation commande
+deactivate UI
+
+== Suivi Commande ==
+C -> UI: Consulter mes commandes
+activate UI
+UI -> ACC: getOrderHistory(userId)
+activate ACC
+ACC -> DB: SELECT * FROM llx_commande WHERE fk_soc = ?
+activate DB
+DB --> ACC: orderHistory[]
+deactivate DB
+ACC --> UI: ordersData
+deactivate ACC
+UI --> C: Historique des commandes
+deactivate UI
+
+C -> UI: Détails commande
+activate UI
+UI -> OC: getOrderDetails(orderId)
+activate OC
+OC -> DB: SELECT * FROM llx_commande c JOIN llx_commandedet cd ON c.rowid = cd.fk_commande WHERE c.rowid = ?
+activate DB
+DB --> OC: orderDetails
+deactivate DB
+OC --> UI: detailedOrder
+deactivate OC
+UI --> C: Détails de la commande
+deactivate UI
+
+@enduml

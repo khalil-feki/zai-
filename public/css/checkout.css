@@ -52,6 +52,7 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     position: relative;
     z-index: 1;
+    padding: 2rem;
 }
 
 .checkout-card::before {
@@ -69,6 +70,10 @@
 .checkout-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+
+.checkout-card:hover::before {
+    opacity: 1;
 }
 
 .card-header {
@@ -99,26 +104,37 @@
     border-radius: 2px;
 }
 
-/* Modern Section Headers */
+/* Modern section headers */
 h5 {
-    color: #4a5568;
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin: 30px 0 20px 0;
+    color: #2d3748;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
     position: relative;
-    padding-left: 20px;
+    padding-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-h5::before {
+h5::after {
     content: '';
     position: absolute;
+    bottom: 0;
     left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 4px;
-    height: 20px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
     border-radius: 2px;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        width: 0;
+    }
+    to {
+        width: 60px;
+    }
 }
 
 .form-group {
@@ -129,43 +145,130 @@ h5::before {
 .form-group label {
     color: #2d3748;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 0.75rem;
     display: block;
     font-size: 0.95rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.form-group label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.form-group label:hover::before {
+    transform: translateY(-50%) scale(1.5);
+    box-shadow: 0 0 8px rgba(102, 126, 234, 0.4);
 }
 
 .form-control {
+    background: #ffffff;
     border: 2px solid #e2e8f0;
     border-radius: 12px;
-    padding: 15px 20px;
+    padding: 1rem 1.25rem;
     font-size: 1rem;
-    transition: all 0.4s ease;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     width: 100%;
     position: relative;
+    font-weight: 500;
     z-index: 1;
+}
+
+/* Modern select styling */
+select.form-control {
+    background-image: linear-gradient(45deg, transparent 50%, #667eea 50%),
+                      linear-gradient(135deg, #667eea 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(1em + 2px),
+                         calc(100% - 15px) calc(1em + 2px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    appearance: none;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
+select.form-control:hover {
+    background-image: linear-gradient(45deg, transparent 50%, #5a67d8 50%),
+                      linear-gradient(135deg, #5a67d8 50%, transparent 50%);
+}
+
+/* Modern textarea styling */
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.6;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.95) 0%, 
+        rgba(255, 255, 255, 1) 100%);
+    backdrop-filter: blur(5px);
+}
+
+textarea.form-control:focus {
+    background: rgba(255, 255, 255, 1);
 }
 
 .form-control:focus {
     border-color: #667eea;
-    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15), 0 4px 12px rgba(102, 126, 234, 0.1);
+    background: #ffffff;
     outline: none;
     transform: translateY(-2px);
-    background: rgba(255, 255, 255, 1);
 }
 
 .form-control:hover {
     border-color: #cbd5e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transform: translateY(-1px);
 }
 
 .form-check-input {
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid #667eea;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    cursor: pointer;
     margin-top: 0.25rem;
-    transform: scale(1.2);
-    accent-color: #667eea;
+    appearance: none;
+}
+
+.form-check-input:checked {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+    transform: scale(1.05);
+}
+
+.form-check-input:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.form-check-input:hover {
+    border-color: #5a67d8;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+    transform: scale(1.02);
 }
 
 .form-check-label {
@@ -182,15 +285,15 @@ h5::before {
 
 /* Modern Button Styling */
 .btn {
-    padding: 15px 40px;
-    border-radius: 12px;
+    padding: 10px 24px;
+    border-radius: 8px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
     transition: all 0.4s ease;
     border: none;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.85rem;
     position: relative;
     overflow: hidden;
     display: inline-block;
@@ -215,13 +318,38 @@ h5::before {
 .btn-primary {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+    font-size: 0.8rem;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    padding: 8px 20px;
 }
 
 .btn-primary:hover {
     background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(102, 126, 234, 0.35);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
 }
 
 .btn-primary:active {
@@ -243,14 +371,18 @@ h5::before {
 
 /* Modern Order Summary */
 .order-summary {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
+    backdrop-filter: blur(25px);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.08),
+        0 8px 16px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     position: relative;
-    margin-top: 20px;
+    margin-top: 24px;
+    overflow: hidden;
 }
 
 .order-summary::before {
@@ -259,18 +391,38 @@ h5::before {
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #f093fb, #f5576c);
-    border-radius: 20px 20px 0 0;
+    height: 5px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background-size: 200% 100%;
+    animation: gradientShift 4s ease-in-out infinite;
+    border-radius: 24px 24px 0 0;
+}
+
+.order-summary::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.03) 0%, transparent 70%);
+    animation: floatingBubbles 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .order-summary h3 {
-    color: #2d3748;
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 25px;
+    color: #1a202c;
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: 28px;
     position: relative;
-    padding-bottom: 15px;
+    padding-bottom: 18px;
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    z-index: 1;
 }
 
 .order-summary h3::after {
@@ -288,8 +440,19 @@ h5::before {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid #e2e8f0;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.summary-item:hover {
+    background: rgba(102, 126, 234, 0.02);
+    border-radius: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin: 0 -12px;
 }
 
 .summary-item:last-child {
@@ -297,12 +460,20 @@ h5::before {
 }
 
 .summary-total {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #2d3748;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 2px solid #e2e8f0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-top: 1.5rem;
+    padding: 1.25rem 0;
+    border-top: 2px solid transparent;
+    background-image: linear-gradient(white, white), linear-gradient(135deg, #667eea, #764ba2);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    position: relative;
+    z-index: 1;
 }
 
 .alert {
@@ -445,15 +616,28 @@ h5::before {
     .btn {
         width: 100%;
         margin-bottom: 10px;
-        padding: 12px 30px;
+        padding: 10px 20px;
+        font-size: 0.8rem;
     }
     
     .order-summary {
-        padding: 20px;
-        margin-top: 15px;
+        padding: 24px;
+        margin-top: 18px;
+        border-radius: 20px;
     }
     
     .order-summary h3 {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+    }
+    
+    .summary-item {
+        padding: 0.8rem 0;
+    }
+    
+    .summary-total {
+        font-size: 1.2rem;
+        margin-top: 1.2rem;
+        padding: 1rem 0;
     }
 }

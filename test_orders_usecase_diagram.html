@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Diagramme Cas d'Usage Commandes - ZAI E-commerce</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .diagram-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            background-color: #ecf0f1;
+        }
+        .diagram-title {
+            color: #2980b9;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .plantuml-code {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            margin: 15px 0;
+        }
+        .instructions {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .online-link {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 5px;
+        }
+        .online-link:hover {
+            background-color: #2980b9;
+        }
+        .features-list {
+            background-color: #e8f5e8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .features-list h3 {
+            color: #27ae60;
+            margin-top: 0;
+        }
+        .features-list ul {
+            margin: 10px 0;
+        }
+        .features-list li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛒 Diagramme de Cas d'Usage - Gestion des Commandes</h1>
+        <p><strong>Projet:</strong> ZAI E-commerce Platform - Sprint 3</p>
+        <p><strong>Fichier:</strong> plantuml_orders_usecase_diagram.puml</p>
+        
+        <div class="diagram-section">
+            <div class="diagram-title">📋 Diagramme de Cas d'Usage des Commandes</div>
+            
+            <div class="features-list">
+                <h3>🎯 ZAI E-commerce Features</h3>
+                <ul>
+                    <li><strong>Client Functions:</strong> Create orders, process payments, view history, track status</li>
+                    <li><strong>Address Management:</strong> Manage shipping addresses, apply discount codes</li>
+                    <li><strong>Order Control:</strong> Cancel orders, request refunds</li>
+                    <li><strong>ZAI Admin:</strong> Validate orders, update status, generate invoices, process refunds</li>
+                    <li><strong>Returns Management:</strong> Handle product returns and exchanges</li>
+                    <li><strong>Dolibarr Integration:</strong> Sync customer data, update stock, generate invoices, track shipments</li>
+                </ul>
+            </div>
+            
+            <div class="instructions">
+                <h3>📝 Instructions de Génération</h3>
+                <p><strong>Option 1 - Service en ligne (Recommandé):</strong></p>
+                <a href="http://www.plantuml.com/plantuml/uml/" target="_blank" class="online-link">PlantUML Online Server</a>
+                <a href="https://plantuml-editor.kkeisuke.com/" target="_blank" class="online-link">PlantUML Editor</a>
+                
+                <p><strong>Option 2 - Installation locale:</strong></p>
+                <ol>
+                    <li>Installer Java JRE 8+</li>
+                    <li>Télécharger plantuml.jar</li>
+                    <li>Exécuter: <code>java -jar plantuml.jar -tpng plantuml_orders_usecase_diagram.puml</code></li>
+                </ol>
+                
+                <p><strong>Option 3 - Extension VS Code:</strong></p>
+                <p>Installer l'extension "PlantUML" et utiliser Ctrl+Shift+P → "PlantUML: Preview Current Diagram"</p>
+            </div>
+            
+            <div class="plantuml-code">@startuml Orders Use Cases
+!theme plain
+title Plateforme E-commerce ZAI - Cas d'Usage Gestion des Commandes (Sprint 3)
+
+left to right direction
+
+actor Client
+actor "Gestionnaire Commandes" as Manager
+actor Administrateur
+actor "Passerelle Paiement" as Gateway
+actor "Service Livraison" as Delivery
+
+rectangle "Système Gestion Commandes" {
+  usecase "Finaliser Commande" as UC1
+  usecase "Choisir Méthode Paiement" as UC2
+  usecase "Traiter Paiement" as UC3
+  usecase "Consulter Historique Commandes" as UC4
+  usecase "Voir Détails Commande" as UC5
+  usecase "Suivre Statut Commande" as UC6
+  usecase "Recevoir Notifications" as UC7
+  usecase "Gérer Adresses Livraison" as UC8
+  usecase "Appliquer Code Promo" as UC9
+  usecase "Annuler Commande" as UC10
+}
+
+rectangle "Gestion Administrative" {
+  usecase "Mettre à Jour Statut" as ADMIN1
+  usecase "Générer Facture" as ADMIN2
+  usecase "Gérer Remboursement" as ADMIN3
+  usecase "Valider Commande" as ADMIN4
+  usecase "Préparer Expédition" as ADMIN5
+  usecase "Confirmer Livraison" as ADMIN6
+  usecase "Gérer Retours" as ADMIN7
+}
+
+rectangle "Rapports et Analytics" {
+  usecase "Générer Rapports Ventes" as REP1
+  usecase "Analyser Performance" as REP2
+  usecase "Suivre Métriques" as REP3
+}
+
+' Relations Client
+Client --> UC1 : finalise
+Client --> UC2 : sélectionne
+Client --> UC4 : consulte
+Client --> UC5 : examine
+Client --> UC6 : suit
+Client --> UC7 : reçoit
+Client --> UC8 : gère
+Client --> UC9 : utilise
+Client --> UC10 : demande
+
+' Relations Gestionnaire
+Manager --> ADMIN1 : met à jour
+Manager --> ADMIN4 : valide
+Manager --> ADMIN5 : prépare
+Manager --> UC6 : surveille
+Manager --> UC7 : envoie
+
+' Relations Administrateur
+Administrateur --> ADMIN2 : génère
+Administrateur --> ADMIN3 : traite
+Administrateur --> ADMIN6 : confirme
+Administrateur --> ADMIN7 : gère
+Administrateur --> REP1 : produit
+Administrateur --> REP2 : analyse
+Administrateur --> REP3 : surveille
+
+' Relations Systèmes Externes
+Gateway --> UC3 : traite
+Delivery --> ADMIN6 : confirme
+Delivery --> UC6 : met à jour
+
+' Relations entre cas d'usage
+UC1 ..> UC2 : inclut
+UC2 ..> UC3 : déclenche
+UC1 ..> UC8 : peut inclure
+UC1 ..> UC9 : peut inclure
+UC3 ..> ADMIN2 : génère
+UC3 ..> ADMIN4 : déclenche
+ADMIN4 ..> ADMIN5 : active
+ADMIN5 ..> ADMIN6 : précède
+UC10 ..> ADMIN3 : peut déclencher
+
+' Héritage
+Manager --|> Client
+Administrateur --|> Manager
+
+@enduml</div>
+        </div>
+        
+        <div class="instructions success">
+            <h3>✅ Diagramme Créé avec Succès</h3>
+            <p>Le diagramme de cas d'usage pour la gestion des commandes a été créé et intégré dans le document LaTeX.</p>
+            <p><strong>Fichiers générés:</strong></p>
+            <ul>
+                <li><code>plantuml_orders_usecase_diagram.puml</code> - Code source PlantUML</li>
+                <li>Référence mise à jour dans le document LaTeX (chapitre 6)</li>
+            </ul>
+            <p><strong>Prochaines étapes:</strong></p>
+            <ol>
+                <li>Générer l'image PNG à partir du fichier PlantUML</li>
+                <li>Placer l'image dans le dossier du projet</li>
+                <li>Compiler le document LaTeX pour voir le résultat final</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>

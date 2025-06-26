@@ -1,0 +1,56 @@
+@startuml Product Display Sequence
+!theme plain
+title ZAI E-commerce Platform - Sequence d'Affichage des Produits
+
+actor Customer as "Client"
+participant "ProductController" as ProdCtrl
+participant "ProductModel" as ProdM
+participant "CategoryModel" as CatM
+participant "DolibarrAPI" as Doli
+
+Customer -> ProdCtrl: browseProducts(categoryId, filters)
+activate ProdCtrl
+
+note over ProdCtrl : Traitement de la demande\nd'affichage des produits
+
+ProdCtrl -> CatM: findById(categoryId)
+activate CatM
+CatM -> CatM: Requête sur llx_categorie
+CatM --> ProdCtrl: category data
+deactivate CatM
+
+ProdCtrl -> ProdM: findByCategory(categoryId, filters)
+activate ProdM
+
+note over ProdM : Application des filtres\n(prix, disponibilité)
+
+ProdM -> Doli: getProducts(categoryId, filters)
+activate Doli
+
+note over Doli : Requête sur tables:\n- llx_product\n- llx_product_extrafields\n- llx_stock
+
+Doli -> Doli: SELECT p.*, pe.*, s.reel\nFROM llx_product p\nJOIN llx_product_extrafields pe ON p.rowid = pe.fk_object\nLEFT JOIN llx_stock s ON p.rowid = s.fk_product\nWHERE p.fk_product_type = 0\nAND p.tosell = 1
+
+Doli --> ProdM: product data (nom, prix, stock, images)
+deactivate Doli
+
+ProdM -> ProdM: Calcul prix avec TVA
+ProdM -> ProdM: Formatage des données
+
+ProdM --> ProdCtrl: products list
+deactivate ProdM
+
+ProdCtrl -> CatM: getSubcategories(categoryId)
+activate CatM
+CatM -> CatM: SELECT * FROM llx_categorie\nWHERE fk_parent = ?
+CatM --> ProdCtrl: subcategories
+deactivate CatM
+
+note over ProdCtrl : Préparation de la vue\navec produits et sous-catégories
+
+ProdCtrl --> Customer: products page with data
+deactivate ProdCtrl
+
+note over Customer : Affichage du catalogue\navec filtres et navigation
+
+@enduml

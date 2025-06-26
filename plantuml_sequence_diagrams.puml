@@ -1,0 +1,210 @@
+@startuml User Registration Sequence
+!theme plain
+title ZAI E-commerce Platform - User Registration Sequence
+
+actor User
+participant "AuthController" as Auth
+participant "UserModel" as UserM
+participant "DolibarrAPI" as Doli
+participant "SessionManager" as Session
+participant "EmailService" as Email
+
+User -> Auth: register(userData)
+activate Auth
+
+Auth -> UserM: validateUserData(userData)
+activate UserM
+UserM --> Auth: validation result
+deactivate UserM
+
+alt validation successful
+    Auth -> UserM: hashPassword(password)
+    activate UserM
+    UserM --> Auth: hashedPassword
+    deactivate UserM
+    
+    Auth -> UserM: create(userData)
+    activate UserM
+    UserM -> UserM: save to database
+    UserM --> Auth: user created
+    deactivate UserM
+    
+    Auth -> Doli: createThirdParty(userData)
+    activate Doli
+    Doli -> Doli: create in Dolibarr
+    Doli --> Auth: dolibarr_id
+    deactivate Doli
+    
+    Auth -> UserM: updateDolibarrId(userId, dolibarr_id)
+    activate UserM
+    UserM --> Auth: updated
+    deactivate UserM
+    
+    Auth -> Session: start()
+    activate Session
+    Session -> Session: create session
+    Session --> Auth: session started
+    deactivate Session
+    
+    Auth -> Email: sendWelcomeEmail(userData)
+    activate Email
+    Email --> Auth: email sent
+    deactivate Email
+    
+    Auth --> User: registration successful
+else validation failed
+    Auth --> User: validation errors
+end
+
+deactivate Auth
+
+@enduml
+
+@startuml User Login Sequence
+!theme plain
+title ZAI E-commerce Platform - User Login Sequence
+
+actor User
+participant "AuthController" as Auth
+participant "UserModel" as UserM
+participant "SessionManager" as Session
+participant "DolibarrAPI" as Doli
+
+User -> Auth: login(credentials)
+activate Auth
+
+Auth -> UserM: findByEmail(email)
+activate UserM
+UserM --> Auth: user data
+deactivate UserM
+
+alt user exists
+    Auth -> UserM: validatePassword(password, hashedPassword)
+    activate UserM
+    UserM --> Auth: password valid
+    deactivate UserM
+    
+    alt password valid
+        Auth -> Session: start()
+        activate Session
+        Session --> Auth: session started
+        deactivate Session
+        
+        Auth -> Session: set('user_id', userId)
+        activate Session
+        Session --> Auth: user_id stored
+        deactivate Session
+        
+        Auth -> Doli: syncUserData(userId)
+        activate Doli
+        Doli --> Auth: sync completed
+        deactivate Doli
+        
+        Auth --> User: login successful
+    else password invalid
+        Auth --> User: invalid credentials
+    end
+else user not found
+    Auth --> User: invalid credentials
+end
+
+deactivate Auth
+
+@enduml
+
+@startuml Product Display Sequence
+!theme plain
+title ZAI E-commerce Platform - Product Display Sequence
+
+actor Customer
+participant "ProductController" as ProdCtrl
+participant "ProductModel" as ProdM
+participant "CategoryModel" as CatM
+participant "DolibarrAPI" as Doli
+
+Customer -> ProdCtrl: browseProducts(categoryId, filters)
+activate ProdCtrl
+
+ProdCtrl -> CatM: findById(categoryId)
+activate CatM
+CatM --> ProdCtrl: category data
+deactivate CatM
+
+ProdCtrl -> ProdM: findByCategory(categoryId, filters)
+activate ProdM
+ProdM -> Doli: getProducts(categoryId, filters)
+activate Doli
+Doli --> ProdM: product data
+deactivate Doli
+ProdM --> ProdCtrl: products list
+deactivate ProdM
+
+ProdCtrl -> CatM: getSubcategories(categoryId)
+activate CatM
+CatM --> ProdCtrl: subcategories
+deactivate CatM
+
+ProdCtrl --> Customer: products page with data
+deactivate ProdCtrl
+
+@enduml
+
+@startuml Add to Cart Sequence
+!theme plain
+title ZAI E-commerce Platform - Add to Cart Sequence
+
+actor Customer
+participant "CartController" as CartCtrl
+participant "ProductModel" as ProdM
+participant "CartModel" as CartM
+participant "SessionManager" as Session
+
+Customer -> CartCtrl: addToCart(productId, quantity)
+activate CartCtrl
+
+CartCtrl -> Session: get('user_id')
+activate Session
+Session --> CartCtrl: userId or sessionId
+deactivate Session
+
+CartCtrl -> ProdM: findById(productId)
+activate ProdM
+ProdM --> CartCtrl: product data
+deactivate ProdM
+
+CartCtrl -> ProdM: checkStock(productId, quantity)
+activate ProdM
+ProdM --> CartCtrl: stock available
+deactivate ProdM
+
+alt stock available
+    CartCtrl -> CartM: findExistingItem(userId, productId)
+    activate CartM
+    CartM --> CartCtrl: existing item or null
+    deactivate CartM
+    
+    alt item exists
+        CartCtrl -> CartM: updateQuantity(itemId, newQuantity)
+        activate CartM
+        CartM --> CartCtrl: updated
+        deactivate CartM
+    else new item
+        CartCtrl -> CartM: addItem(userId, productId, quantity, price)
+        activate CartM
+        CartM --> CartCtrl: item added
+        deactivate CartM
+    end
+    
+    CartCtrl -> CartM: getCartCount(userId)
+    activate CartM
+    CartM --> CartCtrl: cart count
+    deactivate CartM
+    
+    CartCtrl --> Customer: item added successfully
+else insufficient stock
+    CartCtrl --> Customer: insufficient stock error
+end
+
+deactivate CartCtrl
+
+@enduml

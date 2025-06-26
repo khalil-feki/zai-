@@ -1,0 +1,133 @@
+@startuml Order Tracking Sequence
+!theme plain
+title ZAI E-commerce Platform - Séquence de Suivi de Commande
+
+actor Customer as "Client"
+participant "OrderController" as OrderCtrl
+participant "OrderModel" as OrderM
+participant "DolibarrAPI" as Doli
+participant "ShippingAPI" as Shipping
+participant "Database" as DB
+
+Customer -> OrderCtrl: trackOrder(orderId)
+activate OrderCtrl
+
+note over OrderCtrl : Validation de l'accès\net vérification des droits
+
+OrderCtrl -> OrderCtrl: validateUserAccess(userId, orderId)
+
+OrderCtrl -> OrderM: findById(orderId)
+activate OrderM
+OrderM -> DB: SELECT o.*, u.login as customer_name\nFROM llx_commande o\nJOIN llx_user u ON o.fk_user_author = u.rowid\nWHERE o.rowid = ?
+activate DB
+DB --> OrderM: order data with customer info
+deactivate DB
+OrderM --> OrderCtrl: order details
+deactivate OrderM
+
+alt commande existe et appartient à l'utilisateur
+    OrderCtrl -> Doli: getOrderStatus(dolibarrOrderId)
+    activate Doli
+    
+    note over Doli : Récupération du statut\ndepuis Dolibarr ERP
+    
+    Doli -> DB: SELECT c.fk_statut, s.libelle as status_label,\nc.date_creation, c.date_valid, c.date_livraison\nFROM llx_commande c\nLEFT JOIN llx_c_commande_statut s ON c.fk_statut = s.id\nWHERE c.rowid = ?
+    activate DB
+    DB --> Doli: status and dates
+    deactivate DB
+    
+    Doli -> Doli: formatStatusInfo(statusData)
+    Doli --> OrderCtrl: dolibarr status with timeline
+    deactivate Doli
+    
+    alt commande a un numéro de suivi
+        OrderCtrl -> OrderM: getTrackingNumber(orderId)
+        activate OrderM
+        OrderM -> DB: SELECT tracking_number, shipping_carrier\nFROM order_shipping\nWHERE order_id = ?
+        activate DB
+        DB --> OrderM: tracking info
+        deactivate DB
+        OrderM --> OrderCtrl: trackingNumber and carrier
+        deactivate OrderM
+        
+        OrderCtrl -> Shipping: getTrackingInfo(trackingNumber, carrier)
+        activate Shipping
+        
+        note over Shipping : Appel API transporteur\n(Colissimo, Chronopost, etc.)
+        
+        Shipping -> Shipping: callCarrierAPI(trackingNumber)
+        Shipping -> Shipping: parseTrackingResponse(response)
+        
+        note right : Informations récupérées :\n- Position actuelle\n- Étapes de livraison\n- Date de livraison prévue\n- Statut détaillé
+        
+        Shipping --> OrderCtrl: shipping status and timeline
+        deactivate Shipping
+    else pas de numéro de suivi
+        note over OrderCtrl : Commande en préparation\nou pas encore expédiée
+    end
+    
+    OrderCtrl -> OrderM: getOrderHistory(orderId)
+    activate OrderM
+    OrderM -> DB: SELECT oh.*, u.login as updated_by\nFROM order_history oh\nLEFT JOIN llx_user u ON oh.updated_by = u.rowid\nWHERE oh.order_id = ?\nORDER BY oh.created_at ASC
+    activate DB
+    DB --> OrderM: complete status history
+    deactivate DB
+    OrderM --> OrderCtrl: chronological status changes
+    deactivate OrderM
+    
+    OrderCtrl -> OrderM: getOrderItems(orderId)
+    activate OrderM
+    OrderM -> DB: SELECT cd.*, p.label as product_name,\np.photo as product_image\nFROM llx_commandedet cd\nJOIN llx_product p ON cd.fk_product = p.rowid\nWHERE cd.fk_commande = ?
+    activate DB
+    DB --> OrderM: order items with product details
+    deactivate DB
+    OrderM --> OrderCtrl: detailed order items
+    deactivate OrderM
+    
+    OrderCtrl -> OrderM: calculateDeliveryEstimate(orderData, shippingInfo)
+    activate OrderM
+    
+    note over OrderM : Calcul estimation livraison\nbasé sur le transporteur\net la zone géographique
+    
+    OrderM -> OrderM: getShippingZone(deliveryAddress)
+    OrderM -> OrderM: calculateBusinessDays(carrier, zone)
+    OrderM --> OrderCtrl: estimated delivery date
+    deactivate OrderM
+    
+    note over OrderCtrl : Préparation de la réponse\navec toutes les informations\nde suivi consolidées
+    
+    OrderCtrl -> OrderCtrl: buildTrackingResponse(orderData, statusHistory, shippingInfo)
+    
+    OrderCtrl --> Customer: {
+        "success": true,
+        "order": {
+            "id": orderId,
+            "reference": orderRef,
+            "status": currentStatus,
+            "created_date": creationDate,
+            "estimated_delivery": estimatedDate
+        },
+        "tracking": {
+            "number": trackingNumber,
+            "carrier": carrierName,
+            "current_location": location,
+            "delivery_status": deliveryStatus
+        },
+        "timeline": statusHistory,
+        "items": orderItems
+    }
+else commande introuvable ou non autorisée
+    OrderCtrl -> OrderCtrl: logUnauthorizedAccess(userId, orderId)
+    
+    OrderCtrl --> Customer: {
+        "success": false,
+        "message": "Commande introuvable ou accès non autorisé",
+        "error_code": "ORDER_NOT_FOUND"
+    }
+end
+
+deactivate OrderCtrl
+
+note over Customer : Affichage de l'interface\nde suivi avec timeline,\ncarte de livraison\net détails de commande
+
+@enduml

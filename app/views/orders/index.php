@@ -305,18 +305,7 @@ body {
 <div class="orders-container">
     <h1>My Orders</h1>
     
-    <!-- User Info -->
-    <div class="user-info" style="background: rgba(255, 255, 255, 0.95); padding: 1.5rem; border-radius: 15px; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-            <div style="color: #5a5c69;">
-                <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem;">📧 Showing orders for your email:</h3>
-                <p style="margin: 0; font-weight: 600; color: #4e73df; font-size: 1rem;"><?= htmlspecialchars($_SESSION['user_email'] ?? 'N/A') ?></p>
-            </div>
-        </div>
-        <div style="margin-top: 1rem; padding: 0.75rem; background: #e8f5e8; border-radius: 8px; color: #2e7d32; font-size: 0.9rem;">
-            <strong>ℹ️ Note:</strong> Orders are automatically filtered to show only those associated with your email address.
-        </div>
-    </div>
+    
     
     <?php if (empty($orders)): ?>
         <div class="empty-orders">

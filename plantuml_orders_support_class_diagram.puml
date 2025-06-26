@@ -1,0 +1,115 @@
+@startuml Diagramme de Classes Commandes et Support
+!theme plain
+title Plateforme E-commerce ZAI - Classes Commandes et Support (Sprint 3)
+
+class ControlleurCommande {
+  -modeleCommande: ModeleCommande
+  -servicePaiement: ServicePaiement
+  -modelePanier: ModelePanier
+  -modeleUtilisateur: ModeleUtilisateur
+  --
+  +creer(donneesCommande)
+  +afficher(id)
+  +index(idUtilisateur)
+  +mettreAJourStatut(id, statut)
+  +annuler(id)
+  +obtenirHistoriqueCommandes(idUtilisateur)
+  +suivreCommande(id)
+  +traiterPaiement(idCommande, donneesPaiement)
+}
+
+class ModeleCommande {
+  +id: int
+  +id_utilisateur: int
+  +numero_commande: string
+  +montant_total: decimal
+  +montant_taxe: decimal
+  +montant_livraison: decimal
+  +statut: string
+  +statut_paiement: string
+  +adresse_livraison: text
+  +adresse_facturation: text
+  +cree_le: datetime
+  +modifie_le: datetime
+  --
+  +creer(donnees)
+  +trouverParId(id)
+  +trouverParUtilisateur(idUtilisateur)
+  +mettreAJourStatut(id, statut)
+  +calculerTotal()
+  +obtenirArticlesCommande(id)
+  +ajouterArticleCommande(idCommande, idProduit, quantite, prix)
+  +genererNumeroCommande()
+}
+
+class ServicePaiement {
+  -configuration: array
+  -modeleCommande: ModeleCommande
+  --
+  +traiterPaiement(donneesCommande, donneesPaiement)
+  +validerPaiement(donneesPaiement)
+  +rembourserPaiement(idCommande, montant)
+  +obtenirStatutPaiement(idTransaction)
+  +gererCallbackPaiement(donnees)
+  +genererTokenPaiement()
+}
+
+class ControlleurTicket {
+  -modeleTicket: ModeleTicket
+  -modeleUtilisateur: ModeleUtilisateur
+  -serviceEmail: ServiceEmail
+  --
+  +creer(donneesTicket)
+  +afficher(id)
+  +index(idUtilisateur)
+  +ajouterReponse(id, reponse)
+  +mettreAJourStatut(id, statut)
+  +fermer(id)
+  +assignerAgent(id, idAgent)
+  +obtenirHistoriqueTickets(idUtilisateur)
+}
+
+class ModeleTicket {
+  +id: int
+  +id_utilisateur: int
+  +id_agent: int
+  +numero_ticket: string
+  +sujet: string
+  +description: text
+  +statut: string
+  +priorite: string
+  +categorie: string
+  +cree_le: datetime
+  +modifie_le: datetime
+  --
+  +creer(donnees)
+  +trouverParId(id)
+  +trouverParUtilisateur(idUtilisateur)
+  +trouverParAgent(idAgent)
+  +mettreAJourStatut(id, statut)
+  +ajouterReponse(idTicket, reponse)
+  +obtenirReponses(id)
+  +genererNumeroTicket()
+}
+
+class ServiceEmail {
+  -configuration: array
+  --
+  +envoyerConfirmationCommande(donneesCommande)
+  +envoyerConfirmationPaiement(donneesPaiement)
+  +envoyerNotificationTicket(donneesTicket)
+  +envoyerReponseTicket(idTicket, reponse)
+  +envoyerMiseAJourStatutCommande(idCommande, statut)
+}
+
+' Relations
+ControlleurCommande --> ModeleCommande : utilise
+ControlleurCommande --> ServicePaiement : traite
+ControlleurCommande --> ModelePanier : convertit
+ControlleurTicket --> ModeleTicket : utilise
+ControlleurTicket --> ServiceEmail : notifie
+ServicePaiement --> ModeleCommande : met à jour
+ServicePaiement --> ServiceEmail : confirme
+ControlleurCommande --> ServiceEmail : notifie
+
+@enduml

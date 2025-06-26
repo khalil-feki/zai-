@@ -1,17 +1,9 @@
 <?php require_once 'app/views/containers/header.php'; ?>
 
-<div class="profile-container">
-    <div class="profile-header">
-        <h1>My Profile</h1>
-    </div>
-    
-    <div class="profile-content">
-        <div class="profile-sidebar">
-            <div class="profile-avatar">
-                <img src="<?= BASE_URL ?>public/images/avatar.png" alt="Profile Avatar">
-                <h3><?= htmlspecialchars(($user['firstname'] ?? '') . ' ' . ($user['lastname'] ?? '')) ?></h3>
-                <p class="user-email"><?= htmlspecialchars($user['email'] ?? 'No email available') ?></p>
-            </div>
+<section class="auth-section">
+    <div class="container">
+        <div class="auth-container">
+            <h1>My Profile</h1>
             
             <div class="profile-menu">
                 <ul>
@@ -20,10 +12,8 @@
                     <li><a href="<?= BASE_URL ?>auth/logout">Logout</a></li>
                 </ul>
             </div>
-        </div>
         
-        <div class="profile-main">
-            <div class="profile-section">
+            <div class="auth-form">
                 <h2>Profile Information</h2>
                 
                 <?php if (isset($_SESSION['errors'])): ?>
@@ -92,10 +82,8 @@
                     </div>
                 </form>
             </div>
-            
-
         </div>
     </div>
-</div>
+</section>
 
 <?php require_once 'app/views/containers/footer.php'; ?>

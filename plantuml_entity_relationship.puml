@@ -1,0 +1,292 @@
+@startuml
+!theme plain
+title Entity-Relationship Diagram - ZAI E-commerce Database
+
+!define TABLE entity
+!define PK <b><color:red>
+!define FK <color:blue>
+!define ATTR <color:black>
+
+TABLE "llx_user" {
+    PK rowid : BIGINT
+    --
+    ATTR login : VARCHAR(50)
+    ATTR pass_crypted : VARCHAR(128)
+    ATTR lastname : VARCHAR(50)
+    ATTR firstname : VARCHAR(50)
+    ATTR email : VARCHAR(255)
+    ATTR phone : VARCHAR(30)
+    ATTR address : TEXT
+    ATTR zip : VARCHAR(25)
+    ATTR town : VARCHAR(50)
+    ATTR country_id : INT
+    FK fk_soc : INT
+    ATTR datec : DATETIME
+    ATTR tms : TIMESTAMP
+    ATTR statut : TINYINT
+    ATTR entity : INT
+}
+
+TABLE "llx_societe" {
+    PK rowid : BIGINT
+    --
+    ATTR nom : VARCHAR(128)
+    ATTR name_alias : VARCHAR(128)
+    ATTR address : VARCHAR(255)
+    ATTR zip : VARCHAR(25)
+    ATTR town : VARCHAR(50)
+    ATTR country_id : INT
+    ATTR phone : VARCHAR(30)
+    ATTR email : VARCHAR(128)
+    ATTR url : VARCHAR(255)
+    ATTR siren : VARCHAR(128)
+    ATTR siret : VARCHAR(128)
+    ATTR ape : VARCHAR(128)
+    ATTR client : TINYINT
+    ATTR fournisseur : TINYINT
+    ATTR datec : DATETIME
+    ATTR tms : TIMESTAMP
+    ATTR status : TINYINT
+    ATTR entity : INT
+}
+
+TABLE "llx_product" {
+    PK rowid : BIGINT
+    --
+    ATTR ref : VARCHAR(128)
+    ATTR label : VARCHAR(255)
+    ATTR description : TEXT
+    ATTR note_public : TEXT
+    ATTR note_private : TEXT
+    ATTR price : DOUBLE
+    ATTR price_ttc : DOUBLE
+    ATTR price_min : DOUBLE
+    ATTR price_min_ttc : DOUBLE
+    ATTR price_base_type : VARCHAR(3)
+    ATTR tva_tx : DOUBLE
+    ATTR weight : FLOAT
+    ATTR weight_units : TINYINT
+    ATTR length : FLOAT
+    ATTR length_units : TINYINT
+    ATTR width : FLOAT
+    ATTR height : FLOAT
+    ATTR surface : FLOAT
+    ATTR volume : FLOAT
+    ATTR stock : DOUBLE
+    ATTR seuil_stock_alerte : FLOAT
+    ATTR duration : VARCHAR(6)
+    ATTR fk_product_type : INT
+    FK fk_default_warehouse : INT
+    ATTR canvas : VARCHAR(32)
+    ATTR finished : TINYINT
+    ATTR tobuy : TINYINT
+    ATTR tosell : TINYINT
+    ATTR datec : DATETIME
+    ATTR tms : TIMESTAMP
+    ATTR entity : INT
+}
+
+TABLE "llx_categorie" {
+    PK rowid : BIGINT
+    --
+    FK fk_parent : INT
+    ATTR label : VARCHAR(180)
+    ATTR description : TEXT
+    ATTR color : VARCHAR(8)
+    ATTR position : INT
+    ATTR visible : TINYINT
+    ATTR type : TINYINT
+    ATTR datec : DATETIME
+    ATTR tms : TIMESTAMP
+    ATTR import_key : VARCHAR(14)
+    ATTR entity : INT
+}
+
+TABLE "llx_categorie_product" {
+    FK fk_categorie : INT
+    FK fk_product : INT
+    ATTR import_key : VARCHAR(14)
+    --
+    PK PRIMARY KEY (fk_categorie, fk_product)
+}
+
+TABLE "llx_commande" {
+    PK rowid : BIGINT
+    --
+    ATTR ref : VARCHAR(30)
+    FK fk_soc : INT
+    FK fk_user_author : INT
+    FK fk_user_modif : INT
+    FK fk_user_valid : INT
+    FK fk_user_cloture : INT
+    ATTR date_creation : DATETIME
+    ATTR date_valid : DATETIME
+    ATTR date_cloture : DATETIME
+    ATTR date_commande : DATE
+    ATTR date_livraison : DATETIME
+    FK fk_remise_except : INT
+    ATTR remise_percent : DOUBLE
+    ATTR remise_absolue : DOUBLE
+    ATTR total_ht : DOUBLE
+    ATTR total_tva : DOUBLE
+    ATTR localtax1 : DOUBLE
+    ATTR localtax2 : DOUBLE
+    ATTR total_ttc : DOUBLE
+    ATTR note_private : TEXT
+    ATTR note_public : TEXT
+    ATTR model_pdf : VARCHAR(255)
+    ATTR last_main_doc : VARCHAR(255)
+    FK fk_account : INT
+    FK fk_currency : VARCHAR(3)
+    ATTR fk_cond_reglement : INT
+    ATTR fk_mode_reglement : INT
+    ATTR date_lim_reglement : DATE
+    ATTR deposit_percent : FLOAT
+    ATTR fk_availability : INT
+    ATTR fk_input_reason : INT
+    ATTR fk_delivery_address : INT
+    ATTR demand_reason_id : INT
+    ATTR facture : TINYINT
+    ATTR fk_statut : SMALLINT
+    ATTR billed : SMALLINT
+    ATTR tms : TIMESTAMP
+    ATTR import_key : VARCHAR(14)
+    ATTR extraparams : VARCHAR(255)
+    ATTR entity : INT
+}
+
+TABLE "llx_commandedet" {
+    PK rowid : BIGINT
+    --
+    FK fk_commande : INT
+    FK fk_parent_line : INT
+    FK fk_product : INT
+    ATTR label : VARCHAR(255)
+    ATTR description : TEXT
+    ATTR vat_src_code : VARCHAR(10)
+    ATTR tva_tx : DOUBLE
+    ATTR localtax1_tx : DOUBLE
+    ATTR localtax1_type : VARCHAR(10)
+    ATTR localtax2_tx : DOUBLE
+    ATTR localtax2_type : VARCHAR(10)
+    ATTR qty : DOUBLE
+    ATTR remise_percent : DOUBLE
+    ATTR remise : DOUBLE
+    ATTR fk_remise_except : INT
+    ATTR price : DOUBLE
+    ATTR subprice : DOUBLE
+    ATTR total_ht : DOUBLE
+    ATTR total_tva : DOUBLE
+    ATTR total_localtax1 : DOUBLE
+    ATTR total_localtax2 : DOUBLE
+    ATTR total_ttc : DOUBLE
+    ATTR product_type : SMALLINT
+    ATTR date_start : DATETIME
+    ATTR date_end : DATETIME
+    ATTR info_bits : INT
+    ATTR buy_price_ht : DOUBLE
+    ATTR fk_product_fournisseur_price : INT
+    ATTR special_code : INT
+    ATTR rang : INT
+    ATTR fk_unit : INT
+    ATTR import_key : VARCHAR(14)
+}
+
+TABLE "llx_ticket" {
+    PK rowid : BIGINT
+    --
+    ATTR entity : INT
+    ATTR ref : VARCHAR(128)
+    ATTR track_id : VARCHAR(128)
+    FK fk_soc : INT
+    FK fk_project : INT
+    FK fk_contract : INT
+    ATTR origin_email : VARCHAR(128)
+    FK fk_user_create : INT
+    FK fk_user_assign : INT
+    ATTR subject : VARCHAR(255)
+    ATTR message : TEXT
+    FK fk_statut : INT
+    ATTR resolution : INT
+    ATTR progress : VARCHAR(100)
+    ATTR timing : VARCHAR(20)
+    ATTR type_code : VARCHAR(32)
+    ATTR category_code : VARCHAR(32)
+    ATTR severity_code : VARCHAR(32)
+    ATTR datec : DATETIME
+    ATTR date_read : DATETIME
+    ATTR date_last_msg_sent : DATETIME
+    ATTR date_close : DATETIME
+    ATTR tms : TIMESTAMP
+    ATTR notify_tiers_at_create : TINYINT
+    ATTR email_msgid : VARCHAR(175)
+    ATTR email_date : DATETIME
+    ATTR note_private : TEXT
+    ATTR note_public : TEXT
+    ATTR model_pdf : VARCHAR(255)
+    ATTR extraparams : VARCHAR(255)
+}
+
+TABLE "zai_cart" {
+    PK id : INT
+    --
+    FK user_id : INT
+    FK product_id : INT
+    ATTR quantity : INT
+    ATTR price : DECIMAL(10,2)
+    ATTR created_at : TIMESTAMP
+    ATTR updated_at : TIMESTAMP
+}
+
+TABLE "zai_orders" {
+    PK id : INT
+    --
+    FK user_id : INT
+    FK dolibarr_order_id : INT
+    ATTR order_reference : VARCHAR(50)
+    ATTR total_amount : DECIMAL(10,2)
+    ATTR status : VARCHAR(20)
+    ATTR payment_status : VARCHAR(20)
+    ATTR shipping_address : TEXT
+    ATTR billing_address : TEXT
+    ATTR created_at : TIMESTAMP
+    ATTR updated_at : TIMESTAMP
+}
+
+TABLE "zai_order_items" {
+    PK id : INT
+    --
+    FK order_id : INT
+    FK product_id : INT
+    ATTR quantity : INT
+    ATTR unit_price : DECIMAL(10,2)
+    ATTR total_price : DECIMAL(10,2)
+    ATTR created_at : TIMESTAMP
+}
+
+' Relationships
+llx_user ||--o{ llx_societe : fk_soc
+llx_societe ||--o{ llx_commande : fk_soc
+llx_user ||--o{ llx_commande : fk_user_author
+llx_commande ||--o{ llx_commandedet : fk_commande
+llx_product ||--o{ llx_commandedet : fk_product
+llx_categorie ||--o{ llx_categorie : fk_parent
+llx_categorie ||--o{ llx_categorie_product : fk_categorie
+llx_product ||--o{ llx_categorie_product : fk_product
+llx_societe ||--o{ llx_ticket : fk_soc
+llx_user ||--o{ llx_ticket : fk_user_create
+llx_user ||--o{ llx_ticket : fk_user_assign
+llx_user ||--o{ zai_cart : user_id
+llx_product ||--o{ zai_cart : product_id
+llx_user ||--o{ zai_orders : user_id
+llx_commande ||--o{ zai_orders : dolibarr_order_id
+zai_orders ||--o{ zai_order_items : order_id
+llx_product ||--o{ zai_order_items : product_id
+
+note top of llx_user : **Core User Management**\nDolibarr native user table\nwith ZAI extensions
+
+note top of llx_product : **Product Catalog**\nDolibarr product management\nwith inventory tracking
+
+note top of zai_cart : **ZAI Custom Tables**\nExtended functionality\nfor e-commerce features
+
+@enduml

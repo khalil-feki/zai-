@@ -1,0 +1,57 @@
+@startuml Diagramme de Cas d'Usage Global
+!theme plain
+title Plateforme E-commerce ZAI - Diagramme de Cas d'Usage Global
+
+left to right direction
+
+actor Client
+actor Administrateur
+actor Visiteur
+
+rectangle "Système E-commerce ZAI" {
+  usecase "Créer un Compte" as UC1
+  usecase "Parcourir les Produits" as UC2
+  usecase "Gérer le Panier" as UC3
+  usecase "Passer Commande" as UC4
+  usecase "Suivre Commande" as UC5
+  usecase "Créer Ticket Support" as UC6
+  usecase "Gérer Profil" as UC7
+  usecase "Connexion/Déconnexion" as UC8
+  usecase "Rechercher Produits" as UC9
+  usecase "Voir Historique Commandes" as UC10
+  usecase "Gérer Produits" as UC11
+  usecase "Gérer Commandes" as UC12
+  usecase "Gérer Utilisateurs" as UC13
+  usecase "Traiter Tickets Support" as UC14
+  usecase "Voir Rapports" as UC15
+}
+
+' Interactions Visiteur
+Visiteur --> UC1
+Visiteur --> UC2
+Visiteur --> UC8
+Visiteur --> UC9
+
+' Interactions Client
+Client --> UC2
+Client --> UC3
+Client --> UC4
+Client --> UC5
+Client --> UC6
+Client --> UC7
+Client --> UC8
+Client --> UC9
+Client --> UC10
+
+' Interactions Administrateur
+Administrateur --> UC11
+Administrateur --> UC12
+Administrateur --> UC13
+Administrateur --> UC14
+Administrateur --> UC15
+Administrateur --> UC8
+
+' Héritage
+Client --|> Visiteur
+
+@enduml

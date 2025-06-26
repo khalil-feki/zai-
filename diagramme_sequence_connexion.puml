@@ -1,0 +1,81 @@
+@startuml
+!theme plain
+title Diagramme de Sequence - Connexion Utilisateur
+
+!define PRIMARY_COLOR #2E86AB
+!define SECONDARY_COLOR #A23B72
+!define SUCCESS_COLOR #F18F01
+!define ERROR_COLOR #C73E1D
+
+participant "Utilisateur" as User #lightblue
+participant "Plateforme ZAI" as ZAI #lightgreen
+participant "AuthController" as AuthCtrl #lightyellow
+participant "User Model" as UserModel #lightcyan
+participant "Base de Donnees" as DB #lightgray
+
+== Connexion avec Verification Email ==
+
+User -> ZAI : Tentative de connexion (email, password)
+activate ZAI
+
+ZAI -> AuthCtrl : login(email, password)
+activate AuthCtrl
+
+note over AuthCtrl : Validation des parametres d'entree
+
+AuthCtrl -> UserModel : authenticate(email, password)
+activate UserModel
+
+UserModel -> DB : SELECT s.*, e.password, e.email_verified\nFROM h8pd_societe s\nJOIN h8pd_societe_extrafields e ON s.rowid = e.fk_object\nWHERE s.email = ?
+activate DB
+DB --> UserModel : Donnees utilisateur + statut verification
+deactivate DB
+
+UserModel -> UserModel : password_verify(password, hashedPassword)
+note right : Verification du mot de passe hache
+
+UserModel --> AuthCtrl : Utilisateur trouve + validation mot de passe
+deactivate UserModel
+
+alt Mot de passe correct
+    alt Email verifie (email_verified = 1)
+        AuthCtrl -> AuthCtrl : createSession(userData)
+        note right : Creation de la session utilisateur\navec donnees securisees
+        
+        AuthCtrl -> AuthCtrl : setUserCookies()
+        note right : Configuration des cookies\nde session securises
+        
+        AuthCtrl --> ZAI : Connexion reussie
+        ZAI --> User : Bienvenue! Connexion reussie\nRedirection vers tableau de bord
+    else Email non verifie (email_verified = 0)
+        AuthCtrl --> ZAI : Erreur - Email non verifie
+        ZAI --> User : Veuillez verifier votre email\navant de vous connecter
+        
+        note over ZAI : Option de renvoyer\nl'email de verification
+    end
+else Mot de passe incorrect
+    AuthCtrl --> ZAI : Erreur - Identifiants invalides
+    ZAI --> User : Email ou mot de passe incorrect
+    
+    note over AuthCtrl : Compteur de tentatives\nde connexion echouees
+end
+
+deactivate AuthCtrl
+deactivate ZAI
+
+== Gestion des Erreurs de Connexion ==
+
+alt Utilisateur inexistant
+    UserModel --> AuthCtrl : Utilisateur non trouve
+    AuthCtrl --> ZAI : Erreur - Identifiants invalides
+    ZAI --> User : Email ou mot de passe incorrect
+else Compte bloque/suspendu
+    UserModel --> AuthCtrl : Compte suspendu
+    AuthCtrl --> ZAI : Erreur - Compte suspendu
+    ZAI --> User : Votre compte a ete suspendu\nContactez le support
+else Trop de tentatives echouees
+    AuthCtrl --> ZAI : Erreur - Compte temporairement bloque
+    ZAI --> User : Trop de tentatives echouees\nReessayez dans 15 minutes
+end
+
+@enduml

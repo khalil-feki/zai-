@@ -1,0 +1,245 @@
+@startuml
+!theme plain
+title MVC Architecture - ZAI E-commerce Platform
+
+!define LAYER package
+!define COMPONENT class
+!define INTERFACE interface
+
+LAYER "Presentation Layer (View)" as ViewLayer {
+    COMPONENT "HTML Templates" {
+        + auth/login.php
+        + auth/register.php
+        + products/index.php
+        + products/detail.php
+        + cart/view.php
+        + orders/history.php
+        + ticket/create.php
+        --
+        + renderForm()
+        + displayData()
+        + includeAssets()
+    }
+    
+    COMPONENT "CSS Stylesheets" {
+        + style.css
+        + auth.css
+        + products.css
+        + orders.css
+        --
+        + responsive design
+        + component styling
+        + animations
+    }
+    
+    COMPONENT "JavaScript" {
+        + main.js
+        + cart.js
+        + animations.js
+        + header.js
+        --
+        + DOM manipulation
+        + AJAX requests
+        + form validation
+        + user interactions
+    }
+}
+
+LAYER "Business Logic Layer (Controller)" as ControllerLayer {
+    COMPONENT "AuthController" {
+        + login()
+        + register()
+        + logout()
+        + resetPassword()
+        + updateProfile()
+        --
+        - validateInput()
+        - handleSession()
+    }
+    
+    COMPONENT "ProductController" {
+        + index()
+        + show()
+        + search()
+        + getByCategory()
+        --
+        - formatProductData()
+        - handlePagination()
+    }
+    
+    COMPONENT "CartController" {
+        + addToCart()
+        + removeFromCart()
+        + updateQuantity()
+        + getCartItems()
+        + clearCart()
+        --
+        - calculateTotal()
+        - validateStock()
+    }
+    
+    COMPONENT "OrderController" {
+        + create()
+        + show()
+        + history()
+        + updateStatus()
+        --
+        - processPayment()
+        - generateReference()
+    }
+    
+    COMPONENT "TicketsController" {
+        + create()
+        + show()
+        + update()
+        + list()
+        --
+        - sendNotification()
+        - validateTicket()
+    }
+}
+
+LAYER "Data Access Layer (Model)" as ModelLayer {
+    COMPONENT "User Model" {
+        + find()
+        + create()
+        + update()
+        + delete()
+        + authenticate()
+        --
+        - hashPassword()
+        - validateEmail()
+    }
+    
+    COMPONENT "Product Model" {
+        + getAll()
+        + getById()
+        + getByCategory()
+        + search()
+        + updateStock()
+        --
+        - formatPrice()
+        - checkAvailability()
+    }
+    
+    COMPONENT "Cart Model" {
+        + getItems()
+        + addItem()
+        + updateItem()
+        + removeItem()
+        + clear()
+        --
+        - calculateSubtotal()
+        - validateQuantity()
+    }
+    
+    COMPONENT "Order Model" {
+        + create()
+        + getById()
+        + getByUser()
+        + updateStatus()
+        --
+        - generateOrderNumber()
+        - calculateTotals()
+    }
+    
+    COMPONENT "Ticket Model" {
+        + create()
+        + getById()
+        + getByUser()
+        + update()
+        --
+        - generateTrackingId()
+        - setDefaultStatus()
+    }
+}
+
+LAYER "Integration Layer" as IntegrationLayer {
+    COMPONENT "DolibarrService" {
+        + syncUser()
+        + getProducts()
+        + createOrder()
+        + updateInventory()
+        --
+        - makeApiCall()
+        - handleResponse()
+        - formatData()
+    }
+    
+    COMPONENT "Database" {
+        + Dolibarr Tables
+        + ZAI Custom Tables
+        --
+        + llx_user
+        + llx_product
+        + llx_commande
+        + zai_cart
+        + zai_orders
+    }
+}
+
+LAYER "Configuration & Routing" as ConfigLayer {
+    COMPONENT "Router" {
+        + route()
+        + dispatch()
+        + handleRequest()
+        --
+        - parseUrl()
+        - loadController()
+    }
+    
+    COMPONENT "Config" {
+        + database.php
+        + dolibarr.php
+        + routes.php
+        --
+        + DB_HOST
+        + API_ENDPOINTS
+        + ROUTE_MAPPINGS
+    }
+    
+    COMPONENT "Middleware" {
+        + AuthMiddleware
+        + ErrorHandler
+        --
+        + checkAuthentication()
+        + handleErrors()
+        + logRequests()
+    }
+}
+
+' MVC Flow Relationships
+ViewLayer --> ControllerLayer : User Requests
+ControllerLayer --> ModelLayer : Data Operations
+ModelLayer --> IntegrationLayer : Database Queries
+IntegrationLayer --> ModelLayer : Data Results
+ModelLayer --> ControllerLayer : Processed Data
+ControllerLayer --> ViewLayer : Response Data
+
+' Configuration Relationships
+ConfigLayer --> ControllerLayer : Routes & Config
+ConfigLayer --> ModelLayer : Database Config
+ConfigLayer --> IntegrationLayer : API Config
+
+' Specific Controller-Model Relationships
+"AuthController" --> "User Model" : user operations
+"ProductController" --> "Product Model" : product data
+"CartController" --> "Cart Model" : cart management
+"OrderController" --> "Order Model" : order processing
+"TicketsController" --> "Ticket Model" : ticket handling
+
+' Integration Relationships
+"DolibarrService" --> "Database" : API sync
+"User Model" --> "DolibarrService" : user sync
+"Product Model" --> "DolibarrService" : product sync
+"Order Model" --> "DolibarrService" : order sync
+
+note right of ViewLayer : **Presentation Layer**\n• User Interface\n• Templates & Assets\n• Client-side Logic\n• Responsive Design
+
+note right of ControllerLayer : **Business Logic**\n• Request Handling\n• Data Processing\n• Business Rules\n• Response Generation
+
+note right of ModelLayer : **Data Management**\n• Database Operations\n• Data Validation\n• Business Objects\n• Data Transformation
+
+note right of IntegrationLayer : **External Systems**\n• Dolibarr ERP Integration\n• Database Abstraction\n• API Communications\n• Data Synchronization
+
+@enduml

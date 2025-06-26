@@ -1,0 +1,72 @@
+@startuml
+!theme plain
+title Comparative Analysis of E-commerce Solutions
+
+!define RECTANGLE class
+
+package "Existing Solutions" {
+    RECTANGLE "Shopify" {
+        + SaaS Platform
+        + Monthly Subscription
+        + Limited Customization
+        + Built-in Payment Gateway
+        + App Ecosystem
+        - High Long-term Costs
+        - Vendor Lock-in
+        - Limited ERP Integration
+    }
+    
+    RECTANGLE "WooCommerce" {
+        + Open Source
+        + WordPress Integration
+        + Extensive Plugins
+        + Cost Effective
+        + High Customization
+        - Requires Technical Knowledge
+        - Performance Issues
+        - Security Maintenance
+    }
+    
+    RECTANGLE "Magento" {
+        + Enterprise Features
+        + Multi-store Support
+        + Advanced SEO
+        + B2B Capabilities
+        + Scalable Architecture
+        - Complex Setup
+        - High Resource Requirements
+        - Expensive Licensing
+    }
+    
+    RECTANGLE "PrestaShop" {
+        + Free Open Source
+        + Multi-language Support
+        + Mobile Responsive
+        + SEO Friendly
+        + European Focus
+        - Limited Scalability
+        - Module Dependencies
+        - Performance Limitations
+    }
+}
+
+package "ZAI E-commerce Solution" {
+    RECTANGLE "ZAI Platform" {
+        + Custom Development
+        + Dolibarr ERP Integration
+        + Tailored Business Logic
+        + Full Source Control
+        + Cost-Effective Long-term
+        + Specific Requirements Met
+        + Direct Database Access
+        + Custom Workflow Support
+        - Initial Development Time
+        - Requires Maintenance
+    }
+}
+
+note right of "ZAI Platform" : **Key Differentiators:**\n• Native Dolibarr Integration\n• Custom Business Processes\n• Full Control & Ownership\n• Scalable Architecture\n• Cost-Effective Solution
+
+note top of "Existing Solutions" : **Limitations for Our Use Case:**\n• Limited ERP Integration\n• High Ongoing Costs\n• Vendor Dependencies\n• Generic Solutions
+
+@enduml

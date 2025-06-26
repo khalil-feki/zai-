@@ -1,0 +1,81 @@
+@startuml Creation de Ticket de Support
+!theme plain
+title Plateforme E-commerce ZAI - Creation de Ticket de Support
+
+actor Client
+participant "Controleur Ticket" as TicketCtrl
+participant "Modele Ticket" as TicketM
+participant "Service Email" as Email
+participant "Base de Donnees" as DB
+participant "API Dolibarr" as Doli
+
+Client -> TicketCtrl: Creer ticket (donnees, fichiers)
+activate TicketCtrl
+
+note over TicketCtrl : Validation utilisateur\net verification des donnees
+
+TicketCtrl -> TicketCtrl: Valider authentification
+TicketCtrl -> TicketCtrl: Nettoyer les donnees
+
+TicketCtrl -> TicketM: Valider donnees ticket
+activate TicketM
+
+note over TicketM : Validation :\n- Sujet (min 5 caracteres)\n- Description (min 20 caracteres)\n- Categorie et priorite
+
+TicketM --> TicketCtrl: Resultat validation
+deactivate TicketM
+
+alt Validation reussie
+    alt Fichiers presents
+        TicketCtrl -> DB: Sauvegarder fichiers
+        activate DB
+        note over DB : Validation fichiers :\n- Types autorises\n- Taille max 5MB\n- Max 3 fichiers
+        DB --> TicketCtrl: Fichiers sauvegardes
+        deactivate DB
+    end
+    
+    TicketCtrl -> TicketM: Creer ticket
+    activate TicketM
+    
+    TicketM -> TicketM: Generer numero ticket
+    note right : Format TK-YYYY-NNNNNN
+    
+    TicketM -> DB: Enregistrer ticket
+    activate DB
+    DB --> TicketM: ID ticket genere
+    deactivate DB
+    
+    TicketM --> TicketCtrl: Ticket cree
+    deactivate TicketM
+    
+    TicketCtrl -> Doli: Synchroniser avec Dolibarr
+    activate Doli
+    
+    note over Doli : Creation ticket\ndans Dolibarr
+    
+    Doli -> DB: Enregistrer dans Dolibarr
+    activate DB
+    DB --> Doli: Ticket Dolibarr cree
+    deactivate DB
+    
+    Doli --> TicketCtrl: Synchronisation reussie
+    deactivate Doli
+    
+    TicketCtrl -> Email: Envoyer confirmations
+    activate Email
+    
+    note over Email : Emails envoyes :\n- Confirmation client\n- Notification equipe support
+    
+    Email --> TicketCtrl: Emails envoyes
+    deactivate Email
+    
+    TicketCtrl --> Client: Succes : Ticket cree\n(ID, reference, statut)
+else Validation echouee
+    TicketCtrl --> Client: Erreur : Corriger les donnees
+end
+
+deactivate TicketCtrl
+
+note over Client : Confirmation de creation\nou correction des erreurs
+
+@enduml

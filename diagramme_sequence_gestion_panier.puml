@@ -1,0 +1,208 @@
+@startuml Cart Management Sequence
+!theme plain
+title ZAI E-commerce Platform - Sequence de Gestion du Panier
+
+actor Customer as "Client"
+participant "CartController" as CartCtrl
+participant "CartModel" as CartM
+participant "ProductModel" as ProdM
+participant "SessionManager" as Session
+participant "DolibarrAPI" as Doli
+participant "Database" as DB
+
+== Affichage du Panier ==
+
+Customer -> CartCtrl: viewCart()
+activate CartCtrl
+
+CartCtrl -> Session: get('user_id')
+activate Session
+Session --> CartCtrl: userId or sessionId
+deactivate Session
+
+CartCtrl -> CartM: getCartItems(userId/sessionId)
+activate CartM
+CartM -> DB: SELECT ci.*, p.label, p.description, p.photo\nFROM cart_items ci\nJOIN llx_product p ON ci.product_id = p.rowid\nWHERE ci.user_id = ? OR ci.session_id = ?
+activate DB
+DB --> CartM: cart items with product details
+deactivate DB
+CartM --> CartCtrl: cartItems
+deactivate CartM
+
+loop pour chaque article
+    CartCtrl -> ProdM: getCurrentPrice(productId)
+    activate ProdM
+    ProdM -> Doli: getPrice(productId)
+    activate Doli
+    Doli --> ProdM: current price
+    deactivate Doli
+    ProdM --> CartCtrl: updated price
+    deactivate ProdM
+    
+    CartCtrl -> ProdM: checkAvailability(productId)
+    activate ProdM
+    ProdM -> Doli: getStock(productId)
+    activate Doli
+    Doli --> ProdM: stock level
+    deactivate Doli
+    ProdM --> CartCtrl: availability status
+    deactivate ProdM
+end
+
+CartCtrl -> CartCtrl: calculateCartTotal(items)
+CartCtrl --> Customer: cart page with items, prices, total
+deactivate CartCtrl
+
+== Modification de Quantité ==
+
+Customer -> CartCtrl: updateQuantity(itemId, newQuantity)
+activate CartCtrl
+
+CartCtrl -> CartCtrl: validateQuantity(newQuantity)
+
+alt quantité valide (> 0)
+    CartCtrl -> CartM: getCartItem(itemId)
+    activate CartM
+    CartM -> DB: SELECT * FROM cart_items WHERE id = ?
+    activate DB
+    DB --> CartM: cart item
+    deactivate DB
+    CartM --> CartCtrl: itemDetails
+    deactivate CartM
+    
+    CartCtrl -> ProdM: checkStock(productId, newQuantity)
+    activate ProdM
+    ProdM -> Doli: getStockLevel(productId)
+    activate Doli
+    Doli --> ProdM: available stock
+    deactivate Doli
+    ProdM --> CartCtrl: stock sufficient/insufficient
+    deactivate ProdM
+    
+    alt stock suffisant
+        CartCtrl -> CartM: updateItemQuantity(itemId, newQuantity)
+        activate CartM
+        CartM -> DB: UPDATE cart_items\nSET quantity = ?, updated_at = NOW()\nWHERE id = ?
+        activate DB
+        DB --> CartM: quantity updated
+        deactivate DB
+        CartM --> CartCtrl: update successful
+        deactivate CartM
+        
+        CartCtrl -> CartM: getCartSummary(userId/sessionId)
+        activate CartM
+        CartM -> DB: SELECT COUNT(*) as items,\nSUM(quantity * price) as total\nFROM cart_items\nWHERE user_id = ? OR session_id = ?
+        activate DB
+        DB --> CartM: cart summary
+        deactivate DB
+        CartM --> CartCtrl: updated totals
+        deactivate CartM
+        
+        CartCtrl --> Customer: {"success": true, "newTotal": total, "itemCount": count}
+    else stock insuffisant
+        CartCtrl --> Customer: {"success": false, "message": "Stock insuffisant", "maxQuantity": stock}
+    end
+else quantité invalide (= 0)
+    CartCtrl -> CartCtrl: removeFromCart(itemId)
+    note right : Redirection vers\nla suppression d'article
+end
+
+deactivate CartCtrl
+
+== Suppression d'Article ==
+
+Customer -> CartCtrl: removeItem(itemId)
+activate CartCtrl
+
+CartCtrl -> CartM: getCartItem(itemId)
+activate CartM
+CartM -> DB: SELECT * FROM cart_items WHERE id = ?
+activate DB
+DB --> CartM: item details
+deactivate DB
+CartM --> CartCtrl: itemToRemove
+deactivate CartM
+
+CartCtrl -> CartM: deleteItem(itemId)
+activate CartM
+CartM -> DB: DELETE FROM cart_items WHERE id = ?
+activate DB
+DB --> CartM: item deleted
+deactivate DB
+CartM --> CartCtrl: deletion confirmed
+deactivate CartM
+
+CartCtrl -> CartM: getCartSummary(userId/sessionId)
+activate CartM
+CartM -> DB: SELECT COUNT(*) as items,\nSUM(quantity * price) as total\nFROM cart_items\nWHERE user_id = ? OR session_id = ?
+activate DB
+DB --> CartM: updated summary
+deactivate DB
+CartM --> CartCtrl: new totals
+deactivate CartM
+
+CartCtrl --> Customer: {"success": true, "message": "Article supprimé", "newTotal": total, "itemCount": count}
+deactivate CartCtrl
+
+== Vidage du Panier ==
+
+Customer -> CartCtrl: clearCart()
+activate CartCtrl
+
+CartCtrl -> Session: get('user_id')
+activate Session
+Session --> CartCtrl: userId or sessionId
+deactivate Session
+
+CartCtrl -> CartM: clearAllItems(userId/sessionId)
+activate CartM
+CartM -> DB: DELETE FROM cart_items\nWHERE user_id = ? OR session_id = ?
+activate DB
+DB --> CartM: all items deleted
+deactivate DB
+CartM --> CartCtrl: cart cleared
+deactivate CartM
+
+CartCtrl -> Session: clearCartSession()
+activate Session
+Session --> CartCtrl: session cleared
+deactivate Session
+
+CartCtrl --> Customer: {"success": true, "message": "Panier vidé", "cartCount": 0, "cartTotal": 0}
+deactivate CartCtrl
+
+== Application de Code Promo ==
+
+Customer -> CartCtrl: applyPromoCode(code)
+activate CartCtrl
+
+CartCtrl -> CartCtrl: validatePromoCode(code)
+
+CartCtrl -> DB: SELECT * FROM promo_codes\nWHERE code = ? AND active = 1\nAND (expiry_date IS NULL OR expiry_date > NOW())
+activate DB
+DB --> CartCtrl: promo details or null
+deactivate DB
+
+alt code promo valide
+    CartCtrl -> CartM: getCartTotal(userId/sessionId)
+    activate CartM
+    CartM --> CartCtrl: current total
+    deactivate CartM
+    
+    CartCtrl -> CartCtrl: calculateDiscount(total, promoDetails)
+    
+    CartCtrl -> Session: setPromoCode(code, discount)
+    activate Session
+    Session --> CartCtrl: promo applied
+    deactivate Session
+    
+    CartCtrl --> Customer: {"success": true, "discount": amount, "newTotal": discountedTotal}
+else code invalide/expiré
+    CartCtrl --> Customer: {"success": false, "message": "Code promo invalide"}
+end
+
+deactivate CartCtrl
+
+note over Customer : Interface mise à jour\navec totaux recalculés\net messages de confirmation
+
+@enduml

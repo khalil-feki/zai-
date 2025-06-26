@@ -1,0 +1,75 @@
+@startuml Diagramme de Classes d'Authentification
+!theme plain
+title Plateforme E-commerce ZAI - Classes d'Authentification (Sprint 1)
+
+class ControlleurAuth {
+  -modeleUtilisateur: ModeleUtilisateur
+  -gestionnaireSession: GestionnaireSession
+  -integrationDolibarr: IntegrationDolibarr
+  --
+  +inscrire(donneesUtilisateur)
+  +connecter(identifiants)
+  +deconnecter()
+  +reinitialiserMotDePasse(email)
+  +mettreAJourProfil(donneesUtilisateur)
+  +validerSession()
+  +gererSyncDolibarr()
+}
+
+class ModeleUtilisateur {
+  +id: int
+  +nomUtilisateur: string
+  +email: string
+  +motDePasse: string
+  +role: string
+  +dolibarr_id: int
+  +cree_le: datetime
+  +modifie_le: datetime
+  --
+  +creer(donneesUtilisateur)
+  +trouverParEmail(email)
+  +trouverParId(id)
+  +mettreAJour(id, donnees)
+  +supprimer(id)
+  +validerMotDePasse(motDePasse)
+  +hachageMotDePasse(motDePasse)
+  +synchroniserAvecDolibarr()
+}
+
+class GestionnaireSession {
+  -nomSession: string
+  -parametresCookie: array
+  -estDemarre: boolean
+  -dureeVie: int
+  --
+  +demarrer()
+  +detruire()
+  +definir(cle, valeur)
+  +obtenir(cle)
+  +possede(cle)
+  +regenererId()
+  +estValide()
+  +prolonger()
+}
+
+class IntegrationDolibarr {
+  -urlApi: string
+  -cleApi: string
+  -baseDonnees: BaseDonnees
+  -configuration: array
+  --
+  +synchroniserUtilisateur(donneesUtilisateur)
+  +creerTiers(donnees)
+  +mettreAJourTiers(id, donnees)
+  +obtenirUtilisateur(id)
+  +authentifier(identifiants)
+  +validerCleApi()
+}
+
+' Relations
+ControlleurAuth --> ModeleUtilisateur : utilise
+ControlleurAuth --> GestionnaireSession : gère
+ControlleurAuth --> IntegrationDolibarr : intègre
+ModeleUtilisateur --> IntegrationDolibarr : synchronise avec
+
+@enduml

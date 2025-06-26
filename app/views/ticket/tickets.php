@@ -257,6 +257,23 @@ if (!RUNNING_IN_DOLIBARR) {
         padding-right: 35px;
     }
     
+    /* Make request type field bigger */
+    select[name="request_type"] {
+        height: 56px;
+        font-size: 17px;
+        padding: 15px 40px 15px 18px;
+        font-weight: 500;
+    }
+    
+    /* Make ticket group and severity fields bigger */
+    select[name="ticket_group"],
+    select[name="severity"] {
+        height: 56px;
+        font-size: 17px;
+        padding: 15px 40px 15px 18px;
+        font-weight: 500;
+    }
+    
     textarea.form-control {
         min-height: 180px;
         resize: vertical;
@@ -276,6 +293,10 @@ if (!RUNNING_IN_DOLIBARR) {
     .btn-container {
         text-align: center;
         margin-top: 2.5rem;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
     }
     
     .btn {
@@ -316,7 +337,31 @@ if (!RUNNING_IN_DOLIBARR) {
     .btn-secondary {
         background: var(--gradient-secondary);
         color: white;
-        margin-left: 15px;
+    }
+    
+    /* Improved button styling */
+    .btn-create {
+        min-width: 160px;
+        background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+        box-shadow: 0 4px 15px rgba(78, 115, 223, 0.3);
+    }
+    
+    .btn-cancel {
+        min-width: 140px;
+        background: linear-gradient(135deg, #858796 0%, #60616f 100%);
+        box-shadow: 0 4px 15px rgba(133, 135, 150, 0.3);
+    }
+    
+    .btn-create:hover {
+        background: linear-gradient(135deg, #2e59d9 0%, #1a4aa3 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(78, 115, 223, 0.4);
+    }
+    
+    .btn-cancel:hover {
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(133, 135, 150, 0.4);
     }
     
     .btn:hover {
@@ -1098,24 +1143,13 @@ if (!RUNNING_IN_DOLIBARR) {
                 </div>
             </div>
             
-            <div class="form-group">
-                <label for="attachment">Pièce jointe</label>
-                <div class="form-control-wrapper">
-                    <div class="file-upload">
-                        <button type="button" class="file-upload-btn">
-                            <i class="fas fa-paperclip" style="margin-right: 8px;"></i>Choisir un fichier
-                        </button>
-                        <input type="file" id="attachment" name="attachment">
-                        <span class="file-name" id="file-name-display">Aucun fichier choisi</span>
-                    </div>
-                </div>
-            </div>
+
             
             <div class="btn-container">
-                <button type="submit" name="submit_ticket" class="btn btn-primary">
+                <button type="submit" name="submit_ticket" class="btn btn-primary btn-create">
                     <i class="fas fa-paper-plane" style="margin-right: 8px;"></i>Créer ticket
                 </button>
-                <button type="button" class="btn btn-secondary" onclick="window.location.href='<?php echo BASE_URL; ?>'">
+                <button type="button" class="btn btn-secondary btn-cancel" onclick="window.location.href='<?php echo BASE_URL; ?>'">
                     <i class="fas fa-times" style="margin-right: 8px;"></i>Annuler
                 </button>
             </div>

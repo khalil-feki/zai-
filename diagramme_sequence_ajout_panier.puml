@@ -1,0 +1,148 @@
+@startuml Add to Cart Sequence
+!theme plain
+title ZAI E-commerce Platform - Sequence d'Ajout au Panier
+
+actor Customer as "Client"
+participant "ProductController" as ProdCtrl
+participant "CartController" as CartCtrl
+participant "ProductModel" as ProdM
+participant "CartModel" as CartM
+participant "SessionManager" as Session
+participant "DolibarrAPI" as Doli
+participant "Database" as DB
+
+Customer -> ProdCtrl: viewProduct(productId)
+activate ProdCtrl
+ProdCtrl -> ProdM: getProductDetails(productId)
+activate ProdM
+ProdM --> ProdCtrl: productData
+deactivate ProdM
+ProdCtrl --> Customer: product page with "Add to Cart" button
+deactivate ProdCtrl
+
+Customer -> CartCtrl: addToCart(productId, quantity, options)
+activate CartCtrl
+
+note over CartCtrl : Validation des paramètres\nd'ajout au panier
+
+CartCtrl -> CartCtrl: validateInput(productId, quantity)
+
+CartCtrl -> Session: get('user_id')
+activate Session
+Session --> CartCtrl: userId or sessionId
+deactivate Session
+
+note over CartCtrl : Vérification de l'utilisateur\nou création de session anonyme
+
+alt utilisateur connecté
+    CartCtrl -> CartCtrl: setUserId(userId)
+else utilisateur anonyme
+    CartCtrl -> Session: generateSessionId()
+    activate Session
+    Session --> CartCtrl: sessionId
+    deactivate Session
+    CartCtrl -> CartCtrl: setSessionId(sessionId)
+end
+
+CartCtrl -> ProdM: findById(productId)
+activate ProdM
+ProdM -> Doli: getProduct(productId)
+activate Doli
+Doli -> DB: SELECT p.*, pe.*, s.reel as stock\nFROM llx_product p\nJOIN llx_product_extrafields pe ON p.rowid = pe.fk_object\nLEFT JOIN llx_stock s ON p.rowid = s.fk_product\nWHERE p.rowid = ?
+activate DB
+DB --> Doli: product data with stock
+deactivate DB
+Doli --> ProdM: productInfo
+deactivate Doli
+ProdM --> CartCtrl: product details
+deactivate ProdM
+
+alt produit existe et actif
+    CartCtrl -> ProdM: checkStock(productId, quantity)
+    activate ProdM
+    ProdM -> Doli: getStockLevel(productId)
+    activate Doli
+    Doli -> DB: SELECT reel FROM llx_stock\nWHERE fk_product = ?
+    activate DB
+    DB --> Doli: stock disponible
+    deactivate DB
+    Doli --> ProdM: stockLevel
+    deactivate Doli
+    ProdM --> CartCtrl: stock sufficient/insufficient
+    deactivate ProdM
+    
+    alt stock suffisant
+        CartCtrl -> CartM: findExistingItem(userId/sessionId, productId)
+        activate CartM
+        CartM -> DB: SELECT * FROM cart_items\nWHERE (user_id = ? OR session_id = ?)\nAND product_id = ?
+        activate DB
+        DB --> CartM: existing item or null
+        deactivate DB
+        CartM --> CartCtrl: existingItem
+        deactivate CartM
+        
+        alt article existe dans le panier
+            CartCtrl -> CartM: updateQuantity(itemId, newQuantity)
+            activate CartM
+            CartM -> DB: UPDATE cart_items\nSET quantity = ?, updated_at = NOW()\nWHERE id = ?
+            activate DB
+            DB --> CartM: quantity updated
+            deactivate DB
+            CartM --> CartCtrl: item updated
+            deactivate CartM
+            
+            note over CartCtrl : Mise à jour de la quantité\nexistante + nouvelle quantité
+        else nouvel article
+            CartCtrl -> ProdM: getPrice(productId)
+            activate ProdM
+            ProdM -> Doli: getCurrentPrice(productId)
+            activate Doli
+            Doli -> DB: SELECT price, tva_tx FROM llx_product\nWHERE rowid = ?
+            activate DB
+            DB --> Doli: price and tax
+            deactivate DB
+            Doli -> Doli: calculatePriceWithTax(price, tva_tx)
+            Doli --> ProdM: finalPrice
+            deactivate Doli
+            ProdM --> CartCtrl: productPrice
+            deactivate ProdM
+            
+            CartCtrl -> CartM: addItem(userId/sessionId, productId, quantity, price)
+            activate CartM
+            CartM -> DB: INSERT INTO cart_items\n(user_id, session_id, product_id, quantity, price, created_at)
+            activate DB
+            DB --> CartM: item added
+            deactivate DB
+            CartM --> CartCtrl: new item created
+            deactivate CartM
+        end
+        
+        CartCtrl -> CartM: getCartSummary(userId/sessionId)
+        activate CartM
+        CartM -> DB: SELECT COUNT(*) as item_count,\nSUM(quantity * price) as total\nFROM cart_items\nWHERE user_id = ? OR session_id = ?
+        activate DB
+        DB --> CartM: cart summary
+        deactivate DB
+        CartM --> CartCtrl: cartCount and total
+        deactivate CartM
+        
+        CartCtrl -> Session: updateCartSession(cartData)
+        activate Session
+        Session --> CartCtrl: session updated
+        deactivate Session
+        
+        note over CartCtrl : Préparation de la réponse\navec détails du panier mis à jour
+        
+        CartCtrl --> Customer: {"success": true, "message": "Produit ajouté", "cartCount": count, "cartTotal": total}
+    else stock insuffisant
+        CartCtrl --> Customer: {"success": false, "message": "Stock insuffisant", "availableStock": stockLevel}
+    end
+else produit inexistant/inactif
+    CartCtrl --> Customer: {"success": false, "message": "Produit non disponible"}
+end
+
+deactivate CartCtrl
+
+note over Customer : Mise à jour de l'interface\n- Compteur panier\n- Message de confirmation\n- Animation d'ajout
+
+@enduml

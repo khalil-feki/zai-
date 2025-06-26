@@ -5,7 +5,7 @@
         <div class="footer-content">
             <div class="footer-section about">
                 <div class="logo-container">
-                    <img src="<?= BASE_URL ?>public/images/logo.png" alt="<?= SITE_NAME ?> Logo" class="footer-logo">
+                    <img src="<?= BASE_URL ?>public/img/logo.jpeg" alt="<?= SITE_NAME ?> Logo" class="footer-logo">
                 </div>
                 <p class="footer-description">Your trusted online shopping destination for premium products at competitive prices.</p>
                 <div class="social-icons">

@@ -22,7 +22,7 @@ $router->addRoute('user/profile', 'UserController', 'profile');
 $router->addRoute('user/update', 'UserController', 'update');
 $router->addRoute('user/orders', 'UserController', 'orders');
 $router->addRoute('user/addresses', 'UserController', 'addresses');
-$router->addRoute('user/save-address', 'UserController', 'saveAddress');
+$router->addRoute('user/saveAddress', 'UserController', 'saveAddress');
 
 // Cart routes
 $router->addRoute('cart', 'CartController', 'index');

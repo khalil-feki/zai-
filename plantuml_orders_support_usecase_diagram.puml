@@ -1,0 +1,101 @@
+@startuml Orders and Support Use Cases
+!theme plain
+title Plateforme E-commerce ZAI - Cas d'Usage Commandes et Support (Sprint 3)
+
+left to right direction
+
+actor Client
+actor "Agent Support" as Agent
+actor Administrateur
+actor "Passerelle Paiement" as PasserellePaiement
+
+rectangle "Système Gestion Commandes" {
+  usecase "Créer Commande" as UC1
+  usecase "Traiter Paiement" as UC2
+  usecase "Suivre Commande" as UC3
+  usecase "Voir Historique Commandes" as UC4
+  usecase "Annuler Commande" as UC5
+  usecase "Mettre à Jour Statut Commande" as UC6
+  usecase "Générer Facture" as UC7
+  usecase "Gérer Remboursement" as UC8
+}
+
+rectangle "Système Support" {
+  usecase "Créer Ticket Support" as SUP1
+  usecase "Voir Statut Ticket" as SUP2
+  usecase "Ajouter Réponse Ticket" as SUP3
+  usecase "Fermer Ticket" as SUP4
+  usecase "Assigner Ticket" as SUP5
+  usecase "Escalader Ticket" as SUP6
+  usecase "Voir Historique Ticket" as SUP7
+}
+
+rectangle "Fonctions Admin" {
+  usecase "Gérer Toutes Commandes" as ADMIN1
+  usecase "Gérer Tous Tickets" as ADMIN2
+  usecase "Générer Rapports" as ADMIN3
+  usecase "Configurer Système" as ADMIN4
+}
+
+' Interactions Client - Commandes
+Client --> UC1 : passe
+Client --> UC2 : paie pour
+Client --> UC3 : surveille
+Client --> UC4 : consulte
+Client --> UC5 : annule
+
+' Interactions Client - Support
+Client --> SUP1 : crée
+Client --> SUP2 : vérifie
+Client --> SUP3 : répond à
+Client --> SUP7 : consulte
+
+' Interactions Agent Support
+Agent --> SUP2 : surveille
+Agent --> SUP3 : répond à
+Agent --> SUP4 : résout
+Agent --> SUP5 : assigne
+Agent --> SUP6 : escalade
+Agent --> UC6 : met à jour
+
+' Interactions Administrateur
+Administrateur --> ADMIN1 : supervise
+Administrateur --> ADMIN2 : gère
+Administrateur --> ADMIN3 : génère
+Administrateur --> ADMIN4 : configure
+Administrateur --> UC8 : traite
+
+' Interactions système externe
+PasserellePaiement --> UC2 : traite
+
+' Relations cas d'usage
+UC1 ..> UC2 : inclut
+UC2 ..> UC7 : déclenche
+UC5 ..> UC8 : peut déclencher
+SUP1 ..> SUP2 : crée
+SUP3 ..> SUP2 : met à jour
+SUP6 ..> SUP5 : inclut
+
+' Héritage
+Agent --|> Client
+Administrateur --|> Agent
+
+note right of UC1
+  Convertit le contenu du panier
+  en commande avec informations
+  de livraison et facturation
+end note
+
+note right of UC2
+  S'intègre avec passerelle
+  de paiement externe pour
+  transactions sécurisées
+end note
+
+note right of SUP1
+  Génère automatiquement
+  numéro de ticket et envoie
+  email de confirmation
+end note
+
+@enduml

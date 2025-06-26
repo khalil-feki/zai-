@@ -1,0 +1,210 @@
+@startuml
+!theme plain
+title Diagramme de Séquence - Intégration Dolibarr ZAI E-commerce
+
+participant "ZAI E-commerce" as ZAI
+participant "DolibarrIntegration" as DI
+participant "Dolibarr API" as DAPI
+database "llx_societe" as TSOC
+database "llx_user" as TUSER
+database "llx_product" as TPROD
+database "llx_commande" as TCMD
+database "llx_commandedet" as TCMDDET
+database "llx_stock" as TSTOCK
+database "llx_facture" as TFACT
+database "llx_paiement" as TPAY
+
+== Synchronisation Client ==
+ZAI -> DI: syncCustomer(customerData)
+activate DI
+DI -> DAPI: checkCustomerExists(email)
+activate DAPI
+DAPI -> TUSER: SELECT rowid FROM llx_user WHERE email = ?
+activate TUSER
+TUSER --> DAPI: customerId or null
+deactivate TUSER
+
+alt Client n'existe pas
+    DAPI -> TSOC: INSERT INTO llx_societe (nom, email, ...)
+    activate TSOC
+    TSOC --> DAPI: societeId
+    deactivate TSOC
+    
+    DAPI -> TUSER: INSERT INTO llx_user (login, email, fk_societe, ...)
+    activate TUSER
+    TUSER --> DAPI: userId
+    deactivate TUSER
+else Client existe
+    DAPI -> TUSER: UPDATE llx_user SET ... WHERE rowid = ?
+    activate TUSER
+    TUSER --> DAPI: userUpdated
+    deactivate TUSER
+end
+
+DAPI --> DI: customerSynced(userId)
+deactivate DAPI
+DI --> ZAI: syncComplete
+deactivate DI
+
+== Synchronisation Produits ==
+ZAI -> DI: syncProducts()
+activate DI
+DI -> DAPI: getProductCatalog()
+activate DAPI
+DAPI -> TPROD: SELECT * FROM llx_product WHERE tosell = 1
+activate TPROD
+TTPROD --> DAPI: productsList[]
+deactivate TPROD
+
+DAPI -> TSTOCK: SELECT stock FROM llx_stock WHERE fk_product IN (...)
+activate TSTOCK
+TSTOCK --> DAPI: stockLevels[]
+deactivate TSTOCK
+
+DAPI --> DI: productsData(products, stocks)
+deactivate DAPI
+DI --> ZAI: productsCatalogUpdated
+deactivate DI
+
+== Création Commande ==
+ZAI -> DI: createOrder(orderData)
+activate DI
+DI -> DAPI: validateOrderData(orderData)
+activate DAPI
+
+# Vérification stock
+DAPI -> TSTOCK: SELECT stock FROM llx_stock WHERE fk_product = ?
+activate TSTOCK
+TSTOCK --> DAPI: currentStock
+deactivate TSTOCK
+
+alt Stock suffisant
+    # Création commande
+    DAPI -> TCMD: INSERT INTO llx_commande (ref, fk_soc, date_creation, total_ttc, ...)
+    activate TCMD
+    TCMD --> DAPI: commandeId
+    deactivate TCMD
+    
+    # Détails commande
+    loop Pour chaque produit
+        DAPI -> TCMDDET: INSERT INTO llx_commandedet (fk_commande, fk_product, qty, prix, ...)
+        activate TCMDDET
+        TCMDDET --> DAPI: detailId
+        deactivate TCMDDET
+        
+        # Réservation stock
+        DAPI -> TSTOCK: UPDATE llx_stock SET stock = stock - ? WHERE fk_product = ?
+        activate TSTOCK
+        TSTOCK --> DAPI: stockUpdated
+        deactivate TSTOCK
+    end
+    
+    DAPI --> DI: orderCreated(commandeId, orderRef)
+else Stock insuffisant
+    DAPI --> DI: error("Stock insuffisant")
+end
+deactivate DAPI
+DI --> ZAI: orderResult
+deactivate DI
+
+== Traitement Paiement ==
+ZAI -> DI: processPayment(paymentData)
+activate DI
+DI -> DAPI: createPayment(paymentData)
+activate DAPI
+
+# Enregistrement paiement
+DAPI -> TPAY: INSERT INTO llx_paiement (datep, amount, fk_paiement, num_paiement, ...)
+activate TPAY
+TTPAY --> DAPI: paiementId
+deactivate TPAY
+
+# Mise à jour statut commande
+DAPI -> TCMD: UPDATE llx_commande SET fk_statut = 2 WHERE rowid = ?
+activate TCMD
+TCMD --> DAPI: statusUpdated
+deactivate TCMD
+
+# Génération facture
+DAPI -> TFACT: INSERT INTO llx_facture (facnumber, fk_soc, total_ttc, paye, ...)
+activate TFACT
+TFACT --> DAPI: factureId
+deactivate TFACT
+
+DAPI --> DI: paymentProcessed(paiementId, factureId)
+deactivate DAPI
+DI --> ZAI: paymentComplete
+deactivate DI
+
+== Suivi Commande ==
+ZAI -> DI: getOrderStatus(orderId)
+activate DI
+DI -> DAPI: fetchOrderDetails(orderId)
+activate DAPI
+
+DAPI -> TCMD: SELECT c.*, s.nom FROM llx_commande c JOIN llx_societe s ON c.fk_soc = s.rowid WHERE c.rowid = ?
+activate TCMD
+TCMD --> DAPI: orderInfo
+deactivate TCMD
+
+DAPI -> TCMDDET: SELECT cd.*, p.label FROM llx_commandedet cd JOIN llx_product p ON cd.fk_product = p.rowid WHERE cd.fk_commande = ?
+activate TCMDDET
+TCMDDET --> DAPI: orderDetails[]
+deactivate TCMDDET
+
+DAPI --> DI: orderData(orderInfo, orderDetails)
+deactivate DAPI
+DI --> ZAI: orderStatus
+deactivate DI
+
+== Gestion Stock Temps Réel ==
+ZAI -> DI: checkStockAvailability(productId, quantity)
+activate DI
+DI -> DAPI: getProductStock(productId)
+activate DAPI
+DAPI -> TSTOCK: SELECT stock FROM llx_stock WHERE fk_product = ?
+activate TSTOCK
+TSTOCK --> DAPI: currentStock
+deactivate TSTOCK
+DAPI --> DI: stockLevel
+deactivate DAPI
+
+alt Stock >= quantity
+    DI --> ZAI: stockAvailable(true)
+else Stock < quantity
+    DI --> ZAI: stockAvailable(false, availableStock)
+end
+deactivate DI
+
+== Synchronisation Bidirectionnelle ==
+note over ZAI, TPAY
+    Synchronisation automatique toutes les 5 minutes
+    - Mise à jour des stocks
+    - Synchronisation des statuts de commande
+    - Mise à jour des informations clients
+    - Synchronisation des nouveaux produits
+end note
+
+ZAI -> DI: scheduledSync()
+activate DI
+DI -> DAPI: syncAllData()
+activate DAPI
+
+# Sync stocks
+DAPI -> TSTOCK: SELECT fk_product, stock FROM llx_stock
+activate TSTOCK
+TSTOCK --> DAPI: allStocks[]
+deactivate TSTOCK
+
+# Sync commandes
+DAPI -> TCMD: SELECT rowid, fk_statut FROM llx_commande WHERE date_modification > ?
+activate TCMD
+TCMD --> DAPI: updatedOrders[]
+deactivate TCMD
+
+DAPI --> DI: syncData(stocks, orders)
+deactivate DAPI
+DI --> ZAI: syncCompleted
+deactivate DI
+
+@enduml

@@ -1,0 +1,61 @@
+@startuml Diagramme de Cas d'Usage d'Authentification
+!theme plain
+title Plateforme E-commerce ZAI - Cas d'Usage d'Authentification (Sprint 1)
+
+left to right direction
+
+actor Visiteur
+actor Client
+actor Administrateur
+
+rectangle "Système d'Authentification" {
+  usecase "S'inscrire" as UC1
+  usecase "Se connecter" as UC2
+  usecase "Se déconnecter" as UC3
+  usecase "Réinitialiser mot de passe" as UC4
+  usecase "Mettre à jour profil" as UC5
+  usecase "Valider session" as UC6
+  usecase "Synchroniser avec Dolibarr" as UC7
+}
+
+rectangle "Systèmes Externes" {
+  usecase "Intégration Dolibarr" as EXT1
+}
+
+' Interactions Visiteur
+Visiteur --> UC1 : crée un compte
+Visiteur --> UC2 : s'authentifie
+Visiteur --> UC4 : récupère l'accès
+
+' Interactions Client
+Client --> UC2 : s'authentifie
+Client --> UC3 : termine la session
+Client --> UC5 : gère le profil
+Client --> UC4 : récupère l'accès
+
+' Interactions Administrateur
+Administrateur --> UC2 : s'authentifie
+Administrateur --> UC3 : termine la session
+Administrateur --> UC5 : gère le profil
+
+' Interactions Système
+UC1 ..> UC7 : déclenche
+UC2 ..> UC6 : inclut
+UC5 ..> UC7 : déclenche
+UC7 --> EXT1 : communique
+
+' Héritage
+Client --|> Visiteur
+Administrateur --|> Client
+
+note right of UC1
+  L'inscription crée automatiquement
+  un tiers dans Dolibarr
+end note
+
+note right of UC7
+  Synchronise les données utilisateur
+  entre la BD locale et Dolibarr
+end note
+
+@enduml
