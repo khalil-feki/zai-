@@ -39,11 +39,9 @@
 
 
 \begin{document}
-\includepdf[pages=-]{intro.pdf}
 
 \thispagestyle{empty}
 \vspace*{5cm}
-\
 \chapter*{Dédicaces}
 
 
@@ -69,6 +67,8 @@ Enfin, je remercie sincèrement les membres du jury pour l’intérêt qu’ils 
 
 
 % Table des matières
+\pagenumbering{roman}
+\setcounter{page}{1}
 \tableofcontents
 \cleardoublepage
 
@@ -79,7 +79,9 @@ Enfin, je remercie sincèrement les membres du jury pour l’intérêt qu’ils 
 % Liste des tableaux 
 \listoftables
 \cleardoublepage
-\section*{Introduction Générale}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\chapter{Introduction Générale}
 \vspace{0.5cm}
 
 \begin{minipage}{\textwidth}
@@ -98,7 +100,7 @@ Notre projet vise précisément à développer une solution e-commerce moderne e
 \chapter{Présentation du cadre de projet}
 
 \section{Introduction}
-Ce chapitre présente mon stage au sein de ZAI, spécialiste des solutions retail en Tunisie. Nous analyserons d'abord son écosystème (1 000+ clients, et ses innovations (systèmes de caisse, outils e-commerce). Puis nous détaillerons la méthodologie appliquée dans le développement de ses solutions pour environnements commerciaux complexes, au sein d'une équipe de 15 experts.
+Ce chapitre présente mon stage au sein de ZAI, spécialiste des solutions retail en Tunisie. Nous analyserons d'abord son écosystème (1 000+ clients) et ses innovations (systèmes de caisse, outils e-commerce). Puis nous détaillerons la méthodologie appliquée dans le développement de ses solutions pour environnements commerciaux complexes, au sein d'une équipe de 15 experts.
 
 \section{Problématique}
 Dans un contexte économique en constante évolution, marqué par la digitalisation croissante des activités commerciales, la transformation numérique des entreprises et l'essor du commerce électronique sont devenues des enjeux majeurs tant pour les commerçants que pour leurs clients. Malgré la disponibilité de multiples solutions de gestion d'entreprise comme Dolibarr, de nombreuses entreprises rencontrent des difficultés à moderniser leur présence en ligne et à optimiser leurs processus de vente, tandis que leurs clients peinent à accéder à une expérience d'achat fluide et moderne en raison de l'absence d'interfaces e-commerce adaptées et de la complexité des systèmes de gestion traditionnels.
@@ -118,18 +120,18 @@ Les principales problématiques :
 
 
 \section{Objectifs du Projet}
+
 Nous développons une solution e-commerce clé en main qui se connecte directement à Dolibarr pour automatiser la gestion commerciale. Notre plateforme permettra de synchroniser en temps réel les produits, stocks et commandes entre le site marchand et l'ERP, éliminant les saisies manuelles et les erreurs associées. L'interface utilisateur, simple et intuitive, offrira une expérience d'achat fluide sur tous les appareils,  Cette intégration permettra aux entreprises de gagner du temps sur leur gestion quotidienne tout en améliorant la précision de leurs données. La solution sera déployée progressivement, avec une première version opérationnelle rapidement, suivie d'optimisations continues pour s'adapter aux besoins spécifiques de chaque activité.
 
 
 
-
 \section{Présentation de l'Organisme d'Accueil}
-ZAI, fondée en 2002 en tant que spécialiste tunisien des technologies pour le commerce de détail, s'est imposée comme leader du marché des solutions de gestion commerciale et de points de vente, servant plus de 1 000 clients à travers l'Afrique du Nord avec près de 500 systèmes installés. La société maintient un taux de croissance annuel de 30 pour cent  grâce à ses solutions innovantes et sur mesure pour divers secteurs du commerce, notamment la mode, la restauration, les pressing et la distribution en gros, proposant des systèmes de gestion adaptés aux commerces indépendants comme aux enseignes multi-sites. Avec 15 techniciens qualifiés et 10 revendeurs agréés en Tunisie, Algérie, Maroc et Libye, ZAI fournit des systèmes de caisse intelligents, des solutions pour environnements commerciaux à fort trafic et des plateformes e-commerce intégrées, ayant déployé plus de 1 000 terminaux POS et 100 systèmes antivol adaptés à plus de 40 types d'activités. La société garantit une innovation continue grâce à des partenariats techniques européens et maintient la satisfaction client via un support technique dédié et des réseaux de service localisés, tout en préparant une expansion régionale accrue avec ses technologies éprouvées de gestion commerciale. 
+ZAI, fondée en 2002 en tant que spécialiste tunisien des technologies pour le commerce de détail, s'est imposée comme leader du marché des solutions de gestion commerciale et de points de vente, servant plus de 1 000 clients à travers l'Afrique du Nord avec près de 500 systèmes installés. La société maintient un taux de croissance annuel de 30\% grâce à ses solutions innovantes et sur mesure pour divers secteurs du commerce, notamment la mode, la restauration, les pressing et la distribution en gros, proposant des systèmes de gestion adaptés aux commerces indépendants comme aux enseignes multi-sites. Avec 15 techniciens qualifiés et 10 revendeurs agréés en Tunisie, Algérie, Maroc et Libye, ZAI fournit des systèmes de caisse intelligents, des solutions pour environnements commerciaux à fort trafic et des plateformes e-commerce intégrées, ayant déployé plus de 1 000 terminaux POS et 100 systèmes antivol adaptés à plus de 40 types d'activités. La société garantit une innovation continue grâce à des partenariats techniques européens et maintient la satisfaction client via un support technique dédié et des réseaux de service localisés, tout en préparant une expansion régionale accrue avec ses technologies éprouvées de gestion commerciale. 
 
 \begin{figure}[H]
 \centering
-\includegraphics {logo.jpeg}
-\caption{zai}
+\includegraphics[width=0.6\textwidth]{logo.jpeg}
+\caption{Logo ZAI}
 \label{fig:zai}
 \end{figure}
 
@@ -341,7 +343,7 @@ L'adoption de la méthodologie Scrum pour ce projet s'est imposée comme un choi
 
 \begin{figure}[H]
     \centering
-     \includegraphics[width=1 \textwidth]{ScrumValues-500.png}
+     \includegraphics[width=1\textwidth]{ScrumValues-500.png}
     \caption{Scrum}
     \label{fig:scrum}
 \end{figure}
@@ -356,7 +358,7 @@ L'équipe Scrum mise en place pour ce projet présente une structure organisatio
 \end{itemize}
 \begin{figure}[H]
     \centering
-     \includegraphics[width=1 \textwidth]{Scrum.jpg}
+     \includegraphics[width=1\textwidth]{Scrum.jpg}
     \caption{Méthodologie Scrum appliquée au projet}
     \label{fig:scrum_methodology}
 \end{figure}
@@ -426,8 +428,7 @@ Le diagramme de cas d'utilisation présente les interactions entre les acteurs e
 
 \begin{figure}[H]
     \centering
-    \includegraphics{Diagramme de Cas d’Utilisation.png}
-    
+    \includegraphics[width=0.8\textwidth]{Diagramme de Cas d'Utilisation.png}
     \caption{Diagramme de cas d'utilisation général}
     \label{fig:usecase_diagram}
 \end{figure}
@@ -724,7 +725,7 @@ Le diagramme de cas d'utilisation suivant présente les interactions possibles e
 
 \begin{figure}[H]
 \centering
-\includegraphics {authentication_usecase_diagram.png}
+\includegraphics[width=0.8\textwidth]{authentication_usecase_diagram.png}
 \caption{Diagramme de cas d'utilisation - Authentification}
 \label{fig:usecase_auth}
 \end{figure}
@@ -821,7 +822,7 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \subsection{Séquence d'Inscription}
 \begin{figure}[H]
     \centering
-    \includegraphics{register.png}
+    \includegraphics[width=0.8\textwidth]{register.png}
     \caption{Diagramme de séquence - Inscription d'un utilisateur}
     \label{fig:sequence_register}
 \end{figure}
@@ -843,7 +844,7 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \subsection{Séquence de Connexion}
 \begin{figure}[H]
     \centering
-    \includegraphics{login.png}
+    \includegraphics[width=0.8\textwidth]{login.png}
     \caption{Diagramme de séquence - Connexion d'un utilisateur}
     \label{fig:sequence_login}
 \end{figure}
@@ -863,7 +864,7 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \subsection{Séquence de Modification de Profil}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1 \textwidth]{updateprof.png}    
+    \includegraphics[width=1\textwidth]{updateprof.png}
     \caption{Diagramme de séquence - Modification de profil}
     \label{fig:sequence_profile_update}
 \end{figure}
@@ -882,7 +883,7 @@ Cette section présente les interfaces utilisateur développées pour le module 
 \subsection{Interface d'Inscription}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1 \textwidth]{registerinterface.png}
+    \includegraphics[width=1\textwidth]{registerinterface.png}
     \caption{Interface d'inscription}
     \label{fig:register_screen}
 \end{figure}
@@ -893,7 +894,7 @@ Cette section présente les interfaces utilisateur développées pour le module 
 
 \centering 
 
-\includegraphics[width=1 \textwidth]{loginintt.png} 
+\includegraphics[width=1\textwidth]{loginintt.png} 
 
 \caption{Interface de connexion} 
 
@@ -905,7 +906,7 @@ Cette section présente les interfaces utilisateur développées pour le module 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1 \textwidth]{profile.png}
+    \includegraphics[width=1\textwidth]{profile.png}
     \caption{Interface de profil utilisateur}
     \label{fig:profile_screen}
 \end{figure}
@@ -982,25 +983,25 @@ Le diagramme de cas d'utilisation suivant présente les interactions possibles e
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1 \textwidth]{visiteurUseCase.png}
+\includegraphics[width=1\textwidth]{visiteurUseCase.png}
 \caption{Diagramme de cas d'utilisation - Produits et panier}
 \label{fig:visiteur UseCase}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=1 \textwidth]{clientUseCase.png}
+\includegraphics[width=1\textwidth]{clientUseCase.png}
 \caption{Diagramme de cas d'utilisation - client-Produits et panier}
 \label{fig:usecase_products}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=1 \textwidth]{adminusecase.png}
+\includegraphics[width=1\textwidth]{adminusecase.png}
 \caption{Diagramme de cas d'utilisation -  Produits et Catégories}
 \label{fig:usecase_products}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=1 \textwidth]{Parcourir les ProduitsUseCase.png}
+\includegraphics[width=1\textwidth]{Parcourir les ProduitsUseCase.png}
 \caption{Diagramme de cas d'utilisation -  Parcourir les Produits}
 \label{fig:usecase_products}
 \end{figure}
@@ -1071,7 +1072,7 @@ L'interface de gestion des produits dans Dolibarr ERP offre un contrôle complet
 \hline
 \textbf{Table} & \textbf{Description} & \textbf{Champs Clés} \\
 \hline
-\texttt{llx\_product} & Produits principaux & \texttt{rowid}, \texttt{ref}, \texttt{label}, \texttt{price}, \texttt{tva\_tx} \\
+\texttt{h8pd_product} & Produits principaux & \texttt{rowid}, \texttt{ref}, \texttt{label}, \texttt{price}, \texttt{tva\_tx} \\
 \hline
 \texttt{llx\_product\_extrafields} & Champs personnalisés & \texttt{fk\_object}, \texttt{description\_long}, \texttt{images}, \texttt{featured} \\
 \hline
@@ -1117,7 +1118,7 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \subsection{Séquence d'Affichage des Produits}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6 \textwidth]{AffichageProduits.png}
+\includegraphics[width=0.6\textwidth]{AffichageProduits.png}
 \caption{Diagramme de séquence - Affichage des produits}
 \label{fig:sequence_display_products}
 \end{figure}
@@ -1138,7 +1139,7 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \subsection{Séquence de Recherche de Produits}
 \begin{figure}[H]
 \centering
- \includegraphics[width=0.5 \textwidth]{Recherche de Produits.png}
+\includegraphics[width=0.5\textwidth]{Recherche de Produits.png}
 \caption{Diagramme de séquence - Recherche de produits}
 \label{fig:sequence_search_products}
 \end{figure}
@@ -1158,7 +1159,7 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \subsection{Séquence d'Ajout au Panier}
 \begin{figure}[H]
 \centering
- \includegraphics[width=1 \textwidth]{ajouter.png}
+\includegraphics[width=1\textwidth]{ajouter.png}
 \caption{Diagramme de séquence - Ajout d'un produit au panier}
 \label{fig:sequence_add_to_cart}
 \end{figure}
@@ -1238,7 +1239,7 @@ L'interface de détail présente toutes les caractéristiques techniques du prod
 \subsection{Interface du Panier d'Achat}
 \begin{figure}[H]
 \centering
- \includegraphics[width=1 \textwidth]{cart.png}
+\includegraphics[width=1\textwidth]{cart.png}
 \caption{Interface du panier d'achat}
 \label{fig:shopping_cart}
 \end{figure}
@@ -1311,7 +1312,7 @@ Le diagramme de cas d'utilisation suivant présente les interactions possibles e
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1 \textwidth]{lescommandes.png}
+\includegraphics[width=1\textwidth]{lescommandes.png}
 \caption{Diagramme de cas d'utilisation - Gestion des commandes}
 \label{fig:usecase_orders}
 \end{figure}
