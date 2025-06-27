@@ -1,0 +1,241 @@
+@startuml Order Creation Sequence
+!theme plain
+title ZAI E-commerce Platform - Diagramme de séquence : Création d'une Commande
+
+actor Client as "Client"
+participant "CheckoutController" as CheckoutCtrl
+participant "CartModel" as CartM
+participant "OrderModel" as OrderM
+participant "ProductModel" as ProductM
+participant "UserModel" as UserM
+participant "DolibarrService" as DoliService
+participant "PaymentService" as PaymentSvc
+participant "EmailService" as EmailSvc
+participant "Database" as DB
+participant "DolibarrAPI" as DoliAPI
+
+Client -> CheckoutCtrl: processOrder(cartData, shippingInfo, paymentInfo)
+activate CheckoutCtrl
+
+note over CheckoutCtrl : Validation des données
+et vérification de sécurité
+
+CheckoutCtrl -> CheckoutCtrl: validateOrderData(cartData, shippingInfo, paymentInfo)
+
+CheckoutCtrl -> CartM: getCartItems(userId)
+activate CartM
+CartM -> DB: SELECT ci.*, p.label, p.price, p.stock
+FROM cart_items ci
+JOIN llx_product p ON ci.product_id = p.rowid
+WHERE ci.user_id = ?
+activate DB
+DB --> CartM: cart items with product details
+deactivate DB
+CartM --> CheckoutCtrl: validated cart items
+deactivate CartM
+
+alt panier vide ou invalide
+    CheckoutCtrl --> Client: {
+        "success": false,
+        "message": "Panier vide ou produits indisponibles",
+        "error_code": "INVALID_CART"
+    }
+else panier valide
+    CheckoutCtrl -> ProductM: checkStockAvailability(cartItems)
+    activate ProductM
+    
+    loop pour chaque produit du panier
+        ProductM -> DB: SELECT stock FROM llx_product WHERE rowid = ?
+        activate DB
+        DB --> ProductM: current stock level
+        deactivate DB
+        
+        ProductM -> DoliAPI: getProductStock(productId)
+        activate DoliAPI
+        DoliAPI --> ProductM: dolibarr stock info
+        deactivate DoliAPI
+    end
+    
+    ProductM --> CheckoutCtrl: stock validation result
+    deactivate ProductM
+    
+    alt stock insuffisant
+        CheckoutCtrl --> Client: {
+            "success": false,
+            "message": "Stock insuffisant pour certains produits",
+            "error_code": "INSUFFICIENT_STOCK",
+            "unavailable_items": [...]
+        }
+    else stock disponible
+        CheckoutCtrl -> CheckoutCtrl: calculateOrderTotal(cartItems, shippingInfo)
+        
+        note over CheckoutCtrl : Calcul du total :
+        - Prix des produits
+        - TVA
+        - Frais de port
+        - Codes promo
+        
+        CheckoutCtrl -> PaymentSvc: processPayment(paymentInfo, orderTotal)
+        activate PaymentSvc
+        
+        PaymentSvc -> PaymentSvc: validatePaymentMethod(paymentInfo)
+        PaymentSvc -> PaymentSvc: chargePayment(amount, paymentMethod)
+        
+        alt paiement échoué
+            PaymentSvc --> CheckoutCtrl: payment failed
+            deactivate PaymentSvc
+            CheckoutCtrl --> Client: {
+                "success": false,
+                "message": "Échec du paiement",
+                "error_code": "PAYMENT_FAILED"
+            }
+        else paiement réussi
+            PaymentSvc --> CheckoutCtrl: payment successful with transaction_id
+            deactivate PaymentSvc
+            
+            CheckoutCtrl -> OrderM: createOrder(orderData)
+            activate OrderM
+            
+            OrderM -> DB: BEGIN TRANSACTION
+            activate DB
+            
+            OrderM -> DB: INSERT INTO zai_orders
+            (user_id, total_amount, shipping_address, 
+             payment_method, transaction_id, status, created_at)
+            VALUES (?, ?, ?, ?, ?, 'pending', NOW())
+            DB --> OrderM: order_id
+            
+            loop pour chaque item du panier
+                OrderM -> DB: INSERT INTO zai_order_items
+                (order_id, product_id, quantity, unit_price, total_price)
+                VALUES (?, ?, ?, ?, ?)
+            end
+            
+            OrderM -> DB: UPDATE llx_product SET stock = stock - ?
+            WHERE rowid = ? AND stock >= ?
+            
+            OrderM -> DB: DELETE FROM cart_items WHERE user_id = ?
+            
+            OrderM -> DB: COMMIT TRANSACTION
+            deactivate DB
+            
+            OrderM --> CheckoutCtrl: local order created successfully
+            deactivate OrderM
+            
+            CheckoutCtrl -> DoliService: createDolibarrOrder(orderData)
+            activate DoliService
+            
+            DoliService -> UserM: getDolibarrCustomerId(userId)
+            activate UserM
+            UserM -> DB: SELECT fk_soc FROM llx_user WHERE rowid = ?
+            activate DB
+            DB --> UserM: dolibarr_customer_id
+            deactivate DB
+            UserM --> DoliService: customer_id
+            deactivate UserM
+            
+            DoliService -> DoliAPI: POST /orders
+            {
+                "socid": customer_id,
+                "date": order_date,
+                "lines": [
+                    {
+                        "fk_product": product_id,
+                        "qty": quantity,
+                        "subprice": unit_price
+                    }
+                ]
+            }
+            activate DoliAPI
+            
+            DoliAPI -> DB: INSERT INTO llx_commande
+            (fk_soc, date_creation, fk_user_author, fk_statut)
+            VALUES (?, NOW(), ?, 0)
+            activate DB
+            DB --> DoliAPI: dolibarr_order_id
+            
+            DoliAPI -> DB: INSERT INTO llx_commandedet
+            (fk_commande, fk_product, qty, subprice, total_ht)
+            VALUES (?, ?, ?, ?, ?)
+            DB --> DoliAPI: order lines created
+            deactivate DB
+            
+            DoliAPI --> DoliService: {
+                "id": dolibarr_order_id,
+                "ref": order_reference
+            }
+            deactivate DoliAPI
+            
+            DoliService -> OrderM: updateOrderWithDolibarrId(orderId, dolibarrOrderId)
+            activate OrderM
+            OrderM -> DB: UPDATE zai_orders 
+            SET dolibarr_order_id = ?, dolibarr_ref = ?
+            WHERE id = ?
+            activate DB
+            DB --> OrderM: order updated
+            deactivate DB
+            OrderM --> DoliService: update successful
+            deactivate OrderM
+            
+            DoliService --> CheckoutCtrl: dolibarr order created
+            deactivate DoliService
+            
+            CheckoutCtrl -> EmailSvc: sendOrderConfirmation(orderData, customerEmail)
+            activate EmailSvc
+            
+            EmailSvc -> EmailSvc: generateOrderConfirmationEmail(orderData)
+            EmailSvc -> EmailSvc: sendEmail(customerEmail, subject, htmlContent)
+            
+            note over EmailSvc : Email de confirmation avec :
+            - Numéro de commande
+            - Détail des produits
+            - Montant total
+            - Adresse de livraison
+            - Délai de livraison estimé
+            
+            EmailSvc --> CheckoutCtrl: email sent successfully
+            deactivate EmailSvc
+            
+            CheckoutCtrl -> OrderM: createOrderHistory(orderId, 'created', 'Commande créée')
+            activate OrderM
+            OrderM -> DB: INSERT INTO order_history
+            (order_id, status, message, created_at)
+            VALUES (?, 'created', 'Commande créée et confirmée', NOW())
+            activate DB
+            DB --> OrderM: history entry created
+            deactivate DB
+            OrderM --> CheckoutCtrl: history logged
+            deactivate OrderM
+            
+            note over CheckoutCtrl : Préparation de la réponse
+            avec toutes les informations
+            de la commande créée
+            
+            CheckoutCtrl --> Client: {
+                "success": true,
+                "message": "Commande créée avec succès",
+                "order": {
+                    "id": orderId,
+                    "reference": orderReference,
+                    "dolibarr_ref": dolibarrReference,
+                    "total": orderTotal,
+                    "status": "pending",
+                    "estimated_delivery": deliveryDate
+                },
+                "payment": {
+                    "transaction_id": transactionId,
+                    "method": paymentMethod,
+                    "status": "completed"
+                }
+            }
+        end
+    end
+end
+
+deactivate CheckoutCtrl
+
+note over Client : Redirection vers la page
+de confirmation de commande
+avec les détails
+
+@enduml

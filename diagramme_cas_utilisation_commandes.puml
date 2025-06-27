@@ -1,0 +1,148 @@
+@startuml Order Use Cases
+!theme plain
+title ZAI E-commerce Platform - Diagramme de Cas d'Utilisation : Gestion des Commandes
+
+' Acteurs
+actor "Client" as Client
+actor "Administrateur" as Admin
+actor "Gestionnaire de Stock" as StockManager
+actor "Service Client" as Support
+actor "Système Dolibarr" as Dolibarr
+actor "API Transporteur" as ShippingAPI
+actor "Système de Paiement" as PaymentSystem
+
+' Package principal
+package "Gestion des Commandes" {
+    
+    ' Cas d'utilisation pour le Client
+    usecase "Passer une commande" as UC1
+    usecase "Consulter mes commandes" as UC2
+    usecase "Suivre une commande" as UC3
+    usecase "Annuler une commande" as UC4
+    usecase "Modifier une commande" as UC5
+    usecase "Télécharger facture" as UC6
+    usecase "Retourner un produit" as UC7
+    
+    ' Cas d'utilisation pour l'Administration
+    usecase "Gérer toutes les commandes" as UC8
+    usecase "Valider une commande" as UC9
+    usecase "Expédier une commande" as UC10
+    usecase "Générer rapports commandes" as UC11
+    usecase "Configurer statuts commandes" as UC12
+    
+    ' Cas d'utilisation pour la Gestion de Stock
+    usecase "Vérifier disponibilité stock" as UC13
+    usecase "Réserver produits" as UC14
+    usecase "Mettre à jour stock" as UC15
+    
+    ' Cas d'utilisation pour le Support
+    usecase "Assister client commande" as UC16
+    usecase "Traiter réclamation" as UC17
+    usecase "Modifier statut commande" as UC18
+    
+    ' Cas d'utilisation système
+    usecase "Synchroniser avec Dolibarr" as UC19
+    usecase "Calculer frais de port" as UC20
+    usecase "Traiter paiement" as UC21
+    usecase "Envoyer notifications" as UC22
+    usecase "Générer numéro suivi" as UC23
+}
+
+' Relations Client
+Client --> UC1
+Client --> UC2
+Client --> UC3
+Client --> UC4
+Client --> UC5
+Client --> UC6
+Client --> UC7
+
+' Relations Administrateur
+Admin --> UC8
+Admin --> UC9
+Admin --> UC10
+Admin --> UC11
+Admin --> UC12
+Admin --> UC18
+
+' Relations Gestionnaire de Stock
+StockManager --> UC13
+StockManager --> UC14
+StockManager --> UC15
+
+' Relations Service Client
+Support --> UC16
+Support --> UC17
+Support --> UC18
+
+' Relations Systèmes externes
+Dolibarr --> UC19
+ShippingAPI --> UC23
+PaymentSystem --> UC21
+
+' Relations d'inclusion et d'extension
+UC1 ..> UC13 : <<include>>
+UC1 ..> UC14 : <<include>>
+UC1 ..> UC20 : <<include>>
+UC1 ..> UC21 : <<include>>
+UC1 ..> UC19 : <<include>>
+UC1 ..> UC22 : <<include>>
+
+UC9 ..> UC15 : <<include>>
+UC9 ..> UC19 : <<include>>
+UC9 ..> UC22 : <<include>>
+
+UC10 ..> UC23 : <<include>>
+UC10 ..> UC19 : <<include>>
+UC10 ..> UC22 : <<include>>
+
+UC3 ..> UC19 : <<include>>
+
+UC4 ..> UC15 : <<extend>>
+UC4 ..> UC19 : <<include>>
+UC4 ..> UC22 : <<include>>
+
+UC5 ..> UC13 : <<extend>>
+UC5 ..> UC19 : <<include>>
+
+UC6 ..> UC19 : <<include>>
+
+UC7 ..> UC15 : <<include>>
+UC7 ..> UC19 : <<include>>
+UC7 ..> UC22 : <<include>>
+
+' Notes explicatives
+note right of UC1
+  Processus complet de commande :
+  - Validation du panier
+  - Vérification stock
+  - Calcul frais de port
+  - Traitement paiement
+  - Création commande Dolibarr
+end note
+
+note right of UC3
+  Suivi en temps réel :
+  - Statut Dolibarr
+  - Informations transporteur
+  - Historique des étapes
+  - Estimation livraison
+end note
+
+note right of UC19
+  Synchronisation bidirectionnelle :
+  - Création commandes
+  - Mise à jour statuts
+  - Gestion stock
+  - Facturation
+end note
+
+note bottom of UC22
+  Notifications automatiques :
+  - Confirmation commande
+  - Changement de statut
+  - Expédition
+  - Livraison
+end note
+
+@enduml

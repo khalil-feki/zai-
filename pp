@@ -42,7 +42,7 @@
 \begin{document}
 
 % Front cover
-\includegraphics[width=1 \textwidth]{11.png}
+\includegraphics[width=0.95 \textwidth]{11.png}
 
 % Dedication page
 \includegraphics[width=1.15 \textwidth]{22.png}
@@ -85,103 +85,54 @@ Enfin, je remercie sincèrement les membres du jury pour l’intérêt qu’ils 
 % Liste des tableaux 
 \listoftables
 \cleardoublepage
+\section*{Introduction Générale}
+Aujourd'hui, on vit vraiment dans un monde où tout devient numérique, et 
 
-% Chapitre 1 : Présentation du cadre de projet
-\chapter{Présentation du cadre de projet}
-\section{Introduction Générale}
-\section{Contexte du Projet}
-Aujourd'hui, on vit vraiment dans un monde où tout devient numérique, et franchement, le commerce électronique explose littéralement ! Le marché mondial dépasse maintenant les 5 000 milliards de dollars en 2024 - c'est énorme quand on y pense. Toutes les entreprises, petites ou grandes, se battent pour améliorer leur présence en ligne et optimiser leurs processus de vente. C'est devenu vital pour survivre dans cet environnement ultra-compétitif qui évolue à une vitesse folle.
+franchement, le commerce électronique explose littéralement ! Le marché mondial 
+
+dépasse maintenant les 5 000 milliards de dollars en 2025 - c'est énorme quand on y 
+
+pense. Toutes les entreprises, petites ou grandes, se battent pour améliorer leur 
+
+présence en ligne et optimiser leurs processus de vente. C'est devenu vital pour 
+
+survivre dans cet environnement ultra-compétitif qui évolue à une vitesse folle.
 
 Bon, intégrer une plateforme e-commerce avec un système ERP existant, c'est pas de la tarte ! C'est un vrai défi technique, mais les bénéfices en valent vraiment la peine : efficacité opérationnelle améliorée, coûts réduits, et surtout une bien meilleure expérience pour les clients. Cette intégration permet une gestion unifiée des stocks, des commandes, et des données clients, éliminant les silos informationnels et réduisant les erreurs humaines.
 
 C'est exactement dans cette optique que notre projet prend tout son sens. On vise à créer une solution e-commerce vraiment moderne et sécurisée qui s'intègre de manière fluide avec Dolibarr - l'ERP que notre client utilise déjà. Dolibarr, étant un ERP open-source largement adopté par les PME, offre une base solide pour cette intégration. L'objectif est de créer une interface utilisateur intuitive, responsive et sécurisée qui se connecte directement à la base de données Dolibarr, évitant ainsi la duplication des données et assurant une cohérence en temps réel entre les différents systèmes.
+% Chapitre 1 : Présentation du cadre de projet
+\chapter{Présentation du cadre de projet}
+
+\section{Introduction}
+Ce chapitre présente mon stage au sein de ZAI, spécialiste des solutions retail en Tunisie. Nous analyserons d'abord son écosystème (1 000+ clients, et ses innovations (systèmes de caisse, outils e-commerce). Puis nous détaillerons la méthodologie appliquée dans le développement de ses solutions pour environnements commerciaux complexes, au sein d'une équipe de 15 experts.
 
 \section{Problématique}
 Alors, voici la situation : notre client utilise déjà Dolibarr pour gérer tout son business - inventaire, clients, commandes, etc. Mais il y a un hic... En fait, plusieurs défis de taille dans le monde ultra-compétitif du e-commerce d'aujourd'hui :
 
-\subsection{Défis Techniques}
-\begin{itemize}
-    \item \textbf{Pas d'interface e-commerce digne de ce nom} : Leurs clients ne peuvent même pas consulter le catalogue ou passer commande en ligne à n'importe quelle heure - c'est un gros problème en 2024 !
-    \item \textbf{L'intégration, c'est le casse-tête} : Il faut absolument s'intégrer avec la base de données Dolibarr qui existe déjà, mais sans tout casser au passage
-    \item \textbf{Tout doit être synchro en temps réel} : Les stocks, les prix, les infos produits... tout doit être parfaitement cohérent entre l'ERP et le site e-commerce, sinon c'est la catastrophe
-    \item \textbf{Ça doit tenir la charge} : Plus d'utilisateurs, plus de transactions... le système doit pouvoir encaisser sans broncher
-\end{itemize}
 
-\subsection{Côté Sécurité, c'est du sérieux}
-\begin{itemize}
-    \item \textbf{Les données perso, c'est sacré} : RGPD oblige, il faut protéger les infos clients comme la prunelle de nos yeux
-    \item \textbf{Paiements ultra-sécurisés} : Pas question de rigoler avec l'argent des clients - protocoles de paiement blindés exigés
-    \item \textbf{Authentification béton} : Système d'accès costaud pour éviter les fraudes et autres joyeusetés
-\end{itemize}
-
-\subsection{Les enjeux Business}
-\begin{itemize}
-    \item \textbf{L'expérience utilisateur avant tout} : Interface qui doit être intuitive et fonctionner nickel sur tous les appareils - smartphone, tablette, ordi
-    \item \textbf{Rester dans la course} : Fonctionnalités modernes obligatoires - recherche intelligente, recommandations personnalisées, avis clients, tout le tralala
-    \item \textbf{Penser à demain} : Architecture évolutive pour pouvoir ajouter des trucs cool plus tard sans tout refaire
-\end{itemize}
 
 \section{Objectifs du Projet}
 Bon, concrètement, qu'est-ce qu'on veut faire avec ce projet ? On vise à développer une plateforme e-commerce complète et vraiment sécurisée, parfaitement intégrée avec Dolibarr, et qui respecte tous les standards modernes du e-commerce :
 
-\subsection{Objectifs Fonctionnels}
-\begin{itemize}
-    \item \textbf{Une interface qui claque} : Interface web responsive, super intuitive et accessible, qui marche parfaitement sur tous les appareils - que ce soit sur ton ordi, ta tablette ou ton smartphone
-    \item \textbf{Un catalogue produits au top} : Navigation fluide avec des filtres efficaces, recherche intelligente qui trouve vraiment ce qu'on cherche, catégorisation logique et recommandations personnalisées
-    \item \textbf{Panier et commandes sans prise de tête} : Processus de commande ultra-fluide avec sauvegarde auto (fini les paniers perdus !), calcul automatique des frais de livraison et gestion des promos
-    \item \textbf{Paiements blindés} : Plusieurs passerelles de paiement intégrées avec chiffrement SSL/TLS - sécurité maximale garantie
-    \item \textbf{Gestion des utilisateurs au poil} : Authentification robuste, profils clients complets, historique des commandes et liste de souhaits - tout ce qu'il faut
-    \item \textbf{Support client intégré} : Système de tickets efficace, chat en ligne réactif et FAQ dynamique qui répond vraiment aux questions
-\end{itemize}
 
-\subsection{Objectifs Techniques (là ça devient sérieux)}
-\begin{itemize}
-    \item \textbf{Intégration Dolibarr native} : Connexion directe avec la base de données Dolibarr, zéro duplication de données - on fait ça proprement
-    \item \textbf{Architecture MVC bien pensée} : Structure modulaire et maintenable avec le pattern Model-View-Controller - du code propre et organisé
-    \item \textbf{Performance au top} : Mise en cache intelligente, requêtes optimisées et temps de chargement < 3 secondes (parce que personne n'aime attendre)
-    \item \textbf{Sécurité blindée} : Conformité OWASP, protection contre toutes les attaques classiques (XSS, CSRF, SQL Injection, etc.)
-    \item \textbf{Monitoring et logs} : Surveillance des performances en temps réel et traçabilité complète - on veut tout savoir
-\end{itemize}
 
-\subsection{Objectifs Méthodologiques (pour bien s'organiser)}
-\begin{itemize}
-    \item \textbf{Développement Agile à fond} : On applique Scrum de manière rigoureuse avec des sprints de 2 semaines - ça marche vraiment bien
-    \item \textbf{Tests automatisés partout} : Couverture de tests unitaires et d'intégration > 80\% - on ne laisse rien au hasard
-    \item \textbf{Documentation au top} : Guide d'installation détaillé, documentation API complète et manuel utilisateur - tout pour que ce soit clair
-    \item \textbf{Déploiement automatisé} : Pipeline CI/CD avec Docker et scripts de déploiement - plus d'erreurs humaines
-\end{itemize}
-
-\section{Structure du Rapport}
-Ce rapport est structuré en cinq chapitres:
-\begin{itemize}
-    \item \textbf{Chapitre 1: Présentation du cadre de projet} - Présente le contexte, la problématique, les objectifs du projet, l'organisme d'accueil et la méthodologie de travail adoptée.
-    \item \textbf{Chapitre 2: Sprint 0 - Conception et Architecture} - Présente l'analyse des besoins, les diagrammes UML et la planification des sprints.
-    \item \textbf{Chapitre 3: Sprint 1 - Gestion des Utilisateurs et Authentification} - Détaille le développement du module d'authentification et de gestion des utilisateurs.
-    \item \textbf{Chapitre 4: Sprint 2 - Catalogue de Produits et Panier} - Décrit le développement du catalogue de produits et du panier d'achat.
-    \item \textbf{Chapitre 5: Sprint 3 - Gestion des Commandes} - Présente le développement du module de gestion des commandes.
-    \item \textbf{Chapitre 6: Sprint 4 - Système de Support Client} - Détaille le développement du système de tickets de support.
-    \item \textbf{Conclusion Générale et Perspectives} - Résume les réalisations et propose des perspectives d'évolution.
-\end{itemize}
+\section{Présentation de l'Organisme d'Accueil}
+ZAI, fondée en 2002 en tant que spécialiste tunisien des technologies pour le commerce de détail, s'est imposée comme leader du marché des solutions de gestion commerciale et de points de vente, servant plus de 1 000 clients à travers l'Afrique du Nord avec près de 500 systèmes installés. La société maintient un taux de croissance annuel de 30 pour cent  grâce à ses solutions innovantes et sur mesure pour divers secteurs du commerce, notamment la mode, la restauration, les pressing et la distribution en gros, proposant des systèmes de gestion adaptés aux commerces indépendants comme aux enseignes multi-sites. Avec 15 techniciens qualifiés et 10 revendeurs agréés en Tunisie, Algérie, Maroc et Libye, ZAI fournit des systèmes de caisse intelligents, des solutions pour environnements commerciaux à fort trafic et des plateformes e-commerce intégrées, ayant déployé plus de 1 000 terminaux POS et 100 systèmes antivol adaptés à plus de 40 types d'activités. La société garantit une innovation continue grâce à des partenariats techniques européens et maintient la satisfaction client via un support technique dédié et des réseaux de service localisés, tout en préparant une expansion régionale accrue avec ses technologies éprouvées de gestion commerciale. 
 
 \begin{figure}[H]
-    \centering
-    \fbox{\parbox{0.8\textwidth}{\centering\Large [PLACEHOLDER: Insérer ici une image représentative du projet]}}
-    \caption{Vue d'ensemble du projet ZAI E-commerce}
-    \label{fig:project_overview}
+\centering
+\includegraphics {logo.jpeg}
+\caption{zai}
+\label{fig:zai}
 \end{figure}
-
-\section{Cadre du Projet}
-\section{Présentation de l'Organisme d'Accueil}
-ESPRIT (École Supérieure Privée d'Ingénierie et de Technologies), c'est vraiment une école qui sort du lot ! Reconnue pour son excellence académique et son approche super pratique de l'enseignement, elle forme des ingénieurs depuis 2003 dans plein de domaines : informatique, télécoms, électromécanique, génie civil... bref, tout ce qui bouge dans la tech !
-
-Ce qui rend ESPRIT vraiment spéciale, c'est son modèle pédagogique innovant. Ici, on apprend en faisant - apprentissage par projets et collaboration constante avec le monde professionnel. L'école a tissé des partenariats solides avec des tonnes d'entreprises, nationales comme internationales, ce qui nous donne des opportunités de stages et de projets de fin d'études qui collent vraiment aux besoins du marché. C'est exactement ce qu'il nous faut !
 
 \section{Problématique et Solution Proposée}
 \subsection{Problématique Détaillée}
 Alors, notre client utilise déjà Dolibarr pour gérer tout son business - inventaire, clients, commandes, etc. Mais voilà le problème : ils galèrent avec plusieurs trucs :
 
 \begin{itemize}
-    \item Pas d'interface e-commerce moderne pour leurs clients - c'est un gros manque en 2024 !
+    \item Pas d'interface e-commerce moderne pour leurs clients - c'est un gros manque en 2025 !
     \item Processus de commande complètement manuel qui nécessite qu'un commercial intervienne à chaque fois - pas très efficace...
     \item Galère pour maintenir la cohérence des données entre les différents systèmes - source d'erreurs garantie
     \item Besoin d'une solution vraiment personnalisée qui colle à leur façon de bosser
@@ -222,7 +173,13 @@ Après avoir bien analysé les besoins et étudié toutes les solutions existant
     \item Assure une cohérence parfaite des données entre l'interface e-commerce et l'ERP - fini les bugs
 \end{itemize}
 
-Cette solution offre vraiment le meilleur équilibre entre intégration, flexibilité et personnalisation. Certes, le coût de développement initial est plus élevé, mais ça vaut le coup !
+Cette solution offre vraiment le meilleur équilibre entre intégration, flexibilité et personnalisation. Certes, le coût de développement initial est plus élevé, mais ça vaut le coup ! 
+
+{
+\centering
+\includegraphics[width=0.4\textwidth]{SOLU.JPEG}
+\par
+}
 
 \section{Méthodologie de Travail}
 \subsection{Comparaison entre les Méthodologies Prédictives et Adaptatives}
@@ -260,7 +217,7 @@ Pour ce projet, on a choisi d'adopter la méthodologie Scrum - et franchement, c
 
 \begin{figure}[H]
     \centering
-    \fbox{\parbox{0.8\textwidth}{\centering\Large [PLACEHOLDER: Insérer ici un diagramme du processus Scrum]}}
+     \includegraphics[width=1 \textwidth]{Scrum.jpg}
     \caption{Méthodologie Scrum appliquée au projet}
     \label{fig:scrum_methodology}
 \end{figure}
@@ -278,61 +235,60 @@ Notre équipe Scrum, c'est du solide ! Elle est composée de :
 Voilà, ce chapitre nous a permis de poser le cadre général du projet ! On a présenté ESPRIT, détaillé la problématique de notre client, étudié toutes les solutions existantes et expliqué pourquoi on a choisi Scrum. Notre solution sur mesure va vraiment répondre aux besoins spécifiques du client tout en s'intégrant parfaitement avec son système Dolibarr. On est prêts à attaquer !
 
 % Chapter 2
-\chapter{Sprint 0: Conception et Architecture}
+\chapter{Sprint 0: Analyse Et spécifications des besoins}
 \section{Introduction}
-Alors, on attaque le Sprint 0 ! C'est la phase où on pose vraiment les bases de tout le projet. Dans ce chapitre, on va vous présenter toute la conception et l'architecture : analyse des besoins, diagrammes UML, planification des sprints... bref, tout ce qu'il faut pour avoir des fondations solides avant de se lancer dans le développement. C'est peut-être pas la partie la plus fun, mais c'est absolument essentiel !
+C'est la phase où on pose vraiment les bases de tout le projet. Dans ce chapitre, on va vous présenter toute la conception et l'architecture : analyse des besoins, diagrammes UML, planification des sprints... bref, tout ce qu'il faut pour avoir des fondations solides avant de se lancer dans le développement. C'est peut-être pas la partie la plus fun, mais c'est absolument essentiel !
 
 \section{Analyse des Besoins}
 \subsection{Besoins Fonctionnels}
-Alors, qu'est-ce que notre plateforme e-commerce doit savoir faire ? Voici tout ce qu'on a identifié :
-
+Les besoins fonctionnels sont un concept clé de la gestion de projet et dudéveloppement de logiciels. Il désigne les fonctionnalités ou les aspects qu'un systèmedoitprésenter afin de répondre aux besoins et aux exigences des utilisateurs.
 \begin{itemize}
-    \item \textbf{Gestion des utilisateurs} (la base de tout) :
+    \item \textbf{Gestion des utilisateurs}  :
     \begin{itemize}
-        \item Inscription et connexion des utilisateurs - simple et efficace
-        \item Gestion du profil utilisateur - pour personnaliser l'expérience
-        \item Récupération de mot de passe - parce qu'on oublie tous !
+        \item Inscription et connexion des utilisateurs 
+        \item Gestion du profil utilisateur 
+        \item Récupération de mot de passe 
     \end{itemize}
     
-    \item \textbf{Gestion des produits} (le cœur du business) :
+    \item \textbf{Gestion des produits}  :
     \begin{itemize}
-        \item Consultation du catalogue de produits - avec une interface qui claque
-        \item Filtrage et recherche de produits - pour trouver rapidement ce qu'on cherche
-        \item Affichage des détails des produits - toutes les infos importantes
+        \item Consultation du catalogue de produits 
+        \item Filtrage et recherche de produits 
+        \item Affichage des détails des produits 
     \end{itemize}
     
-    \item \textbf{Gestion du panier} (l'étape cruciale) :
+    \item \textbf{Gestion du panier}  :
     \begin{itemize}
-        \item Ajout de produits au panier - en un clic
-        \item Modification des quantités - pour ajuster facilement
-        \item Suppression de produits du panier - si on change d'avis
+        \item Ajout de produits au panier 
+        \item Modification des quantités 
+        \item Suppression de produits du panier 
     \end{itemize}
     
-    \item \textbf{Gestion des commandes} (là où ça devient sérieux) :
+    \item \textbf{Gestion des commandes}  :
     \begin{itemize}
-        \item Passage de commande - processus fluide et sécurisé
-        \item Suivi de l'état des commandes - transparence totale
-        \item Consultation de l'historique des commandes - pratique pour recommander
+        \item Passage de commande 
+        \item Suivi de l'état des commandes 
+        \item Consultation de l'historique des commandes 
     \end{itemize}
     
-    \item \textbf{Support client} (parce que le service, c'est important) :
+    \item \textbf{Support client}  :
     \begin{itemize}
-        \item Création de tickets de support - pour signaler les problèmes
-        \item Suivi des tickets - pour voir où ça en est
-        \item Communication avec le service client - dialogue direct
+        \item Création de tickets de support 
+        \item Suivi des tickets 
+        
     \end{itemize}
 \end{itemize}
 
 \subsection{Besoins Non Fonctionnels}
-Maintenant, parlons des trucs techniques mais super importants - les besoins non fonctionnels :
+Les besoins non fonctionnels sont des indications de qualité pour les exigencesfonctionnelles. Elles servent de complément aux besoins fonctionnels  :
 
 \begin{itemize}
-    \item \textbf{Performance}: Temps de réponse inférieur à 2 secondes pour les opérations courantes - personne n'aime attendre !
-    \item \textbf{Sécurité}: Protection blindée des données utilisateurs et des transactions, authentification sécurisée - on rigole pas avec ça
-    \item \textbf{Disponibilité}: Système disponible 24/7 avec un taux de disponibilité de 99,9\% - presque jamais en panne
-    \item \textbf{Scalabilité}: Capacité à gérer un nombre croissant d'utilisateurs et de produits - pour grandir avec le business
-    \item \textbf{Maintenabilité}: Code bien structuré et documenté pour faciliter la maintenance - pensons aux développeurs qui viendront après nous
-    \item \textbf{Compatibilité}: Interface responsive qui marche sur tous les appareils et navigateurs - du smartphone au desktop
+    \item \textbf{Performance}: Temps de réponse inférieur à 2 secondes pour les opérations courantes 
+    \item \textbf{Sécurité}: Protection blindée des données utilisateurs et des transactions, authentification sécurisée 
+    \item \textbf{Disponibilité}: Système disponible 24/7 avec un taux de disponibilité de 99,9\% 
+    \item \textbf{Scalabilité}: Capacité à gérer un nombre croissant d'utilisateurs et de produits 
+    \item \textbf{Maintenabilité}: Code bien structuré et documenté pour faciliter la maintenance 
+    \item \textbf{Compatibilité}: Interface responsive qui marche sur tous les appareils et navigateurs 
 \end{itemize}
 
 \section{Diagrammes UML}
@@ -352,32 +308,30 @@ Le diagramme de classes présente la structure statique du système, montrant le
 
 \begin{figure}[H]
     \centering
-    \includegraphics{class_diagram.png}
+    \includegraphics[width=1.1\textwidth]{class_diagram.png}
     \caption{Diagramme de classes du système}
+    
     \label{fig:class_diagram}
 \end{figure}
 
-\subsection{Diagramme Entité-Relation}
-Le diagramme entité-relation présente la structure de la base de données Dolibarr et les tables utilisées par notre application.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics{Diagramme entité-relation.png}
-    \caption{Diagramme entité-relation de la base de données}
-    \label{fig:er_diagram}
-\end{figure}
 
 \section{Architecture Technique}
 \subsection{Architecture Globale}
 Pour l'architecture globale, on a opté pour le modèle MVC (Modèle-Vue-Contrôleur) - un grand classique qui a fait ses preuves ! Ça nous permet d'avoir une séparation claire des responsabilités et ça facilite vraiment la maintenance du code. C'est propre, c'est organisé, c'est exactement ce qu'il nous faut.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics{MVC.png}
-    \caption{Architecture MVC du système}
-    \label{fig:mvc_architecture}
-\end{figure}
 
+
+\begin{figure}[H]
+    
+    {
+\centering
+\includegraphics[width=0.5\textwidth]{java-mvc-project.jpeg}
+\par
+}
+    \caption{Architecture MVC}
+    \label{fig:mvc}
+\end{figure}
 \subsubsection{Architecture Applicative}
 Voici comment on a organisé tout ça :
 \begin{itemize}
@@ -397,46 +351,14 @@ Pour la stack techno, on a choisi du solide :
     \item \textbf{Outils de développement} : Git, Composer, NPM, Docker pour la containerisation - tout l'arsenal du développeur moderne
 \end{itemize}
 
-\subsection{Sécurité et Conformité}
-\subsubsection{Sécurité des Données}
-La sécurité, c'est vraiment LE point crucial pour une plateforme e-commerce ! On peut pas se permettre de faire n'importe quoi avec les données des clients. Du coup, notre solution implémente toutes ces mesures :
 
-\paragraph{Chiffrement et Protection}
-Pour protéger les données, on met le paquet :
-\begin{itemize}
-    \item \textbf{Chiffrement en transit} : SSL/TLS 1.3 pour toutes les communications - rien ne passe en clair
-    \item \textbf{Chiffrement au repos} : AES-256 pour les données sensibles en base - du militaire !
-    \item \textbf{Hachage sécurisé} : Bcrypt avec salt pour les mots de passe - impossible à décrypter
-    \item \textbf{Tokenisation} : JWT avec rotation automatique pour l'authentification - sécurité renforcée
-\end{itemize}
 
-\paragraph{Protection contre les Attaques}
-Contre les attaques, on a prévu le coup :
-\begin{itemize}
-    \item \textbf{Injection SQL} : Requêtes préparées et validation stricte des entrées - les hackers peuvent toujours essayer !
-    \item \textbf{XSS (Cross-Site Scripting)} : Échappement automatique et CSP (Content Security Policy) - pas de script malveillant qui passe
-    \item \textbf{CSRF (Cross-Site Request Forgery)} : Tokens CSRF sur tous les formulaires - protection contre les fausses requêtes
-    \item \textbf{Brute Force} : Limitation du taux de tentatives et CAPTCHA - fini les attaques par force brute
-    \item \textbf{DDoS} : Rate limiting et filtrage IP automatique - on résiste aux attaques massives
-\end{itemize}
 
-\subsubsection{Conformité Réglementaire}
-\paragraph{RGPD (Règlement Général sur la Protection des Données)}
-Pour être en règle avec le RGPD (et éviter les amendes salées !), on a tout prévu :
-\begin{itemize}
-    \item \textbf{Consentement explicite} : Gestion granulaire des préférences utilisateur - chacun choisit ce qu'il partage
-    \item \textbf{Droit à l'oubli} : Fonctionnalité de suppression complète des données - si quelqu'un veut partir, on efface tout
-    \item \textbf{Portabilité} : Export des données personnelles au format JSON/XML - récupération facile
-    \item \textbf{Audit trail} : Traçabilité complète des accès et modifications - on sait qui a fait quoi et quand
-\end{itemize}
 
-\paragraph{Standards E-commerce}
-Et pour les standards e-commerce, on respecte tout ça :
-\begin{itemize}
-    \item \textbf{PCI DSS} : Conformité pour le traitement des données de cartes bancaires - obligatoire pour les paiements
-    \item \textbf{ISO 27001} : Bonnes pratiques de sécurité de l'information - la référence mondiale
-    \item \textbf{OWASP Top 10} : Protection contre les vulnérabilités web les plus critiques - on suit les recommandations des experts
-\end{itemize}
+
+
+
+
 
 \section{Performance et Optimisation}
 \subsection{Stratégies de Performance}
@@ -461,23 +383,9 @@ Et côté backend, on n'est pas en reste :
     \item \textbf{Compression de réponse} : Compression automatique des réponses API - moins de bande passante utilisée
 \end{itemize}
 
-\subsection{Métriques de Performance}
-\subsubsection{Objectifs de Performance}
-\begin{itemize}
-    \item \textbf{Time to First Byte (TTFB)} : < 200ms
-    \item \textbf{First Contentful Paint (FCP)} : < 1.5s
-    \item \textbf{Largest Contentful Paint (LCP)} : < 2.5s
-    \item \textbf{Cumulative Layout Shift (CLS)} : < 0.1
-    \item \textbf{First Input Delay (FID)} : < 100ms
-\end{itemize}
 
-\subsubsection{Monitoring et Alertes}
-\begin{itemize}
-    \item \textbf{APM (Application Performance Monitoring)} : New Relic ou équivalent
-    \item \textbf{Logs centralisés} : ELK Stack (Elasticsearch, Logstash, Kibana)
-    \item \textbf{Métriques temps réel} : Grafana avec Prometheus
-    \item \textbf{Alertes automatiques} : Seuils de performance et disponibilité
-\end{itemize}
+
+
 
 \subsection{Intégration avec Dolibarr}
 L'intégration avec Dolibarr constitue le cœur de notre solution, assurant une synchronisation parfaite des données :
@@ -490,126 +398,60 @@ L'intégration avec Dolibarr constitue le cœur de notre solution, assurant une 
     \item \textbf{Cache intelligent} : Mise en cache des données Dolibarr fréquemment consultées
 \end{itemize}
 
-\subsubsection{Tables Dolibarr Utilisées}
-\begin{itemize}
-    \item \textbf{llx\_societe} : Données clients et prospects
-    \item \textbf{llx\_product} : Catalogue produits et services
-    \item \textbf{llx\_commande} : Commandes et devis
-    \item \textbf{llx\_stock} : Gestion des stocks en temps réel
-    \item \textbf{llx\_facture} : Facturation automatisée
-\end{itemize}
+
 
 
 
 
 \section{Backlog de Produit}
-Le backlog de produit contient toutes les fonctionnalités à développer, organisées selon la méthode MoSCoW (Must have, Should have, Could have, Won't have) et estimées en story points.
+Le backlog de produit contient toutes les fonctionnalités à développer, organisées par sprints avec leur priorité et estimation en story points.
 
-\subsection{Épiques et User Stories}
-
-\subsubsection{Épique 1: Gestion des Utilisateurs}
 \begin{table}[H]
 \centering
-\begin{tabularx}{\textwidth}{|X|X|X|}
+\resizebox{\textwidth}{!}{ % This ensures the table fits the page width
+\begin{tabular}{|l|l|p{7cm}|l|}
 \hline
-\textbf{User Story} & \textbf{Priorité} & \textbf{Story Points} \\
-\hline
-En tant que visiteur, je veux m'inscrire avec email/mot de passe & Must have & 5 \\
-\hline
-En tant qu'utilisateur, je veux me connecter de manière sécurisée & Must have & 3 \\
-\hline
-En tant qu'utilisateur, je veux réinitialiser mon mot de passe & Must have & 3 \\
-\hline
-En tant qu'utilisateur, je veux modifier mon profil & Should have & 5 \\
-\hline
-En tant qu'utilisateur, je veux activer l'authentification à deux facteurs & Should have & 8 \\
-\hline
-En tant qu'utilisateur, je veux me connecter via OAuth (Google, Facebook) & Could have & 13 \\
-\hline
-\end{tabularx}
-\caption{User Stories - Gestion des Utilisateurs}
+\textbf{Sprint ID} & \textbf{Priorité} & \textbf{User Story} & \textbf{Estimation} \\ \hline
+
+\multicolumn{4}{|c|}{\textbf{Épique 1: Gestion des Utilisateurs}} \\ \hline
+1.1 & Élevé & En tant que visiteur, je veux m'inscrire avec email/mot de passe & 5 \\ \hline
+1.2 & Élevé & En tant qu'utilisateur, je veux me connecter de manière sécurisée & 3 \\ \hline
+1.3 & Élevé & En tant qu'utilisateur, je veux réinitialiser mon mot de passe & 3 \\ \hline
+1.4 & Moyenne & En tant qu'utilisateur, je veux modifier mon profil & 5 \\ \hline
+1.5 & Moyenne & En tant qu'utilisateur, je veux activer l'authentification à deux facteurs & 8 \\ \hline
+1.6 & Faible & En tant qu'utilisateur, je veux me connecter via OAuth (Google, Facebook) & 13 \\ \hline
+
+\multicolumn{4}{|c|}{\textbf{Épique 2: Catalogue et Recherche}} \\ \hline
+2.1 & Élevé & En tant qu'utilisateur, je veux consulter le catalogue de produits & 8 \\ \hline
+2.2 & Élevé & En tant qu'utilisateur, je veux voir les détails d'un produit & 5 \\ \hline
+2.3 & Élevé & En tant qu'utilisateur, je veux filtrer les produits par catégorie & 8 \\ \hline
+2.4 & Élevé & En tant qu'utilisateur, je veux rechercher des produits par nom/description & 13 \\ \hline
+2.5 & Moyenne & En tant qu'utilisateur, je veux trier les produits (prix, popularité, nouveauté) & 5 \\ \hline
+2.6 & Moyenne & En tant qu'utilisateur, je veux voir les produits recommandés & 21 \\ \hline
+2.7 & Faible & En tant qu'utilisateur, je veux consulter les avis et notes des produits & 13 \\ \hline
+2.8 & Faible & En tant qu'utilisateur, je veux comparer plusieurs produits & 8 \\ \hline
+
+\multicolumn{4}{|c|}{\textbf{Épique 3: Panier et Commandes}} \\ \hline
+3.1 & Élevé & En tant qu'utilisateur, je veux ajouter des produits à mon panier & 8 \\ \hline
+3.2 & Élevé & En tant qu'utilisateur, je veux modifier les quantités dans mon panier & 5 \\ \hline
+3.3 & Élevé & En tant qu'utilisateur, je veux passer une commande & 13 \\ \hline
+3.4 & Élevé & En tant qu'utilisateur, je veux choisir une adresse de livraison & 8 \\ \hline
+3.5 & Élevé & En tant qu'utilisateur, je veux sélectionner un mode de paiement & 13 \\ \hline
+3.6 & Moyenne & En tant qu'utilisateur, je veux consulter l'historique de mes commandes & 8 \\ \hline
+3.7 & Moyenne & En tant qu'utilisateur, je veux suivre le statut de ma commande & 13 \\ \hline
+3.8 & Moyenne & En tant qu'utilisateur, je veux sauvegarder mon panier entre les sessions & 8 \\ \hline
+3.9 & Faible & En tant qu'utilisateur, je veux appliquer des codes promo & 13 \\ \hline
+\multicolumn{4}{|c|}{\textbf{Épique 4: Support Client}} \\ \hline
+4.1 & Moyenne & En tant qu'utilisateur, je veux créer un ticket de support & 8 \\ \hline
+4.2 & Moyenne & En tant qu'utilisateur, je veux consulter mes tickets de support & 5 \\ \hline
+4.3 & Moyenne & En tant qu'utilisateur, je veux recevoir des notifications par email & 8 \\ \hline
+4.4 & Faible & En tant qu'utilisateur, je veux accéder à une FAQ dynamique & 13 \\ \hline
+4.5 & Faible & En tant qu'utilisateur, je veux utiliser un chat en ligne & 21 \\ \hline
+\end{tabular}
+}
+\caption{Product Backlog consolidé}
+\label{tab:backlog}
 \end{table}
-
-\subsubsection{Épique 2: Catalogue et Recherche}
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{|X|X|X|}
-\hline
-\textbf{User Story} & \textbf{Priorité} & \textbf{Story Points} \\
-\hline
-En tant qu'utilisateur, je veux consulter le catalogue de produits & Must have & 8 \\
-\hline
-En tant qu'utilisateur, je veux voir les détails d'un produit & Must have & 5 \\
-\hline
-En tant qu'utilisateur, je veux filtrer les produits par catégorie & Must have & 8 \\
-\hline
-En tant qu'utilisateur, je veux rechercher des produits par nom/description & Must have & 13 \\
-\hline
-En tant qu'utilisateur, je veux trier les produits (prix, popularité, nouveauté) & Should have & 5 \\
-\hline
-En tant qu'utilisateur, je veux voir les produits recommandés & Should have & 21 \\
-\hline
-En tant qu'utilisateur, je veux consulter les avis et notes des produits & Could have & 13 \\
-\hline
-En tant qu'utilisateur, je veux comparer plusieurs produits & Could have & 8 \\
-\hline
-\end{tabularx}
-\caption{User Stories - Catalogue et Recherche}
-\end{table}
-
-\subsubsection{Épique 3: Panier et Commandes}
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{|X|X|X|}
-\hline
-\textbf{User Story} & \textbf{Priorité} & \textbf{Story Points} \\
-\hline
-En tant qu'utilisateur, je veux ajouter des produits à mon panier & Must have & 8 \\
-\hline
-En tant qu'utilisateur, je veux modifier les quantités dans mon panier & Must have & 5 \\
-\hline
-En tant qu'utilisateur, je veux passer une commande & Must have & 13 \\
-\hline
-En tant qu'utilisateur, je veux choisir une adresse de livraison & Must have & 8 \\
-\hline
-En tant qu'utilisateur, je veux sélectionner un mode de paiement & Must have & 13 \\
-\hline
-En tant qu'utilisateur, je veux consulter l'historique de mes commandes & Should have & 8 \\
-\hline
-En tant qu'utilisateur, je veux suivre le statut de ma commande & Should have & 13 \\
-\hline
-En tant qu'utilisateur, je veux sauvegarder mon panier entre les sessions & Should have & 8 \\
-\hline
-En tant qu'utilisateur, je veux appliquer des codes promo & Could have & 13 \\
-\hline
-\end{tabularx}
-\caption{User Stories - Panier et Commandes}
-\end{table}
-
-\subsubsection{Épique 4: Support Client}
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{|X|X|X|}
-\hline
-\textbf{User Story} & \textbf{Priorité} & \textbf{Story Points} \\
-\hline
-En tant qu'utilisateur, je veux créer un ticket de support & Should have & 8 \\
-\hline
-En tant qu'utilisateur, je veux consulter mes tickets de support & Should have & 5 \\
-\hline
-En tant qu'utilisateur, je veux recevoir des notifications par email & Should have & 8 \\
-\hline
-En tant qu'utilisateur, je veux accéder à une FAQ dynamique & Could have & 13 \\
-\hline
-En tant qu'utilisateur, je veux utiliser un chat en ligne & Could have & 21 \\
-\hline
-\end{tabularx}
-\caption{User Stories - Support Client}
-\end{table}
-
-\section{Planification des Sprints}
-Le projet est divisé en 4 sprints de développement, précédés d'un Sprint 0 de conception.
-
 \begin{table}[H]
 \centering
 \begin{tabularx}{\textwidth}{|X|X|X|}
@@ -618,13 +460,13 @@ Le projet est divisé en 4 sprints de développement, précédés d'un Sprint 0 
 \hline
 0 & Conception et Architecture & 3 semaine \\
 \hline
-1 & Gestion des Utilisateurs et Authentification & 5 semaines \\
+1 & Gestion des Utilisateurs et Authentification & 3 semaines \\
 \hline
-2 & Catalogue de Produits et Panier & 6 semaines \\
+2 & Catalogue de Produits et Panier & 3 semaines \\
 \hline
-3 & Gestion des Commandes & 5 semaines \\
+3 & Gestion des Commandes & 3 semaines \\
 \hline
-4 & Système de Support Client & 2 semaines \\
+4 & Système de Support Client & 3 semaines \\
 \hline
 \end{tabularx}
 \caption{Planification des sprints}
@@ -828,20 +670,7 @@ L'interface Dolibarr pour les tiers/clients offre :
 \caption{Tables Dolibarr - Module Authentification}
 \end{table}
 
-\subsubsection{Tables de Session}
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{|X|X|X|}
-\hline
-\textbf{Table} & \textbf{Description} & \textbf{Champs Clés} \\
-\hline
-\texttt{llx\_user\_token} & Tokens d'authentification & \texttt{fk\_user}, \texttt{token}, \texttt{datec}, \texttt{datevalid} \\
-\hline
-\texttt{llx\_actioncomm} & Historique des connexions & \texttt{fk\_user}, \texttt{datep}, \texttt{type\_code}, \texttt{note} \\
-\hline
-\end{tabularx}
-\caption{Tables Dolibarr - Gestion des Sessions}
-\end{table}
+
 
 \subsection{Modèle de Données}
 Le modèle de données pour les utilisateurs utilise les tables existantes de Dolibarr:
@@ -849,7 +678,7 @@ Le modèle de données pour les utilisateurs utilise les tables existantes de Do
     \item \textbf{llx\_societe}: Stocke les informations de base des utilisateurs
     \item \textbf{llx\_societe\_extrafields}: Stocke les informations supplémentaires comme les mots de passe cryptés
     \item \textbf{llx\_user}: Pour les utilisateurs administrateurs
-    \item \textbf{llx\_user\_token}: Pour la gestion des tokens de session
+   
 \end{itemize}
 
 
@@ -895,32 +724,9 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \item Recherche de l'utilisateur dans la base Dolibarr
 \item Vérification du mot de passe haché
 \item Création de la session utilisateur
-\item Génération d'un token de sécurité
 \item Enregistrement de la connexion dans l'historique
-\item Redirection vers le tableau de bord
 \end{enumerate}
 
-\subsection{Séquence de Réinitialisation de Mot de Passe}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{restpasse.png}
-    \caption{Diagramme de séquence - Réinitialisation de mot de passe}
-    \label{fig:sequence_reset_password}
-\end{figure}
-
-\textbf{Étapes de la réinitialisation :}
-\begin{enumerate}
-\item L'utilisateur demande une réinitialisation
-\item Saisie de l'adresse email
-\item Vérification de l'existence du compte
-\item Génération d'un token de réinitialisation
-\item Envoi d'un email avec le lien de réinitialisation
-\item L'utilisateur clique sur le lien
-\item Validation du token et de sa validité
-\item Saisie du nouveau mot de passe
-\item Mise à jour sécurisée dans Dolibarr
-\item Confirmation de la modification
-\end{enumerate}
 
 \subsection{Séquence de Modification de Profil}
 \begin{figure}[H]
@@ -934,7 +740,6 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \begin{itemize}
 \item Modification des informations personnelles
 \item Changement de mot de passe
-\item Gestion des préférences
 \item Historique des modifications
 \item Validation des changements
 \end{itemize}
@@ -1099,12 +904,6 @@ Ce sprint utilise principalement les modules de gestion des produits et stocks d
 \item \textbf{API utilisée} : \texttt{/categories} pour la gestion des catégories
 \end{itemize}
 
-\subsubsection{Module Stocks}
-\begin{itemize}
-\item \textbf{Tables utilisées} : \texttt{llx\_product\_stock}, \texttt{llx\_entrepot}
-\item \textbf{Fonctionnalités} : Gestion des stocks, disponibilité des produits
-\item \textbf{Graphiques disponibles} : Évolution des stocks, alertes de rupture, rotation des stocks
-\end{itemize}
 
 \subsection{Interface Dolibarr - Gestion des Produits}
 L'interface Dolibarr pour les produits offre :
@@ -1171,22 +970,7 @@ L'interface Dolibarr pour les stocks propose :
 \caption{Tables Dolibarr - Module Catégories}
 \end{table}
 
-\subsubsection{Tables Stocks}
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{|X|X|X|}
-\hline
-\textbf{Table} & \textbf{Description} & \textbf{Champs Clés} \\
-\hline
-\texttt{llx\_product\_stock} & Stocks par entrepôt & \texttt{fk\_product}, \texttt{fk\_entrepot}, \texttt{reel}, \texttt{pmp} \\
-\hline
-\texttt{llx\_stock\_mouvement} & Mouvements de stock & \texttt{fk\_product}, \texttt{fk\_entrepot}, \texttt{value}, \texttt{datem} \\
-\hline
-\texttt{llx\_entrepot} & Entrepôts & \texttt{rowid}, \texttt{label}, \texttt{description}, \texttt{statut} \\
-\hline
-\end{tabularx}
-\caption{Tables Dolibarr - Module Stocks}
-\end{table}
+
 
 \section{Implémentation}
 \subsection{Modèle de Produit}
@@ -1207,7 +991,7 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \subsection{Séquence d'Affichage des Produits}
 \begin{figure}[H]
 \centering
-
+\includegraphics[width=0.6 \textwidth]{AffichageProduits.png}
 \caption{Diagramme de séquence - Affichage des produits}
 \label{fig:sequence_display_products}
 \end{figure}
@@ -1228,7 +1012,7 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \subsection{Séquence de Recherche de Produits}
 \begin{figure}[H]
 \centering
- \includegraphics[width=1 \textwidth]{Séquence de Recherche Produit.png}
+ \includegraphics[width=0.5 \textwidth]{Recherche de Produits.png}
 \caption{Diagramme de séquence - Recherche de produits}
 \label{fig:sequence_search_products}
 \end{figure}
@@ -1248,7 +1032,7 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \subsection{Séquence d'Ajout au Panier}
 \begin{figure}[H]
 \centering
- \includegraphics[width=1 \textwidth]{ Séquence d'Ajout au Panier.png}
+ \includegraphics[width=1 \textwidth]{ajouter.png}
 \caption{Diagramme de séquence - Ajout d'un produit au panier}
 \label{fig:sequence_add_to_cart}
 \end{figure}
@@ -1266,24 +1050,41 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \item Proposition de produits complémentaires
 \end{enumerate}
 
-\subsection{Séquence de Gestion du Panier}
+
+
+\section{Gestion du Panier}
+
+\subsection{Affichage du Panier}
 \begin{figure}[H]
 \centering
- \includegraphics[width=1 \textwidth]{gestionpanier.png}
-\caption{Diagramme de séquence - Gestion du panier}
-\label{fig:sequence_cart_management}
+\includegraphics[width=0.8\textwidth]{affichage_panier.png}
+\caption{Diagramme d'affichage du panier}
+\label{fig:affichage_panier}
 \end{figure}
 
-\textbf{Fonctionnalités de gestion du panier :}
-\begin{itemize}
-\item Modification des quantités en temps réel
-\item Suppression d'articles
-\item Calcul automatique des totaux
-\item Application des remises et promotions
-\item Estimation des frais de livraison
-\item Sauvegarde temporaire du panier
-\item Récupération du panier abandonné
-\end{itemize}
+\textbf{Processus :} Le client consulte son panier via l'interface. Le système récupère et affiche les articles stockés avec leurs informations complètes (prix, quantité, etc.). Cette fonctionnalité permet une visualisation claire du contenu actuel du panier.
+
+\subsection{Modification de Quantité}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{modification_quantite.png}
+\caption{Diagramme de modification de quantité}
+\label{fig:modification_quantite}
+\end{figure}
+
+\textbf{Processus :} Le client modifie une quantité. Le système vérifie le stock disponible avant mise à jour, puis recalcule le total. Affiche une erreur si stock insuffisant. Cette interaction se fait en temps réel sans rechargement de page.
+
+\subsection{Suppression d'Article}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{suppression_article.png}
+\caption{Diagramme de suppression d'article}
+\label{fig:suppression_article}
+\end{figure}
+
+\textbf{Processus :} Le client supprime un article du panier. Le système actualise immédiatement le contenu et recalcule le montant total pour affichage. La suppression est confirmée visuellement à l'utilisateur.
+
+
 
 \section{Réalisation}
 Cette section présente les captures d'écran des interfaces utilisateur développées pour la gestion des produits et du panier.
@@ -1358,15 +1159,12 @@ Ce chapitre présente le troisième sprint de développement, focalisé exclusiv
 \hline
 En tant qu'utilisateur, je veux finaliser ma commande & Complexe & 12 \\
 \hline
-En tant qu'utilisateur, je veux choisir une méthode de paiement & Moyenne & 8 \\
-\hline
 En tant qu'utilisateur, je veux consulter l'historique de mes commandes & Moyenne & 6 \\
 \hline
 En tant qu'utilisateur, je veux voir les détails d'une commande & Facile & 4 \\
 \hline
 En tant qu'utilisateur, je veux suivre le statut de ma commande & Moyenne & 6 \\
-\hline
-En tant qu'utilisateur, je veux recevoir des notifications de commande & Facile & 4 \\
+
 \hline
 \end{tabularx}
 \caption{Backlog du Sprint 3 - Gestion des Commandes}
@@ -1378,12 +1176,12 @@ En tant qu'utilisateur, je veux recevoir des notifications de commande & Facile 
 \subsection{Analyse des Besoins}
 La gestion des commandes représente un processus critique dans toute plateforme e-commerce. Elle doit garantir la sécurité des transactions, la traçabilité des opérations et l'intégrité des données tout en offrant une expérience utilisateur optimale.
 
-\subsection{Use Case Détaillé}
+\subsection{Use Case }
 Le diagramme de cas d'utilisation suivant présente les interactions possibles entre l'utilisateur et le système concernant la gestion des commandes.
 
 \begin{figure}[H]
 \centering
-\fbox{\parbox{0.8\textwidth}{\centering\Large [PLACEHOLDER: Insérer ici le diagramme de cas d'utilisation pour les commandes]}}
+\includegraphics[width=1 \textwidth]{lescommandes.png}
 \caption{Diagramme de cas d'utilisation - Gestion des commandes}
 \label{fig:usecase_orders}
 \end{figure}
@@ -1394,10 +1192,8 @@ Le diagramme de cas d'utilisation suivant présente les interactions possibles e
 \item Choisir une méthode de paiement
 \item Consulter l'historique des commandes
 \item Voir les détails d'une commande
-\item Suivre le statut d'une commande
-\item Recevoir des notifications de commande
 \item Gérer les adresses de livraison
-\item Appliquer des codes promotionnels
+
 \end{itemize}
 
 \section{Intégration Dolibarr}
@@ -1413,49 +1209,38 @@ Ce sprint utilise intensivement plusieurs modules Dolibarr pour la gestion compl
 \item \textbf{Workflow} : Brouillon → Validée → En cours → Expédiée → Livrée
 \end{itemize}
 
-\subsubsection{Module Paiements}
-\begin{itemize}
-\item \textbf{Tables utilisées} : \texttt{llx\_paiement}, \texttt{llx\_paiement\_commande}, \texttt{llx\_c\_paiement}
-\item \textbf{Fonctionnalités} : Enregistrement, validation et suivi des paiements
-\item \textbf{Graphiques disponibles} : Répartition par mode de paiement, évolution des encaissements
-\item \textbf{Sécurité} : Chiffrement des données sensibles, conformité PCI-DSS
-\end{itemize}
 
-\subsubsection{Module Expéditions}
-\begin{itemize}
-\item \textbf{Tables utilisées} : \texttt{llx\_expedition}, \texttt{llx\_expeditiondet}
-\item \textbf{Fonctionnalités} : Gestion des expéditions et suivi des livraisons
-\item \textbf{Intégrations} : Transporteurs, codes de suivi, notifications automatiques
-\end{itemize}
+
+
 
 \subsection{Interface Dolibarr - Gestion des Commandes}
 L'interface Dolibarr pour les commandes offre une gestion complète et professionnelle :
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\textwidth]{dolibarr_commande.png}
+\caption{Interface de commande dans Dolibarr}
+\label{fig:dolibarr_commande}
+\end{figure}
+
+L'interface de commande Dolibarr permet la gestion complète des commandes clients, depuis la création jusqu'au suivi. Elle intègre automatiquement les informations produits, clients et paiements.
+
+
 \begin{itemize}
 \item \textbf{Dashboard commandes} : Vue d'ensemble avec indicateurs de performance en temps réel
 \item \textbf{Liste des commandes} : Filtrage avancé par statut, client, période, montant
 \item \textbf{Fiche commande} : Détails complets avec historique des modifications et traçabilité
 \item \textbf{Gestion des statuts} : Workflow automatisé avec notifications
 \item \textbf{Graphiques intégrés} :
-  \begin{itemize}
+  
   \item Évolution mensuelle du chiffre d'affaires
   \item Répartition des commandes par statut
   \item Analyse des produits les plus vendus
   \item Métriques des délais de livraison
   \item Taux de conversion et abandon de panier
   \end{itemize}
-\end{itemize}
 
-\subsection{Workflow de Commande}
-Le processus de commande suit un workflow structuré :
-\begin{enumerate}
-\item \textbf{Création} : Conversion du panier en commande brouillon
-\item \textbf{Validation} : Vérification des stocks et informations client
-\item \textbf{Paiement} : Traitement sécurisé du paiement
-\item \textbf{Confirmation} : Validation définitive et génération du numéro
-\item \textbf{Préparation} : Mise en préparation dans l'entrepôt
-\item \textbf{Expédition} : Génération du bon de livraison
-\item \textbf{Livraison} : Confirmation de réception
-\end{enumerate}
 
 \section{Base de Données}
 \subsection{Architecture des Données}
@@ -1497,22 +1282,8 @@ La gestion des commandes s'appuie sur une architecture de base de données robus
 \caption{Tables Dolibarr - Module Paiements}
 \end{table}
 
-\subsubsection{Tables Expéditions}
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{|X|X|X|}
-\hline
-\textbf{Table} & \textbf{Description} & \textbf{Champs Clés} \\
-\hline
-\texttt{llx\_expedition} & Expéditions & \texttt{rowid}, \texttt{fk\_commande}, \texttt{date\_expedition}, \texttt{tracking\_number} \\
-\hline
-\texttt{llx\_expeditiondet} & Détails expédition & \texttt{fk\_expedition}, \texttt{fk\_product}, \texttt{qty} \\
-\hline
-\texttt{llx\_c\_shipment\_mode} & Modes d'expédition & \texttt{rowid}, \texttt{code}, \texttt{libelle}, \texttt{tracking\_url} \\
-\hline
-\end{tabularx}
-\caption{Tables Dolibarr - Module Expéditions}
-\end{table}
+
+
 
 \section{Implémentation}
 \subsection{Architecture de Développement}
@@ -1527,49 +1298,13 @@ Le modèle de commande constitue le cœur du système de gestion des commandes. 
 \item Synchronisation des statuts en temps réel
 \item Gestion des lignes de commande et des variantes
 \item Calcul automatique des totaux, taxes et frais de port
-\item Intégration avec le module de paiement
 \item Gestion des adresses de livraison et facturation
 \item Suivi des expéditions et numéros de tracking
 \item Application des codes promotionnels et remises
-\item Gestion des stocks et réservations
 \end{itemize}
 
-\subsection{Contrôleur de Commande}
-Le contrôleur de commande orchestre l'ensemble des opérations liées aux commandes. Il gère les requêtes HTTP, valide les données, coordonne les interactions avec les modèles et retourne les réponses appropriées.
 
-\textbf{Responsabilités principales :}
-\begin{itemize}
-\item Validation des données de commande
-\item Gestion des sessions et authentification
-\item Coordination avec les services de paiement
-\item Génération des confirmations et factures
-\item Gestion des erreurs et exceptions
-\item Logging et audit des opérations
-\end{itemize}
 
-\subsection{Service de Paiement}
-Le service de paiement gère l'intégration avec les différentes passerelles de paiement et assure la sécurité des transactions financières.
-
-\textbf{Fonctionnalités clés :}
-\begin{itemize}
-\item Support multi-passerelles (Stripe, PayPal, etc.)
-\item Chiffrement des données sensibles
-\item Gestion des remboursements
-\item Conformité PCI DSS
-\item Notifications de paiement en temps réel
-\end{itemize}
-
-\subsection{Service d'Expédition}
-Le service d'expédition coordonne la logistique et le suivi des livraisons.
-
-\textbf{Capacités principales :}
-\begin{itemize}
-\item Calcul automatique des frais de port
-\item Intégration avec les transporteurs
-\item Génération des étiquettes d'expédition
-\item Suivi en temps réel des colis
-\item Notifications de livraison
-\end{itemize}
 
 \section{Diagrammes de Séquence}
 Les diagrammes de séquence suivants illustrent les interactions entre les différents composants du système lors des opérations de gestion des commandes.
@@ -1577,7 +1312,7 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \subsection{Séquence de Création de Commande}
 \begin{figure}[H]
 \centering
-
+\includegraphics[width=0.6\textwidth]{mvc_commande.png}
 \caption{Diagramme de séquence - Création d'une commande}
 \label{fig:sequence_create_order}
 \end{figure}
@@ -1601,8 +1336,8 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \begin{figure}[H]
 \centering
 \includegraphics[width=1 \textwidth]{FLUX.png}
-\caption{Diagramme de séquence - Flux Client}
-\label{fig:sequence_client_flow}
+\caption{Diagramme de cas d’utilisation - Flux Client}
+\label{fig:cas d’utilisation_client_flow}
 \end{figure}
 
 \textbf{Étapes du flux client :}
@@ -1619,8 +1354,8 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \begin{figure}[H]
 \centering
 \includegraphics[width=1 \textwidth]{ADMINZAI.png}
-\caption{Diagramme de séquence - Fonctions Administrateur}
-\label{fig:sequence_admin_functions}
+\caption{Diagramme de cas d’utilisation - Fonctions Administrateur}
+\label{fig:cas d’utilisation_admin_functions}
 \end{figure}
 
 
@@ -1631,26 +1366,6 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \item Génération des factures
 \item Traitement des demandes de retour et avoir
 \end{enumerate}
-
-\subsection{Intégration Dolibarr}
-\begin{figure}[H]
-\centering
-\includegraphics[width=1 \textwidth]{dolidoli.png}
-\caption{Diagramme de séquence - Intégration Dolibarr}
-\label{fig:sequence_dolibarr_integration}
-\end{figure}
-
-\textbf{Processus d'intégration Dolibarr :}
-\begin{enumerate}
-\item Synchronisation bidirectionnelle des données clients
-\item Mise à jour en temps réel du catalogue produits
-\item Création automatique des commandes dans les tables Dolibarr
-\item Traitement des paiements et génération des factures
-\item Suivi des commandes via les statuts Dolibarr
-
-\end{enumerate}
-
-
 
 \subsection{Séquence de Suivi de Commande}
 \begin{figure}[H]
@@ -1686,6 +1401,16 @@ Cette section présente les captures d'écran des interfaces utilisateur dévelo
 
 L'interface de commande présente un processus de checkout simplifié et sécurisé, permettant aux utilisateurs de finaliser leurs achats en quelques étapes. Elle inclut la validation des informations de livraison, le choix du mode de paiement et la confirmation finale.
 
+\subsection{Interface de confirmation de commande réussie}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{order_success.png}
+\caption{Interface de confirmation de commande réussie}
+\label{fig:order_success}
+\end{figure}
+
+L'interface de confirmation affiche les détails essentiels de la commande validée, incluant le numéro de référence, le montant total et les prochaines étapes de livraison. Une notification par email est automatiquement envoyée au client.
+
 \subsection{Interface d'Historique des Commandes}
 \begin{figure}[H]
 \centering
@@ -1699,7 +1424,7 @@ L'interface d'historique offre une vue d'ensemble complète de toutes les comman
 \subsection{Interface de Détail de Commande}
 \begin{figure}[H]
 \centering
-\fbox{\parbox{0.8\textwidth}{\centering\Large [PLACEHOLDER: Interface de détail de commande avec tracking]}}
+\includegraphics[width=1 \textwidth]{COMMANDESUIVIE.png}
 \caption{Interface de détail de commande }
 \label{fig:order_detail_screen}
 \end{figure}
@@ -1727,13 +1452,8 @@ Génération de facture & Création automatique de la facture & Facture génér�
 Historique des commandes & Consultation de l'historique des commandes & Liste des commandes  & Réussi \\
 \hline
 Détails de commande & Consultation des détails d'une commande & Informations complètes affichées & Réussi \\
-
-\hline
-Notifications & Envoi d'emails de confirmation et de suivi & Notifications envoyées correctement & Réussi \\
 \hline
 Gestion des erreurs & Traitement des erreurs de paiement & Messages d'erreur appropriés & Réussi \\
-\hline
-Sécurité des données & Chiffrement des informations sensibles & Données protégées selon PCI DSS & Réussi \\
 \hline
 Performances & Temps de réponse des opérations & Réponse < 3 secondes & Réussi \\
 \hline
@@ -1758,9 +1478,7 @@ Ce sprint a permis de mettre en place un système complet de gestion des command
 \subsection{Réalisations Clés}
 \begin{itemize}
 \item \textbf{Processus de commande optimisé} : Tunnel de conversion simplifié avec validation en temps réel
-\item \textbf{Intégration Dolibarr native} : Synchronisation parfaite avec les tables \texttt{llx\_commande}, \texttt{llx\_commandedet}, \texttt{llx\_paiement} et \texttt{llx\_expedition}
-\item \textbf{Gestion des paiements sécurisée} : Support multi-passerelles avec conformité PCI DSS
-\item \textbf{Suivi des expéditions avancé} : Intégration avec les API des transporteurs et géolocalisation
+\item \textbf{Intégration Dolibarr native} : Synchronisation parfaite avec les tables \texttt{llx\_commande}, \texttt{llx\_commandedet} 
 \item \textbf{Notifications automatiques} : Système d'alertes proactives pour informer les clients
 \item \textbf{Interface utilisateur moderne} : Design responsive et expérience utilisateur optimisée
 \end{itemize}
@@ -1779,17 +1497,15 @@ Le Sprint 4 se concentre sur le développement d'un système de support client c
 \centering
 \begin{tabularx}{\textwidth}{|X|X|X|X|}
 \hline
-\textbf{ID} & \textbf{User Story} & \textbf{Priorité} & \textbf{Points} \\
+\textbf{ID} & \textbf{User Story} & \textbf{Priorité}  \\
 \hline
-US-13 & En tant qu'utilisateur, je veux pouvoir créer un ticket de support pour signaler un problème & Haute & 8 \\
+1 & En tant qu'utilisateur, je veux pouvoir créer un ticket de support pour signaler un problème & Haute  \\
 \hline
-US-14 & En tant qu'utilisateur, je veux consulter l'historique de mes tickets de support & Haute & 5 \\
+2 & En tant qu'utilisateur, je veux consulter l'historique de mes tickets de support & Haute  \\
 \hline
-US-15 & En tant qu'utilisateur, je veux recevoir des notifications sur l'évolution de mes tickets & Moyenne & 5 \\
-
-
+3 & En tant qu'utilisateur, je veux recevoir des notifications sur l'évolution de mes tickets & Moyenne  \\
 \hline
-US-18 & En tant qu'agent, je veux pouvoir catégoriser et prioriser les tickets & Moyenne & 5 \\
+4 & En tant qu'agent, je veux pouvoir catégoriser et prioriser les tickets & Moyenne  \\
 \hline
 \end{tabularx}
 \caption{Backlog du Sprint 4 - Support Client}
@@ -1810,20 +1526,20 @@ Le système de support client doit répondre aux exigences suivantes :
 \subsection{Cas d'Utilisation}
 \begin{figure}[H]
 \centering
-\fbox{\parbox{0.8\textwidth}{\centering\Large [PLACEHOLDER: Diagramme de cas d'utilisation du support client]}}
+\includegraphics[width=0.85\textwidth]{support_client_admin.png}
 \caption{Diagramme de cas d'utilisation - Système de support client}
 \label{fig:usecase_support}
-\end{figure}
 
+\vspace{1cm}
+
+Le système distingue clairement les fonctionnalités clients (création et suivi de tickets) des outils administrateurs (gestion complète et configuration du système de support).
+\end{figure}
 \textbf{Cas d'utilisation principaux :}
 \begin{itemize}
 \item Créer un ticket de support
-\item Consulter l'historique des tickets
-\item Répondre à un ticket
 \item Assigner un ticket à un agent
-\item Escalader un ticket
 \item Fermer un ticket
-\item Évaluer la qualité du support
+
 \end{itemize}
 
 \section{Intégration Dolibarr}
@@ -1844,9 +1560,6 @@ Le module Tickets de Dolibarr offre une infrastructure complète pour la gestion
 \begin{itemize}
 \item \texttt{llx\_ticket} : Tickets principaux
 \item \texttt{llx\_ticket\_extrafields} : Champs personnalisés
-\item \texttt{llx\_actioncomm} : Historique des actions
-\item \texttt{llx\_c\_ticket\_severity} : Niveaux de gravité
-\item \texttt{llx\_c\_ticket\_type} : Types de tickets
 \end{itemize}
 
 \subsection{Module CRM}
@@ -1878,28 +1591,13 @@ Le système de support s'appuie sur une architecture de données optimisée pour
 \hline
 \texttt{llx\_ticket\_extrafields} & Champs personnalisés tickets & \texttt{fk\_object}, \texttt{priority}, \texttt{category}, \texttt{satisfaction\_rating} \\
 \hline
-\texttt{llx\_actioncomm} & Historique des actions & \texttt{fk\_element}, \texttt{elementtype}, \texttt{note}, \texttt{datep} \\
+
 \hline
 \end{tabularx}
 \caption{Tables Dolibarr - Module Support}
 \end{table}
 
-\subsubsection{Tables de Configuration}
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{|X|X|X|}
-\hline
-\textbf{Table} & \textbf{Description} & \textbf{Champs Clés} \\
-\hline
-\texttt{llx\_c\_ticket\_severity} & Niveaux de gravité & \texttt{code}, \texttt{pos}, \texttt{label}, \texttt{color} \\
-\hline
-\texttt{llx\_c\_ticket\_type} & Types de tickets & \texttt{code}, \texttt{pos}, \texttt{label}, \texttt{use\_default} \\
-\hline
-\texttt{llx\_c\_ticket\_category} & Catégories de tickets & \texttt{code}, \texttt{pos}, \texttt{label}, \texttt{public} \\
-\hline
-\end{tabularx}
-\caption{Tables Dolibarr - Configuration Support}
-\end{table}
+
 
 \section{Implémentation}
 \subsection{Architecture du Support}
@@ -1912,10 +1610,7 @@ Le modèle de ticket constitue le cœur du système de support, gérant l'ensemb
 \begin{itemize}
 \item Création de tickets via API Dolibarr
 \item Gestion des priorités et catégories
-\item Suivi des échanges et réponses
-\item Notifications automatiques
 \item Intégration avec le CRM Dolibarr
-\item Système d'escalade automatique
 \item Mesure de satisfaction client
 \end{itemize}
 
@@ -1932,25 +1627,15 @@ Le contrôleur de support orchestre l'ensemble des opérations liées à la gest
 \item Audit et logging des opérations
 \end{itemize}
 
-\subsection{Service de Notification}
-Le service de notification assure la communication en temps réel entre les clients et les agents de support.
 
-\textbf{Fonctionnalités clés :}
-\begin{itemize}
-\item Notifications email automatiques
-\item Alertes en temps réel
-\item Templates personnalisables
-\item Gestion des préférences utilisateur
-\item Intégration avec les systèmes externes
-\end{itemize}
 
 \section{Diagrammes de Séquence}
-Les diagrammes de séquence suivants illustrent les interactions entre les différents composants du système de support client.
+Le diagramme de séquence suivant illustrent le interaction entre les différents composants du système de support client.
 
 \subsection{Séquence de Création de Ticket}
 \begin{figure}[H]
 \centering
- \includegraphics[width=1 \textwidth]{creationtt.png}
+ \includegraphics[width=0.6 \textwidth]{creationtt.png}
 \caption{Diagramme de séquence - Création d'un ticket de support}
 \label{fig:sequence_create_ticket}
 \end{figure}
@@ -1969,25 +1654,7 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \item Affichage du numéro de ticket à l'utilisateur
 \end{enumerate}
 
-\subsection{Séquence de Traitement de Ticket}
-\begin{figure}[H]
-\centering
-\fbox{\parbox{0.8\textwidth}{\centering\Large [PLACEHOLDER: Diagramme de séquence de traitement de ticket]}}
-\caption{Diagramme de séquence - Traitement d'un ticket par un agent}
-\label{fig:sequence_process_ticket}
-\end{figure}
 
-\textbf{Processus de traitement :}
-\begin{enumerate}
-\item L'agent consulte sa liste de tickets assignés
-\item Sélection et ouverture d'un ticket
-\item Analyse du problème et recherche de solution
-\item Rédaction de la réponse
-\item Mise à jour du statut du ticket
-\item Envoi de la réponse au client
-\item Notification automatique au client
-\item Suivi de la satisfaction client
-\end{enumerate}
 
 \section{Réalisation}
 Cette section présente les interfaces utilisateur développées pour le système de support client.
@@ -2002,7 +1669,7 @@ Cette section présente les interfaces utilisateur développées pour le systèm
 
 L'interface de création de ticket offre une expérience utilisateur simplifiée, permettant aux clients de décrire leur problème de manière structurée avec catégorisation automatique et estimation du temps de résolution.
 
-\subsection{Interface de Gestion des Tickets}
+\subsection{Tableau de Bord Agent}
 \begin{figure}[H]
 \centering
 \includegraphics[width=1 \textwidth]{tickettt.png}
@@ -2010,17 +1677,8 @@ L'interface de création de ticket offre une expérience utilisateur simplifiée
 \label{fig:tickets_screen}
 \end{figure}
 
-L'interface de gestion permet aux utilisateurs de suivre l'évolution de leurs tickets, de consulter l'historique des échanges et d'évaluer la qualité du support reçu.
-
-\subsection{Tableau de Bord Agent}
-\begin{figure}[H]
-\centering
-\fbox{\parbox{0.8\textwidth}{\centering\Large [PLACEHOLDER: Tableau de bord agent de support]}}
-\caption{Tableau de bord agent - Vue d'ensemble des tickets}
-\label{fig:agent_dashboard}
-\end{figure}
-
 Le tableau de bord agent offre une vue d'ensemble complète des tickets assignés, avec des indicateurs de performance, des alertes de priorité et des outils de gestion avancés.
+
 
 \section{Tests}
 Pour assurer la qualité et la fiabilité du système de support client, nous avons effectué une batterie de tests complète :
@@ -2036,10 +1694,6 @@ Création de ticket & Création d'un nouveau ticket de support & Ticket créé a
 Catégorisation automatique & Classification automatique des tickets & Catégorie assignée correctement & Réussi \\
 \hline
 Assignation d'agent & Attribution automatique selon les règles & Agent assigné selon la disponibilité & Réussi \\
-\hline
-Rapports et statistiques & Génération de tableaux de bord & Données agrégées correctement & Réussi \\
-\hline
-Intégration CRM & Synchronisation avec le CRM & Données client mises à jour & Réussi \\
 \hline
 \end{tabularx}
 \caption{Tests du système de support client}
@@ -2157,7 +1811,7 @@ Souders, S., \textit{High Performance Web Sites}, O'Reilly Media, 2007
 \bibitem{ux}
 Norman, D., \textit{The Design of Everyday Things}, Basic Books, 2013
 
-\bibitem{ecommerce2024}
+\bibitem{ecommerce2025}
 Statista, \textit{E-commerce worldwide - statistics \& facts}, 2024, \url{https://www.statista.com/topics/871/online-shopping/}
 \end{thebibliography}
 

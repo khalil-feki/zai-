@@ -1,0 +1,195 @@
+@startuml Customer Support Use Cases
+!theme plain
+title ZAI E-commerce Platform - Diagramme de Cas d'Utilisation : Support Client
+
+' Acteurs
+actor "Client" as Client
+actor "Agent Support" as SupportAgent
+actor "Superviseur Support" as Supervisor
+actor "Administrateur" as Admin
+actor "Technicien" as Technician
+actor "Système Dolibarr" as Dolibarr
+actor "Système Email" as EmailSystem
+actor "Système SMS" as SMSSystem
+
+' Package principal
+package "Support Client" {
+    
+    ' Cas d'utilisation pour le Client
+    usecase "Créer un ticket" as UC1
+    usecase "Consulter mes tickets" as UC2
+    usecase "Répondre à un ticket" as UC3
+    usecase "Évaluer le support" as UC4
+    usecase "Fermer un ticket" as UC5
+    usecase "Joindre des fichiers" as UC6
+    usecase "Demander rappel téléphonique" as UC7
+    
+    ' Cas d'utilisation pour l'Agent Support
+    usecase "Traiter les tickets" as UC8
+    usecase "Répondre aux clients" as UC9
+    usecase "Escalader un ticket" as UC10
+    usecase "Classer par priorité" as UC11
+    usecase "Consulter historique client" as UC12
+    usecase "Mettre à jour statut" as UC13
+    usecase "Créer ticket interne" as UC14
+    
+    ' Cas d'utilisation pour le Superviseur
+    usecase "Superviser équipe support" as UC15
+    usecase "Assigner tickets" as UC16
+    usecase "Générer rapports support" as UC17
+    usecase "Définir priorités" as UC18
+    usecase "Valider résolutions" as UC19
+    usecase "Former agents" as UC20
+    
+    ' Cas d'utilisation pour l'Administrateur
+    usecase "Configurer catégories" as UC21
+    usecase "Gérer utilisateurs support" as UC22
+    usecase "Paramétrer SLA" as UC23
+    usecase "Configurer notifications" as UC24
+    usecase "Gérer templates réponses" as UC25
+    
+    ' Cas d'utilisation pour le Technicien
+    usecase "Résoudre problèmes techniques" as UC26
+    usecase "Diagnostiquer erreurs" as UC27
+    usecase "Mettre à jour système" as UC28
+    
+    ' Cas d'utilisation système
+    usecase "Synchroniser avec Dolibarr" as UC29
+    usecase "Envoyer notifications" as UC30
+    usecase "Archiver tickets" as UC31
+    usecase "Calculer métriques SLA" as UC32
+    usecase "Générer alertes" as UC33
+    usecase "Sauvegarder données" as UC34
+}
+
+' Relations Client
+Client --> UC1
+Client --> UC2
+Client --> UC3
+Client --> UC4
+Client --> UC5
+Client --> UC6
+Client --> UC7
+
+' Relations Agent Support
+SupportAgent --> UC8
+SupportAgent --> UC9
+SupportAgent --> UC10
+SupportAgent --> UC11
+SupportAgent --> UC12
+SupportAgent --> UC13
+SupportAgent --> UC14
+
+' Relations Superviseur
+Supervisor --> UC15
+Supervisor --> UC16
+Supervisor --> UC17
+Supervisor --> UC18
+Supervisor --> UC19
+Supervisor --> UC20
+
+' Relations Administrateur
+Admin --> UC21
+Admin --> UC22
+Admin --> UC23
+Admin --> UC24
+Admin --> UC25
+
+' Relations Technicien
+Technician --> UC26
+Technician --> UC27
+Technician --> UC28
+
+' Relations Systèmes externes
+Dolibarr --> UC29
+EmailSystem --> UC30
+SMSSystem --> UC30
+
+' Relations d'inclusion et d'extension
+UC1 ..> UC29 : <<include>>
+UC1 ..> UC30 : <<include>>
+UC1 ..> UC32 : <<include>>
+
+UC8 ..> UC12 : <<include>>
+UC8 ..> UC29 : <<include>>
+UC8 ..> UC30 : <<include>>
+
+UC9 ..> UC25 : <<extend>>
+UC9 ..> UC30 : <<include>>
+
+UC10 ..> UC16 : <<include>>
+UC10 ..> UC30 : <<include>>
+UC10 ..> UC33 : <<include>>
+
+UC11 ..> UC32 : <<include>>
+UC11 ..> UC33 : <<extend>>
+
+UC13 ..> UC29 : <<include>>
+UC13 ..> UC30 : <<include>>
+UC13 ..> UC32 : <<include>>
+
+UC15 ..> UC17 : <<include>>
+UC15 ..> UC32 : <<include>>
+
+UC16 ..> UC30 : <<include>>
+UC16 ..> UC32 : <<include>>
+
+UC17 ..> UC32 : <<include>>
+
+UC19 ..> UC29 : <<include>>
+UC19 ..> UC30 : <<include>>
+
+UC23 ..> UC32 : <<include>>
+UC23 ..> UC33 : <<include>>
+
+UC24 ..> UC30 : <<include>>
+
+UC26 ..> UC29 : <<include>>
+UC26 ..> UC30 : <<include>>
+
+UC31 ..> UC34 : <<include>>
+
+' Notes explicatives
+note right of UC1
+  Création de ticket :
+  - Sélection catégorie
+  - Description problème
+  - Niveau de priorité
+  - Pièces jointes
+  - Notification automatique
+end note
+
+note right of UC8
+  Traitement tickets :
+  - File d'attente prioritaire
+  - Historique client
+  - Outils de diagnostic
+  - Templates de réponse
+  - Suivi SLA
+end note
+
+note right of UC29
+  Synchronisation Dolibarr :
+  - Données client
+  - Historique commandes
+  - Informations produits
+  - Statuts tickets
+end note
+
+note bottom of UC32
+  Métriques SLA :
+  - Temps de première réponse
+  - Temps de résolution
+  - Taux de satisfaction
+  - Escalades
+end note
+
+note left of UC15
+  Supervision équipe :
+  - Dashboard temps réel
+  - Charge de travail
+  - Performance agents
+  - Qualité service
+end note
+
+@enduml
