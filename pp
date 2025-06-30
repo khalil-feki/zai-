@@ -16,13 +16,25 @@
 \usepackage[french]{babel}
 \usepackage{pdfpages}
 \usepackage{longtable}
+\usepackage{indentfirst} % For first line indent
+
 % Set page geometry
 \geometry{a4paper, margin=2.5cm}
 
-% Set font
+% Set font to Calibri
+\setmainfont{Calibri}
 
-% Set line spacing
-\setstretch{1.15}
+% Set line spacing to 1.5 lines
+\setstretch{1.5}
+
+% Set paragraph formatting
+\setlength{\parindent}{0.8cm} % First line indent
+\setlength{\parskip}{6pt} % Space between paragraphs
+\addtolength{\parskip}{0pt} % No additional space
+
+% Ensure full justification
+\usepackage{ragged2e}
+\justifying
 
 % Format chapter titles
 \titleformat{\chapter}[display]
@@ -36,10 +48,8 @@
 {\thesection}{1em}{}
 \titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
 
-
-
 \begin{document}
-\includepdf[pages=-]{intro.pdf}
+\includepdf[pages=-]{Template.pdf}
 
 \thispagestyle{empty}
 \vspace*{5cm}
@@ -201,7 +211,7 @@ Dolibarr offre un ensemble complet de modules couvrant tous les aspects de la ge
 Dolibarr repose sur une architecture web moderne et éprouvée :
 
 \begin{itemize}
-    \item \textbf{Langage} : Développé en PHP avec une base de code mature et stable
+    \item \textbf{Langage} : Développé en PHP 
     \item \textbf{Base de données} : Compatible MySQL, MariaDB, PostgreSQL
     \item \textbf{Interface} : Interface web responsive accessible depuis tout navigateur
     \item \textbf{API} : API REST complète pour l'intégration avec des systèmes tiers
@@ -501,7 +511,7 @@ La stack technologique sélectionnée repose sur des technologies éprouvées et
     \small\textbf{MySQL}
     \end{center}
     \vspace{0.2cm}
-    
+    \vspace{1cm}
     \item \textbf{Serveur web} : Apache 2.4+ avec mod\_rewrite et protocoles SSL/TLS pour la sécurité et les performances
     \vspace{0.2cm}
     \begin{center}
@@ -616,14 +626,13 @@ US-3.5 & Élevé & En tant qu'utilisateur, je veux sélectionner un mode de paie
 US-3.6 & Moyenne & En tant qu'utilisateur, je veux consulter l'historique de mes commandes & 8 \\ \hline
 US-3.7 & Moyenne & En tant qu'utilisateur, je veux suivre le statut de ma commande & 13 \\ \hline
 US-3.8 & Moyenne & En tant qu'utilisateur, je veux sauvegarder mon panier entre les sessions & 8 \\ \hline
-US-3.9 & Faible & En tant qu'utilisateur, je veux appliquer des codes promo & 13 \\ \hline
+
 
 \multicolumn{4}{|c|}{\textbf{Épique 4 : Support Client}} \\ \hline
 US-4.1 & Moyenne & En tant qu'utilisateur, je veux créer un ticket de support & 8 \\ \hline
 US-4.2 & Moyenne & En tant qu'utilisateur, je veux consulter mes tickets de support & 5 \\ \hline
 US-4.3 & Moyenne & En tant qu'utilisateur, je veux recevoir des notifications par email & 8 \\ \hline
-US-4.4 & Faible & En tant qu'utilisateur, je veux accéder à une FAQ dynamique & 13 \\ \hline
-US-4.5 & Faible & En tant qu'utilisateur, je veux utiliser un chat en ligne & 21 \\ \hline
+
 \end{longtable}
 
 
@@ -982,7 +991,7 @@ Le diagramme de cas d'utilisation suivant présente les interactions possibles e
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1 \textwidth]{visiteurUseCase.png}
+\includegraphics[width=1 \textwidth]{v}
 \caption{Diagramme de cas d'utilisation - Produits et panier}
 \label{fig:visiteur UseCase}
 \end{figure}
@@ -1442,9 +1451,7 @@ Les diagrammes de séquence suivants illustrent les interactions entre les diff�
 \item Appel à l'API Dolibarr pour créer la commande
 \item Insertion dans les tables \texttt{llx\_commande} et \texttt{llx\_commandedet}
 \item Génération du numéro de commande unique
-\item Réservation temporaire du stock
-\item Redirection vers la page de paiement
-\item Confirmation et notification à l'utilisateur
+
 \end{enumerate}
 
 \subsection{Flux Client}
@@ -1867,67 +1874,103 @@ En conclusion, ce projet nous a non seulement permis de consolider nos compéten
 
 
 
-\bibliographystyle{plain}
 \begin{thebibliography}{20}
+
 \bibitem{scrum}
-Scrum.org, \textit{What is Scrum?}, consulté le 08/11/2024, \url{https://www.scrum.org/resources/what-is-scrum}
+Scrum.org. \textit{What is Scrum?} [en ligne]. Consulté le 08/11/2024. Disponible sur : \url{https://www.scrum.org/resources/what-is-scrum}
 
 \bibitem{dolibarr}
-Dolibarr ERP \& CRM, \textit{Documentation officielle}, consulté le 04/11/2024, \url{https://www.dolibarr.org/documentation.php}
+Dolibarr ERP \& CRM. \textit{Documentation officielle} [en ligne]. Consulté le 04/11/2024. Disponible sur : \url{https://www.dolibarr.org/documentation.php}
 
 \bibitem{php}
-PHP Documentation, \textit{PHP Manual}, consulté le 10/11/2024, \url{https://www.php.net/manual/en/}
+PHP Documentation. \textit{PHP Manual} [en ligne]. Consulté le 10/11/2024. Disponible sur : \url{https://www.php.net/manual/en/}
 
 \bibitem{mysql}
-MySQL Documentation, \textit{MySQL Reference Manual}, consulté le 12/11/2024, \url{https://dev.mysql.com/doc/}
+MySQL Documentation. \textit{MySQL Reference Manual} [en ligne]. Consulté le 12/11/2024. Disponible sur : \url{https://dev.mysql.com/doc/}
 
 \bibitem{mvc}
-Freeman, A., \textit{Pro ASP.NET MVC 5}, Apress, 2013
+FREEMAN, A. \textit{Pro ASP.NET MVC 5}. Apress, 2013.
 
 \bibitem{ecommerce}
-Laudon, K. C., \& Traver, C. G., \textit{E-commerce: Business, Technology, Society}, Pearson, 2018
+LAUDON, K. C. et TRAVER, C. G. \textit{E-commerce: Business, Technology, Society}. Pearson, 2018.
 
 \bibitem{erp}
-Monk, E., \& Wagner, B., \textit{Concepts in Enterprise Resource Planning}, Cengage Learning, 2012
+MONK, E. et WAGNER, B. \textit{Concepts in Enterprise Resource Planning}. Cengage Learning, 2012.
 
 \bibitem{agile}
-Beck, K., et al., \textit{Manifesto for Agile Software Development}, 2001, \url{https://agilemanifesto.org/}
-
-\bibitem{microservices}
-Newman, S., \textit{Building Microservices: Designing Fine-Grained Systems}, O'Reilly Media, 2021
-
-\bibitem{docker}
-Docker Inc., \textit{Docker Documentation}, consulté le 15/11/2024, \url{https://docs.docker.com/}
-
-\bibitem{security}
-OWASP Foundation, \textit{OWASP Top Ten Web Application Security Risks}, 2021, \url{https://owasp.org/www-project-top-ten/}
+BECK, K., et al. \textit{Manifesto for Agile Software Development} [en ligne]. 2001. Disponible sur : \url{https://agilemanifesto.org/}
 
 \bibitem{gdpr}
-Commission Européenne, \textit{Règlement Général sur la Protection des Données (RGPD)}, 2018
+Commission Européenne. \textit{Règlement Général sur la Protection des Données (RGPD)}. 2018.
 
 \bibitem{pci}
-PCI Security Standards Council, \textit{Payment Card Industry Data Security Standard}, v4.0, 2022
+PCI Security Standards Council. \textit{Payment Card Industry Data Security Standard}. Version 4.0, 2022.
 
 \bibitem{restapi}
-Fielding, R. T., \textit{Architectural Styles and the Design of Network-based Software Architectures}, Doctoral dissertation, UC Irvine, 2000
+FIELDING, R. T. \textit{Architectural Styles and the Design of Network-based Software Architectures}. Thèse de doctorat, UC Irvine, 2000.
 
 \bibitem{bootstrap}
-Bootstrap Team, \textit{Bootstrap Documentation}, consulté le 18/11/2024, \url{https://getbootstrap.com/docs/}
+Bootstrap Team. \textit{Bootstrap Documentation} [en ligne]. Consulté le 18/11/2024. Disponible sur : \url{https://getbootstrap.com/docs/}
 
 \bibitem{git}
-Chacon, S., \& Straub, B., \textit{Pro Git}, Apress, 2014
+CHACON, S. et STRAUB, B. \textit{Pro Git}. Apress, 2014.
 
-\bibitem{devops}
-Kim, G., Humble, J., Debois, P., \& Willis, J., \textit{The DevOps Handbook}, IT Revolution Press, 2016
 
 \bibitem{performance}
-Souders, S., \textit{High Performance Web Sites}, O'Reilly Media, 2007
+SOUDERS, S. \textit{High Performance Web Sites}. O'Reilly Media, 2007.
 
 \bibitem{ux}
-Norman, D., \textit{The Design of Everyday Things}, Basic Books, 2013
+NORMAN, D. \textit{The Design of Everyday Things}. Basic Books, 2013.
 
 \bibitem{ecommerce2025}
-Statista, \textit{E-commerce worldwide - statistics \& facts}, 2024, \url{https://www.statista.com/topics/871/online-shopping/}
-\end{thebibliography}
+Statista. \textit{E-commerce worldwide - statistics \& facts} [en ligne]. 2024. Disponible sur : \url{https://www.statista.com/topics/871/online-shopping/}
 
+\end{thebibliography}
+\cleardoublepage
+\chapter*{Résumé}
+\addcontentsline{toc}{chapter}{Résumé}
+
+Ce projet de fin d'études présente le développement d'une plateforme e-commerce moderne intégrée au système ERP Dolibarr. Réalisé au sein de l'entreprise ZAI, spécialiste tunisien des solutions retail, ce travail répond aux défis de la transformation numérique des entreprises.
+
+La problématique centrale concerne l'absence d'interface e-commerce moderne chez les entreprises utilisant Dolibarr, entraînant des processus manuels inefficaces et une fragmentation des données. Notre solution propose une plateforme web sur mesure développée selon l'architecture MVC, offrant une intégration native avec Dolibarr.
+
+La méthodologie Scrum a structuré le développement en quatre sprints principaux :
+\begin{itemize}
+\item \textbf{Sprint 1} : Gestion des utilisateurs et authentification sécurisée
+\item \textbf{Sprint 2} : Catalogue de produits et gestion du panier d'achat
+\item \textbf{Sprint 3} : Système de commandes avec synchronisation Dolibarr
+\item \textbf{Sprint 4} : Plateforme de support client avec gestion des tickets
+\end{itemize}
+
+Les technologies utilisées incluent PHP pour le backend, MySQL pour la base de données, et une interface responsive moderne. L'architecture garantit la cohérence des données entre la plateforme e-commerce et l'ERP, éliminant les saisies manuelles et les erreurs associées.
+
+Les résultats obtenus démontrent une amélioration significative de l'efficacité opérationnelle, une réduction des coûts de traitement des commandes, et une expérience utilisateur optimisée. La solution offre une base solide pour l'évolution future vers des fonctionnalités avancées comme l'intelligence artificielle et les applications mobiles.
+
+\textbf{Mots-clés :} E-commerce, ERP, Dolibarr, Intégration, PHP, MVC, Scrum, Transformation numérique
+
+
+
+\cleardoublepage
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+This final year project presents the development of a modern e-commerce platform integrated with the Dolibarr ERP system. Conducted within ZAI company, a Tunisian specialist in retail solutions, this work addresses the challenges of digital transformation for businesses.
+
+The central problem concerns the absence of modern e-commerce interfaces for companies using Dolibarr, leading to inefficient manual processes and data fragmentation. Our solution proposes a custom web platform developed using MVC architecture, offering native integration with Dolibarr.
+
+The Scrum methodology structured the development into four main sprints:
+\begin{itemize}
+\item \textbf{Sprint 1}: User management and secure authentication
+\item \textbf{Sprint 2}: Product catalog and shopping cart management
+\item \textbf{Sprint 3}: Order system with Dolibarr synchronization
+\item \textbf{Sprint 4}: Customer support platform with ticket management
+\end{itemize}
+
+The technologies used include PHP for the backend, MySQL for the database, and a modern responsive interface. The architecture ensures data consistency between the e-commerce platform and the ERP, eliminating manual data entry and associated errors.
+
+The results obtained demonstrate significant improvement in operational efficiency, reduction in order processing costs, and optimized user experience. The solution provides a solid foundation for future evolution towards advanced features such as artificial intelligence and mobile applications.
+
+The project successfully delivers a comprehensive e-commerce solution that bridges the gap between traditional ERP systems and modern digital commerce requirements. The platform's modular design and robust integration capabilities position it as a scalable solution for businesses seeking to modernize their online presence while maintaining operational consistency.
+
+\textbf{Keywords:} E-commerce, ERP, Dolibarr, Integration, PHP, MVC, Scrum, Digital transformation
 \end{document}
