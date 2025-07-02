@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Présentation PFE - ZAI</title>
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #007bbf;
+            --accent: #ffa500;
+            --light: #f5f5f5;
+            --dark: #333333;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin: 25px 0 15px 0;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 8px;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin: 20px 0 10px 0;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .slide-card {
+            border-left: 4px solid var(--secondary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .slide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            border-left: 4px solid var(--accent);
+        }
+        
+        .slide-card.active {
+            border-left: 4px solid var(--accent);
+            background-color: rgba(255, 165, 0, 0.05);
+        }
+        
+        .slide-number {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .slide-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+        
+        .slide-content {
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .slide-card.active .slide-content {
+            display: block;
+        }
+        
+        .slide-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .slide-content li {
+            margin-bottom: 8px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: #002244;
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+        }
+        
+        .btn-accent:hover {
+            background-color: #e69500;
+        }
+        
+        .btn-group {
+            margin: 20px 0;
+        }
+        
+        .btn-group .btn {
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        textarea {
+            min-height: 100px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--secondary);
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .alert-info {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .alert-warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        
+        .badge-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .badge-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .badge-accent {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .export-options {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        .export-options.show {
+            display: block;
+        }
+        
+        .notes-section {
+            background-color: #fffaed;
+            border-left: 4px solid var(--warning);
+            padding: 15px;
+            margin-top: 15px;
+        }
+        
+        .notes-section h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-group .btn {
+                display: block;
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Générateur de Présentation PFE - ZAI</h1>
+            <p>Créez et personnalisez votre présentation de soutenance pour le projet e-commerce intégré avec Dolibarr ERP</p>
+        </header>
+        
+        <div class="card">
+            <h2>Informations Générales</h2>
+            <div class="form-group">
+                <label for="student-name">Nom de l'étudiant</label>
+                <input type="text" id="student-name" placeholder="Votre nom complet">
+            </div>
+            <div class="form-group">
+                <label for="university">Université / École</label>
+                <input type="text" id="university" placeholder="Nom de votre établissement">
+            </div>
+            <div class="form-group">
+                <label for="program">Filière</label>
+                <input type="text" id="program" placeholder="Ex: Génie Logiciel, Informatique Appliquée...">
+            </div>
+            <div class="form-group">
+                <label for="academic-year">Année Universitaire</label>
+                <input type="text" id="academic-year" placeholder="Ex: 2023-2024" value="2023-2024">
+            </div>
+            <div class="form-group">
+                <label for="defense-date">Date de Soutenance</label>
+                <input type="text" id="defense-date" placeholder="Ex: 15 juin 2024">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" id="save-info">Enregistrer les informations</button>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="structure">Structure de Présentation</div>
+            <div class="tab" data-tab="export">Exporter</div>
+            <div class="tab" data-tab="tips">Conseils</div>
+        </div>
+        
+        <div class="tab-content active" id="structure">
+            <div class="alert alert-info">
+                <strong>Instructions:</strong> Cliquez sur une diapositive pour voir et modifier son contenu. Personnalisez chaque section selon votre projet spécifique.
+            </div>
+            
+            <div class="slide-card active" data-slide="1">
+                <div class="slide-header">
+                    <span class="slide-number">1</span>
+                    <span class="slide-title">Page de Titre</span>
+                    <span class="badge badge-primary">Introduction</span>
+                </div>
+                <div class="slide-content">
+                    <div class="form-group">
+                        <label>Titre Principal</label>
+                        <input type="text" class="slide-input" data-field="title" value="Développement d'une Plateforme E-commerce Intégrée avec Dolibarr ERP">
+                    </div>
+                    <div class="form-group">
+                        <label>Sous-titre</label>
+                        <input type="text" class="slide-input" data-field="subtitle" value="Projet de Fin d'Études">
+                    </div>
+                    <div class="form-group">
+                        <label>Éléments à inclure</label>
+                        <ul>
+                            <li>Nom complet de l'étudiant</li>
+                            <li>Filière et établissement</li>
+                            <li>Logo de l'université</li>
+                            <li>Logo de ZAI</li>
+                            <li>Nom des encadrants (académique et entreprise)</li>
+                            <li>Date de soutenance</li>
+                            <li>Année universitaire</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Suggestions de Design</label>
+                        <ul>
+                            <li>Fond sobre avec couleurs corporate (bleu ZAI)</li>
+                            <li>Typographie claire et professionnelle</li>
+                            <li>Disposition centrée et équilibrée</li>
+                            <li>Image d'arrière-plan subtile liée à l'e-commerce</li>
+                        </ul>
+                    </div>
+                    <div class="notes-section">
+                        <h4>Notes de Présentation</h4>
+                        <p>Durée: 30 secondes</p>
+                        <ul>
+                            <li>Saluer le jury et se présenter</li>
+                            <li>Remercier pour l'opportunité de présenter ce projet</li>
+                            <li>Annoncer brièvement le sujet et sa pertinence</li>
+                            <li>Mentionner l'entreprise d'accueil (ZAI)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide-card" data-slide="2">
+                <div class="slide-header">
+                    <span class="slide-number">2</span>
+                    <span class="slide-title">Plan de Présentation</span>
+                    <span class="badge badge-primary">Introduction</span>
+                </div>
+                <div class="slide-content">
+                    <div class="form-group">
+                        <label>Structure Chronométrée</label>
+                        <ul>
+                            <li><strong>Durée totale:</strong> 30 minutes (20 min présentation + 10 min Q&R)</li>
+                            <li><strong>Partie 1:</strong> Introduction et Contexte (3 min)</li>
+                            <li><strong>Partie 2:</strong> Analyse et Conception (5 min)</li>
+                            <li><strong>Partie 3:</strong> Réalisation Technique (8 min)</li>
+                            <li><strong>Partie 4:</strong> Validation et Résultats (3 min)</li>
+                            <li><strong>Partie 5:</strong> Conclusion et Perspectives (1 min)</li>
+                            <li><strong>Questions/Réponses:</strong> 10 minutes</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Objectifs de la Présentation</label>
+                        <ul>
+                            <li>Présenter la solution e-commerce développée pour ZAI</li>
+                            <li>Démontrer l'intégration réussie avec Dolibarr ERP</li>
+                            <li>Justifier les choix techniques et méthodologiques</li>
+                            <li>Évaluer les résultats et l'impact business</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Suggestions de Design</label>
+                        <ul>
+                            <li>Utiliser un diagramme de Gantt ou timeline visuelle</li>
+                            <li>Icônes représentatives pour chaque section</li>
+                            <li>Indicateurs visuels de durée</li>
+                            <li>Structure claire avec hiérarchie visuelle</li>
+                        </ul>
+                    </div>
+                    <div class="notes-section">
+                        <h4>Notes de Présentation</h4>
+                        <p>Durée: 1 minute</p>
+                        <ul>
+                            <li>Présenter la structure de l'exposé</li>
+                            <li>Mentionner la durée approximative de chaque partie</li>
+                            <li>Annoncer que les questions seront prises à la fin</li>
+                            <li>Transition: "Commençons par le contexte général..."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide-card" data-slide="3">
+                <div class="slide-header">
+                    <span class="slide-number">3</span>
+                    <span class="slide-title">Contexte Général</span>
+                    <span class="badge badge-primary">Introduction</span>
+                </div>
+                <div class="slide-content">
+                    <div class="form-group">
+                        <label>Marché Mondial du E-commerce</label>
+                        <ul>
+                            <li>Taille du marché: 6.2 trillions USD (2024)</li>
+                            <li>Croissance annuelle: +10.4% (2020-2024)</li>
+                            <li>Part mobile: 72.9% des ventes en ligne</li>
+                            <li>Nombre d'acheteurs en ligne: 2.71 milliards</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Tendances Technologiques</label>
+                        <ul>
+                            <li>Intégration ERP-E-commerce en forte demande (+35%)</li>
+                            <li>Personnalisation et expérience client prioritaires</li>
+                            <li>Automatisation des processus métier</li>
+                            <li>Solutions cloud et API-first</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Enjeux pour les PME</label>
+                        <ul>
+                            <li><strong>Défis:</strong> Coûts d'intégration, complexité technique, maintenance</li>
+                            <li><strong>Opportunités:</strong> Expansion marché, efficacité opérationnelle, données clients</li>
+                            <li>35% des PME tunisiennes seulement ont une présence e-commerce</li>
+                            <li>Besoin de solutions locales adaptées au contexte</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Contexte Tunisien</label>
+                        <ul>
+                            <li>E-commerce tunisien: 180 millions TND (2023)</li>
+                            <li>Croissance: +25% par an</li>
+                            <li>Digitalisation PME: 35% seulement</li>
+                            <li>Cadre réglementaire en évolution</li>
+                        </ul>
+                    </div>
+                    <div class="notes-section">
+                        <h4>Notes de Présentation</h4>
+                        <p>Durée: 2 minutes</p>
+                        <ul>
+                            <li>Présenter les chiffres clés du marché e-commerce</li>
+                            <li>Souligner l'importance de l'intégration ERP</li>
+                            <li>Mettre en contexte les défis spécifiques aux PME tunisiennes</li>
+                            <li>Transition: "Dans ce contexte, ZAI fait face à des défis spécifiques..."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide-card" data-slide="4">
+                <div class="slide-header">
+                    <span class="slide-number">4</span>
+                    <span class="slide-title">Problématique</span>
+                    <span class="badge badge-primary">Introduction</span>
+                </div>
+                <div class="slide-content">
+                    <div class="form-group">
+                        <label>Situation Actuelle de ZAI</label>
+                        <ul>
+                            <li>150+ clients actifs, 12 ans d'expérience</li>
+                            <li>Demandes e-commerce: +300% (2022-2024)</li>
+                            <li>Satisfaction client actuelle: 78%</li>
+                            <li>Processus manuel: 85% des opérations</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Défis Identifiés (Quantifiés)</label>
+                        <ul>
+                            <li><strong>Absence d'interface e-commerce moderne</strong>
+                                <ul>
+                                    <li>→ Perte de CA estimée: 25%</li>
+                                    <li>→ Opportunités manquées: 15-20 clients/an</li>
+                                </ul>
+                            </li>
+                            <li><strong>Processus de commande manuel inefficace</strong>
+                                <ul>
+                                    <li>→ Temps moyen par commande: 45 min</li>
+                                    <li>→ Coût opérationnel: 35 TND/commande</li>
+                                </ul>
+                            </li>
+                            <li><strong>Fragmentation des données clients/produits</strong>
+                                <ul>
+                                    <li>→ Taux d'erreur: 12%</li>
+                                    <li>→ Temps de résolution: 2h en moyenne</li>
+                                </ul>
+                            </li>
+                            <li><strong>Solutions génériques inadaptées aux besoins</strong>
+                                <ul>
+                                    <li>→ Coût d'adaptation: 15,000 TND minimum</li>
+                                    <li>→ Délai d'implémentation: 6+ mois</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Question Centrale</label>
+                        <p><em>"Comment développer une solution e-commerce intégrée qui optimise les processus métier de ZAI tout en offrant une expérience client moderne et en s'intégrant parfaitement avec Dolibarr ERP?"</em></p>
+                    </div>
+                    <div class="notes-section">
+                        <h4>Notes de Présentation</h4>
+                        <p>Durée: 2 minutes</p>
+                        <ul>
+                            <li>Présenter la situation actuelle de ZAI</li>
+                            <li>Détailler chaque défi avec ses impacts quantifiés</li>
+                            <li>Formuler clairement la question centrale</li>
+                            <li>Transition: "Pour mieux comprendre le contexte, présentons l'entreprise ZAI..."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide-card" data-slide="5">
+                <div class="slide-header">
+                    <span class="slide-number">5</span>
+                    <span class="slide-title">Présentation de ZAI</span>
+                    <span class="badge badge-primary">Introduction</span>
+                </div>
+                <div class="slide-content">
+                    <div class="form-group">
+                        <label>Profil de l'Entreprise</label>
+                        <ul>
+                            <li>Fondée en 2012 par Zied Abid</li>
+                            <li>CA 2023: 850,000 TND (+15% vs 2022)</li>
+                            <li>Croissance moyenne: 18% par an</li>
+                            <li>Certifications: ISO 9001, Microsoft Partner</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Présence sur le Marché</label>
+                        <ul>
+                            <li>150+ clients actifs</li>
+                            <li>Taux de satisfaction: 78%</li>
+                            <li>Taux de rétention: 85%</li>
+                            <li>Couverture: Tunisie + Maghreb</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Équipe et Ressources</label>
+                        <ul>
+                            <li>12 collaborateurs</li>
+                            <li>R&D: 20% du budget</li>
+                            <li>Certifications techniques: 8 experts</li>
+                            <li>Support 24/7 disponible</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Expertise Technique</label>
+                        <ul>
+                            <li>ERP Dolibarr: 8 ans d'expérience</li>
+                            <li>Solutions web: PHP, MySQL, JavaScript</li>
+                            <li>Secteurs: PME, Commerce, Services</li>
+                            <li>Intégrations: CRM, Comptabilité, E-commerce</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Positionnement Concurrentiel</label>
+                        <ul>
+                            <li>Leader sur solutions Dolibarr en Tunisie</li>
+                            <li>Différenciation: expertise locale, support personnalisé</li>
+                            <li>Concurrents: 3 acteurs majeurs sur le segment</li>
+                        </ul>
+                    </div>
+                    <div class="notes-section">
+                        <h4>Notes de Présentation</h4>
+                        <p>Durée: 1 minute</p>
+                        <ul>
+                            <li>Présenter brièvement ZAI et son positionnement</li>
+                            <li>Mettre en avant l'expertise Dolibarr</li>
+                            <li>Souligner la croissance et les besoins d'évolution</li>
+                            <li>Transition: "ZAI utilise Dolibarr comme solution ERP centrale..."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide-card" data-slide="6">
+                <div class="slide-header">
+                    <span class="slide-number">6</span>
+                    <span class="slide-title">Présentation de Dolibarr ERP</span>
+                    <span class="badge badge-primary">Introduction</span>
+                </div>
+                <div class="slide-content">
+                    <div class="form-group">
+                        <label>Profil et Adoption</label>
+                        <ul>
+                            <li>Lancé en 2003, open source (GPL v3+)</li>
+                            <li>300,000+ installations dans 100+ pays</li>
+                            <li>Communauté: 5,000+ développeurs</li>
+                            <li>Version actuelle: 18.0.x</li>
+                            <li>Disponible en 50+ langues</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Positionnement sur le Marché</label>
+                        <ul>
+                            <li>Cible: TPE/PME (1-250 employés)</li>
+                            <li>Secteurs: Commerce, Services, Industrie</li>
+                            <li>Concurrents: Odoo, ERPNext, SAP Business One</li>
+                            <li>Avantages: Modularité, simplicité, coût</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Architecture et Fonctionnalités</label>
+                        <ul>
+                            <li><strong>Stack technique:</strong> PHP, MySQL, JavaScript</li>
+                            <li><strong>Modules fonctionnels:</strong> CRM, Facturation, Stock, RH, Projets...</li>
+                            <li><strong>API REST:</strong> Complète et documentée</li>
+                            <li><strong>Exemples d'endpoints:</strong> /products, /thirdparties, /orders</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Avantages pour l'Intégration E-commerce</label>
+                        <ul>
+                            <li><strong>Points forts:</strong> API REST complète, structure BDD claire</li>
+                            <li><strong>Module e-commerce natif:</strong> Fonctionnalités basiques</li>
+                            <li><strong>Limitations:</strong> UX limitée, personnalisation complexe</li>
+                            <li><strong>Opportunité:</strong> Développement sur mesure</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Justification du Choix par ZAI</label>
+                        <ul>
+                            <li>Expertise interne (8 ans)</li>
+                            <li>Coût total de possession réduit</li>
+                            <li>Flexibilité et personnalisation</li>
+                            <li>Communauté active et support</li>
+                        </ul>
+                    </div>
+                    <div class="notes-section">
+                        <h4>Notes de Présentation</h4>
+                        <p>Durée: 2 minutes</p>
+                        <ul>
+                            <li>Présenter Dolibarr et son positionnement</li>
+                            <li>Mettre l'accent sur l'API et les possibilités d'intégration</li>
+                            <li>Expliquer pourquoi c'est un bon choix pour ZAI</li>
+                            <li>Transition: "Avant de développer notre solution, nous avons analysé l'existant..."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide-card" data-slide="7">
+                <div class="slide-header">
+                    <span class="slide-number">7</span>
+                    <span class="slide-title">Analyse de l'Existant et Étude Comparative</span>
+                    <span class="badge badge-secondary">Analyse</span>
+                </div>
+                <div class="slide-content">
+                    <div class="form-group">
+                        <label>Solutions Analysées</label>
+                        <ul>
+                            <li><strong>Solution 1:</strong> Module E-commerce Dolibarr Natif</li>
+                            <li><strong>Solution 2:</strong> WooCommerce + Connecteur Dolibarr</li>
+                            <li><strong>Solution 3:</strong> Shopify + API Dolibarr</li>
+                            <li><strong>Solution 4:</strong> Solution Personnalisée</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Analyse Comparative Détaillée</label>
+                        <table border="1" style="width:100%; border-collapse: collapse; margin-bottom: 15px;">
+                            <tr>
+                                <th style="padding: 8px; text-align: left;">Solution</th>
+                                <th style="padding: 8px; text-align: left;">Avantages</th>
+                                <th style="padding: 8px; text-align: left;">Inconvénients</th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px;">Module Dolibarr Natif</td>
+                                <td style="padding: 8px;">
+                                    • Intégration native<br>
+                                    • Coût initial faible<br>
+                                    • Maintenance simple
+                                </td>
+                                <td style="padding: 8px;">
+                                    • Fonctionnalités limitées<br>
+                                    • UX obsolète<br>
+                                    • Personnalisation difficile
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px;">WooCommerce + Connecteur</td>
+                                <td style="padding: 8px;">
+                                    • Riche en fonctionnalités<br>
+                                    • Large écosystème<br>
+                                    • Bonne UX
+                                </td>
+                                <td style="padding: 8px;">
+                                    • Connecteur coûteux (3500€)<br>
+                                    • Synchronisation limitée<br>
+                                    • Double maintenance
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px;">Shopify + API</td>
+                                <td style="padding: 8px;">
+                                    • Excellente UX<br>
+                                    • Rapide à déployer<br>
+                                    • Sécurité gérée
+                                </td>
+                                <td style="padding: 8px;">
+                                    • Coût mensuel élevé<br>
+                                    • Intégration complexe<br>
+                                    • Personnalisation limitée
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px;">Solution Personnalisée</td>
+                                <td style="padding: 8px;">
+                                    • 100% adaptée aux besoins<br>
+                                    • Intégration profonde<br>
+                                    • Contrôle total
+                                </td>
+                                <td style="padding: 8px;">
+                                    • Développement initial plus long<br>
+                                    • Coût initial plus élevé<br>
+                                    • Maintenance interne
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="form-group">
+                        <label>Matrice de Décision</label>
+                        <p>Critères pondérés (échelle 1-5, 5 étant le meilleur):</p>
+                        <ul>
+                            <li><strong>Intégration Dolibarr (25%):</strong> Solution 4 (5), Solution 1 (4), Solution 2 (3), Solution 3 (2)</li>
+                            <li><strong>Expérience utilisateur (20%):</strong> Solution 3 (5), Solution 4 (4), Solution 2 (4), Solution 1 (2)</li>
+                            <li><strong>Personnalisation (20%):</strong> Solution 4 (5), Solution 2 (3), Solution 3 (2), Solution 1 (2)</li>
+                            <li><strong>Coût total sur 3 ans (15%):</strong> Solution 4 (4), Solution 1 (4), Solution 2 (3), Solution 3 (1)</li>
+                            <li><strong>Maintenance (10%):</strong> Solution 1 (4), Solution 4 (3), Solution 2 (2), Solution 3 (2)</li>
+                            <li><strong>Évolutivité (10%):</strong> Solution 4 (5), Solution 2 (4), Solution 3 (3), Solution 1 (2)</li>
+                        </ul>
+                        <p><strong>Scores finaux:</strong> Solution 4 (4.45), Solution 2 (3.25), Solution 1 (3.0), Solution 3 (2.45)</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Analyse Coût-Bénéfice (3 ans)</label>
+                        <ul>
+                            <li><strong>Solution 1:</strong> 5,000 TND initial + 15,000 TND maintenance = 20,000 TND</li>
+                            <li><strong>Solution 2:</strong> 12,000 TND initial + 18,000 TND maintenance = 30,000 TND</li>
+                            <li><strong>Solution 3:</strong> 8,000 TND initial + 36,000 TND abonnement = 44,000 TND</li>
+                            <li><strong>Solution 4:</strong> 25,000 TND initial + 10,000 TND maintenance = 35,000 TND</li>
+                            <li><strong>ROI estimé Solution 4:</strong> 120,000 TND (économies + revenus additionnels)</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Justification du Choix</label>
+                        <p>La <strong>Solution 4 (Personnalisée)</strong> a été retenue pour les raisons suivantes:</p>
+                        <ul>
+                            <li>Meilleur score global dans la matrice de décision (4.45/5)</li>
+                            <li>Intégration Dolibarr optimale (accès direct BDD + API)</li>
+                            <li>Personnalisation complète selon besoins ZAI</li>
+                            <li>ROI supérieur malgré investissement initial plus élevé</li>
+                            <li>Contrôle total sur l'évolution future</li>
+                            <li>Valorisation de l'expertise interne ZAI</li>
+                        </ul>
+                    </div>
+                    <div class="notes-section">
+                        <h4>Notes de Présentation</h4>
+                        <p>Durée: 3 minutes</p>
+                        <ul>
+                            <li>Présenter brièvement chaque solution analysée</li>
+                            <li>Expliquer la méthodologie d'évaluation (matrice pondérée)</li>
+                            <li>Justifier le choix de la solution personnalisée avec données</li>
+                            <li>Transition: "Voyons maintenant l'architecture de la solution proposée..."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide-card" data-slide="8">
+                <div class="slide-header">
+                    <span class="slide-number">8</span>
+                    <span class="slide-title">Solution Proposée - Architecture Globale</span>
+                    <span class="badge badge-secondary">Analyse</span>
+                </div>
+                <div class="slide-content">
+                    <div class="form-group">
+                        <label>Vision de la Solution</label>
+                        <p>Plateforme e-commerce sur mesure, parfaitement intégrée à Dolibarr, offrant une expérience utilisateur moderne tout en optimisant les processus métier de ZAI.</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Approche d'Intégration Hybride</label>
+                        <ul>
+                            <li><strong>Accès direct BDD:</strong> Pour données statiques et haute performance</li>
+                            <li><strong>API REST Dolibarr:</strong> Pour opérations transactionnelles</li>
+                            <li><strong>Synchronisation temps réel:</strong> Webhooks et événements</li>
+                            <li><strong>Cache intelligent:</strong> Redis pour données fréquemment accédées</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Stack Technologique</label>
+                        <ul>
+                            <li><strong>Backend:</strong> PHP 8.1+, Architecture MVC</li>
+                            <li><strong>Base de données:</strong> MySQL 8.0, Redis (cache)</li>
+                            <li><strong>Frontend:</strong> HTML5, CSS3, JavaScript ES6+, Bootstrap 5</li>
+                            <li><strong>Serveur:</strong> Apache 2.4+, SSL/TLS</li>
+                            <li><strong>Outils:</strong> Git, Composer, npm</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Fonctionnalités Principales</label>
+                        <ul>
+                            <li><strong>Catalogue Produits Dynamique</strong>
+                                <ul>
+                                    <li>Synchronisation bidirectionnelle avec Dolibarr</li>
+                                    <li>Catégorisation avancée et filtres</li>
+                                    <li>Recherche intelligente</li>
+                                    <li>Gestion des stocks en temps réel</li>
+                                </ul>
+                            </li>
+                            <li><strong>Gestion du Panier Intelligente</strong>
+                                <ul>
+                                    <li>Persistance multi-device</li>
+                                    <li>Calcul dynamique des prix et remises</li>
+                                    <li>Suggestions produits complémentaires</li>
+                                </ul>
+                            </li>
+                            <li><strong>Processus de Commande Automatisé</strong>
+                                <ul>
+                                    <li>Création automatique dans Dolibarr</li>
+                                    <li>Paiement sécurisé multi-méthodes</li>
+                                    <li>Suivi de commande en temps réel</li>
+                                </ul>
+                            </li>
+                            <li><strong>Système de Support Client</strong>
+                                <ul>
+                                    <li>Tickets intégrés avec Dolibarr</li>
+                                    <li>Historique client unifié</li>
+                                    <li>Base de connaissances</li>
+                                </ul>
+                            </li>
+                            <li><strong>Interface d'Administration</strong>
+                                <ul>
+                                    <li>Tableau de bord analytique</li>
+                                    <li>Gestion des utilisateurs et droits</li>
+                                    <li>Configuration système</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Avantages Concurrentiels</label>
+                        <ul>
+                            <li><strong>Performance:</strong> Temps de chargement < 2s, optimisation mobile</li>
+                            <li><strong>Intégration:</strong> Synchronisation bidirectionnelle complète</li>
+                            <li><strong>Expérience utilisateur:</strong> Interface moderne et intuitive</li>
+                            <li><strong>Évolutivité:</strong> Architecture modulaire extensible</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Métriques de Succès Visées</label>
+                        <ul>
+                            <li>Réduction temps traitement commande: -80% (45min → 8min)</li>
+                            <li>Augmentation taux conversion: +35%</li>
+                            <li>Réduction taux d'erreur: -75% (12% → 3%)</li>
+                            <li>Amélioration satisfaction client: +15% (78% → 90%+)</li>
+                        </ul>
+                    </div>
+                    <div class="notes-section">
+                        <h4>Notes de Présentation</h4>
+                        <p>Durée: 3 minutes</p>
+                        <ul>
+                            <li>Présenter la vision globale de la solution</li>
+                            <li>Expliquer l'approche d'intégration hybride</li>
+                            <li>Détailler les fonctionnalités principales</li>
+                            <li>Mettre en avant les avantages concurrentiels</li>
+                            <li>Transition: "Pour réaliser ce projet, nous avons adopté la méthodologie Scrum..."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide-card" data-slide="9">
+                <div class="slide-header">
+                    <span class="slide-number">9</span>
+                    <span class="slide-title">Méthodologie de Développement - Scrum Adapté</span>
+                    <span class="badge badge-secondary">Analyse</span>
+                </div>
+                <div class="slide-content">
+                    <div class="form-group">
+                        <label>Pourquoi Scrum?</label>
+                        <ul>
+                            <li>Complexité du projet (intégration ERP)</li>
+                            <li>Besoins évolutifs de ZAI</li>
+                            <li>Feedback continu nécessaire</li>
+                            <li>Livraisons incrémentales valorisables</li>
+                            <li>Adaptabilité aux contraintes de temps PFE</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Organisation de l'Équipe</label>
+                        <ul>
+                            <li><strong>Product Owner:</strong> Directeur ZAI</li>
+                            <li><strong>Scrum Master:</strong> Encadrant entreprise</li>
+                            <li><strong>Équipe de Développement:</strong> Étudiant PFE + Support technique ZAI</li>
+                            <li><strong>Parties Prenantes:</strong> Utilisateurs finaux, Encadrant académique</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Événements Scrum Adaptés</label>
+                        <ul>
+                            <li><strong>Sprint Planning:</strong> Début de chaque sprint (3h)</li>
+                            <li><strong>Daily Standups:</strong> Format asynchrone (15 min)</li>
+                            <li><strong>Sprint Review:</strong> Démo des fonctionnalités (2h)</li>
+                            <li><strong>Sprint Retrospective:</strong> Amélioration continue (1h)</li>
+                            <li><strong>Backlog Refinement:</strong> Hebdomadaire (1h)</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Planning des Sprints</label>
+                        <ul>
+                            <li><strong>Sprint 0 (1 semaine):</strong> Setup environnement, analyse détaillée</li>
+                            <li><strong>Sprint 1 (3 semaines): Authentification</strong>
+                                <ul>
+                                    <li>US1: Inscription utilisateur (8 pts)</li>
+                                    <li>US2: Connexion/déconnexion (5 pts)</li>
+                                    <li>US3: Gestion profil (5 pts)</li>
+                                    <li>US4: Récupération mot de passe (3 pts)</li>
+                                    <li>US5: Synchronisation utilisateurs Dolibarr (8 pts)</li>
+                                    <li><strong>Livrable:</strong> Module authentification fonctionnel</li>
+                                </ul>
+                            </li>
+                            <li><strong>Sprint 2 (3 semaines): Catalogue et Panier</strong>
+                                <ul>
+                                    <li>US6: Affichage catalogue produits (8 pts)</li>
+                                    <li>US7: Recherche et filtres (5 pts)</li>
+                                    <li>US8: Gestion panier (8 pts)</li>
+                                    <li>US9: Synchronisation produits Dolibarr (8 pts)</li>
+                                    <li><strong>Livrable:</strong> Catalogue et panier fonctionnels</li>
+                                </ul>
+                            </li>
+                            <li><strong>Sprint 3 (3 semaines): Gestion des Commandes</strong>
+                                <ul>
+                                    <li>US10: Processus checkout (13 pts)</li>
+                                    <li>US11: Paiement (8 pts)</li>
+                                    <li>US12: Création commande Dolibarr (8 pts)</li>
+                                    <li>US13: Suivi commande (5 pts)</li>
+                                    <li><strong>Livrable:</strong> Système de commande complet</li>
+                                </ul>
+                            </li>
+                            <li><strong>Sprint 4 (3 semaines): Support Client et Finalisation</strong>
+                                <ul>
+                                    <li>US14: Création tickets support (5 pts)</li>
+                                    <li>US15: Suivi tickets (5 pts)</li>
+                                    <li>US16: Base de connaissances (3 pts)</li>
+                                    <li>US17: Dashboard admin (8 pts)</li>
+                                    <li>US18: Tests et optimisations (13 pts)</li>
+                                    <li><strong>Livrable:</strong> Plateforme complète et testée</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Outils et Pratiques Agiles</label>
+                        <ul>
+                            <li><strong>Gestion de projet:</strong> Jira (backlog, sprints, tickets)</li>
+                            <li><strong>Documentation:</strong> Confluence (wiki, spécifications)</li>
+                            <li><strong>Communication:</strong> Slack, réunions hebdomadaires</li>
+                            <li><strong>Code:</strong> Git/GitLab (feature branches, PR)</li>
+                            <li><strong>Qualité:</strong> TDD, Code Review, Intégration Continue</li>
+                            <li><strong>Definition of Done:</strong> Critères formalisés</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Métriques de Suivi</label>
+                        <ul>
+                            <li><strong>Vélocité:</strong> Points par sprint (objectif: stabilité)</li>
+                            <li><strong>Burn-down chart:</strong> Suivi quotidien</li>
+                            <li><strong>Couverture de code:</strong> >80% pour code critique</li>
+                            <li><strong>Taux de bugs:</strong> <10% des tickets</li>
+                            <li><strong>Satisfaction client:</strong> Feedback après chaque démo</li>
+                        </ul>
+                    </div>
+                    <div class="notes-section">
+                        <h4>Notes de Présentation</h4>
+                        <p>Durée: 2 minutes</p>
+                        <ul>
+                            <li>Expliquer pourquoi Scrum a été choisi</li>
+                            <li>Présenter l'organisation de l'équipe</li>
+                            <li>Détailler le planning des sprints</li>
+                            <li>Mettre en avant les adaptations spécifiques au contexte PFE</li>
+                            <li>Transition: "Passons maintenant à l'architecture technique détaillée..."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ajouter les autres diapositives ici -->
+            
+            <div class="slide-card" data-slide="23">
+                <div class="slide-header">
+                    <span class="slide-number">23</span>
+                    <span class="slide-title">Questions & Réponses</span>
+                    <span class="badge badge-accent">Conclusion</span>
+                </div>
+                <div class="slide-content">
+                    <div class="form-group">
+                        <label>Contenu de la Diapositive</label>
+                        <ul>
+                            <li>"Merci pour votre attention"</li>
+                            <li>Coordonnées de contact</li>
+                            <li>QR code vers démo ou documentation</li>
+                            <li>Image ou citation inspirante</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Questions Anticipées</label>
+                        <ul>
+                            <li><strong>Techniques:</strong>
+                                <ul>
+                                    <li>"Pourquoi PHP et non un framework JS moderne?"</li>
+                                    <li>"Comment avez-vous géré la sécurité des données?"</li>
+                                    <li>"Quelles difficultés d'intégration avec Dolibarr?"</li>
+                                </ul>
+                            </li>
+                            <li><strong>Méthodologiques:</strong>
+                                <ul>
+                                    <li>"Comment avez-vous adapté Scrum au contexte PFE?"</li>
+                                    <li>"Comment avez-vous géré les changements de priorités?"</li>
+                                </ul>
+                            </li>
+                            <li><strong>Business:</strong>
+                                <ul>
+                                    <li>"Quel est le ROI attendu pour ZAI?"</li>
+                                    <li>"Comment cette solution se compare à la concurrence?"</li>
+                                </ul>
+                            </li>
+                            <li><strong>Personnelles:</strong>
+                                <ul>
+                                    <li>"Quelles compétences avez-vous développées?"</li>
+                                    <li>"Quelles difficultés personnelles avez-vous rencontrées?"</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="notes-section">
+                        <h4>Notes de Présentation</h4>
+                        <p>Durée: 10 minutes</p>
+                        <ul>
+                            <li>Remercier le jury pour son attention</li>
+                            <li>Inviter aux questions</li>
+                            <li>Rester calme et structuré dans les réponses</li>
+                            <li>Admettre les limites si nécessaire</li>
+                            <li>Conclure en remerciant à nouveau</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="export">
+            <div class="alert alert-info">
+                <strong>Options d'exportation:</strong> Choisissez le format et la plateforme pour exporter votre présentation.
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="export-markdown">Exporter en Markdown</button>
+                <button class="btn btn-secondary" id="export-json">Exporter en JSON</button>
+                <button class="btn btn-accent" id="show-export-options">Options avancées</button>
+            </div>
+            
+            <div class="export-options" id="export-options-panel">
+                <h3>Options d'Exportation Avancées</h3>
+                
+                <div class="form-group">
+                    <label for="export-platform">Plateforme cible</label>
+                    <select id="export-platform">
+                        <option value="canva">Canva</option>
+                        <option value="powerpoint">PowerPoint</option>
+                        <option value="google">Google Slides</option>
+                        <option value="gamma">Gamma AI</option>
+                        <option value="beautiful">Beautiful.AI</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="export-format">Format d'exportation</label>
+                    <select id="export-format">
+                        <option value="markdown">Markdown</option>
+                        <option value="json">JSON</option>
+                        <option value="html">HTML</option>
+                        <option value="prompt">Prompt IA</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="export-options">Options supplémentaires</label>
+                    <div>
+                        <input type="checkbox" id="include-notes" checked>
+                        <label for="include-notes">Inclure les notes de présentation</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="include-design" checked>
+                        <label for="include-design">Inclure les suggestions de design</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="include-questions" checked>
+                        <label for="include-questions">Inclure les questions anticipées</label>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" id="export-advanced">Exporter</button>
+            </div>
+            
+            <div class="card" style="margin-top: 20px;">
+                <h3>Utiliser avec les Plateformes IA</h3>
+                <p>Vous pouvez utiliser cette structure pour générer automatiquement votre présentation avec:</p>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4>Canva Magic Design</h4>
+                        <p>Utilisez le prompt généré pour créer une présentation visuellement attractive.</p>
+                        <a href="https://www.canva.com" target="_blank" class="btn btn-secondary">Ouvrir Canva</a>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Gamma AI</h4>
+                        <p>Génération automatique de présentations professionnelles par IA.</p>
+                        <a href="https://gamma.app" target="_blank" class="btn btn-secondary">Ouvrir Gamma</a>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Beautiful.AI</h4>
+                        <p>Design intelligent automatique pour présentations.</p>
+                        <a href="https://www.beautiful.ai" target="_blank" class="btn btn-secondary">Ouvrir Beautiful.AI</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="tips">
+            <div class="alert alert-info">
+                <strong>Conseils de présentation:</strong> Recommandations pour une soutenance PFE réussie.
+            </div>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Préparation</h3>
+                    <ul>
+                        <li>Répétez au moins 3 fois à voix haute</li>
+                        <li>Chronométrez-vous pour respecter le timing</li>
+                        <li>Préparez des réponses aux questions anticipées</li>
+                        <li>Testez votre matériel technique</li>
+                        <li>Préparez un plan B en cas de problème technique</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Pendant la Présentation</h3>
+                    <ul>
+                        <li>Maintenez le contact visuel avec le jury</li>
+                        <li>Parlez clairement et à un rythme modéré</li>
+                        <li>Utilisez des gestes naturels</li>
+                        <li>Restez calme et confiant</li>
+                        <li>Gérez votre stress par la respiration</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Gestion du Temps</h3>
+                    <ul>
+                        <li>Respectez strictement les 20 minutes</li>
+                        <li>Ayez une montre visible</li>
+                        <li>Préparez des versions courtes si nécessaire</li>
+                        <li>Laissez du temps pour les questions</li>
+                        <li>Concluez même si vous n'avez pas tout dit</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Questions & Réponses</h3>
+                    <ul>
+                        <li>Écoutez attentivement chaque question</li>
+                        <li>Reformulez si nécessaire</li>
+                        <li>Répondez de manière structurée</li>
+                        <li>Admettez vos limites si nécessaire</li>
+                        <li>Restez positif et constructif</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Aspects Techniques</h3>
+                    <ul>
+                        <li>Testez votre présentation sur l'équipement final</li>
+                        <li>Ayez une version PDF de secours</li>
+                        <li>Préparez des captures d'écran de votre démo</li>
+                        <li>Vérifiez la connectivité internet</li>
+                        <li>Ayez un support USB de sauvegarde</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Évaluation</h3>
+                    <ul>
+                        <li>Clarté de l'expression (20%)</li>
+                        <li>Maîtrise technique (25%)</li>
+                        <li>Méthodologie (20%)</li>
+                        <li>Résultats et impact (20%)</li>
+                        <li>Réponses aux questions (15%)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2024 ZAI - Générateur de Présentation PFE. Créé pour optimiser votre soutenance.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Variables globales
+        let presentationData = {
+            studentInfo: {},
+            slides: {}
+        };
+        
+        // Gestion des onglets
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Retirer la classe active de tous les onglets
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+                
+                // Ajouter la classe active à l'onglet cliqué
+                this.classList.add('active');
+                const targetTab = this.getAttribute('data-tab');
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+        
+        // Gestion des diapositives
+        document.querySelectorAll('.slide-card').forEach(slide => {
+            slide.addEventListener('click', function() {
+                // Retirer la classe active de toutes les diapositives
+                document.querySelectorAll('.slide-card').forEach(s => s.classList.remove('active'));
+                
+                // Ajouter la classe active à la diapositive cliquée
+                this.classList.add('active');
+            });
+        });
+        
+        // Sauvegarde des informations générales
+        document.getElementById('save-info').addEventListener('click', function() {
+            presentationData.studentInfo = {
+                name: document.getElementById('student-name').value,
+                university: document.getElementById('university').value,
+                program: document.getElementById('program').value,
+                academicYear: document.getElementById('academic-year').value,
+                defenseDate: document.getElementById('defense-date').value
+            };
+            
+            // Afficher une confirmation
+            const alert = document.createElement('div');
+            alert.className = 'alert alert-success';
+            alert.innerHTML = '<strong>Succès!</strong> Informations sauvegardées.';
+            this.parentNode.insertBefore(alert, this);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 3000);
+        });
+        
+        // Gestion des options d'exportation
+        document.getElementById('show-export-options').addEventListener('click', function() {
+            const panel = document.getElementById('export-options-panel');
+            panel.classList.toggle('show');
+        });
+        
+        // Exportation en Markdown
+        document.getElementById('export-markdown').addEventListener('click', function() {
+            exportToMarkdown();
+        });
+        
+        // Exportation en JSON
+        document.getElementById('export-json').addEventListener('click', function() {
+            exportToJSON();
+        });
+        
+        // Exportation avancée
+        document.getElementById('export-advanced').addEventListener('click', function() {
+            const platform = document.getElementById('export-platform').value;
+            const format = document.getElementById('export-format').value;
+            
+            switch(format) {
+                case 'markdown':
+                    exportToMarkdown();
+                    break;
+                case 'json':
+                    exportToJSON();
+                    break;
+                case 'prompt':
+                    exportToPrompt(platform);
+                    break;
+                default:
+                    exportToMarkdown();
+            }
+        });
+        
+        // Fonction d'exportation Markdown
+        function exportToMarkdown() {
+            let markdown = generateMarkdownContent();
+            downloadFile('presentation_pfe_zai.md', markdown, 'text/markdown');
+        }
+        
+        // Fonction d'exportation JSON
+        function exportToJSON() {
+            let jsonData = {
+                studentInfo: presentationData.studentInfo,
+                slides: collectSlideData(),
+                exportDate: new Date().toISOString()
+            };
+            downloadFile('presentation_pfe_zai.json', JSON.stringify(jsonData, null, 2), 'application/json');
+        }
+        
+        // Fonction d'exportation Prompt
+        function exportToPrompt(platform) {
+            let prompt = generatePromptForPlatform(platform);
+            downloadFile(`prompt_${platform}.txt`, prompt, 'text/plain');
+        }
+        
+        // Génération du contenu Markdown
+        function generateMarkdownContent() {
+            const info = presentationData.studentInfo;
+            let content = `# Présentation PFE - ${info.name || '[Nom de l\'étudiant]'}\n\n`;
+            content += `**Titre:** Développement d'une Plateforme E-commerce Intégrée avec Dolibarr ERP\n`;
+            content += `**Université:** ${info.university || '[Université]'}\n`;
+            content += `**Filière:** ${info.program || '[Filière]'}\n`;
+            content += `**Année:** ${info.academicYear || '[Année]'}\n`;
+            content += `**Date de soutenance:** ${info.defenseDate || '[Date]'}\n\n`;
+            
+            // Ajouter le contenu des diapositives
+            content += `## Structure de la Présentation\n\n`;
+            
+            const slides = document.querySelectorAll('.slide-card');
+            slides.forEach((slide, index) => {
+                const title = slide.querySelector('.slide-title').textContent;
+                const badge = slide.querySelector('.badge').textContent;
+                content += `### ${index + 1}. ${title} (${badge})\n\n`;
+                
+                // Ajouter le contenu spécifique de chaque diapositive
+                const slideContent = slide.querySelector('.slide-content');
+                if (slideContent) {
+                    const lists = slideContent.querySelectorAll('ul');
+                    lists.forEach(list => {
+                        const items = list.querySelectorAll('li');
+                        items.forEach(item => {
+                            content += `- ${item.textContent}\n`;
+                        });
+                    });
+                }
+                content += `\n`;
+            });
+            
+            return content;
+        }
+        
+        // Collecte des données des diapositives
+        function collectSlideData() {
+            const slides = {};
+            document.querySelectorAll('.slide-card').forEach(slide => {
+                const slideNumber = slide.getAttribute('data-slide');
+                const title = slide.querySelector('.slide-title').textContent;
+                const badge = slide.querySelector('.badge').textContent;
+                
+                slides[slideNumber] = {
+                    title: title,
+                    category: badge,
+                    content: extractSlideContent(slide)
+                };
+            });
+            return slides;
+        }
+        
+        // Extraction du contenu d'une diapositive
+        function extractSlideContent(slide) {
+            const content = {};
+            const slideContent = slide.querySelector('.slide-content');
+            
+            if (slideContent) {
+                const formGroups = slideContent.querySelectorAll('.form-group');
+                formGroups.forEach(group => {
+                    const label = group.querySelector('label');
+                    if (label) {
+                        const labelText = label.textContent;
+                        const list = group.querySelector('ul');
+                        if (list) {
+                            const items = Array.from(list.querySelectorAll('li')).map(li => li.textContent);
+                            content[labelText] = items;
+                        }
+                    }
+                });
+            }
+            
+            return content;
+        }
+        
+        // Génération de prompt pour plateformes IA
+        function generatePromptForPlatform(platform) {
+            const info = presentationData.studentInfo;
+            let prompt = '';
+            
+            switch(platform) {
+                case 'canva':
+                    prompt = `Créez une présentation professionnelle pour un PFE avec Canva Magic Design:\n\n`;
+                    prompt += `Titre: "Développement d'une Plateforme E-commerce Intégrée avec Dolibarr ERP"\n`;
+                    prompt += `Étudiant: ${info.name || '[Nom]'}\n`;
+                    prompt += `Contexte: Projet de fin d'études en informatique\n\n`;
+                    prompt += `Style souhaité: Professionnel, moderne, couleurs corporate (bleu/orange)\n`;
+                    prompt += `Nombre de diapositives: 23\n\n`;
+                    break;
+                    
+                case 'gamma':
+                    prompt = `Generate a professional PFE presentation using Gamma AI:\n\n`;
+                    prompt += `Topic: "Development of an E-commerce Platform Integrated with Dolibarr ERP"\n`;
+                    prompt += `Student: ${info.name || '[Name]'}\n`;
+                    prompt += `Context: Computer Science graduation project\n\n`;
+                    prompt += `Requirements:\n- Professional design\n- Technical content\n- Business impact focus\n- 20-minute presentation\n\n`;
+                    break;
+                    
+                default:
+                    prompt = generateGenericPrompt();
+            }
+            
+            return prompt;
+        }
+        
+        // Génération de prompt générique
+        function generateGenericPrompt() {
+            return `Créez une présentation professionnelle pour un projet de fin d'études sur le développement d'une plateforme e-commerce intégrée avec Dolibarr ERP. La présentation doit inclure 23 diapositives couvrant le contexte, l'analyse, la conception, la réalisation et les résultats du projet.`;
+        }
+        
+        // Fonction de téléchargement de fichier
+        function downloadFile(filename, content, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            // Afficher une confirmation
+            const alert = document.createElement('div');
+            alert.className = 'alert alert-success';
+            alert.innerHTML = `<strong>Succès!</strong> Fichier ${filename} téléchargé.`;
+            document.querySelector('.container').insertBefore(alert, document.querySelector('.container').firstChild);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 3000);
+        }
+        
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Activer la première diapositive par défaut
+            document.querySelector('.slide-card').classList.add('active');
+            
+            // Charger les données sauvegardées si disponibles
+            const savedData = localStorage.getItem('presentationData');
+            if (savedData) {
+                presentationData = JSON.parse(savedData);
+                loadSavedData();
+            }
+        });
+        
+        // Chargement des données sauvegardées
+        function loadSavedData() {
+            const info = presentationData.studentInfo;
+            if (info) {
+                document.getElementById('student-name').value = info.name || '';
+                document.getElementById('university').value = info.university || '';
+                document.getElementById('program').value = info.program || '';
+                document.getElementById('academic-year').value = info.academicYear || '';
+                document.getElementById('defense-date').value = info.defenseDate || '';
+            }
+        }
+        
+        // Sauvegarde automatique
+        setInterval(() => {
+            localStorage.setItem('presentationData', JSON.stringify(presentationData));
+        }, 30000); // Sauvegarde toutes les 30 secondes
+    </script>
+</body>
+</html>

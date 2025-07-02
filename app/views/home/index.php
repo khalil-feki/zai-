@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="hero-image">
-      <img src="<?= BASE_URL ?>public/images/pos-system.png" alt="Système POS">
+      <img src="<?= BASE_URL ?>public/img/Système POS.png" alt="Système POS">
     </div>
   </div>
   
@@ -42,7 +42,7 @@
             <div class="solution-connection"></div>
             
             <div class="solution-center">
-                <img src="<?= BASE_URL ?>public/images/logo-pos.png" alt="Logo POS">
+                <img src="<?= BASE_URL ?>public/img/Système POS.png" alt="Logo POS">
             </div>
             
             <div class="solution-items stagger-list">
@@ -248,7 +248,7 @@
         <div class="pack-selection-content">
             <div class="pack-center">
                 <div class="pack-center-image">
-                    <img src="<?= BASE_URL ?>public/images/pos-system.png" alt="Système POS" class="floating-animation">
+                    <img src="<?= BASE_URL ?>public/img/Système POS.png" alt="Système POS" class="floating-animation">
                 </div>
                 <div class="pack-center-glow"></div>
             </div>
@@ -307,7 +307,7 @@
                                         <li>Option Premium</li>
                                         <li>Option Professionnelle</li>
                                     </ul>
-                                    <button class="pack-select-btn">Sélectionner</button>
+
                                 </div>
                             </div>
                         </div>
@@ -316,17 +316,7 @@
             </div>
         </div>
         
-        <div class="pack-summary">
-            <h3>Votre configuration</h3>
-            <div class="pack-selected-items">
-                <p class="empty-selection">Aucun élément sélectionné</p>
-            </div>
-            <div class="pack-total">
-                <span>Total estimé:</span>
-                <span class="pack-price">0 €</span>
-            </div>
-            <button class="pack-checkout-btn">Demander un devis</button>
-        </div>
+        
     </div>
 </section>
 <script>
@@ -403,136 +393,7 @@ document.addEventListener('DOMContentLoaded', function() {
         item.addEventListener('click', function() {
             this.classList.toggle('flipped');
         });
-        
-        // Sélection d'un élément
-        const selectBtn = item.querySelector('.pack-select-btn');
-        if (selectBtn) {
-            selectBtn.addEventListener('click', function(e) {
-                e.stopPropagation(); // Empêcher la propagation au parent
-                
-                const itemTitle = item.querySelector('h3').textContent;
-                const summaryContainer = document.querySelector('.pack-selected-items');
-                const emptyMessage = summaryContainer.querySelector('.empty-selection');
-                
-                if (emptyMessage) {
-                    emptyMessage.remove();
-                }
-                
-                // Vérifier si l'élément est déjà sélectionné
-                const existingItem = document.querySelector(`.selected-item[data-title="${itemTitle}"]`);
-                
-                if (!existingItem) {
-                    // Ajouter l'élément au résumé
-                    const selectedItem = document.createElement('div');
-                    selectedItem.classList.add('selected-item');
-                    selectedItem.setAttribute('data-title', itemTitle);
-                    selectedItem.innerHTML = `
-                        <span>${itemTitle}</span>
-                        <span class="item-price">+ 299 €</span>
-                        <button class="remove-item"><i class="fas fa-times"></i></button>
-                    `;
-                    summaryContainer.appendChild(selectedItem);
-                    
-                    // Mettre à jour le prix total
-                    updateTotalPrice();
-                    
-                    // Ajouter l'événement pour supprimer l'élément
-                    selectedItem.querySelector('.remove-item').addEventListener('click', function() {
-                        selectedItem.remove();
-                        updateTotalPrice();
-                        
-                        // Réafficher le message si aucun élément n'est sélectionné
-                        if (summaryContainer.children.length === 0) {
-                            const emptyMsg = document.createElement('p');
-                            emptyMsg.classList.add('empty-selection');
-                            emptyMsg.textContent = 'Aucun élément sélectionné';
-                            summaryContainer.appendChild(emptyMsg);
-                        }
-                    });
-                }
-                
-                // Fermer le flip
-                setTimeout(() => {
-                    item.classList.remove('flipped');
-                }, 500);
-            });
-        }
     });
-    
-    // Fonction pour mettre à jour le prix total
-    function updateTotalPrice() {
-        const selectedItems = document.querySelectorAll('.selected-item');
-        let total = 0;
-        
-        selectedItems.forEach(item => {
-            const priceText = item.querySelector('.item-price').textContent;
-            const price = parseInt(priceText.replace(/[^0-9]/g, ''));
-            total += price;
-        });
-        
-        document.querySelector('.pack-price').textContent = `${total} €`;
-    }
-    
-    // Animation de l'image centrale
-    const centerImage = document.querySelector('.pack-center-image img');
-    if (centerImage) {
-        centerImage.classList.add('floating-animation');
-    }
-    
-    // Effet de connexion entre les éléments et l'image centrale
-    const packItemsContainer = document.querySelector('.pack-items');
-    if (packItemsContainer) {
-        packItems.forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                const centerGlow = document.querySelector('.pack-center-glow');
-                centerGlow.style.opacity = '1';
-                
-                // Créer une ligne de connexion
-                const connection = document.createElement('div');
-                connection.classList.add('pack-connection-line');
-                document.querySelector('.pack-selection-content').appendChild(connection);
-                
-                // Positionner la ligne
-                const itemRect = item.getBoundingClientRect();
-                const centerRect = document.querySelector('.pack-center').getBoundingClientRect();
-                const contentRect = document.querySelector('.pack-selection-content').getBoundingClientRect();
-                
-                const startX = itemRect.left + itemRect.width/2 - contentRect.left;
-                const startY = itemRect.top + itemRect.height/2 - contentRect.top;
-                const endX = centerRect.left + centerRect.width/2 - contentRect.left;
-                const endY = centerRect.top + centerRect.height/2 - contentRect.top;
-                
-                // Calculer l'angle et la longueur
-                const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
-                const length = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
-                
-                connection.style.width = `${length}px`;
-                connection.style.left = `${startX}px`;
-                connection.style.top = `${startY}px`;
-                connection.style.transform = `rotate(${angle}deg)`;
-                connection.style.transformOrigin = '0 0';
-                
-                // Animation d'apparition
-                setTimeout(() => {
-                    connection.style.opacity = '1';
-                }, 10);
-            });
-            
-            item.addEventListener('mouseleave', function() {
-                const centerGlow = document.querySelector('.pack-center-glow');
-                centerGlow.style.opacity = '0.5';
-                
-                // Supprimer les lignes de connexion
-                const connections = document.querySelectorAll('.pack-connection-line');
-                connections.forEach(conn => {
-                    conn.style.opacity = '0';
-                    setTimeout(() => {
-                        conn.remove();
-                    }, 300);
-                });
-            });
-        });
-    }
 });
 </script>
 <script src="<?= BASE_URL ?>public/js/animations.js"></script>
