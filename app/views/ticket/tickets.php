@@ -1220,8 +1220,7 @@ if (!RUNNING_IN_DOLIBARR) {
         
         <div class="map-container">
             <div class="contact-card" style="padding: 0; overflow: hidden;">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.142047033408!2d2.3354330157170955!3d48.87456857928921!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e38f817b573%3A0x48d69c30470e7aeb!2sRue%20du%20Faubourg%20Saint-Honor%C3%A9%2C%2075008%20Paris!5e0!3m2!1sen!2sfr!4v1623252352526!5m2!1sen!2sfr" 
-                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3276.123456789!2d10.268511667415163!3d36.85149046821041!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDUxJzA1LjQiTiAxMMKwMTYnMDYuNiJF!5e0!3m2!1sen!2sfr!4v1640995200000!5m2!1sen!2sfr" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </div>

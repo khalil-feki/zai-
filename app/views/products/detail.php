@@ -22,7 +22,7 @@
             <h1 class="hero-title"><?= htmlspecialchars($product['label']) ?></h1>
             <div class="hero-stats">
                 <div class="stat-item">
-                    <span class="stat-number">€<?= number_format($product['price'], 2) ?></span>
+                    <span class="stat-number"><?= number_format($product['price'], 2) ?> dt</span>
                     <span class="stat-label">Premium Quality</span>
                 </div>
             </div>
@@ -146,7 +146,7 @@
                             <div class="price-breakdown">
                                 <div class="price-item">
                                     <span class="price-label">Unit Price:</span>
-                                    <span class="price-value">€<?= number_format($product['price'], 2) ?></span>
+                                    <span class="price-value"><?= number_format($product['price'], 2) ?> dt</span>
                                 </div>
                                 <div class="price-item">
                                     <span class="price-label">Quantity:</span>
@@ -154,7 +154,7 @@
                                 </div>
                                 <div class="price-item total-price">
                                     <span class="price-label">Total:</span>
-                                    <span class="price-value" id="total-price">€<?= number_format($product['price'], 2) ?></span>
+                                    <span class="price-value" id="total-price"><?= number_format($product['price'], 2) ?> dt</span>
                                 </div>
                             </div>
                         </div>
@@ -197,7 +197,7 @@
                                      onerror="this.src='<?= LOCAL_IMAGE_BASE_URL . DEFAULT_PRODUCT_IMAGE ?>'">
                                 <div class="card-body d-flex flex-column">
                                     <h6 class="card-title"><?= htmlspecialchars($relatedProduct['label']) ?></h6>
-                                    <p class="card-text text-primary fw-bold">€<?= number_format($relatedProduct['price'], 2) ?></p>
+                                    <p class="card-text text-primary fw-bold"><?= number_format($relatedProduct['price'], 2) ?> dt</p>
                                     <div class="mt-auto">
                                         <a href="<?= BASE_URL ?>product/view/<?= $relatedProduct['rowid'] ?>" 
                                            class="btn btn-outline-primary btn-sm">View Details</a>
@@ -912,7 +912,7 @@ function updateTotal() {
     const total = quantity * unitPrice;
     
     document.getElementById('display-quantity').textContent = quantity;
-    document.getElementById('total-price').textContent = '€' + total.toFixed(2);
+    document.getElementById('total-price').textContent = total.toFixed(2) + ' dt';
 }
 
 function increaseQuantity() {

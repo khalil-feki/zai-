@@ -15,13 +15,13 @@
                                 <small class="text-muted">SKU: <?= htmlspecialchars($item['ref']) ?></small>
                             </div>
                             <div class="col-md-2">
-                                <span class="fw-bold">€<?= number_format($item['price'], 2) ?></span>
+                                <span class="fw-bold"><?= number_format($item['price'], 2) ?> dt</span>
                             </div>
                             <div class="col-md-2">
                                 <span class="badge bg-secondary">Qty: <?= $item['quantity'] ?></span>
                             </div>
                             <div class="col-md-2">
-                                <span class="fw-bold text-primary">€<?= number_format($item['total_price'], 2) ?></span>
+                                <span class="fw-bold text-primary"><?= number_format($item['total_price'], 2) ?> dt</span>
                             </div>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                         <h5>Total Amount:</h5>
                     </div>
                     <div class="col-md-4 text-end">
-                        <h4 class="text-primary">€<?= number_format($cartTotal, 2) ?></h4>
+                        <h4 class="text-primary"><?= number_format($cartTotal, 2) ?> dt</h4>
                     </div>
                 </div>
             </div>

@@ -44,8 +44,8 @@
                                 
                                 <div class="item-pricing">
                                     <div class="price-info">
-                                        <span class="unit-price">€<?= number_format($item['price'], 2) ?> each</span>
-                                        <span class="total-price">€<?= number_format($item['total_price'], 2) ?></span>
+                                        <span class="unit-price"><?= number_format($item['price'], 2) ?> dt each</span>
+                                        <span class="total-price"><?= number_format($item['total_price'], 2) ?> dt</span>
                                     </div>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                             <h3 class="summary-title">Order Summary</h3>
                             <div class="summary-line">
                                 <span>Items (<?= count($cartItems) ?>)</span>
-                                <span>€<?= number_format($cartTotal, 2) ?></span>
+                                <span><?= number_format($cartTotal, 2) ?> dt</span>
                             </div>
                             <div class="summary-line">
                                 <span>Shipping</span>
@@ -65,7 +65,7 @@
                             </div>
                             <div class="summary-total">
                                 <span>Total</span>
-                                <span>€<?= number_format($cartTotal, 2) ?></span>
+                                <span><?= number_format($cartTotal, 2) ?> dt</span>
                             </div>
                         </div>
                     </div>

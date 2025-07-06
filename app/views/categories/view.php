@@ -14,8 +14,8 @@
         <div class="hero-content">
             <nav aria-label="breadcrumb" class="modern-breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="<?= BASE_URL; ?>"><i class="fas fa-home"></i> Home</a></li>
-                    <li class="breadcrumb-item"><a href="<?= BASE_URL; ?>category">Categories</a></li>
+                    <li class="breadcrumb-item"><a href="<?= BASE_URL; ?>"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li class="breadcrumb-item"><a href="<?= BASE_URL; ?>category">Catégories</a></li>
                     <li class="breadcrumb-item active"><?= htmlspecialchars($currentCategory['label']); ?></li>
                 </ol>
             </nav>
@@ -26,7 +26,7 @@
             <div class="hero-stats">
                 <div class="stat-item">
                     <span class="stat-number"><?= count($products); ?></span>
-                    <span class="stat-label">Products Available</span>
+                    <span class="stat-label">Produits Disponibles</span>
                 </div>
             </div>
         </div>
@@ -41,14 +41,14 @@
             <div class="floating-sidebar">
                 <div class="sidebar-toggle" id="sidebarToggle">
                     <i class="fas fa-filter"></i>
-                    <span>Filters</span>
+                    <span>Filtres</span>
                 </div>
                 
                 <div class="sidebar-content" id="sidebarContent">
                     <!-- Categories Navigation -->
                     <div class="modern-card categories-card">
                         <div class="card-header">
-                            <h5><i class="fas fa-th-large"></i> Categories</h5>
+                            <h5><i class="fas fa-th-large"></i> Catégories</h5>
                         </div>
                         <div class="categories-list">
                             <?php if (!empty($categories)): ?>
@@ -60,7 +60,7 @@
                                     </a>
                                 <?php endforeach; ?>
                             <?php else: ?>
-                                <div class="no-categories">No categories available</div>
+                                <div class="no-categories">Aucune catégorie disponible</div>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -68,49 +68,49 @@
                     <!-- Advanced Filters -->
                     <div class="modern-card filters-card">
                         <div class="card-header">
-                            <h5><i class="fas fa-sliders-h"></i> Advanced Filters</h5>
+                            <h5><i class="fas fa-sliders-h"></i> Filtres Avancés</h5>
                         </div>
                         <form action="<?= BASE_URL; ?>category/view/<?= $currentCategory['rowid']; ?>" method="GET" id="filter-form" class="modern-form">
                             <div class="form-group">
                                 <label for="search" class="form-label">
-                                    <i class="fas fa-search"></i> Search Products
+                                    <i class="fas fa-search"></i> Rechercher des Produits
                                 </label>
                                 <input type="text" class="modern-input" id="search" name="search" 
-                                       value="<?= htmlspecialchars($search ?? ''); ?>" placeholder="What are you looking for?">
+                                       value="<?= htmlspecialchars($search ?? ''); ?>" placeholder="Que recherchez-vous ?">
                             </div>
                             
                             <div class="form-group">
                                 <label class="form-label">
-                                    <i class="fas fa-euro-sign"></i> Price Range
+                                    <i class="fas fa-euro-sign"></i> Gamme de Prix
                                 </label>
                                 <div class="price-range-inputs">
                                     <input type="number" class="modern-input" id="min_price" name="min_price" 
-                                           value="<?= $minPrice ?? ''; ?>" placeholder="Min €" min="0" step="0.01">
-                                    <span class="range-separator">to</span>
+                                           value="<?= $minPrice ?? ''; ?>" placeholder="Min dt" min="0" step="0.01">
+                                    <span class="range-separator">à</span>
                                     <input type="number" class="modern-input" id="max_price" name="max_price" 
-                                           value="<?= $maxPrice ?? ''; ?>" placeholder="Max €" min="0" step="0.01">
+                                           value="<?= $maxPrice ?? ''; ?>" placeholder="Max dt" min="0" step="0.01">
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="sort" class="form-label">
-                                    <i class="fas fa-sort"></i> Sort By
+                                    <i class="fas fa-sort"></i> Trier Par
                                 </label>
                                 <select class="modern-select" id="sort" name="sort">
-                                    <option value="newest" <?= ($sort === 'newest') ? 'selected' : ''; ?>>✨ Newest First</option>
-                                    <option value="price_asc" <?= ($sort === 'price_asc') ? 'selected' : ''; ?>>💰 Price: Low to High</option>
-                                    <option value="price_desc" <?= ($sort === 'price_desc') ? 'selected' : ''; ?>>💎 Price: High to Low</option>
-                                    <option value="name_asc" <?= ($sort === 'name_asc') ? 'selected' : ''; ?>>🔤 Name: A to Z</option>
-                                    <option value="name_desc" <?= ($sort === 'name_desc') ? 'selected' : ''; ?>>🔤 Name: Z to A</option>
+                                    <option value="newest" <?= ($sort === 'newest') ? 'selected' : ''; ?>>✨ Plus Récents</option>
+                                    <option value="price_asc" <?= ($sort === 'price_asc') ? 'selected' : ''; ?>>💰 Prix: Croissant</option>
+                                    <option value="price_desc" <?= ($sort === 'price_desc') ? 'selected' : ''; ?>>💎 Prix: Décroissant</option>
+                                    <option value="name_asc" <?= ($sort === 'name_asc') ? 'selected' : ''; ?>>🔤 Nom: A à Z</option>
+                                    <option value="name_desc" <?= ($sort === 'name_desc') ? 'selected' : ''; ?>>🔤 Nom: Z à A</option>
                                 </select>
                             </div>
                             
                             <div class="filter-actions">
                                 <button type="submit" class="modern-btn primary">
-                                    <i class="fas fa-magic"></i> Apply Filters
+                                    <i class="fas fa-magic"></i> Appliquer les Filtres
                                 </button>
                                 <a href="<?= BASE_URL; ?>category/view/<?= $currentCategory['rowid']; ?>" class="modern-btn secondary">
-                                    <i class="fas fa-undo"></i> Reset
+                                    <i class="fas fa-undo"></i> Réinitialiser
                                 </a>
                             </div>
                         </form>
@@ -135,27 +135,27 @@
                                         </a>
                                     </div>
                                     <div class="product-badge">
-                                        <span class="badge-new">New</span>
+                                        <span class="badge-new">Nouveau</span>
                                     </div>
                                 </div>
                                 
                                 <div class="product-content">
                                     <h3 class="product-title"><?= htmlspecialchars($product['label']); ?></h3>
                                     <p class="product-description">
-                                        <?= !empty($product['description']) ? htmlspecialchars(substr($product['description'], 0, 80)) . '...' : 'Premium quality product with excellent features.'; ?>
+                                        <?= !empty($product['description']) ? htmlspecialchars(substr($product['description'], 0, 80)) . '...' : 'Produit de qualité premium avec d\'excellentes caractéristiques.'; ?>
                                     </p>
                                     <div class="product-price">
-                                        <span class="current-price">€<?= number_format($product['price'], 2); ?></span>
+                                        <span class="current-price"><?= number_format($product['price'], 2); ?> dt</span>
                                     </div>
                                     
                                     <div class="product-actions">
                                         <a href="<?= BASE_URL; ?>product/view/<?= $product['rowid']; ?>" class="action-btn view-btn" onclick="event.stopPropagation();">
                                             <i class="fas fa-info-circle"></i>
-                                            <span>Details</span>
+                                            <span>Détails</span>
                                         </a>
                                         <button class="action-btn cart-btn add-to-cart" data-product-id="<?= $product['rowid']; ?>" onclick="event.stopPropagation();">
                                             <i class="fas fa-cart-plus"></i>
-                                            <span>Add to Cart</span>
+                                            <span>Ajouter au Panier</span>
                                         </button>
                                     </div>
                                 </div>
@@ -169,10 +169,10 @@
                         <div class="no-products-icon">
                             <i class="fas fa-search"></i>
                         </div>
-                        <h3>No Products Found</h3>
-                        <p>We couldn't find any products matching your criteria. Try adjusting your filters or explore other categories.</p>
+                        <h3>Aucun Produit Trouvé</h3>
+                        <p>Nous n'avons trouvé aucun produit correspondant à vos critères. Essayez d'ajuster vos filtres ou explorez d'autres catégories.</p>
                         <a href="<?= BASE_URL; ?>category/view/<?= $currentCategory['rowid']; ?>" class="modern-btn primary">
-                            <i class="fas fa-refresh"></i> Reset Filters
+                            <i class="fas fa-refresh"></i> Réinitialiser les Filtres
                         </a>
                     </div>
                 <?php endif; ?>

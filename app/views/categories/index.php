@@ -3,8 +3,8 @@
 <section class="categories-hero">
     <div class="container">
         <div class="hero-content fade-in-up">
-            <h1>Explore Our <span>Categories</span></h1>
-            <p>Discover amazing products organized by categories</p>
+            <h1>Explorez Nos <span>Catégories</span></h1>
+            <p>Découvrez des produits incroyables organisés par catégories</p>
         </div>
     </div>
 </section>
@@ -21,98 +21,88 @@
         <div class="content-layout">
             <!-- Left sidebar with categories -->
             <div class="category-sidebar">
-                <h2>Browse Categories</h2>
+                <h2>Parcourir les Catégories</h2>
                 <div class="category-menu">
                     <?php if (!empty($categories)): ?>
-                        <?php foreach ($categories as $category): ?>
+                        <?php 
+                        // Define unique visual elements for each category
+                        $categoryVisuals = [
+                            'Électronique' => ['icon' => 'fas fa-laptop', 'gradient' => 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', 'color' => '#667eea'],
+                            'Vêtements' => ['icon' => 'fas fa-tshirt', 'gradient' => 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', 'color' => '#f093fb'],
+                            'Maison' => ['icon' => 'fas fa-home', 'gradient' => 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)', 'color' => '#4facfe'],
+                            'Sport' => ['icon' => 'fas fa-dumbbell', 'gradient' => 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)', 'color' => '#43e97b'],
+                            'Beauté' => ['icon' => 'fas fa-heart', 'gradient' => 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)', 'color' => '#fa709a'],
+                            'Livres' => ['icon' => 'fas fa-book', 'gradient' => 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)', 'color' => '#a8edea'],
+                            'Jouets' => ['icon' => 'fas fa-gamepad', 'gradient' => 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)', 'color' => '#ffecd2'],
+                            'Automobile' => ['icon' => 'fas fa-car', 'gradient' => 'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)', 'color' => '#a18cd1'],
+                            'Jardin' => ['icon' => 'fas fa-leaf', 'gradient' => 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)', 'color' => '#84fab0'],
+                            'Alimentation' => ['icon' => 'fas fa-utensils', 'gradient' => 'linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%)', 'color' => '#fad0c4']
+                        ];
+                        
+                        foreach ($categories as $index => $category): 
+                            // Get category visual based on label or use default
+                            $categoryLabel = $category['label'];
+                            $visual = null;
+                            
+                            // Try to match category label with predefined visuals
+                            foreach ($categoryVisuals as $key => $value) {
+                                if (stripos($categoryLabel, $key) !== false) {
+                                    $visual = $value;
+                                    break;
+                                }
+                            }
+                            
+                            // If no match found, use a default based on index
+                            if (!$visual) {
+                                $defaultVisuals = array_values($categoryVisuals);
+                                $visual = $defaultVisuals[$index % count($defaultVisuals)];
+                            }
+                        ?>
                             <div class="sidebar-category-item fade-in-up stagger-item" data-category-id="<?= $category['rowid']; ?>">
-                                <div class="sidebar-category-image">
-                                    <img src="<?= BASE_URL . 'public/images/categories/' . (isset($category['image']) ? $category['image'] : 'default-category.jpg'); ?>" alt="<?= htmlspecialchars($category['label']); ?>">
+                                <div class="sidebar-category-icon" style="background: <?= $visual['gradient']; ?>">
+                                    <i class="<?= $visual['icon']; ?>" style="color: white;"></i>
                                 </div>
                                 <div class="sidebar-category-content">
                                     <h3><?= htmlspecialchars($category['label']); ?></h3>
-                                    <a href="<?= BASE_URL; ?>category/view/<?= $category['rowid']; ?>" class="btn-text">Explore <i class="fas fa-arrow-right"></i></a>
+                                    <a href="<?= BASE_URL; ?>category/view/<?= $category['rowid']; ?>" class="btn-text">Explorer <i class="fas fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <div class="no-results">
                             <i class="fas fa-search"></i>
-                            <h3>No categories found</h3>
-                            <p>Please check back later for new categories.</p>
+                            <h3>Aucune catégorie trouvée</h3>
+                            <p>Veuillez revenir plus tard pour de nouvelles catégories.</p>
                         </div>
                     <?php endif; ?>
                 </div>
             </div>
             
-            <!-- Right content with featured and trending products -->
+            <!-- Right content with animated ZAI image -->
             <div class="products-content">
-                <!-- Featured Products Section -->
-                <section class="featured-products">
-                    <div class="section-title">
-                        <h2>Featured <span>Products</span></h2>
-                        <p>Discover our most popular items across all categories</p>
-                    </div>
-                    
-                    <div class="products-slider">
-                        <?php if (!empty($featuredProducts)): ?>
-                            <?php foreach ($featuredProducts as $product): ?>
-                                <div class="product-card fade-in-up stagger-item">
-                                    <div class="product-badge">Featured</div>
-                                    <div class="product-image-container">
-                                        <img src="<?= BASE_URL . ($product['image_url'] ?? (LOCAL_IMAGE_BASE_URL . DEFAULT_PRODUCT_IMAGE)); ?>" alt="<?= htmlspecialchars($product['label']); ?>">
-                                        <div class="product-actions">
-                                            <a href="<?= BASE_URL; ?>product/view/<?= $product['rowid']; ?>" class="action-btn"><i class="fas fa-eye"></i></a>
-                                            <button class="action-btn add-to-cart" data-product-id="<?= $product['rowid']; ?>"><i class="fas fa-shopping-cart"></i></button>
-                                            <button class="action-btn add-to-wishlist" data-product-id="<?= $product['rowid']; ?>"><i class="fas fa-heart"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="product-info">
-                                        <h3 class="product-title"><?= htmlspecialchars($product['label']); ?></h3>
-                                        <div class="product-price">€<?= number_format($product['price'], 2); ?></div>
-                                        <div class="product-rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                            <span>(4.5)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <div class="no-results">
-                                <i class="fas fa-box-open"></i>
-                                <h3>No featured products available</h3>
-                                <p>Please check back later for new products.</p>
+                <!-- ZAI Animated Section -->
+                <section class="zai-showcase">
+                    <div class="zai-container">
+                        <div class="zai-image-wrapper">
+                            <div class="zai-background-effects">
+                                <div class="floating-particle"></div>
+                                <div class="floating-particle"></div>
+                                <div class="floating-particle"></div>
+                                <div class="floating-particle"></div>
+                                <div class="floating-particle"></div>
                             </div>
-                        <?php endif; ?>
-                    </div>
-                </section>
-
-                <!-- Trending Products Section -->
-                <section class="trending-products">
-                    <div class="section-title">
-                        <h2>Trending <span>Now</span></h2>
-                        <p>Hot items that customers are loving right now</p>
-                    </div>
-                    
-                    <div class="trending-grid">
-                        <?php if (!empty($trendingProducts)): ?>
-                            <?php foreach ($trendingProducts as $product): ?>
-                                <div class="trending-card fade-in-up stagger-item">
-                                    <div class="trending-image">
-                                        <img src="<?= BASE_URL . ($product['image_url'] ?? 'public/images/products/default.jpg'); ?>" alt="<?= htmlspecialchars($product['label']); ?>">
-                                    </div>
-                                    <div class="trending-content">
-                                        <h3><?= htmlspecialchars($product['label']); ?></h3>
-                                        <div class="trending-price">€<?= number_format($product['price'], 2); ?></div>
-                                        <a href="<?= BASE_URL; ?>product/view/<?= $product['rowid']; ?>" class="btn-primary">View Details</a>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
+                            <div class="zai-image-container">
+                                <img src="<?= BASE_URL ?>public/img/zai.jpg" alt="ZAI" class="zai-main-image">
+                                <div class="zai-glow-effect"></div>
+                                <div class="zai-pulse-ring"></div>
+                                <div class="zai-pulse-ring pulse-delay-1"></div>
+                                <div class="zai-pulse-ring pulse-delay-2"></div>
+                            </div>
+                            <div class="zai-text-overlay">
+                                <h2 class="zai-title">ZAI</h2>
+                                <p class="zai-subtitle">Innovation & Excellence</p>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>
@@ -132,6 +122,284 @@
     --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --glass-bg: rgba(255, 255, 255, 0.95);
     --backdrop-blur: blur(10px);
+    --zai-primary: #667eea;
+    --zai-secondary: #764ba2;
+    --zai-accent: #4facfe;
+}
+
+/* ZAI Showcase Section */
+.zai-showcase {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    position: relative;
+   
+}
+
+.zai-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.zai-image-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+}
+
+.zai-background-effects {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--zai-primary);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: floatParticle 6s infinite ease-in-out;
+}
+
+.floating-particle:nth-child(1) {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+    background: var(--zai-primary);
+}
+
+.floating-particle:nth-child(2) {
+    top: 60%;
+    left: 80%;
+    animation-delay: 1.2s;
+    background: var(--zai-secondary);
+}
+
+.floating-particle:nth-child(3) {
+    top: 30%;
+    left: 70%;
+    animation-delay: 2.4s;
+    background: var(--zai-accent);
+}
+
+.floating-particle:nth-child(4) {
+    top: 80%;
+    left: 20%;
+    animation-delay: 3.6s;
+    background: var(--zai-primary);
+}
+
+.floating-particle:nth-child(5) {
+    top: 10%;
+    left: 50%;
+    animation-delay: 4.8s;
+    background: var(--zai-secondary);
+}
+
+@keyframes floatParticle {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 1;
+    }
+}
+
+.zai-image-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zai-main-image {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    animation: zaiFloat 4s ease-in-out infinite, zaiGlow 3s ease-in-out infinite alternate;
+    transition: var(--transition-smooth);
+    position: relative;
+    z-index: 3;
+}
+
+.zai-main-image:hover {
+    transform: scale(1.05) rotateY(5deg);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes zaiFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes zaiGlow {
+    0% {
+        filter: brightness(1) saturate(1);
+    }
+    100% {
+        filter: brightness(1.1) saturate(1.2);
+    }
+}
+
+.zai-glow-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, var(--zai-primary) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+    animation: glowPulse 3s ease-in-out infinite;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+.zai-pulse-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--zai-primary);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulseRing 2s ease-out infinite;
+    z-index: 2;
+}
+
+.zai-pulse-ring.pulse-delay-1 {
+    animation-delay: 0.7s;
+    border-color: var(--zai-secondary);
+}
+
+.zai-pulse-ring.pulse-delay-2 {
+    animation-delay: 1.4s;
+    border-color: var(--zai-accent);
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
+.zai-text-overlay {
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 4;
+    animation: textSlideUp 1s ease-out 0.5s both;
+}
+
+.zai-title {
+    font-size: 3rem;
+    font-weight: 900;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: titlePulse 2s ease-in-out infinite;
+}
+
+.zai-subtitle {
+    font-size: 1.2rem;
+    color: var(--zai-secondary);
+    margin: 10px 0 0 0;
+    opacity: 0.8;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+@keyframes textSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes titlePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .zai-main-image {
+        max-width: 300px;
+    }
+    
+    .zai-title {
+        font-size: 2.5rem;
+    }
+    
+    .zai-subtitle {
+        font-size: 1rem;
+    }
+    
+    .zai-image-wrapper {
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .zai-main-image {
+        max-width: 250px;
+    }
+    
+    .zai-title {
+        font-size: 2rem;
+    }
+    
+    .zai-subtitle {
+        font-size: 0.9rem;
+    }
 }
 
 /* Main content layout */
@@ -244,27 +512,52 @@
     color: white;
 }
 
-.sidebar-category-image {
+.sidebar-category-icon {
     width: 55px;
     height: 55px;
-    border-radius: 50%;
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    position: relative;
     overflow: hidden;
-    margin-right: 18px;
-    border: 3px solid rgba(255, 255, 255, 0.8);
     transition: var(--transition-smooth);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.sidebar-category-item:hover .sidebar-category-image {
-    border-color: white;
+.sidebar-category-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-category-icon:hover::before {
+    opacity: 1;
+}
+
+.sidebar-category-icon i {
+    font-size: 24px;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-category-item:hover .sidebar-category-icon {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-category-item:hover .sidebar-category-icon i {
     transform: scale(1.1);
 }
 
-.sidebar-category-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition-smooth);
-}
+/* Removed old image-based category styles - now using icons */
 
 .sidebar-category-content {
     flex: 1;

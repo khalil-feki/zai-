@@ -9,7 +9,7 @@
       <h1 class="hero-title">Votre partenaire <span class="highlight">LOGICIEL</span> de caisse!</h1>
       <p class="hero-description">Logiciel de caisse pour gérer efficacement votre commerce. Solution complète pour les restaurants, commerces de détail et services.</p>
       <div class="hero-buttons">
-        <a href="<?= BASE_URL ?>?page=auth&action=register" class="hero-btn hero-btn-primary">Demander une démo</a>
+        <a href="<?= BASE_URL ?>?page=categories" class="hero-btn hero-btn-primary">Demander une démo</a>
         <a href="#solution-selection" class="hero-btn hero-btn-secondary scroll-btn">Découvrir nos solutions</a>
       </div>
     </div>
@@ -106,7 +106,7 @@
         <div class="asm-cta-content">
             <h2>Prêt à transformer votre entreprise?</h2>
             <p>Rejoignez des milliers d'entreprises qui font confiance à notre système POS pour gérer efficacement leurs opérations quotidiennes.</p>
-            <a href="<?= BASE_URL ?>?page=auth&action=register" class="asm-btn">Demander une démo</a>
+            <a href="<?= BASE_URL ?>?page=categories" class="asm-btn">Demander une démo</a>
         </div>
     </div>
     <div class="asm-cta-shape asm-cta-shape-1"></div>
@@ -217,23 +217,6 @@
     </div>
 </section>
 
-<section class="asm-global-section">
-    <div class="container">
-        <div class="asm-section-title">
-            <h2>zai dans le monde</h2>
-            <p>Notre présence internationale</p>
-        </div>
-        
-        <div class="asm-global-map">
-            <img src="<?= BASE_URL ?>public/images/world-map.png" alt="World Map">
-            <!-- Map points would be positioned absolutely -->
-            <div class="asm-map-point" style="top: 30%; left: 20%;"></div>
-            <div class="asm-map-point" style="top: 40%; left: 48%;"></div>
-            <div class="asm-map-point" style="top: 35%; left: 70%;"></div>
-            <div class="asm-map-point" style="top: 60%; left: 85%;"></div>
-        </div>
-    </div>
-</section>
 
 
 
@@ -258,34 +241,40 @@
                     <?php
                     $packItems = [
                         [
-                            'icon' => 'caisse-tactile.png',
+                            'icon' => 'fas fa-tablet-alt',
                             'title' => 'Caisse tactile',
-                            'description' => 'Sélectionnez votre Caisse Tactile'
+                            'description' => 'Sélectionnez votre Caisse Tactile',
+                            'color' => '#667eea'
                         ],
                         [
-                            'icon' => 'logiciel.png',
+                            'icon' => 'fas fa-desktop',
                             'title' => 'Logiciel de caisse',
-                            'description' => 'Sélectionnez votre Logiciel de Caisse'
+                            'description' => 'Sélectionnez votre Logiciel de Caisse',
+                            'color' => '#4facfe'
                         ],
                         [
-                            'icon' => 'balance.png',
+                            'icon' => 'fas fa-weight-hanging',
                             'title' => 'Balance',
-                            'description' => 'Sélectionnez votre Balance'
+                            'description' => 'Sélectionnez votre Balance',
+                            'color' => '#764ba2'
                         ],
                         [
-                            'icon' => 'tiroir.png',
+                            'icon' => 'fas fa-cash-register',
                             'title' => 'Tiroir caisse',
-                            'description' => 'Sélectionnez votre Tiroir caisse'
+                            'description' => 'Sélectionnez votre Tiroir caisse',
+                            'color' => '#f093fb'
                         ],
                         [
-                            'icon' => 'lecteur.png',
+                            'icon' => 'fas fa-barcode',
                             'title' => 'Lecteurs code-barres',
-                            'description' => 'Sélectionnez votre Lecteurs code-barres'
+                            'description' => 'Sélectionnez votre Lecteurs code-barres',
+                            'color' => '#00f2fe'
                         ],
                         [
-                            'icon' => 'imprimante.png',
+                            'icon' => 'fas fa-print',
                             'title' => 'Imprimante',
-                            'description' => 'Sélectionnez votre Imprimante'
+                            'description' => 'Sélectionnez votre Imprimante',
+                            'color' => '#43e97b'
                         ]
                     ];
                     
@@ -294,20 +283,18 @@
                         <div class="pack-item" data-index="<?= $index ?>">
                             <div class="pack-item-inner">
                                 <div class="pack-item-front">
-                                    <div class="pack-item-icon">
-                                        <img src="<?= BASE_URL ?>public/images/icons/<?= $item['icon'] ?>" alt="<?= $item['title'] ?>">
-                                    </div>
-                                    <h3><?= $item['title'] ?></h3>
-                                    <p><?= $item['description'] ?></p>
-                                </div>
+                                     <div class="pack-item-icon" style="background: linear-gradient(135deg, <?= $item['color'] ?>, <?= $item['color'] ?>80); color: white;">
+                                         <i class="<?= $item['icon'] ?>"></i>
+                                     </div>
+                                     <h3><?= $item['title'] ?></h3>
+                                     <p><?= $item['description'] ?></p>
+                                 </div>
                                 <div class="pack-item-back">
                                     <h4>Options disponibles</h4>
                                     <ul class="pack-options">
-                                        <li>Option Standard</li>
-                                        <li>Option Premium</li>
                                         <li>Option Professionnelle</li>
                                     </ul>
-
+                                   
                                 </div>
                             </div>
                         </div>
@@ -317,7 +304,6 @@
         </div>
         
         
-    </div>
 </section>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -393,7 +379,136 @@ document.addEventListener('DOMContentLoaded', function() {
         item.addEventListener('click', function() {
             this.classList.toggle('flipped');
         });
+        
+        // Sélection d'un élément
+        const selectBtn = item.querySelector('.pack-select-btn');
+        if (selectBtn) {
+            selectBtn.addEventListener('click', function(e) {
+                e.stopPropagation(); // Empêcher la propagation au parent
+                
+                const itemTitle = item.querySelector('h3').textContent;
+                const summaryContainer = document.querySelector('.pack-selected-items');
+                const emptyMessage = summaryContainer.querySelector('.empty-selection');
+                
+                if (emptyMessage) {
+                    emptyMessage.remove();
+                }
+                
+                // Vérifier si l'élément est déjà sélectionné
+                const existingItem = document.querySelector(`.selected-item[data-title="${itemTitle}"]`);
+                
+                if (!existingItem) {
+                    // Ajouter l'élément au résumé
+                    const selectedItem = document.createElement('div');
+                    selectedItem.classList.add('selected-item');
+                    selectedItem.setAttribute('data-title', itemTitle);
+                    selectedItem.innerHTML = `
+                        <span>${itemTitle}</span>
+                        <span class="item-price">+ 299 €</span>
+                        <button class="remove-item"><i class="fas fa-times"></i></button>
+                    `;
+                    summaryContainer.appendChild(selectedItem);
+                    
+                    // Mettre à jour le prix total
+                    updateTotalPrice();
+                    
+                    // Ajouter l'événement pour supprimer l'élément
+                    selectedItem.querySelector('.remove-item').addEventListener('click', function() {
+                        selectedItem.remove();
+                        updateTotalPrice();
+                        
+                        // Réafficher le message si aucun élément n'est sélectionné
+                        if (summaryContainer.children.length === 0) {
+                            const emptyMsg = document.createElement('p');
+                            emptyMsg.classList.add('empty-selection');
+                            emptyMsg.textContent = 'Aucun élément sélectionné';
+                            summaryContainer.appendChild(emptyMsg);
+                        }
+                    });
+                }
+                
+                // Fermer le flip
+                setTimeout(() => {
+                    item.classList.remove('flipped');
+                }, 500);
+            });
+        }
     });
+    
+    // Fonction pour mettre à jour le prix total
+    function updateTotalPrice() {
+        const selectedItems = document.querySelectorAll('.selected-item');
+        let total = 0;
+        
+        selectedItems.forEach(item => {
+            const priceText = item.querySelector('.item-price').textContent;
+            const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+            total += price;
+        });
+        
+        document.querySelector('.pack-price').textContent = `${total} €`;
+    }
+    
+    // Animation de l'image centrale
+    const centerImage = document.querySelector('.pack-center-image img');
+    if (centerImage) {
+        centerImage.classList.add('floating-animation');
+    }
+    
+    // Effet de connexion entre les éléments et l'image centrale
+    const packItemsContainer = document.querySelector('.pack-items');
+    if (packItemsContainer) {
+        packItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                const centerGlow = document.querySelector('.pack-center-glow');
+                centerGlow.style.opacity = '1';
+                
+                // Créer une ligne de connexion
+                const connection = document.createElement('div');
+                connection.classList.add('pack-connection-line');
+                document.querySelector('.pack-selection-content').appendChild(connection);
+                
+                // Positionner la ligne
+                const itemRect = item.getBoundingClientRect();
+                const centerRect = document.querySelector('.pack-center').getBoundingClientRect();
+                const contentRect = document.querySelector('.pack-selection-content').getBoundingClientRect();
+                
+                const startX = itemRect.left + itemRect.width/2 - contentRect.left;
+                const startY = itemRect.top + itemRect.height/2 - contentRect.top;
+                const endX = centerRect.left + centerRect.width/2 - contentRect.left;
+                const endY = centerRect.top + centerRect.height/2 - contentRect.top;
+                
+                // Calculer l'angle et la longueur
+                const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
+                const length = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+                
+                connection.style.width = `${length}px`;
+                connection.style.left = `${startX}px`;
+                connection.style.top = `${startY}px`;
+                connection.style.transform = `rotate(${angle}deg)`;
+                connection.style.transformOrigin = '0 0';
+                
+                // Animation d'apparition
+                setTimeout(() => {
+                    connection.style.opacity = '1';
+                }, 10);
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                const centerGlow = document.querySelector('.pack-center-glow');
+                centerGlow.style.opacity = '0.5';
+                
+                // Supprimer les lignes de connexion
+                const connections = document.querySelectorAll('.pack-connection-line');
+                connections.forEach(conn => {
+                    conn.style.opacity = '0';
+                    setTimeout(() => {
+                        conn.remove();
+                    }, 300);
+                });
+            });
+        });
+    }
 });
 </script>
 <script src="<?= BASE_URL ?>public/js/animations.js"></script>

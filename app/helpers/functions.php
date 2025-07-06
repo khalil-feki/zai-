@@ -229,7 +229,7 @@ function isImage($filename) {
 function formatCurrency($amount, $currency = 'USD') {
     switch ($currency) {
         case 'EUR':
-            return '€' . number_format($amount, 2, ',', '.');
+            return number_format($amount, 2, ',', '.') . ' dt';
         case 'GBP':
             return '£' . number_format($amount, 2);
         default:

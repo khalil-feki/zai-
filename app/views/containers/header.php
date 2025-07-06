@@ -500,10 +500,10 @@
             </button>
             
             <ul class="nav-links">
-                <li><a href="<?= BASE_URL ?>">Home</a></li>
+                <li><a href="<?= BASE_URL ?>">Accueil</a></li>
                 <!-- Products dropdown removed -->
                 <li class="has-dropdown">
-                    <a href="<?= BASE_URL ?>category">Categories</a>
+                    <a href="<?= BASE_URL ?>category">Catégories</a>
                     <ul class="dropdown">
                         <?php
                         // Load categories for the dropdown (only those with products)
@@ -517,28 +517,28 @@
                             }
                         }
                         ?>
-                        <li><a href="<?= BASE_URL ?>category">All Categories</a></li>
+                        <li><a href="<?= BASE_URL ?>category">Toutes les Catégories</a></li>
                     </ul>
                 </li>
                 
                 <?php if (isLoggedIn()): ?>
                     <!-- Add this to your navigation bar -->
-                <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL; ?>tickets">Support Tickets</a>
+                <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL; ?>tickets">Tickets de Support</a>
                 </li>
-                    <li><a href="<?= BASE_URL ?>orders">Orders</a></li>
+                    <li><a href="<?= BASE_URL ?>orders">Commandes</a></li>
                     <li class="has-dropdown">
                         <a href="<?= BASE_URL ?>user/profile">
-                            <i class="fas fa-user"></i> <?= isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Profile' ?>
+                            <i class="fas fa-user"></i> <?= isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Profil' ?>
                         </a>
                         <ul class="dropdown">
-                            <li><a href="<?= BASE_URL ?>user/profile">My Profile</a></li>
-                            <li><a href="<?= BASE_URL ?>orders">My Orders</a></li>
-                            <li><a href="<?= BASE_URL ?>auth/logout">Logout</a></li>
+                            <li><a href="<?= BASE_URL ?>user/profile">Mon Profil</a></li>
+                            <li><a href="<?= BASE_URL ?>orders">Mes Commandes</a></li>
+                            <li><a href="<?= BASE_URL ?>auth/logout">Déconnexion</a></li>
                         </ul>
                     </li>
                 <?php else: ?>
-                    <li><a href="<?= BASE_URL ?>auth/login">Login</a></li>
-                    <li><a href="<?= BASE_URL ?>auth/register">Register</a></li>
+                    <li><a href="<?= BASE_URL ?>auth/login">Connexion</a></li>
+                    <li><a href="<?= BASE_URL ?>auth/register">S'inscrire</a></li>
                 <?php endif; ?>
             </ul>
             
