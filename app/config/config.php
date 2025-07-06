@@ -133,7 +133,7 @@ if (!defined('LOCAL_IMAGE_BASE_URL')) {
     define('LOCAL_IMAGE_BASE_URL', BASE_URL . 'public/img/products/');
 }
 if (!defined('DEFAULT_PRODUCT_IMAGE')) {
-    define('DEFAULT_PRODUCT_IMAGE', 'default-product.jpg');
+    define('DEFAULT_PRODUCT_IMAGE', '1.png');
 }
 // Dolibarr Configuration
 define('DOLIBARR_URL', 'https://your-dolibarr-instance.com');
